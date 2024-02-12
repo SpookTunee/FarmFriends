@@ -3,11 +3,11 @@ extends CharacterBody3D
 
 
 const SPEED = 10.0
-const JUMP_VELOCITY = 10.0
+const JUMP_VELOCITY = 20.0
 var camera_sense = 0.005
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = 20.0
+var gravity = 10.0
 
 func _enter_tree():
 	print(str(name).to_int())
@@ -21,6 +21,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	
+	
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): 
 		return
@@ -31,8 +32,12 @@ func _unhandled_input(event):
 		
 
 func _physics_process(delta):
+
+	
 	if not is_multiplayer_authority(): 
 		return
+	
+	
 	$Camera3D.make_current()
 	# Add the gravity.
 	if not is_on_floor():
