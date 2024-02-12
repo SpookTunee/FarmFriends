@@ -1,6 +1,6 @@
 # Farm Friends
 
-This is a project created by Tate, Sarp, Rohan, and David for > Advanced Video Game Design class.
+This is a project created by Tate, Sarp, Rohan, and David for the *Advanced Video Game Design* class.
 
 TODO:
 
