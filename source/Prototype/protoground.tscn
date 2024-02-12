@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c47gc5d1khumu"]
+
+[ext_resource type="PackedScene" uid="uid://dyhm2bb4dkkq4" path="res://Assets/Prototype Stuff/protoground.blend" id="1_qkapy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xo5kq"]
+albedo_color = Color(0.337255, 0.380392, 0.8, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_p3281"]
+data = PackedVector3Array(-1, 0, 0.9999, 0.9999, 0, -1, 0.9999, 0, 0.9999, -1, 0, 0.9999, -1, 0, -1, 0.9999, 0, -1, -1, 0, -1, 2, 0.2, -2.0001, 0.9999, 0, -1, -1, 0, -1, -2.0001, 0.2, -2.0001, 2, 0.2, -2.0001, 0.9999, 0, 0.9999, -2.0001, 0.2, 2, -1, 0, 0.9999, 0.9999, 0, 0.9999, 2, 0.2, 2, -2.0001, 0.2, 2, 0.9999, 0, -1, 2, 0.2, 2, 0.9999, 0, 0.9999, 0.9999, 0, -1, 2, 0.2, -2.0001, 2, 0.2, 2, -1, 0, 0.9999, -2.0001, 0.2, -2.0001, -1, 0, -1, -1, 0, 0.9999, -2.0001, 0.2, 2, -2.0001, 0.2, -2.0001, 2, 0.2, -2.0001, 4.0234, 0.2, 4.0234, 2, 0.2, 2, 2, 0.2, -2.0001, 4.0234, 0.2, -4.0234, 4.0234, 0.2, 4.0234, -2.0001, 0.2, 2, -4.0234, 0.2, -4.0234, -2.0001, 0.2, -2.0001, -2.0001, 0.2, 2, -4.0234, 0.2, 4.0234, -4.0234, 0.2, -4.0234, -2.0001, 0.2, -2.0001, 4.0234, 0.2, -4.0234, 2, 0.2, -2.0001, -2.0001, 0.2, -2.0001, -4.0234, 0.2, -4.0234, 4.0234, 0.2, -4.0234, 2, 0.2, 2, -4.0234, 0.2, 4.0234, -2.0001, 0.2, 2, 2, 0.2, 2, 4.0234, 0.2, 4.0234, -4.0234, 0.2, 4.0234)
+
+[node name="protoground" instance=ExtResource("1_qkapy")]
+
+[node name="Plane" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xo5kq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_p3281")
