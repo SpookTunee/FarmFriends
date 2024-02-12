@@ -23,7 +23,7 @@ func _unhandled_input(event):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	$"CanvasLayer/Menu/MarginContainer/VBoxContainer/Your Ip".placeholder_text = "Local IP: "+l_IP_scan()
+	$"CanvasLayer/Menu/MarginContainer/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -49,8 +49,12 @@ func l_IP_scan():
 		ip_adress =  IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)
 	elif OS.has_feature("x11"):
 		ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
-	elif OS.has_feature("OSX"):
-		ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
+	elif OS.get_name() == "macOS":
+		for i in IP.get_local_addresses():
+			if (!(i.begins_with("127.0"))) && (!(i.begins_with("fe"))) && (!(i.begins_with("0:"))):
+				return i
+		print("error")
+		#ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 	return ip_adress
 
 func _on_join_pressed():
