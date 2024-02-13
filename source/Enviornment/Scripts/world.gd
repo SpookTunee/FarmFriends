@@ -51,7 +51,7 @@ func l_IP_scan():
 		ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 	elif OS.get_name() == "macOS":
 		for i in IP.get_local_addresses():
-			if (!(i.begins_with("127.0"))) && (!(i.begins_with("fe"))) && (!(i.begins_with("0:"))):
+			if (!(i.begins_with("127.0"))) && (!(i.begins_with("f"))) && (!(i.begins_with("0:"))):
 				return i
 		print("error")
 		#ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
