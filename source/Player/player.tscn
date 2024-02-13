@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://beqbayfw32u85"]
 
-[sub_resource type="GDScript" id="GDScript_fbt2s"]
+[sub_resource type="GDScript" id="GDScript_4qcbo"]
 script/source = "extends CharacterBody3D
 
 
@@ -144,7 +144,7 @@ properties/3/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-script = SubResource("GDScript_fbt2s")
+script = SubResource("GDScript_4qcbo")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_k4e8j")
