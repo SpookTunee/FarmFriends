@@ -7,6 +7,9 @@ const JUMP_VELOCITY = 20.0
 var camera_sense = 0.005
 var chat = false
 
+var item_to_hold #current item that will be picked up
+var item_to_drop #current item that will be dropped
+@onready var proto_item = preload("res://Items/item_prototype.tscn")
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
 
@@ -18,7 +21,7 @@ func _ready():
 
 	if not is_multiplayer_authority():
 		return
-	$Camera3D.make_current()
+	$"Camera/Camera3D".make_current()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	
@@ -26,11 +29,11 @@ func _ready():
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): 
 		return
+		
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * camera_sense)
-		$Camera3D.rotate_x(-event.relative.y * camera_sense)
-		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
-		
+		$"Camera/Camera3D".rotate_x(-event.relative.y * camera_sense)
+		$"Camera/Camera3D".rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 
 func _physics_process(delta):
 
@@ -67,3 +70,44 @@ func _physics_process(delta):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	move_and_slide()
+#func hold():
+	##Checks if hovering over item and sets item to pick up
+	#if reach.is_colliding():
+		#
+		##add if statements for each item
+		#if reach.get_collider() != null and reach.get_collider().name == "ItemPrototype":
+			#item_to_hold = proto_item.instantiate()
+		#
+		#else:
+			#item_to_hold = null
+	#else:
+		#item_to_hold = null
+	#
+	##Checks if item is being held and sets item to drop
+	#if hand.get_child_count() != 0:
+		##add if statements for each item
+		#if hand.get_child(0).name == "ItemPrototype":
+			#item_to_drop = proto_item.instantiate()
+		#
+			#
+	#else:
+		#item_to_drop = null
+		#
+		#
+	#if Input.is_action_just_pressed("interact"):
+		#if item_to_hold != null:
+			#if hand.get_child_count() != 0:
+				#get_parent().add_child(item_to_drop)
+				#item_to_drop.global_transform = hand.global_transform
+				#item_to_drop.dropped = true
+				#hand.get_child(0).queue_free()
+			#reach.get_collider().queue_free()
+			#hand.add_child(item_to_hold)
+			#item_to_hold.held = true
+			#item_to_hold.rotation = hand.rotation
+	#
+	#if Input.is_action_just_pressed("drop") and item_to_drop != null:
+		#get_parent().add_child(item_to_drop)
+		#item_to_drop.global_transform = hand.global_transform
+		#item_to_drop.dropped = true
+		#hand.get_child(0).queue_free()
