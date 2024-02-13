@@ -92,7 +92,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player.tscn")
 spawn_path = NodePath("..")
 
 [node name="ItemPrototype" parent="." instance=ExtResource("3_j7bjs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105669, 0.30039, -0.20821)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 3.81227, 2.09599, 6.50595)
 
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]

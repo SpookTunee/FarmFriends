@@ -15,5 +15,8 @@ func _process(_delta):
 		
 	if held == true:
 		freeze = true
+		$CollisionShape3D.disabled = true
+	else:
+		$CollisionShape3D.disabled = false
 
 
