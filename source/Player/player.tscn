@@ -1,6 +1,126 @@
 [gd_scene load_steps=6 format=3 uid="uid://beqbayfw32u85"]
 
-[ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_os5jd"]
+[sub_resource type="GDScript" id="GDScript_4qcbo"]
+script/source = "extends CharacterBody3D
+
+
+
+const SPEED = 10.0
+const JUMP_VELOCITY = 20.0
+var camera_sense = 0.005
+var chat = false
+
+var item_to_hold #current item that will be picked up
+var item_to_drop #current item that will be dropped
+@onready var proto_item = preload(\"res://Items/item_prototype.tscn\")
+@onready var neck = $Camera
+@onready var camera = $Camera/Camera3D
+@onready var reach = $Camera/Camera3D/RayCast3D
+@onready var hand = $Camera/Hand
+
+@export var sensitivity = 0.003
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = 10.0
+
+func _enter_tree():
+	print(str(name).to_int())
+	set_multiplayer_authority(str(name).to_int())
+
+func _ready():
+
+	if not is_multiplayer_authority():
+		return
+	$\"Camera/Camera3D\".make_current()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	
+	
+func _unhandled_input(event):
+	if not is_multiplayer_authority(): 
+		return
+		
+	if event is InputEventMouseMotion:
+		rotate_y(-event.relative.x * camera_sense)
+		$\"Camera/Camera3D\".rotate_x(-event.relative.y * camera_sense)
+		$\"Camera/Camera3D\".rotation.x = clamp($\"Camera/Camera3D\".rotation.x, -PI/2, PI/2)
+
+func _physics_process(delta):
+
+	
+	if not is_multiplayer_authority(): 
+		return
+	hold()
+	
+	$\"Camera/Camera3D\".make_current()
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+
+	if Input.is_action_just_pressed(\"t\"):
+		chat = true
+
+	if !chat:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		# Handle jump.
+		if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var input_dir = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		if direction:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	move_and_slide()
+func hold():
+	#Checks if hovering over item and sets item to pick up
+	if reach.is_colliding():
+		
+		#add if statements for each item
+		if reach.get_collider() != null and reach.get_collider().name == \"ItemPrototype\":
+			item_to_hold = proto_item.instantiate()
+		
+		else:
+			item_to_hold = null
+	else:
+		item_to_hold = null
+	
+	#Checks if item is being held and sets item to drop
+	if hand.get_child_count() != 0:
+		#add if statements for each item
+		if hand.get_child(0).name == \"ItemPrototype\":
+			item_to_drop = proto_item.instantiate()
+		
+			
+	else:
+		item_to_drop = null
+		
+		
+	if Input.is_action_just_pressed(\"interact\"):
+		if item_to_hold != null:
+			if hand.get_child_count() != 0:
+				get_parent().add_child(item_to_drop)
+				item_to_drop.global_transform = hand.global_transform
+				item_to_drop.dropped = true
+				hand.get_child(0).queue_free()
+			reach.get_collider().queue_free()
+			hand.add_child(item_to_hold)
+			item_to_hold.held = true
+			item_to_hold.rotation = hand.rotation
+	
+	if Input.is_action_just_pressed(\"drop\") and item_to_drop != null:
+		get_parent().add_child(item_to_drop)
+		item_to_drop.global_transform = hand.global_transform
+		item_to_drop.dropped = true
+		hand.get_child(0).queue_free()
+"
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k4e8j"]
 properties/0/path = NodePath(".:position")
@@ -9,10 +129,10 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Camera3D:rotation")
+properties/2/path = NodePath("TextEdit:text")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath("TextEdit:text")
+properties/3/path = NodePath("Camera:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
@@ -24,7 +144,7 @@ properties/3/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-script = ExtResource("1_os5jd")
+script = SubResource("GDScript_4qcbo")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_k4e8j")
@@ -37,10 +157,6 @@ mesh = SubResource("CapsuleMesh_78iyh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_7qel0")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50516, -0.342068)
-near = 0.3
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0417948, 0, 0, 0, -3.41847e-09, 0.0362412, 0, -0.0782055, -1.58415e-09, 0, 1.47677, -0.55046)
 mesh = SubResource("CylinderMesh_dxan4")
@@ -50,3 +166,15 @@ offset_left = 10.0
 offset_top = 12.0
 offset_right = 762.0
 offset_bottom = 259.0
+
+[node name="Camera" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50516, -0.342068)
+near = 0.3
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -1.28764e-07, -1, 0, 2.94577, -4.37114e-08, 0, 0, 0.0110756)
+
+[node name="Hand" type="Node3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.229876, 1.15676, -0.770941)
