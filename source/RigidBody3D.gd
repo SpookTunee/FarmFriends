@@ -10,10 +10,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if dropped == true:
-		self.apply_impulse(transform.basis.z, -transform.basis.z *10)
 		dropped = false
 		
 	if held == true:
 		freeze = true
-
+		$CollisionShape3D.disabled = true
+	else:
+		$CollisionShape3D.disabled = false
 
