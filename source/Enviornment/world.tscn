@@ -76,6 +76,7 @@ spawn_path = NodePath("..")
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 3.81227, 3.35636, 6.50595)
 
 [node name="DayNightCycle" parent="." instance=ExtResource("4_j4k7p")]
+cycle_sec = 480
 
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
