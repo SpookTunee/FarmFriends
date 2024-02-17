@@ -47,14 +47,14 @@ func l_IP_scan():
 	var ip_adress
 	if OS.has_feature("windows"):
 		ip_adress =  IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)
-	elif OS.has_feature("x11"):
+	elif OS.has_feature("x11z"):
 		ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 	elif OS.get_name() == "macOS":
 		for i in IP.get_local_addresses():
 			if (!(i.begins_with("127.0"))) && (!(i.begins_with("f"))) && (!(i.begins_with("0:"))):
 				return i
 		print("error")
-		#ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
+		#ip_adress =  IP.resolve_hostname(st	r(OS.get_environment("HOSTNAME")),1)
 	return ip_adress
 
 func _on_join_pressed():

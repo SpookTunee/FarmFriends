@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4feheqd6xakg"]
+[gd_scene load_steps=6 format=3 uid="uid://c4feheqd6xakg"]
 
 [ext_resource type="Script" path="res://Enviornment/Scripts/world.gd" id="1_dsyey"]
 [ext_resource type="PackedScene" uid="uid://c47gc5d1khumu" path="res://Prototype/protoground.tscn" id="2_lw4s2"]
 [ext_resource type="PackedScene" uid="uid://0ovy6l1mfakq" path="res://Items/item_prototype.tscn" id="3_j7bjs"]
 [ext_resource type="PackedScene" uid="uid://cuqxxerd6wdvt" path="res://DNCycle/day_night_cycle.tscn" id="4_j4k7p"]
+[ext_resource type="PackedScene" uid="uid://c21xlkm6o6frc" path="res://Terrain/terrain.tscn" id="5_cxwk4"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_dsyey")
@@ -77,6 +78,9 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 3.81227, 3.35636, 6.50595)
 
 [node name="DayNightCycle" parent="." instance=ExtResource("4_j4k7p")]
 cycle_sec = 480
+
+[node name="Terrain" parent="." instance=ExtResource("5_cxwk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.84, 0.421564, 48.5174)
 
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
