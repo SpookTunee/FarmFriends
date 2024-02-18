@@ -1,8 +1,8 @@
 extends Node3D
 
-@export var length: float = 2.0
-@export var width: float = 2.0
-@export var subdivisions: float = 8.0 #MUST BE DIVISIBLE BY 2
+@export var length: float = 8.0
+@export var width: float = 8.0
+@export var subdivisions: float = 128.0 #MUST BE DIVISIBLE BY 2
 
 
 func _ready():
@@ -29,38 +29,38 @@ func _ready():
 	#st.set_uv(Vector2(1, 1))
 	#st.add_vertex(Vector3(-1, -1, 0))
 	
-	for x in range(subdivisions/1.0):
-		for y in range(subdivisions/1.0):
-			var xtl = float(length/subdivisions*((x*2.0)-1.0))
-			var ytl = float(width/subdivisions*((y*2.0)))
+	for x in range(subdivisions-1):
+		for y in range(subdivisions-1):
+			var xtl = float(length/subdivisions*((x)-1.0))
+			var ztl = float(width/subdivisions*((y)))
 			
-			var xtr = float(length/subdivisions*((x*2.0)))
-			var ytr = float(width/subdivisions*((y*2.0)))
+			var xtr = float(length/subdivisions*((x)))
+			var ztr = float(width/subdivisions*((y)))
 			
-			var xbl = float(length/subdivisions*((x*2.0)-1.0))
-			var ybl = float(width/subdivisions*((y*2.0)-1.0))
+			var xbl = float(length/subdivisions*((x)-1.0))
+			var zbl = float(width/subdivisions*((y)-1.0))
 			
-			var xbr = float(length/subdivisions*((x*2.0)))
-			var ybr = float(width/subdivisions*((y*2.0)-1.0))
+			var xbr = float(length/subdivisions*((x)))
+			var zbr = float(width/subdivisions*((y)-1.0))
 			
+			
+			#st.set_uv(Vector2(1, 1))
+			st.add_vertex(Vector3(xtr, sin(xtr), ztr))
 			
 			#st.set_uv(Vector2(0, 0))
-			st.add_vertex(Vector3(xbl, ybl, 0))
+			st.add_vertex(Vector3(xbl, sin(xbl), zbl))
 
 			#st.set_uv(Vector2(0, 1))
-			st.add_vertex(Vector3(xtl, ytl, 0))
-
+			st.add_vertex(Vector3(xtl, sin(xtl), ztl))
+			
 			#st.set_uv(Vector2(1, 1))
-			st.add_vertex(Vector3(xtr, ytr, 0))
+			st.add_vertex(Vector3(xtr, sin(xtr), ztr))
 			
 			#st.set_uv(Vector2(0, 1))
-			st.add_vertex(Vector3(xbr, ybr, 0))
+			st.add_vertex(Vector3(xbr, sin(xbr), zbr))
 			
 			#st.set_uv(Vector2(0, 0))
-			st.add_vertex(Vector3(xbl, ybl, 0))
-
-			#st.set_uv(Vector2(1, 1))
-			st.add_vertex(Vector3(xtr, ytr, 0))
+			st.add_vertex(Vector3(xbl, sin(xbl), zbl))
 			
 			#print("running")
 	
