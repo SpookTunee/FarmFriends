@@ -76,7 +76,7 @@ spawn_path = NodePath("..")
 cycle_sec = 480
 
 [node name="Terrain" parent="." instance=ExtResource("5_cxwk4")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -101.129, 2.59017, 1.47221)
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -101.129, 3.84198, 1.47221)
 
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]

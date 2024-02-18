@@ -22,6 +22,7 @@ size = Vector3(1, 1.99918, 1)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
+wall_min_slide_angle = 0.349066
 script = ExtResource("1_os5jd")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

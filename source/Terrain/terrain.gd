@@ -5,7 +5,7 @@ extends Node3D
 @export var subdivisions: float = 64.0 #MUST BE DIVISIBLE BY 2
 
 func yFun(x,z):
-	return sin(x)*cos(z)*.33
+	return sin(x/10)*cos(z/10)
 
 func _ready():
 	var st = SurfaceTool.new()
@@ -28,30 +28,20 @@ func _ready():
 			var xbr = float(length/subdivisions*((x)))
 			var zbr = float(width/subdivisions*((y)-1.0))
 			
-			coll.append(Vector3(xtl, yFun(xtl,ztl), ztl))
-			coll.append(Vector3(xtr, yFun(xtr,ztr), ztr))
-			coll.append(Vector3(xbr, yFun(xbr,zbr), zbr))
 			coll.append(Vector3(xbl, yFun(xbl,zbl), zbl))
-			
-			#st.set_uv(Vector2(1, 1))
+			coll.append(Vector3(xbr, yFun(xbr,zbr), zbr))
+			coll.append(Vector3(xtr, yFun(xtr,ztr), ztr))
+			coll.append(Vector3(xtl, yFun(xtl,ztl), ztl))
+			coll.append(Vector3(xbl, yFun(xbl,zbl), zbl))
+			coll.append(Vector3(xbr, yFun(xbr,zbr), zbr))
+	
 			st.add_vertex(Vector3(xtr, yFun(xtr,ztr), ztr))
-			
-			#st.set_uv(Vector2(0, 0))
 			st.add_vertex(Vector3(xbl, yFun(xbl,zbl), zbl))
-
-			#st.set_uv(Vector2(0, 1))
 			st.add_vertex(Vector3(xtl, yFun(xtl,ztl), ztl))
-			
-			#st.set_uv(Vector2(1, 1))
 			st.add_vertex(Vector3(xtr, yFun(xtr,ztr), ztr))
-			
-			#st.set_uv(Vector2(0, 1))
 			st.add_vertex(Vector3(xbr, yFun(xbr,zbr), zbr))
-			
-			#st.set_uv(Vector2(0, 0))
 			st.add_vertex(Vector3(xbl, yFun(xbl,zbl), zbl))
-			
-			#print("running")
+	
 	
 	st.generate_normals()
 	var coll2 = ConcavePolygonShape3D.new()
