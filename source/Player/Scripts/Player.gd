@@ -33,9 +33,9 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 
+	if !multiplayer.multiplayer_peer: return
 	
-	if not is_multiplayer_authority(): 
-		return
+	if !is_multiplayer_authority(): return
 	
 	
 	$Camera3D.make_current()

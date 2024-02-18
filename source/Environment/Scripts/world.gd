@@ -18,7 +18,7 @@ func disconnect_from_server():
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("menu"):
-		disconnect_from_server()
+		if multiplayer.multiplayer_peer: disconnect_from_server()
 		#get_tree().quit()
 # Called when the node enters the scene tree for the first time.
 func _ready():
