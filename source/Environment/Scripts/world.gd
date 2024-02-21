@@ -10,13 +10,14 @@ var enet_peer = ENetMultiplayerPeer.new()
 func disconnect_from_server():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	remove_player.rpc(multiplayer.get_unique_id())
+	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 	menu.show()
 	for i in get_children():
 		if i.name.begins_with("mpSpawned_"):
 			i.queue_free()
 
-func _unhandled_input(event):
+func _unhandled_input(event):	
 	if Input.is_action_just_pressed("menu"):
 		if multiplayer.multiplayer_peer: disconnect_from_server()
 		#get_tree().quit()

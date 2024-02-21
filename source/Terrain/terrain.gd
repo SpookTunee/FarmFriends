@@ -35,12 +35,12 @@ func _ready():
 			coll.append(Vector3(xbl, yFun(xbl,zbl), zbl))
 			coll.append(Vector3(xbr, yFun(xbr,zbr), zbr))
 	
-			st.add_vertex(Vector3(xtr, yFun(xtr,ztr), ztr))
-			st.add_vertex(Vector3(xbl, yFun(xbl,zbl), zbl))
 			st.add_vertex(Vector3(xtl, yFun(xtl,ztl), ztl))
-			st.add_vertex(Vector3(xtr, yFun(xtr,ztr), ztr))
 			st.add_vertex(Vector3(xbr, yFun(xbr,zbr), zbr))
+			st.add_vertex(Vector3(xtr, yFun(xtr,ztr), ztr))
+			st.add_vertex(Vector3(xtl, yFun(xtl,ztl), ztl))
 			st.add_vertex(Vector3(xbl, yFun(xbl,zbl), zbl))
+			st.add_vertex(Vector3(xbr, yFun(xbr,zbr), zbr))
 	
 	
 	st.generate_normals()

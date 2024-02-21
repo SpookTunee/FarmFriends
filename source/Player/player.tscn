@@ -15,8 +15,7 @@ properties/2/replication_mode = 1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_78iyh"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ybww1"]
-size = Vector3(1, 1.99918, 1)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5t3x"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dxan4"]
 
@@ -34,7 +33,7 @@ mesh = SubResource("CapsuleMesh_78iyh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00005, 0)
-shape = SubResource("BoxShape3D_ybww1")
+shape = SubResource("CapsuleShape3D_e5t3x")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50516, -0.342068)
