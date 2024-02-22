@@ -2,8 +2,8 @@ extends CharacterBody3D
 
 
 
-const SPEED = 10.0
-const JUMP_VELOCITY = 10.0
+const SPEED = 30.0
+const JUMP_VELOCITY = 20.0
 var camera_sense = 0.005
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -32,10 +32,8 @@ func _unhandled_input(event):
 		
 
 func _physics_process(delta):
-
-	if !multiplayer.multiplayer_peer: return
 	
-	if !is_multiplayer_authority(): return
+	if !is_multiplayer_authority() || !multiplayer.multiplayer_peer: return
 	
 	
 	$Camera3D.make_current()

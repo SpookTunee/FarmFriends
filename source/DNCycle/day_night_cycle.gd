@@ -1,11 +1,11 @@
 extends Node3D
 
 @export var cycle_sec: int = 30
-var rot = -90
+var starting_rotation = -20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$DirectionalLight3D.rotation.x = starting_rotation*PI/180
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
