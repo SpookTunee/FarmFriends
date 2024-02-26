@@ -7,7 +7,7 @@ extends Node3D
 func yFun(x,z) -> float:
 	#var noise = Noise.new()
 	#return noise.
-	return sin(x/8)*cos(z/8)*6
+	return sin(x/8)*cos(z/8)*2
 
 func _ready():
 	var st = SurfaceTool.new()

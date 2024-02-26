@@ -12,14 +12,18 @@ size = Vector3(0.314453, 0.0770264, 0.176514)
 [node name="Hoe" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-
-[node name="protoHoe" parent="RigidBody3D" instance=ExtResource("1_sh0bj")]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
+freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.000194697, 0.153588, 0.00410914)
 shape = SubResource("CylinderShape3D_2q1nu")
+disabled = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.279839, 1.11246, 0.00012207)
 shape = SubResource("BoxShape3D_wufre")
+disabled = true
+
+[node name="protoHoe" parent="RigidBody3D" instance=ExtResource("1_sh0bj")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
