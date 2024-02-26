@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuqxxerd6wdvt"]
+
+[ext_resource type="Script" path="res://DNCycle/day_night_cycle.gd" id="1_tsn8e"]
+
+[sub_resource type="Environment" id="Environment_bossx"]
+ambient_light_color = Color(0.654902, 0.811765, 1, 1)
+ambient_light_energy = 0.05
+
+[node name="DayNightCycle" type="Node3D"]
+script = ExtResource("1_tsn8e")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, -6.97574e-16, -1.22103e-21, -1.22103e-21, -3.50078e-06, 1, -6.97574e-16, -1, -3.50078e-06, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bossx")

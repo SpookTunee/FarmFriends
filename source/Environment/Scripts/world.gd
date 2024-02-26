@@ -10,15 +10,16 @@ var enet_peer = ENetMultiplayerPeer.new()
 func disconnect_from_server():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	remove_player.rpc(multiplayer.get_unique_id())
+	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 	menu.show()
 	for i in get_children():
 		if i.name.begins_with("mpSpawned_"):
 			i.queue_free()
 
-func _unhandled_input(event):
+func _unhandled_input(event):	
 	if Input.is_action_just_pressed("menu"):
-		disconnect_from_server()
+		if multiplayer.multiplayer_peer: disconnect_from_server()
 		#get_tree().quit()
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,14 +48,14 @@ func l_IP_scan():
 	var ip_adress
 	if OS.has_feature("windows"):
 		ip_adress =  IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)
-	elif OS.has_feature("x11"):
+	elif OS.has_feature("x11z"):
 		ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 	elif OS.get_name() == "macOS":
 		for i in IP.get_local_addresses():
 			if (!(i.begins_with("127.0"))) && (!(i.begins_with("f"))) && (!(i.begins_with("0:"))):
 				return i
 		print("error")
-		#ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
+		#ip_adress =  IP.resolve_hostname(st	r(OS.get_environment("HOSTNAME")),1)
 	return ip_adress
 
 func _on_join_pressed():
