@@ -31,6 +31,12 @@ func _unhandled_input(event):
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 		
 
+func hoe_handling():
+	$Camera3D/Hoe/AnimationPlayer.play("hoe")
+	print(
+		(global_position-Vector3(50,0,50))/(100/64)
+	)
+
 func _physics_process(delta):
 	
 	if !is_multiplayer_authority() || !multiplayer.multiplayer_peer: return
@@ -47,7 +53,7 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 		
 	if Input.is_action_pressed("m1"):
-		$Camera3D/Hoe/AnimationPlayer.play("hoe")
+		hoe_handling()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
