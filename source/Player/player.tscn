@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://beqbayfw32u85"]
+[gd_scene load_steps=7 format=3 uid="uid://beqbayfw32u85"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_os5jd"]
-[ext_resource type="PackedScene" uid="uid://dux8g5ei8hovm" path="res://Prototype/Hoe.tscn" id="2_1dhbm"]
+[ext_resource type="PackedScene" uid="uid://bwpeukfquy1s4" path="res://Prototype/bag_of_seeds.tscn" id="2_5d38p"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k4e8j"]
 properties/0/path = NodePath(".:position")
@@ -20,21 +20,6 @@ properties/3/replication_mode = 1
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_78iyh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5t3x"]
-
-[sub_resource type="Animation" id="Animation_08uuy"]
-resource_name = "hoe"
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0.1, 1, 2.37135e-16, 0.874196, -6.77734e-17, 0.485573, 0.3, 1, -0.406589, 0.70073, -0.303335, 0.501649, 0.8, 1, 2.37135e-16, 0.874196, -6.77734e-17, 0.485573)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1qs2"]
-_data = {
-"hoe": SubResource("Animation_08uuy")
-}
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dxan4"]
 
@@ -58,13 +43,15 @@ shape = SubResource("CapsuleShape3D_e5t3x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50516, -0.342068)
 near = 0.3
 
-[node name="Hoe" parent="Camera3D" instance=ExtResource("2_1dhbm")]
-transform = Transform3D(-0.549186, 0.0675864, 0.832963, 0.157463, 0.98724, 0.0237137, -0.820731, 0.144184, -0.552821, 0.674198, -0.650779, -0.639026)
+[node name="ItemLook" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, -0.0297149, -0.303575)
+target_position = Vector3(2.08165e-12, 3, 2.08165e-12)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D/Hoe"]
-libraries = {
-"": SubResource("AnimationLibrary_f1qs2")
-}
+[node name="Hand" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.674198, -0.650779, -0.639026)
+
+[node name="BagOfSeeds" parent="Camera3D/Hand" instance=ExtResource("2_5d38p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0549649, -0.256205, 0.495248)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0417948, 0, 0, 0, -3.41847e-09, 0.0362412, 0, -0.0782055, -1.58415e-09, 0, 1.47677, -0.55046)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dux8g5ei8hovm"]
+[gd_scene load_steps=6 format=3 uid="uid://dux8g5ei8hovm"]
 
 [ext_resource type="PackedScene" uid="uid://dsfb1gqvwwcxk" path="res://Assets/Prototype Stuff/Tool/protoHoe.blend" id="1_sh0bj"]
 
@@ -9,7 +9,23 @@ radius = 0.027285
 [sub_resource type="BoxShape3D" id="BoxShape3D_wufre"]
 size = Vector3(0.314453, 0.0770264, 0.176514)
 
+[sub_resource type="Animation" id="Animation_08uuy"]
+resource_name = "hoe"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.1, 1, 2.37135e-16, 0.874196, -6.77734e-17, 0.485573, 0.3, 1, -0.406589, 0.70073, -0.303335, 0.501649, 0.8, 1, 2.37135e-16, 0.874196, -6.77734e-17, 0.485573)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1qs2"]
+_data = {
+"hoe": SubResource("Animation_08uuy")
+}
+
 [node name="Hoe" type="Node3D"]
+transform = Transform3D(-0.528437, 4.80423e-16, 0.848972, 3.48787e-16, 1, -3.48787e-16, -0.848972, 1.11798e-16, -0.528437, 0, 0, 0)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
@@ -27,3 +43,8 @@ disabled = true
 
 [node name="protoHoe" parent="RigidBody3D" instance=ExtResource("1_sh0bj")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f1qs2")
+}

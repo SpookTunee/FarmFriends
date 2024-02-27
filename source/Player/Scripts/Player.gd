@@ -5,6 +5,7 @@ extends CharacterBody3D
 const SPEED = 30.0
 const JUMP_VELOCITY = 20.0
 var camera_sense = 0.005
+@onready var Hand = $Camera3D/Hand
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -32,7 +33,7 @@ func _unhandled_input(event):
 		
 
 func hoe_handling():
-	$Camera3D/Hoe/AnimationPlayer.play("hoe")
+	#$Camera3D/Hoe/AnimationPlayer.play("hoe")
 	print(
 		(global_position-Vector3(50,0,50))/(100/64)
 	)
@@ -53,6 +54,7 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 		
 	if Input.is_action_pressed("m1"):
+		Hand.get_child(0).activate()
 		hoe_handling()
 
 	# Get the input direction and handle the movement/deceleration.
