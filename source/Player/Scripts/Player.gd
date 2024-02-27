@@ -34,9 +34,38 @@ func _unhandled_input(event):
 
 func hoe_handling():
 	#$Camera3D/Hoe/AnimationPlayer.play("hoe")
-	print(
-		(global_position-Vector3(50,0,50))/(100/64)
-	)
+	#var npos = Vector2i(0,0)
+	#npos.x = abs(int(
+		#(global_position.x-50.0)*(64.0/100.0)
+	#))
+	#npos.y = abs(int(
+		#(global_position.z-50.0)*(64.0/100.0)
+	#))
+	#npos = Vector2i(64,64)-npos
+	#var meshy = get_node("/root/World/Terrain/MeshInstance3D")
+	#var mesh = meshy.mesh
+	#var mdt = MeshDataTool.new()
+	#mdt.create_from_surface(mesh, 0)
+	#var overt = mdt.get_vertex(((npos.x*64)+npos.y)*6)
+	#
+	#mdt.set_vertex(
+		#((((npos.x)*64)+npos.y)*6),
+		#mdt.get_vertex((((npos.x)*64)+npos.y)*6) - Vector3(0,1,0)
+	#)
+	#mdt.set_vertex(
+		#((((npos.x)*64)+npos.y)*6)+3,
+		#mdt.get_vertex(((((npos.x)*64)+npos.y)*6)+3) - Vector3(0,1,0)
+	#)
+	#
+	#mdt.set_vertex(
+		#((((npos.x-1)*64)+npos.y)*6)+2,
+		#mdt.get_vertex(((((npos.x-1)*64)+npos.y)*6)+2) - Vector3(0,1,0)
+	#)
+	#
+	#mesh.clear_surfaces()
+	#mdt.commit_to_surface(mesh)
+	#meshy.mesh = mesh
+	pass
 
 func _physics_process(delta):
 	
