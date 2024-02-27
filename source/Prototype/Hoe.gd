@@ -26,5 +26,5 @@ func activate():
 	if Look.get_collider() && (Look.get_collider().name == "Terrain"):
 		var till = tilLand.instantiate()
 		get_node("/root/World").add_child(till)
-		var tpos = Vector3(int(Look.get_collision_point().x*1000)%int((64.0/100.0)*1000),int(Look.get_collision_point().y*1000)%int((64.0/100.0)*1000),int(Look.get_collision_point().z*1000)%int((64.0/100.0)*1000))/1000
-		till.position = tpos#Look.get_collision_point()
+		#var tpos = Vector3(int(Look.get_collision_point().x*1000)%int((64.0/100.0)*1000),int(Look.get_collision_point().y*1000)%int((64.0/100.0)*1000),int(Look.get_collision_point().z*1000)%int((64.0/100.0)*1000))/1000
+		till.position = Look.get_collision_point()

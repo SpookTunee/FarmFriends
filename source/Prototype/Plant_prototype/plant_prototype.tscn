@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b5k44362othcy"]
 
-[ext_resource type="ArrayMesh" uid="uid://fbgrcvdbnklr" path="res://Assets/wheat.obj" id="1_dw5ng"]
+[ext_resource type="ArrayMesh" uid="uid://fbgrcvdbnklr" path="res://Assets/Prototype Stuff/Farming/wheat.obj" id="1_dw5ng"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4l05l"]
 radius = 0.291641
