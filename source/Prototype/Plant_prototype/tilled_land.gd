@@ -8,5 +8,8 @@ func _ready():
 
 
 func grow():
-	var growplant = plant.instanciate()
+	if get_node_or_null("PLANT"): return
+	var growplant = plant.instantiate()
+	growplant.name="PLANT"
 	add_child(growplant)
+	growplant.get_node("Plant/PlantBody/AnimationPlayer").play("Plant_Growth_anim")

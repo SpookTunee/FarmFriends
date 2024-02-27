@@ -53,6 +53,6 @@ func _ready():
 	st.generate_normals()
 	var coll2 = ConcavePolygonShape3D.new()
 	coll2.set_faces(PackedVector3Array(coll))
-	$StaticBody3D/CollisionShape3D.shape = coll2
+	$Terrain/CollisionShape3D.shape = coll2
 	var mesh = st.commit()
 	$MeshInstance3D.mesh = mesh

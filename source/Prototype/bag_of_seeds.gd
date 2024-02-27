@@ -13,5 +13,5 @@ func _process(delta):
 
 func activate():
 	var Look = get_parent().get_parent().get_child(0)
-	if Look.get_collider().name == "TilledLand":
-		Look.get_collider().grow()
+	if Look.get_collider() && (Look.get_collider().name == "TilledLand"):
+		Look.get_collider().get_parent().grow()

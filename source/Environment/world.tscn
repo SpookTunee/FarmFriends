@@ -1,15 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4feheqd6xakg"]
+[gd_scene load_steps=5 format=3 uid="uid://c4feheqd6xakg"]
 
 [ext_resource type="Script" path="res://Environment/Scripts/world.gd" id="1_dsyey"]
-[ext_resource type="PackedScene" uid="uid://c47gc5d1khumu" path="res://Prototype/protoground.tscn" id="2_lw4s2"]
 [ext_resource type="PackedScene" uid="uid://cuqxxerd6wdvt" path="res://DNCycle/day_night_cycle.tscn" id="4_j4k7p"]
 [ext_resource type="PackedScene" uid="uid://bxsw5lvqdwoew" path="res://Prototype/Plant_prototype/tilled_land.tscn" id="5_6boxw"]
 [ext_resource type="PackedScene" uid="uid://c21xlkm6o6frc" path="res://Terrain/terrain.tscn" id="5_cxwk4"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_dsyey")
-
-[node name="protoground" parent="." instance=ExtResource("2_lw4s2")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
