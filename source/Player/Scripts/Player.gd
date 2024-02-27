@@ -2,9 +2,12 @@ extends CharacterBody3D
 
 
 
-const SPEED = 30.0
+const SPEED = 5.0
 const JUMP_VELOCITY = 20.0
 var camera_sense = 0.005
+@onready var Hand = $Camera3D/Hand
+var hoe = preload("res://Prototype/Hoe.tscn")
+var seeds = preload("res://Prototype/bag_of_seeds.tscn")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -30,12 +33,29 @@ func _unhandled_input(event):
 		$Camera3D.rotate_x(-event.relative.y * camera_sense)
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 		
+	#
+	#mdt.set_vertex(
+		#((((npos.x)*64)+npos.y)*6),
+		#mdt.get_vertex((((npos.x)*64)+npos.y)*6) - Vector3(0,1,0)
+	#)
+	#mdt.set_vertex(
+		#((((npos.x)*64)+npos.y)*6)+3,
+		#mdt.get_vertex(((((npos.x)*64)+npos.y)*6)+3) - Vector3(0,1,0)
+	#)
+	#
+	#mdt.set_vertex(
+		#((((npos.x-1)*64)+npos.y)*6)+2,
+		#mdt.get_vertex(((((npos.x-1)*64)+npos.y)*6)+2) - Vector3(0,1,0)
+	#)
+	#
+	#mesh.clear_surfaces()
+	#mdt.commit_to_surface(mesh)
+	#meshy.mesh = mesh
 
-func hoe_handling():
-	$Camera3D/Hoe/AnimationPlayer.play("hoe")
-	print(
-		(global_position-Vector3(50,0,50))/(100/64)
-	)
+func switch_hand(scn):
+	Hand.get_child(0).queue_free()
+	var nscn = scn.instantiate()
+	Hand.add_child(nscn)
 
 func _physics_process(delta):
 	
@@ -52,8 +72,14 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		
+	if Input.is_action_just_pressed("1"):
+		switch_hand(hoe)
+	if Input.is_action_just_pressed("2"):
+		switch_hand(seeds)
+		
+		
 	if Input.is_action_pressed("m1"):
-		hoe_handling()
+		Hand.get_child(0).activate()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.

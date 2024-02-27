@@ -14,6 +14,7 @@ data = PackedVector3Array(-1, 0, 0.9999, 0.9999, 0, -1, 0.9999, 0, 0.9999, -1, 0
 surface_material_override/0 = SubResource("StandardMaterial3D_xo5kq")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Plane" index="0"]
+collision_layer = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_p3281")
