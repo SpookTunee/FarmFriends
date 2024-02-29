@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 
-
 const SPEED = 5.0
 const JUMP_VELOCITY = 20.0
 var camera_sense = 0.005
@@ -60,7 +59,6 @@ func switch_hand(scn):
 func _physics_process(delta):
 	
 	if !is_multiplayer_authority() || !multiplayer.multiplayer_peer: return
-	
 	
 	$Camera3D.make_current()
 	# Add the gravity.

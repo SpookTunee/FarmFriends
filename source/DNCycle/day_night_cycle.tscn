@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuqxxerd6wdvt"]
+[gd_scene load_steps=4 format=3 uid="uid://cuqxxerd6wdvt"]
 
 [ext_resource type="Script" path="res://DNCycle/day_night_cycle.gd" id="1_tsn8e"]
 
 [sub_resource type="Environment" id="Environment_bossx"]
 ambient_light_color = Color(0.654902, 0.811765, 1, 1)
 ambient_light_energy = 0.05
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1ua5o"]
+properties/0/path = NodePath("DirectionalLight3D:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="DayNightCycle" type="Node3D"]
 script = ExtResource("1_tsn8e")
@@ -15,3 +20,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bossx")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_1ua5o")
