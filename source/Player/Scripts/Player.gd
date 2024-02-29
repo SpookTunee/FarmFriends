@@ -58,7 +58,7 @@ func switch_hand(scn):
 
 func _physics_process(delta):
 	
-	if !is_multiplayer_authority() || !multiplayer.multiplayer_peer: return
+	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	
 	$Camera3D.make_current()
 	# Add the gravity.
