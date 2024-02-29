@@ -70,7 +70,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player.tscn")
 spawn_path = NodePath("..")
 
 [node name="DayNightCycle" parent="." instance=ExtResource("4_j4k7p")]
-cycle_sec = 3600
+cycle_sec = 60
 
 [node name="Terrain" parent="." instance=ExtResource("5_cxwk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, -10, -50)
