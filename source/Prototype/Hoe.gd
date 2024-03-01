@@ -13,18 +13,19 @@ func _process(delta):
 
 func activate():
 	$AnimationPlayer.play("hoe")
-	#var npos = Vector2i(0,0)
-	#npos.x = abs(int(
-		#(global_position.x-50.0)*(64.0/100.0)
-	#))
-	#npos.y = abs(int(
-		#(global_position.z-50.0)*(64.0/100.0)
-	#))
-	#npos = Vector2i(64,64)-npos
-	#var tpos = get_node("/root/World/Terrain").global_position + Vector3(float(npos.x)*(100.0/64.0),float(sin((float(npos.x)*(100.0/64.0))/8)*cos((float(npos.y)*(100.0/64.0))/8)*2), float(npos.y)*(100.0/64.0)) - Vector3(50, 0, 50)
-	var Look = get_parent().get_parent().get_child(0)
-	if Look.get_collider() && (Look.get_collider().name == "Terrain"):
-		var till = tilLand.instantiate()
-		get_node("/root/World").add_child(till)
-		#var tpos = Vector3(int(Look.get_collision_point().x*1000)%int((64.0/100.0)*1000),int(Look.get_collision_point().y*1000)%int((64.0/100.0)*1000),int(Look.get_collision_point().z*1000)%int((64.0/100.0)*1000))/1000
-		till.position = Look.get_collision_point()
+	if multiplayer.multiplayer_peer:
+
+		var Look = get_parent().get_parent().get_child(0)
+		if Look.get_collider() && (Look.get_collider().name == "Terrain"):
+			spawn_hoe.rpc(Look.get_collision_point())
+			var till = tilLand.instantiate()
+			till.name = "mpSpawned_self_till_"
+			get_node("/root/World").add_child(till)
+			till.position = (Look.get_collision_point())
+
+@rpc("any_peer","unreliable","call_remote")
+func spawn_hoe(pos:Vector3):
+	var till = tilLand.instantiate()
+	till.name = "mpSpawned_" + str(multiplayer.get_remote_sender_id()) + "_till_"
+	get_node("/root/World").add_child(till)
+	till.position = pos

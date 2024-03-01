@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dux8g5ei8hovm"]
+[gd_scene load_steps=8 format=3 uid="uid://dux8g5ei8hovm"]
 
 [ext_resource type="PackedScene" uid="uid://dsfb1gqvwwcxk" path="res://Assets/Prototype Stuff/Tool/protoHoe.blend" id="1_sh0bj"]
 [ext_resource type="Script" path="res://Prototype/Hoe.gd" id="1_v6rmr"]
@@ -12,16 +12,28 @@ size = Vector3(0.314453, 0.0770264, 0.176514)
 
 [sub_resource type="Animation" id="Animation_08uuy"]
 resource_name = "hoe"
+length = 0.4
 tracks/0/type = "rotation_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0.1, 1, 2.37135e-16, 0.874196, -6.77734e-17, 0.485573, 0.3, 1, -0.406589, 0.70073, -0.303335, 0.501649, 0.8, 1, 2.37135e-16, 0.874196, -6.77734e-17, 0.485573)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.37135e-16, 0.874196, -6.77734e-17, 0.485573, 0.1, 1, -0.406589, 0.70073, -0.303335, 0.501649, 0.4, 1, 2.37135e-16, 0.874196, -6.77734e-17, 0.485573)
+
+[sub_resource type="Animation" id="Animation_mkhpu"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.37135e-16, 0.874196, -6.77734e-17, 0.485573)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f1qs2"]
 _data = {
+"RESET": SubResource("Animation_mkhpu"),
 "hoe": SubResource("Animation_08uuy")
 }
 
