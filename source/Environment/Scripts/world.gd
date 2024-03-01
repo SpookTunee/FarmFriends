@@ -90,6 +90,10 @@ func spawn_hoe(pos:Vector3):
 	till.name = "mpSpawned_" + str(multiplayer.get_remote_sender_id()) + "_till_"
 	get_node("/root/World").add_child(till)
 	till.position = pos
+	
+@rpc("any_peer","unreliable","call_remote")
+func spawn_wheatplant(id: String):
+	get_node(id).gplant(str(multiplayer.get_remote_sender_id()))
 
 func add_player(id):
 	var player = Player.instantiate()
