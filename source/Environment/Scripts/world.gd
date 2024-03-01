@@ -3,6 +3,7 @@ extends Node3D
 @onready var menu = $CanvasLayer/Menu
 @onready var ip = $CanvasLayer/Menu/MarginContainer/VBoxContainer/IPEntry
 
+const tilLand = preload("res://Prototype/Plant_prototype/tilled_land.tscn")
 const Player = preload("res://Player/player.tscn")
 var port = 9999
 var enet_peer = ENetMultiplayerPeer.new()
@@ -81,6 +82,14 @@ func remove_player_callback():
 		if i.name.begins_with("mpSpawned_"):
 			i.queue_free()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+@rpc("any_peer","unreliable","call_remote")
+func spawn_hoe(pos:Vector3):
+	print(pos)
+	var till = tilLand.instantiate()
+	till.name = "mpSpawned_" + str(multiplayer.get_remote_sender_id()) + "_till_"
+	get_node("/root/World").add_child(till)
+	till.position = pos
 
 func add_player(id):
 	var player = Player.instantiate()
