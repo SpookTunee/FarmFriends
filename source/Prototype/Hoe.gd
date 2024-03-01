@@ -17,8 +17,9 @@ func activate():
 
 		var Look = get_parent().get_parent().get_child(0)
 		if Look.get_collider() && (Look.get_collider().name == "Terrain"):
-			get_node("/root/World/").spawn_hoe.rpc(Look.get_collision_point())
+			get_node("/root/World/").spawn_hoe.rpc(Look.get_collision_point(),get_node("/root/World/").tcount)
 			var till = tilLand.instantiate()
-			till.name = "mpSpawned_self_till_"
+			till.name = "mpSpawned_self_till_" + str(get_node("/root/World/").tcount)
 			get_node("/root/World").add_child(till)
 			till.position = (Look.get_collision_point())
+			get_node("/root/World/").tcount += 1

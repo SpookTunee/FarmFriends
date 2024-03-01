@@ -7,6 +7,8 @@ const tilLand = preload("res://Prototype/Plant_prototype/tilled_land.tscn")
 const Player = preload("res://Player/player.tscn")
 var port = 9999
 var enet_peer = ENetMultiplayerPeer.new()
+var tcount = 0
+var pcount = 0
 
 func disconnect_from_server():
 	remove_player.rpc()
@@ -84,16 +86,15 @@ func remove_player_callback():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 @rpc("any_peer","unreliable","call_remote")
-func spawn_hoe(pos:Vector3):
-	print(pos)
+func spawn_hoe(pos:Vector3, id):
 	var till = tilLand.instantiate()
-	till.name = "mpSpawned_" + str(multiplayer.get_remote_sender_id()) + "_till_"
-	get_node("/root/World").add_child(till)
+	till.name = "mpSpawned_" + str(multiplayer.get_remote_sender_id()) + "_till_" + str(id)
+	get_node("/root/World/").add_child(till)
 	till.position = pos
 	
 @rpc("any_peer","unreliable","call_remote")
-func spawn_wheatplant(id: String):
-	get_node(id).gplant(str(multiplayer.get_remote_sender_id()))
+func spawn_wheatplant(id: String, ids):
+	get_node(id).gplant(str(multiplayer.get_remote_sender_id()),ids)
 
 func add_player(id):
 	var player = Player.instantiate()
