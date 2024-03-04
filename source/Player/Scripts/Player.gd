@@ -32,29 +32,19 @@ func _unhandled_input(event):
 		$Camera3D.rotate_x(-event.relative.y * camera_sense)
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 		
-	#
-	#mdt.set_vertex(
-		#((((npos.x)*64)+npos.y)*6),
-		#mdt.get_vertex((((npos.x)*64)+npos.y)*6) - Vector3(0,1,0)
-	#)
-	#mdt.set_vertex(
-		#((((npos.x)*64)+npos.y)*6)+3,
-		#mdt.get_vertex(((((npos.x)*64)+npos.y)*6)+3) - Vector3(0,1,0)
-	#)
-	#
-	#mdt.set_vertex(
-		#((((npos.x-1)*64)+npos.y)*6)+2,
-		#mdt.get_vertex(((((npos.x-1)*64)+npos.y)*6)+2) - Vector3(0,1,0)
-	#)
-	#
-	#mesh.clear_surfaces()
-	#mdt.commit_to_surface(mesh)
-	#meshy.mesh = mesh
 
-func switch_hand(scn):
-	Hand.get_child(0).queue_free()
-	var nscn = scn.instantiate()
-	Hand.add_child(nscn)
+
+@rpc("call_remote","any_peer","reliable")
+func switch_hand(id):
+	if id == 1:
+		Hand.get_child(0).queue_free()
+		var nscn = hoe.instantiate()
+		Hand.add_child(nscn)
+	if id == 2:
+		Hand.get_child(0).queue_free()
+		var nscn = seeds.instantiate()
+		Hand.add_child(nscn)
+
 
 func _physics_process(delta):
 	
@@ -71,9 +61,11 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 		
 	if Input.is_action_just_pressed("1"):
-		switch_hand(hoe)
-	if Input.is_action_just_pressed("2"):
-		switch_hand(seeds)
+		switch_hand.rpc(1)
+		switch_hand(1)
+	elif Input.is_action_just_pressed("2"):
+		switch_hand.rpc(2)
+		switch_hand(2)
 		
 		
 	if Input.is_action_just_pressed("m1"):
