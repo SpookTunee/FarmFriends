@@ -9,12 +9,11 @@ func _ready():
 
 func grow():
 	if get_node_or_null("PLANT"): return
-	get_node("/root/World/").spawn_wheatplant.rpc(self.name.replace("self",str(multiplayer.get_unique_id())),get_node("/root/World/").pcount)
-	gplant("self",get_node("/root/World/").pcount)
-	get_node("/root/World/").pcount += 1
-	
-func gplant(id: String, ids):
+	gplant()
+	$/root/World/TilledLand.grow_plant.rpc(self.name)
+
+func gplant():
 	var growplant = wheatplant.instantiate()
-	growplant.name="mpSpawned_" + id + "_wheatplant_" + str(ids)
+	growplant.name = "PLANT"
 	add_child(growplant)
 	growplant.get_node("Plant/PlantBody/AnimationPlayer").play("Plant_Growth_anim")
