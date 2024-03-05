@@ -5,7 +5,7 @@ extends Node3D
 
 const tilLand = preload("res://Prototype/Plant_prototype/tilled_land.tscn")
 const Player = preload("res://Player/player.tscn")
-var port = 9999
+var port = 6009
 var enet_peer = ENetMultiplayerPeer.new()
 #var tcount = 0
 #var pcount = 0
