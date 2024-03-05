@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bifh8ml83jcuh"
-path.s3tc="res://.godot/imported/icon.svg-7023cc3d71617f3a07035a84c0c54650.s3tc.ctex"
+uid="uid://csq5hkf3nr06e"
+path.s3tc="res://.godot/imported/download (4).jpg-83a6cffe83d769aea865343ca23bf1e0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Our Jesus/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-7023cc3d71617f3a07035a84c0c54650.s3tc.ctex"]
+source_file="res://Assets/Prototype Stuff/Farming/download (4).jpg"
+dest_files=["res://.godot/imported/download (4).jpg-83a6cffe83d769aea865343ca23bf1e0.s3tc.ctex"]
 
 [params]
 
@@ -33,6 +33,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

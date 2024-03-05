@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dvymy72qcwh4u"
-path="res://.godot/imported/protoShovel.blend-d44ee3fbacffdf3fd68b23e10570a0f0.scn"
+path="res://.godot/imported/protoShovel.blend-f82502a5a59996d7507b54b62a781212.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Tool/protoShovel.blend"
-dest_files=["res://.godot/imported/protoShovel.blend-d44ee3fbacffdf3fd68b23e10570a0f0.scn"]
+source_file="res://Assets/Prototype Stuff/Farming/protoShovel.blend"
+dest_files=["res://.godot/imported/protoShovel.blend-f82502a5a59996d7507b54b62a781212.scn"]
 
 [params]
 

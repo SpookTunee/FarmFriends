@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dsfb1gqvwwcxk"
-path="res://.godot/imported/protoHoe.blend-178af06c5abf74ea347cce4e2bdd290f.scn"
+uid="uid://bpsjx8mcj3g4"
+path="res://.godot/imported/WATERING CAN.blend-f000b42d4662698d824a5accdccbf44f.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Tool/protoHoe.blend"
-dest_files=["res://.godot/imported/protoHoe.blend-178af06c5abf74ea347cce4e2bdd290f.scn"]
+source_file="res://Assets/Prototype Stuff/Farming/WATERING CAN.blend"
+dest_files=["res://.godot/imported/WATERING CAN.blend-f000b42d4662698d824a5accdccbf44f.scn"]
 
 [params]
 

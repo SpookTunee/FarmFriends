@@ -68,7 +68,7 @@ func _physics_process(delta):
 		switch_hand(2)
 		
 		
-	if Input.is_action_just_pressed("m1"):
+	if Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
 	# Get the input direction and handle the movement/deceleration.

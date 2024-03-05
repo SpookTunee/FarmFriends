@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dux8g5ei8hovm"]
 
-[ext_resource type="PackedScene" uid="uid://dsfb1gqvwwcxk" path="res://Assets/Prototype Stuff/Tool/protoHoe.blend" id="1_sh0bj"]
 [ext_resource type="Script" path="res://Prototype/Hoe.gd" id="1_v6rmr"]
+[ext_resource type="PackedScene" uid="uid://bkqbv0dhchoux" path="res://Assets/Prototype Stuff/Farming/proto_hoe.tscn" id="2_h55r0"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2q1nu"]
 height = 0.847602
@@ -55,8 +55,8 @@ transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.279839, 1.11246, 0.00
 shape = SubResource("BoxShape3D_wufre")
 disabled = true
 
-[node name="protoHoe" parent="RigidBody3D" instance=ExtResource("1_sh0bj")]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+[node name="protoHoe" parent="RigidBody3D" instance=ExtResource("2_h55r0")]
+transform = Transform3D(2.47703, 2.64698e-23, -8.34465e-07, 1.05879e-22, 2.47703, -7.54389e-22, 8.34465e-07, 1.05879e-22, 2.47703, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

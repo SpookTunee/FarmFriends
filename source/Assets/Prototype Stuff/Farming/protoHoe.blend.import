@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bx8kwy3gyjgi7"
-path="res://.godot/imported/scythe.blend-d1a41f5fb128d8e9b818a3bc6cff8ed7.scn"
+uid="uid://dydlsb61ktuj3"
+path="res://.godot/imported/protoHoe.blend-96ff82e46a9133df9e7f4bd40b694f63.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Tool/scythe.blend"
-dest_files=["res://.godot/imported/scythe.blend-d1a41f5fb128d8e9b818a3bc6cff8ed7.scn"]
+source_file="res://Assets/Prototype Stuff/Farming/protoHoe.blend"
+dest_files=["res://.godot/imported/protoHoe.blend-96ff82e46a9133df9e7f4bd40b694f63.scn"]
 
 [params]
 

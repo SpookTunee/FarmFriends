@@ -1,8 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://dajwb865k54uq"]
+[gd_scene load_steps=2 format=3 uid="uid://b1htfmqikxyh3"]
 
-[ext_resource type="PackedScene" uid="uid://de8wylbxj82w4" path="res://Assets/Prototype Stuff/Farming/protoSeedPouch.blend" id="1_n4pcn"]
+[ext_resource type="PackedScene" uid="uid://dq6f10n125d4r" path="res://Assets/Prototype Stuff/Farming/protoSeedPouch.blend" id="1_n4pcn"]
 
 [node name="protoSeedPouch" instance=ExtResource("1_n4pcn")]
-
-[node name="Plane" parent="." index="0"]
-visible = false

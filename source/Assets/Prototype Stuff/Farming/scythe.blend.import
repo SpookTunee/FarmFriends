@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dcscas1lx77eg"
-path="res://.godot/imported/WATERING CAN.blend-a9585a3c54eaa886cd7d485465c40607.scn"
+uid="uid://bt47np56cssrp"
+path="res://.godot/imported/scythe.blend-8c28ddfa93c0e9f6ce3f1cb63d467da0.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Tool/WATERING CAN.blend"
-dest_files=["res://.godot/imported/WATERING CAN.blend-a9585a3c54eaa886cd7d485465c40607.scn"]
+source_file="res://Assets/Prototype Stuff/Farming/scythe.blend"
+dest_files=["res://.godot/imported/scythe.blend-8c28ddfa93c0e9f6ce3f1cb63d467da0.scn"]
 
 [params]
 

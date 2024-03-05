@@ -12,6 +12,7 @@ var enet_peer = ENetMultiplayerPeer.new()
 
 func disconnect_from_server():
 	remove_player.rpc()
+	get_tree().quit()
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("menu"):
