@@ -1,14 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5k44362othcy"]
+[gd_scene load_steps=6 format=3 uid="uid://b5k44362othcy"]
 
-[ext_resource type="Texture2D" uid="uid://o60q15st31lv" path="res://Assets/Prototype Stuff/Farming/seeds.jpg" id="1_8bl2r"]
-[ext_resource type="ArrayMesh" uid="uid://fbgrcvdbnklr" path="res://Assets/Prototype Stuff/Farming/wheat.obj" id="1_dw5ng"]
+[ext_resource type="PackedScene" uid="uid://s5gyevjbhuch" path="res://Assets/Prototype Stuff/Farming/wheat.blend" id="1_4c7s3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4l05l"]
 radius = 0.291641
 height = 0.862737
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nacby"]
-albedo_texture = ExtResource("1_8bl2r")
 
 [sub_resource type="Animation" id="Animation_oreve"]
 resource_name = "Plant_Growth_anim"
@@ -85,8 +81,11 @@ transform = Transform3D(1.35, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 0, 0, 0)
 
 [node name="PlantBody" type="MeshInstance3D" parent="Plant"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325025, 0)
-material_override = SubResource("StandardMaterial3D_nacby")
-mesh = ExtResource("1_dw5ng")
+cast_shadow = 0
+gi_mode = 0
+
+[node name="wheat" parent="Plant/PlantBody" instance=ExtResource("1_4c7s3")]
+transform = Transform3D(0.330296, 0, 0, 0, 0.330296, 0, 0, 0, 0.330296, -0.153, -0.3, 0.083)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Plant/PlantBody"]
 libraries = {
