@@ -1,6 +1,15 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=4 format=3 uid="uid://bxsw5lvqdwoew"]
 
 [ext_resource type="Script" path="res://Prototype/Plant_prototype/tilled_land.gd" id="1_ika8j"]
+=======
+[gd_scene load_steps=5 format=3 uid="uid://bxsw5lvqdwoew"]
+
+[ext_resource type="Script" path="res://Prototype/Plant_prototype/tilled_land.gd" id="1_ika8j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rxac"]
+albedo_color = Color(0.368627, 0.196078, 0.0627451, 1)
+>>>>>>> Stashed changes
 
 [sub_resource type="TorusMesh" id="TorusMesh_cdlye"]
 inner_radius = 0.056
