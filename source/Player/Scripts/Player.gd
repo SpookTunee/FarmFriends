@@ -7,6 +7,7 @@ var camera_sense = 0.005
 @onready var Hand = $Camera3D/Hand
 var hoe = preload("res://Prototype/Hoe.tscn")
 var seeds = preload("res://Prototype/bag_of_seeds.tscn")
+var scythe = preload("res://Prototype/scythe.tscn")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -44,6 +45,10 @@ func switch_hand(id):
 		Hand.get_child(0).queue_free()
 		var nscn = seeds.instantiate()
 		Hand.add_child(nscn)
+	if id == 3:
+		Hand.get_child(0).queue_free()
+		var nscn = scythe.instantiate()
+		Hand.add_child(nscn)
 
 
 func _physics_process(delta):
@@ -66,6 +71,9 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("2"):
 		switch_hand.rpc(2)
 		switch_hand(2)
+	elif Input.is_action_just_pressed("3"):
+		switch_hand.rpc(3)
+		switch_hand(3)
 		
 		
 	if Input.is_action_pressed("m1"):
