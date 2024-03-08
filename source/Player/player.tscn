@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://beqbayfw32u85"]
+[gd_scene load_steps=10 format=3 uid="uid://beqbayfw32u85"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_os5jd"]
 [ext_resource type="PackedScene" uid="uid://bwpeukfquy1s4" path="res://Prototype/bag_of_seeds.tscn" id="2_5d38p"]
+[ext_resource type="Texture2D" uid="uid://dqv783y1hwhq2" path="res://Assets/Prototype Stuff/Farming/download.jpg" id="2_pm6m2"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k4e8j"]
 properties/0/path = NodePath(".:position")
@@ -16,9 +17,16 @@ properties/2/replication_mode = 1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_78iyh"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16jd0"]
+albedo_texture = ExtResource("2_pm6m2")
+uv1_scale = Vector3(5, 5, 5)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5t3x"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dxan4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nvbsi"]
+albedo_color = Color(1, 0, 1, 1)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -32,6 +40,7 @@ replication_config = SubResource("SceneReplicationConfig_k4e8j")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_78iyh")
+surface_material_override/0 = SubResource("StandardMaterial3D_16jd0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00005, 0)
@@ -55,3 +64,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0549649, -0.096933, 0.01489
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0417948, 0, 0, 0, -3.41847e-09, 0.0362412, 0, -0.0782055, -1.58415e-09, 0, 1.47677, -0.55046)
 mesh = SubResource("CylinderMesh_dxan4")
+surface_material_override/0 = SubResource("StandardMaterial3D_nvbsi")
