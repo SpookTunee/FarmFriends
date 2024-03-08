@@ -1,13 +1,13 @@
 extends CharacterBody3D
 
 
-
 const SPEED = 5.0
-const JUMP_VELOCITY = 20.0
+const JUMP_VELOCITY = 5.0
 var camera_sense = 0.005
 @onready var Hand = $Camera3D/Hand
 var hoe = preload("res://Prototype/Hoe.tscn")
 var seeds = preload("res://Prototype/bag_of_seeds.tscn")
+var scythe = preload("res://Prototype/scythe.tscn")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -33,34 +33,27 @@ func _unhandled_input(event):
 		$Camera3D.rotate_x(-event.relative.y * camera_sense)
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 		
-	#
-	#mdt.set_vertex(
-		#((((npos.x)*64)+npos.y)*6),
-		#mdt.get_vertex((((npos.x)*64)+npos.y)*6) - Vector3(0,1,0)
-	#)
-	#mdt.set_vertex(
-		#((((npos.x)*64)+npos.y)*6)+3,
-		#mdt.get_vertex(((((npos.x)*64)+npos.y)*6)+3) - Vector3(0,1,0)
-	#)
-	#
-	#mdt.set_vertex(
-		#((((npos.x-1)*64)+npos.y)*6)+2,
-		#mdt.get_vertex(((((npos.x-1)*64)+npos.y)*6)+2) - Vector3(0,1,0)
-	#)
-	#
-	#mesh.clear_surfaces()
-	#mdt.commit_to_surface(mesh)
-	#meshy.mesh = mesh
 
-func switch_hand(scn):
-	Hand.get_child(0).queue_free()
-	var nscn = scn.instantiate()
-	Hand.add_child(nscn)
+
+@rpc("call_remote","any_peer","reliable")
+func switch_hand(id):
+	if id == 1:
+		Hand.get_child(0).queue_free()
+		var nscn = hoe.instantiate()
+		Hand.add_child(nscn)
+	if id == 2:
+		Hand.get_child(0).queue_free()
+		var nscn = seeds.instantiate()
+		Hand.add_child(nscn)
+	if id == 3:
+		Hand.get_child(0).queue_free()
+		var nscn = scythe.instantiate()
+		Hand.add_child(nscn)
+
 
 func _physics_process(delta):
 	
-	if !is_multiplayer_authority() || !multiplayer.multiplayer_peer: return
-	
+	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	
 	$Camera3D.make_current()
 	# Add the gravity.
@@ -73,9 +66,14 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 		
 	if Input.is_action_just_pressed("1"):
-		switch_hand(hoe)
-	if Input.is_action_just_pressed("2"):
-		switch_hand(seeds)
+		switch_hand.rpc(1)
+		switch_hand(1)
+	elif Input.is_action_just_pressed("2"):
+		switch_hand.rpc(2)
+		switch_hand(2)
+	elif Input.is_action_just_pressed("3"):
+		switch_hand.rpc(3)
+		switch_hand(3)
 		
 		
 	if Input.is_action_pressed("m1"):

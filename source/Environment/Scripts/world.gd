@@ -3,23 +3,21 @@ extends Node3D
 @onready var menu = $CanvasLayer/Menu
 @onready var ip = $CanvasLayer/Menu/MarginContainer/VBoxContainer/IPEntry
 
+const tilLand = preload("res://Prototype/Plant_prototype/tilled_land.tscn")
 const Player = preload("res://Player/player.tscn")
-var port = 9999
+var port = 6009
 var enet_peer = ENetMultiplayerPeer.new()
+#var tcount = 0
+#var pcount = 0
 
 func disconnect_from_server():
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	remove_player.rpc(multiplayer.get_unique_id())
-	multiplayer.multiplayer_peer.close()
-	multiplayer.multiplayer_peer = null
-	menu.show()
-	for i in get_children():
-		if i.name.begins_with("mpSpawned_"):
-			i.queue_free()
+	remove_player.rpc()
+	get_tree().quit()
 
-func _unhandled_input(event):	
+func _unhandled_input(event):
 	if Input.is_action_just_pressed("menu"):
-		if multiplayer.multiplayer_peer: disconnect_from_server()
+		if multiplayer.multiplayer_peer:
+			disconnect_from_server()
 		#get_tree().quit()
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,7 +29,13 @@ func _process(delta):
 	pass
 
 func on_host_disconnect():
-	disconnect_from_server()
+	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = null
+	menu.show()
+	for i in get_children():
+		if i.name.begins_with("mpSpawned_"):
+			i.queue_free()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_host_pressed():
 	menu.hide()
@@ -66,10 +70,21 @@ func _on_join_pressed():
 	multiplayer.server_disconnected.connect(on_host_disconnect)
 
 @rpc("any_peer", "call_remote", "unreliable")
-func remove_player(id):
-	var player = get_node_or_null("mpSpawned_" + str(id))
+func remove_player():
+	var player = get_node_or_null("mpSpawned_" + str(multiplayer.get_remote_sender_id()))
 	if player:
 		player.queue_free()
+	remove_player_callback.rpc_id(multiplayer.get_remote_sender_id())
+
+@rpc("any_peer","call_remote","unreliable")
+func remove_player_callback():
+	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = null
+	menu.show()
+	for i in get_children():
+		if i.name.begins_with("mpSpawned_"):
+			i.queue_free()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func add_player(id):
 	var player = Player.instantiate()

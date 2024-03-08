@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkqbv0dhchoux"]
+
+[ext_resource type="PackedScene" uid="uid://dydlsb61ktuj3" path="res://Assets/Prototype Stuff/Farming/protoHoe.blend" id="1_madsy"]
+
+[node name="protoHoe" instance=ExtResource("1_madsy")]

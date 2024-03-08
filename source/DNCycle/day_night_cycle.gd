@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var cycle_sec: int = 30
-var starting_rotation = -20
+var starting_rotation = -35
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
