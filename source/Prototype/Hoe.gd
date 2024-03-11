@@ -16,3 +16,4 @@ func activate():
 		if Look.get_collider() && (Look.get_collider().name == "Terrain"):
 			$/root/World/TilledLand.instant_till(multiplayer.get_unique_id(),$/root/World/TilledLand.till_count+1,Look.get_collision_point())
 			$/root/World/TilledLand.spawn_till.rpc($/root/World/TilledLand.till_count,Look.get_collision_point())
+
