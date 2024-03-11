@@ -1,11 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2defqux4eywm"]
+[gd_scene load_steps=6 format=3 uid="uid://b2defqux4eywm"]
 
 [ext_resource type="Script" path="res://Prototype/Scythe.gd" id="1_0dqqh"]
 [ext_resource type="PackedScene" uid="uid://bt47np56cssrp" path="res://Assets/Prototype Stuff/Farming/scythe.blend" id="2_dfyr0"]
 
+[sub_resource type="Animation" id="Animation_m45ci"]
+resource_name = "scythe"
+length = 0.7
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.037649, 0.768223, -0.637462, 0.0453717, 0.3, 1, -0.352591, 0.620216, -0.613565, -0.338452, 0.7, 1, 0.037649, 0.768223, -0.637462, 0.0453717)
+
+[sub_resource type="Animation" id="Animation_2hvam"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8wvph"]
+_data = {
+"RESET": SubResource("Animation_2hvam"),
+"scythe": SubResource("Animation_m45ci")
+}
+
 [node name="Scythe" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+transform = Transform3D(-0.993048, 0.115691, 0.0217116, 6.333e-08, 0.184449, -0.982841, -0.117711, -0.976009, -0.183167, 0, 0, 0)
 script = ExtResource("1_0dqqh")
 
 [node name="scythe" parent="." instance=ExtResource("2_dfyr0")]
-transform = Transform3D(-1.67958, 0.484252, -0.0836886, 0.162538, 0.266154, -1.72199, -0.463773, -1.66047, -0.300421, 0.178655, 0.296345, 0.085088)
+transform = Transform3D(1.74531, -0.127173, 0.0153727, 0.122125, 1.71527, 0.32469, -0.038663, -0.322747, 1.71955, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8wvph")
+}

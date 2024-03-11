@@ -2,4 +2,4 @@ extends Node3D
 
 
 func activate():
-	print("Hi")
+	$AnimationPlayer.play("scythe")
