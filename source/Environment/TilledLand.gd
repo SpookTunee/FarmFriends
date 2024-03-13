@@ -12,6 +12,10 @@ func spawn_till(count,pos):
 func grow_plant(id: String):
 	get_node(id).gplant()
 	
+@rpc("any_peer","call_remote","reliable")
+func harvest_plant(id: String):
+	get_node(id).harvest_plant()
+	
 func instant_till(id,count,pos):
 	till_count += 1
 	var till = tillLand.instantiate()

@@ -17,3 +17,11 @@ func gplant():
 	growplant.name = "PLANT"
 	add_child(growplant)
 	growplant.get_node("Plant/PlantBody/AnimationPlayer").play("Plant_Growth_anim")
+
+func harvest_plant():
+	if !get_node_or_null("PLANT"): return
+	harvest()
+	$/root/World/TilledLand.harvest_plant.rpc(self.name)
+	
+func harvest():
+	get_node("PLANT").queue_free()
