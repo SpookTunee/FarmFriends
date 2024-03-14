@@ -14,7 +14,7 @@ func grow_plant(id: String):
 	
 @rpc("any_peer","call_remote","reliable")
 func harvest_plant(id: String):
-	get_node(id).harvest_plant()
+	get_node(id).harvest()
 	
 func instant_till(id,count,pos):
 	till_count += 1

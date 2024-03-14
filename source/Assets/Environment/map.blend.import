@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://djl7cguuvxc3i"
-path="res://.godot/imported/potato.blend-82f1938494014bad6127dab803d8b227.scn"
+uid="uid://c45i1xbpc4vm2"
+path="res://.godot/imported/map.blend-e0b197c0449603d23e120076669e16d0.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Tool/potato.blend"
-dest_files=["res://.godot/imported/potato.blend-82f1938494014bad6127dab803d8b227.scn"]
+source_file="res://Assets/Environment/map.blend"
+dest_files=["res://.godot/imported/map.blend-e0b197c0449603d23e120076669e16d0.scn"]
 
 [params]
 

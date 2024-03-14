@@ -22,6 +22,8 @@ func harvest_plant():
 	if !get_node_or_null("PLANT"): return
 	harvest()
 	$/root/World/TilledLand.harvest_plant.rpc(self.name)
+	get_node("/root/World/mpSpawned_" + str(multiplayer.get_unique_id())).get_node("Stats").add_wheat()
 	
 func harvest():
 	get_node("PLANT").queue_free()
+	
