@@ -1,14 +1,11 @@
 shader_type spatial;
 
+varying vec3 pos;
 void vertex() {
-	// Called for every vertex the material is visible on.
+    pos = mat3(MODEL_MATRIX) * -VERTEX;
+    pos = pos - NODE_POSITION_WORLD;
 }
 
 void fragment() {
-	// Called for every pixel the material is visible on.
+    ALBEDO = vec3(pos.y/100.0,pos.y/100.0,pos.y/100.0);
 }
-
-//void light() {
-	// Called for every pixel for every light affecting the material.
-	// Uncomment to replace the default light processing function with this one.
-//}

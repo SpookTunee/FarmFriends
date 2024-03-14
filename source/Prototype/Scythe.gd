@@ -20,6 +20,10 @@ func _physics_process(_delta):
 				#if !con.get_parent().get_node("Plant/PlantBody/AnimationPlayer").is_playing():
 				con.get_parent().get_parent().harvest_plant()
 
+func init_pos():
+	$scythe/AnimationPlayer.play("scythe")
+	$scythe/AnimationPlayer.stop()
+
 func activate():
 	$scythe/AnimationPlayer.play("scythe")
 	if !cooldown:

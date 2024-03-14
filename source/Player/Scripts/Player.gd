@@ -49,6 +49,7 @@ func switch_hand(id):
 		Hand.get_child(0).queue_free()
 		var nscn = scythe.instantiate()
 		Hand.add_child(nscn)
+		nscn.init_pos()
 
 
 func _physics_process(delta):
