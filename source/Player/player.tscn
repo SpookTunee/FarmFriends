@@ -1,8 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://beqbayfw32u85"]
+[gd_scene load_steps=12 format=3 uid="uid://beqbayfw32u85"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_os5jd"]
 [ext_resource type="PackedScene" uid="uid://bwpeukfquy1s4" path="res://Prototype/bag_of_seeds.tscn" id="2_5d38p"]
 [ext_resource type="Texture2D" uid="uid://dqv783y1hwhq2" path="res://Assets/Prototype Stuff/Farming/download.jpg" id="2_pm6m2"]
+[ext_resource type="Script" path="res://Player/Stats.gd" id="2_ylpnc"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrk0f"]
+properties/0/path = NodePath(".:wheat_count")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k4e8j"]
 properties/0/path = NodePath(".:position")
@@ -33,6 +39,13 @@ collision_layer = 2
 collision_mask = 257
 wall_min_slide_angle = 0.349066
 script = ExtResource("1_os5jd")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("2_ylpnc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Stats"]
+replication_interval = 0.5
+replication_config = SubResource("SceneReplicationConfig_mrk0f")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_k4e8j")
@@ -65,3 +78,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0549649, -0.096933, 0.01489
 transform = Transform3D(0.0417948, 0, 0, 0, -3.41847e-09, 0.0362412, 0, -0.0782055, -1.58415e-09, 0, 1.47677, -0.55046)
 mesh = SubResource("CylinderMesh_dxan4")
 surface_material_override/0 = SubResource("StandardMaterial3D_nvbsi")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 0, 2.29624, 0)
+text = "0 Wheat
+"

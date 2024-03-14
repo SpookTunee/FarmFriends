@@ -1,10 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwpeukfquy1s4"]
+[gd_scene load_steps=2 format=3 uid="uid://bwpeukfquy1s4"]
 
 [ext_resource type="Script" path="res://Prototype/bag_of_seeds.gd" id="1_1b4ig"]
-[ext_resource type="PackedScene" uid="uid://b1htfmqikxyh3" path="res://Assets/Prototype Stuff/Farming/proto_seed_pouch.tscn" id="2_ejuei"]
 
 [node name="BagOfSeeds" type="Node3D"]
 script = ExtResource("1_1b4ig")
 
-[node name="protoSeedPouch" parent="." instance=ExtResource("2_ejuei")]
+[node name="protoSeedPouch" type="Node3D" parent="."]
 transform = Transform3D(0.468514, 0, 0, 0, 0.468514, 0, 0, 0, 0.468514, 0, 0.236533, 0)
