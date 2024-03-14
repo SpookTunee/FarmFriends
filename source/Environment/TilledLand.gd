@@ -3,6 +3,7 @@ extends Node
 const tillLand = preload("res://Prototype/Plant_prototype/tilled_land.tscn")
 
 var till_count = 0
+var tillposs = []
 
 @rpc("any_peer","call_remote","reliable")
 func spawn_till(count,pos):

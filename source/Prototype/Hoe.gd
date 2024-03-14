@@ -14,6 +14,11 @@ func activate():
 	if multiplayer.multiplayer_peer:
 		var Look = get_parent().get_parent().get_child(0)
 		if Look.get_collider() && (Look.get_collider().name == "Terrain"):
-			$/root/World/TilledLand.instant_till(multiplayer.get_unique_id(),$/root/World/TilledLand.till_count+1,Look.get_collision_point())
-			$/root/World/TilledLand.spawn_till.rpc($/root/World/TilledLand.till_count,Look.get_collision_point())
+			var lpos = Look.get_collision_point()
+			lpos.x = (int(lpos.x)/1.25)*1.25 - 0.625
+			lpos.z = (int(lpos.z)/1.25)*1.25 - 0.625
+			if !(Vector2((lpos.x),(lpos.z)) in get_node("/root/World/TilledLand").tillposs):
+				get_node("/root/World/TilledLand").tillposs.append(Vector2(lpos.x,lpos.z))
+				$/root/World/TilledLand.instant_till(multiplayer.get_unique_id(),$/root/World/TilledLand.till_count+1,lpos)
+				$/root/World/TilledLand.spawn_till.rpc($/root/World/TilledLand.till_count,lpos)
 
