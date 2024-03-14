@@ -69,10 +69,10 @@ _data = {
 
 [node name="Plant_prototype" type="Node3D"]
 
-[node name="TillArea" type="Area3D" parent="."]
+[node name="PlantBox" type="Area3D" parent="."]
 transform = Transform3D(1.35, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TillArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlantBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.477622, 0)
 shape = SubResource("CapsuleShape3D_4l05l")
 

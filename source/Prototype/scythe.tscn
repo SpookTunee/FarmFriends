@@ -1,36 +1,70 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2defqux4eywm"]
+[gd_scene load_steps=8 format=3 uid="uid://b2defqux4eywm"]
 
 [ext_resource type="Script" path="res://Prototype/Scythe.gd" id="1_0dqqh"]
 [ext_resource type="PackedScene" uid="uid://bt47np56cssrp" path="res://Assets/Prototype Stuff/Farming/scythe.blend" id="2_dfyr0"]
 
-[sub_resource type="Animation" id="Animation_m45ci"]
+[sub_resource type="Animation" id="Animation_c72an"]
 resource_name = "scythe"
 length = 0.7
-tracks/0/type = "rotation_3d"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".")
+tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.037649, 0.768223, -0.637462, 0.0453717, 0.3, 1, -0.352591, 0.620216, -0.613565, -0.338452, 0.7, 1, 0.037649, 0.768223, -0.637462, 0.0453717)
-
-[sub_resource type="Animation" id="Animation_2hvam"]
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8wvph"]
-_data = {
-"RESET": SubResource("Animation_2hvam"),
-"scythe": SubResource("Animation_m45ci")
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.42227, 2.2494, 7.13226e-07), Vector3(1.42244, 5.09113, 3.48787e-16), Vector3(1.42227, 2.2494, 7.13226e-07)]
 }
 
+[sub_resource type="Animation" id="Animation_ig2s8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.42227, -2.4299, 7.15667e-07)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s3nx5"]
+_data = {
+"RESET": SubResource("Animation_ig2s8"),
+"scythe": SubResource("Animation_c72an")
+}
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h6y3l"]
+points = PackedVector3Array(0.0345049, 0.985147, -0.0142671, -0.0337773, -0.594877, -0.0142671, -0.0337773, -0.594877, 0.0149948, 0.0345049, -0.594877, -0.0142671, -0.0142671, 0.985147, 0.0345049, -0.0337773, 0.975594, -0.0240189, 0.0149948, -0.594877, 0.0345049, 0.0149948, -0.594877, -0.0337773, 0.0345049, 0.985147, 0.0149948, 0.0247465, 0.975594, -0.0337773, -0.0337773, 0.975594, 0.0247465, -0.0142671, -0.594877, -0.0337773, -0.0142671, -0.594877, 0.0345049, 0.0345049, -0.594877, 0.0149948, 0.0149948, 0.985147, 0.0345049, -0.0142671, 0.985147, -0.0337773, -0.0240189, 0.994855, -0.0240189, 0.0247465, 0.994855, -0.0240189, -0.0240189, 0.994855, 0.0247465)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vbvgw"]
+size = Vector3(1.37988, 1, 1.81055)
+
 [node name="Scythe" type="Node3D"]
-transform = Transform3D(-0.993048, 0.115691, 0.0217116, 6.333e-08, 0.184449, -0.982841, -0.117711, -0.976009, -0.183167, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
 script = ExtResource("1_0dqqh")
 
 [node name="scythe" parent="." instance=ExtResource("2_dfyr0")]
-transform = Transform3D(1.74531, -0.127173, 0.0153727, 0.122125, 1.71527, 0.32469, -0.038663, -0.322747, 1.71955, 0, 0, 0)
+transform = Transform3D(-1.3252, -1.13037, -0.169136, 1.85335e-07, 0.258967, -1.73073, 1.14296, -1.31061, -0.196105, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="scythe"]
 libraries = {
-"": SubResource("AnimationLibrary_8wvph")
+"": SubResource("AnimationLibrary_s3nx5")
 }
+
+[node name="Area3D" type="Area3D" parent="scythe"]
+transform = Transform3D(0.993025, 0.0056175, 0.117782, -0.00325434, 0.99979, -0.0202406, -0.117875, 0.0197155, 0.992833, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="scythe/Area3D"]
+transform = Transform3D(1, 4.58945e-08, -8.89307e-09, 3.47281e-09, 1, 3.18642e-09, -1.09036e-08, -6.57235e-09, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_h6y3l")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="scythe/Area3D"]
+transform = Transform3D(0.445059, 5.14773e-10, 3.03868e-07, -1.65573e-06, -0.00399698, -0.223426, 2.53777e-07, -0.0114098, 0.0782686, 0.279278, 1.03674, -0.0320358)
+shape = SubResource("BoxShape3D_vbvgw")
