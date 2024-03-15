@@ -1,7 +1,10 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
+var sprinting = false
+var ticks = 0
+
+var SPEED = 5.0
 const JUMP_VELOCITY = 5.0
 var camera_sense = 0.005
 @onready var Hand = $Camera3D/Hand
@@ -53,7 +56,7 @@ func switch_hand(id):
 
 
 func _physics_process(delta):
-	
+	ticks += 1
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	
 	$Camera3D.make_current()
@@ -65,7 +68,24 @@ func _physics_process(delta):
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		
+	
+	mov_sprint(delta)
+	mov_dirs()
+	mov_hands()
+	move_and_slide()
+
+
+
+func mov_sprint(delta):
+	if Input.is_action_pressed("sprint"):
+		SPEED = 6.8
+		$Camera3D.rotation.x += (cos((ticks%360)*delta*15))*.0015
+	else:
+		SPEED = 5.0
+
+
+
+func mov_hands():
 	if Input.is_action_just_pressed("1"):
 		switch_hand.rpc(1)
 		switch_hand(1)
@@ -75,13 +95,12 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("3"):
 		switch_hand.rpc(3)
 		switch_hand(3)
-		
-		
 	if Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+
+
+func mov_dirs():
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
@@ -90,7 +109,3 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-
-
-	move_and_slide()
