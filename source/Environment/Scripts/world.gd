@@ -59,7 +59,7 @@ func l_IP_scan():
 			if (!(i.begins_with("127.0"))) && (!(i.begins_with("f"))) && (!(i.begins_with("0:"))):
 				return i
 		print("error")
-		#ip_adress =  IP.resolve_hostname(st	r(OS.get_environment("HOSTNAME")),1)
+		#ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 	return ip_adress
 
 func _on_join_pressed():

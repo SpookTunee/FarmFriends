@@ -18,7 +18,7 @@ func activate():
 			lpos.x = (int(lpos.x)/1.25)*1.25 - 0.625
 			lpos.z = (int(lpos.z)/1.25)*1.25 - 0.625
 			if !(Vector2((lpos.x),(lpos.z)) in get_node("/root/World/TilledLand").tillposs):
-				get_node("/root/World/TilledLand").tillposs.append(Vector2(lpos.x,lpos.z))
+				get_node("/root/World/TilledLand").tillposs.insert(0,Vector2(lpos.x,lpos.z))
 				$/root/World/TilledLand.instant_till(multiplayer.get_unique_id(),$/root/World/TilledLand.till_count+1,lpos)
 				$/root/World/TilledLand.spawn_till.rpc($/root/World/TilledLand.till_count,lpos)
 
