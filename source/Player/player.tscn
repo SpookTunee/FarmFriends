@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://beqbayfw32u85"]
+[gd_scene load_steps=12 format=3 uid="uid://beqbayfw32u85"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_os5jd"]
-[ext_resource type="Texture2D" uid="uid://dqv783y1hwhq2" path="res://Assets/Prototype Stuff/Farming/download.jpg" id="2_pm6m2"]
-[ext_resource type="Script" path="res://Player/Stats.gd" id="2_ylpnc"]
-[ext_resource type="PackedScene" uid="uid://dux8g5ei8hovm" path="res://Prototype/Hoe.tscn" id="4_ovib2"]
-[ext_resource type="Script" path="res://Player/Label.gd" id="5_djcxa"]
+[ext_resource type="Script" path="res://Player/Scripts/Stats.gd" id="2_235ld"]
+[ext_resource type="PackedScene" uid="uid://dux8g5ei8hovm" path="res://Tools/Hoe.tscn" id="4_ovib2"]
+[ext_resource type="Script" path="res://Player/Scripts/Label.gd" id="4_wvlne"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrk0f"]
 properties/0/path = NodePath(".:wheat_count")
@@ -24,10 +23,6 @@ properties/2/replication_mode = 1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_78iyh"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16jd0"]
-albedo_texture = ExtResource("2_pm6m2")
-uv1_scale = Vector3(5, 5, 5)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5t3x"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dxan4"]
@@ -45,7 +40,7 @@ wall_min_slide_angle = 0.349066
 script = ExtResource("1_os5jd")
 
 [node name="Stats" type="Node" parent="."]
-script = ExtResource("2_ylpnc")
+script = ExtResource("2_235ld")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Stats"]
 replication_interval = 0.5
@@ -57,7 +52,6 @@ replication_config = SubResource("SceneReplicationConfig_k4e8j")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_78iyh")
-surface_material_override/0 = SubResource("StandardMaterial3D_16jd0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00005, 0)
@@ -76,7 +70,6 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.674198, -0.650779, -0.639026)
 
 [node name="Hoe" parent="Camera3D/Hand" instance=ExtResource("4_ovib2")]
-transform = Transform3D(-0.528437, 4.80423e-16, 0.848972, 3.48787e-16, 1, -3.48787e-16, -0.848972, 1.11798e-16, -0.528437, 0, 0, 0)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0417948, 0, 0, 0, -3.41847e-09, 0.0362412, 0, -0.0782055, -1.58415e-09, 0, 1.47677, -0.55046)
@@ -92,4 +85,4 @@ text = "0 Wheat
 offset_right = 461.0
 offset_bottom = 138.0
 label_settings = SubResource("LabelSettings_d6qsl")
-script = ExtResource("5_djcxa")
+script = ExtResource("4_wvlne")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxsw5lvqdwoew"]
+
+[ext_resource type="Script" path="res://Farming/Scripts/tilled_land.gd" id="1_ika8j"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b4650"]
+height = 0.3
+radius = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghmv7"]
+albedo_color = Color(0.337255, 0.172549, 0, 1)
+
+[node name="TilledLand" type="Node3D"]
+script = ExtResource("1_ika8j")
+
+[node name="TilledLand" type="StaticBody3D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TilledLand"]
+shape = SubResource("CylinderShape3D_b4650")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.51, 0, 0, 0, 1, 0, 0, 0)
+inner_radius = 0.082
+outer_radius = 0.75
+sides = 7
+ring_sides = 7
+smooth_faces = false
+material = SubResource("StandardMaterial3D_ghmv7")

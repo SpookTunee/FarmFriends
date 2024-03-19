@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwpeukfquy1s4"]
+
+[ext_resource type="Script" path="res://Tools/Scripts/bag_of_seeds.gd" id="1_7h24k"]
+[ext_resource type="PackedScene" uid="uid://dq6f10n125d4r" path="res://Assets/Tools/seed_pouch.blend" id="2_jfjp1"]
+
+[node name="BagOfSeeds" type="Node3D"]
+script = ExtResource("1_7h24k")
+
+[node name="protoSeedPouch" parent="." instance=ExtResource("2_jfjp1")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)

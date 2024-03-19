@@ -8,9 +8,9 @@ var SPEED = 5.0
 const JUMP_VELOCITY = 5.0
 var camera_sense = 0.005
 @onready var Hand = $Camera3D/Hand
-var hoe = preload("res://Prototype/Hoe.tscn")
-var seeds = preload("res://Prototype/bag_of_seeds.tscn")
-var scythe = preload("res://Prototype/scythe.tscn")
+var hoe = preload("res://Tools/Hoe.tscn")
+var seeds = preload("res://Tools/bag_of_seeds.tscn")
+var scythe = preload("res://Tools/scythe.tscn")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
