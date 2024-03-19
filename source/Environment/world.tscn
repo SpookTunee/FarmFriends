@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4feheqd6xakg"]
+[gd_scene load_steps=10 format=3 uid="uid://c4feheqd6xakg"]
 
 [ext_resource type="Script" path="res://Environment/Scripts/world.gd" id="1_dsyey"]
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="2_n7ko7"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cuqxxerd6wdvt" path="res://DNCycle/day_night_cycle.tscn" id="4_j4k7p"]
 [ext_resource type="Texture2D" uid="uid://c4jrs0htyq74a" path="res://Assets/Menu/titleScreen.png" id="5_g0cls"]
 [ext_resource type="ArrayMesh" uid="uid://yoq14k43kyka" path="res://Assets/Environment/map.obj" id="6_bqtpp"]
+[ext_resource type="PackedScene" uid="uid://5frcq064xyc7" path="res://Prototype/plant_base.tscn" id="7_konqx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8rtq"]
 albedo_color = Color(0.278431, 0.396078, 0.227451, 1)
@@ -122,6 +123,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_a8rtq")
 [node name="Terrain" type="CollisionShape3D" parent="Terrain"]
 visible = false
 shape = SubResource("ConcavePolygonShape3D_5qfht")
+
+[node name="PlantSpawner" parent="." instance=ExtResource("7_konqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -41.4755, 0)
 
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]

@@ -2,7 +2,18 @@ extends Node
 
 var day : int
 var dayName : String
-
+enum Regions {
+	NONE,
+	PLAINS,
+	MOUNTAINOUS,
+	RIVER,
+}
+enum Plants {
+	WHEAT,
+	CORN,
+	POTATO,
+	CARROT,
+}
 
 func _process(delta):
 	dayCalc()

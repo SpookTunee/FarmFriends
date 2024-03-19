@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://5frcq064xyc7"]
+[gd_scene load_steps=6 format=3 uid="uid://5frcq064xyc7"]
 
 [ext_resource type="Script" path="res://Prototype/plant_base.gd" id="1_jbvpf"]
-[ext_resource type="ArrayMesh" uid="uid://fbgrcvdbnklr" path="res://Assets/Prototype Stuff/Farming/wheat.obj" id="2_5hq64"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4cvy"]
 radius = 0.291641
@@ -70,7 +69,6 @@ _data = {
 
 [node name="plant_base" type="Node3D"]
 script = ExtResource("1_jbvpf")
-plant_model = ExtResource("2_5hq64")
 
 [node name="PlantBox" type="Area3D" parent="."]
 transform = Transform3D(1.35, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 0, 0, 0)
