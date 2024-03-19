@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://djl7cguuvxc3i"
-path="res://.godot/imported/potato.blend-82f1938494014bad6127dab803d8b227.scn"
+path="res://.godot/imported/potato.blend-3627744da316e994309b48836cebb86b.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Tool/potato.blend"
-dest_files=["res://.godot/imported/potato.blend-82f1938494014bad6127dab803d8b227.scn"]
+source_file="res://Assets/Prototype Stuff/Plants/potato.blend"
+dest_files=["res://.godot/imported/potato.blend-3627744da316e994309b48836cebb86b.scn"]
 
 [params]
 

@@ -14,7 +14,7 @@ func grow():
 	$/root/World/TilledLand.grow_plant.rpc(self.name)
 
 func gplant():
-	var growplant = get_node("/root/World/PlantSpawner").quick_init(Global.Plants.WHEAT)
+	var growplant = get_node("/root/World/PlantSpawner").quick_init(Global.Plants.MUSHROOM)
 	growplant.name = "PLANT"
 	add_child(growplant)
 	growplant.get_node("Plant/PlantBody/AnimationPlayer").play("Plant_Growth_anim")

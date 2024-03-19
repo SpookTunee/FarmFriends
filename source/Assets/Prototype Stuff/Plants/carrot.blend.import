@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://drnuj0o6qh67u"
-path="res://.godot/imported/carrot.blend-13bc0980610738127d73d075cfe5f2f7.scn"
+path="res://.godot/imported/carrot.blend-ccd7ecc1a9416932b486da2815919ca7.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Tool/carrot.blend"
-dest_files=["res://.godot/imported/carrot.blend-13bc0980610738127d73d075cfe5f2f7.scn"]
+source_file="res://Assets/Prototype Stuff/Plants/carrot.blend"
+dest_files=["res://.godot/imported/carrot.blend-ccd7ecc1a9416932b486da2815919ca7.scn"]
 
 [params]
 

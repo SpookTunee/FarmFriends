@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b4guap0drw61r"
-path="res://.godot/imported/asparagus.blend-618cd8d70956cbd9d8212bc50d5459a1.scn"
+uid="uid://c208e64wnar4l"
+path="res://.godot/imported/single corn.blend-3579c413366031cc741f44db29ebcff2.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Tool/asparagus.blend"
-dest_files=["res://.godot/imported/asparagus.blend-618cd8d70956cbd9d8212bc50d5459a1.scn"]
+source_file="res://Assets/Prototype Stuff/Plants/single corn.blend"
+dest_files=["res://.godot/imported/single corn.blend-3579c413366031cc741f44db29ebcff2.scn"]
 
 [params]
 

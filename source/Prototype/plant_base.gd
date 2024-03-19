@@ -4,9 +4,9 @@ class_name PlantBase
 @export var grow_time: float
 @export var plant_model: Mesh
 @export var crop_yield: int
-@export_enum("None","Plains", "Mountainous", "River") var terrain_good : int
-@export_enum("None","Plains", "Mountainous", "River") var terrain_bad : int
-@export_enum("None","Plains", "Mountainous", "River") var terrain_bad_2 : int = 0
+@export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_good : int
+@export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_bad : int
+@export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_bad_2 : int = 0
 
 func _ready():
 	$Plant/PlantBody.mesh = plant_model
@@ -28,12 +28,14 @@ func quick_init(Plant: int):
 	var settings = {}
 	
 	if Plant == Global.Plants.WHEAT:
-		settings = {"grow_time":0.5,"plant_model":load("res://Assets/Prototype Stuff/Farming/wheat.obj"),"crop_yield":5,"terrain_good":Global.Regions.PLAINS,"terrain_bad":Global.Regions.MOUNTAINOUS}
+		settings = {"grow_time":0.5,"plant_model":load("res://Assets/Prototype Stuff/Plants/wheat.obj"),"crop_yield":5,"terrain_good":Global.Regions.PLAINS,"terrain_bad":Global.Regions.MOUNTAINOUS, "terrain_bad_2":Global.Regions.FOREST}
 	elif Plant == Global.Plants.CORN:
-		settings = {"grow_time":1.5,"plant_model":load(""),"crop_yield":5,"terrain_good":Global.Regions.PLAINS,"terrain_bad":Global.Regions.RIVER,"terrain_bad_2":Global.Regions.MOUNTAINOUS}
+		settings = {"grow_time":1.5,"plant_model":load("res://Assets/Prototype Stuff/Plants/corn.obj"),"crop_yield":5,"terrain_good":Global.Regions.PLAINS,"terrain_bad":Global.Regions.RIVER,"terrain_bad_2":Global.Regions.MOUNTAINOUS}
 	elif Plant == Global.Plants.POTATO:  # Potatoes are special, update this code later.
-		settings = {"grow_time":0.5,"plant_model":load(""),"crop_yield":5,"terrain_good":Global.Regions.MOUNTAINOUS,"terrain_bad":Global.Regions.RIVER}
+		settings = {"grow_time":0.5,"plant_model":load("res://Assets/Prototype Stuff/Plants/potato.obj"),"crop_yield":5,"terrain_good":Global.Regions.MOUNTAINOUS,"terrain_bad":Global.Regions.RIVER}
 	elif Plant == Global.Plants.CARROT:
-		settings = {"grow_time":2.5,"plant_model":load(""),"crop_yield":3,"terrain_good":Global.Regions.RIVER,"terrain_bad":Global.Regions.MOUNTAINOUS}
+		settings = {"grow_time":2.5,"plant_model":load("res://Assets/Prototype Stuff/Plants/carrot.obj"),"crop_yield":3,"terrain_good":Global.Regions.RIVER,"terrain_bad":Global.Regions.MOUNTAINOUS}
+	elif Plant == Global.Plants.MUSHROOM:
+		settings = {"grow_time":2.5,"plant_model":load("res://Assets/Prototype Stuff/Plants/mushroom.obj"),"crop_yield":3,"terrain_good":Global.Regions.RIVER,"terrain_bad":Global.Regions.MOUNTAINOUS}
 	
 	return with_vars(settings)

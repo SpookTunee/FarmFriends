@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c208e64wnar4l"
-path="res://.godot/imported/single corn.blend-5463841ff9c58434b14531292001b88c.scn"
+uid="uid://dce27wownxpy2"
+path="res://.godot/imported/corn.blend-2aab6e52a04e2155a42a099ed3d70069.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Tool/single corn.blend"
-dest_files=["res://.godot/imported/single corn.blend-5463841ff9c58434b14531292001b88c.scn"]
+source_file="res://Assets/Prototype Stuff/Plants/corn.blend"
+dest_files=["res://.godot/imported/corn.blend-2aab6e52a04e2155a42a099ed3d70069.scn"]
 
 [params]
 

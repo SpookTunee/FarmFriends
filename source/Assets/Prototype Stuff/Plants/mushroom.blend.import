@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://s5gyevjbhuch"
-path="res://.godot/imported/wheat.blend-e3f6fefa0ee8ca903630cd74e7902501.scn"
+uid="uid://6caub0bcbxqs"
+path="res://.godot/imported/mushroom.blend-9af458a780b92b23d270992fd6ac274a.scn"
 
 [deps]
 
-source_file="res://Assets/Prototype Stuff/Farming/wheat.blend"
-dest_files=["res://.godot/imported/wheat.blend-e3f6fefa0ee8ca903630cd74e7902501.scn"]
+source_file="res://Assets/Prototype Stuff/Plants/mushroom.blend"
+dest_files=["res://.godot/imported/mushroom.blend-9af458a780b92b23d270992fd6ac274a.scn"]
 
 [params]
 

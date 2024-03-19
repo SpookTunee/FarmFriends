@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://n3wo3n6fm621"]
 
-[ext_resource type="PackedScene" uid="uid://s5gyevjbhuch" path="res://Assets/Prototype Stuff/Farming/wheat.blend" id="1_xyqku"]
+[ext_resource type="PackedScene" uid="uid://s5gyevjbhuch" path="res://Assets/Prototype Stuff/Plants/wheat.blend" id="1_xyqku"]
 
 [node name="wheat" instance=ExtResource("1_xyqku")]
 

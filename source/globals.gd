@@ -7,12 +7,14 @@ enum Regions {
 	PLAINS,
 	MOUNTAINOUS,
 	RIVER,
+	FOREST,
 }
 enum Plants {
 	WHEAT,
 	CORN,
 	POTATO,
 	CARROT,
+	MUSHROOM,
 }
 
 func _process(delta):
