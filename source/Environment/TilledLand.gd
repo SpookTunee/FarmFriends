@@ -10,8 +10,8 @@ func spawn_till(count,pos):
 	instant_till(multiplayer.get_remote_sender_id(),count,pos)
 	
 @rpc("any_peer","call_remote","reliable")
-func grow_plant(id: String):
-	get_node(id).gplant()
+func grow_plant(id: String, plant: int):
+	get_node(id).gplant(plant)
 	
 @rpc("any_peer","call_remote","reliable")
 func harvest_plant(id: String):

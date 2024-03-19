@@ -8,13 +8,13 @@ func _ready():
 	pass
 
 
-func grow():
+func grow(plant):
 	if get_node_or_null("PLANT"): return
-	gplant()
-	$/root/World/TilledLand.grow_plant.rpc(self.name)
+	gplant(plant)
+	$/root/World/TilledLand.grow_plant.rpc(self.name,plant)
 
-func gplant():
-	var growplant = get_node("/root/World/PlantSpawner").quick_init(Global.Plants.MUSHROOM)
+func gplant(plant):
+	var growplant = get_node("/root/World/PlantSpawner").quick_init(plant)
 	growplant.name = "PLANT"
 	add_child(growplant)
 	growplant.get_node("Plant/PlantBody/AnimationPlayer").play("Plant_Growth_anim")
