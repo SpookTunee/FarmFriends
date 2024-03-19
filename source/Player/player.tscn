@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://beqbayfw32u85"]
+[gd_scene load_steps=14 format=3 uid="uid://beqbayfw32u85"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_os5jd"]
 [ext_resource type="Texture2D" uid="uid://dqv783y1hwhq2" path="res://Assets/Prototype Stuff/Farming/download.jpg" id="2_pm6m2"]
 [ext_resource type="Script" path="res://Player/Stats.gd" id="2_ylpnc"]
 [ext_resource type="PackedScene" uid="uid://dux8g5ei8hovm" path="res://Prototype/Hoe.tscn" id="4_ovib2"]
+[ext_resource type="Script" path="res://Player/Label.gd" id="5_djcxa"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrk0f"]
 properties/0/path = NodePath(".:wheat_count")
@@ -33,6 +34,9 @@ uv1_scale = Vector3(5, 5, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nvbsi"]
 albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d6qsl"]
+font_size = 64
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -83,3 +87,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nvbsi")
 transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 0, 2.29624, 0)
 text = "0 Wheat
 "
+
+[node name="Label" type="Label" parent="."]
+offset_right = 461.0
+offset_bottom = 138.0
+label_settings = SubResource("LabelSettings_d6qsl")
+script = ExtResource("5_djcxa")

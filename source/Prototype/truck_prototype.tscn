@@ -1,19 +1,61 @@
-[gd_scene load_steps=11 format=3 uid="uid://8rucd3btna6i"]
+[gd_scene load_steps=8 format=3 uid="uid://8rucd3btna6i"]
 
-[ext_resource type="Script" path="res://Prototype/SubViewport.gd" id="1_hhmri"]
 [ext_resource type="Script" path="res://Prototype/truck_prototype.gd" id="1_xm525"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g52p7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mr14s"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hds5g"]
-viewport_path = NodePath("TruckModelPlaceholder/Sprite3D/SubViewport")
-
-[sub_resource type="LabelSettings" id="LabelSettings_we7od"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_f4xsc"]
 size = Vector3(0.513672, 0.359924, 1.56229)
+
+[sub_resource type="Animation" id="Animation_2gf5o"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_bq470"]
 resource_name = "TruckEnter"
@@ -64,54 +106,6 @@ tracks/3/keys = {
 "values": [Vector3(3.48787e-16, 18.8496, 3.48787e-16), Vector3(3.48787e-16, 15.708, 3.48787e-16), Vector3(3.48787e-16, 12.5664, 3.48787e-16), Vector3(3.48787e-16, 9.42478, 3.48787e-16), Vector3(3.48787e-16, 6.28319, 3.48787e-16), Vector3(0, 0, 0), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
 }
 
-[sub_resource type="Animation" id="Animation_2gf5o"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:position:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7o08r"]
 _data = {
 "RESET": SubResource("Animation_2gf5o"),
@@ -129,22 +123,6 @@ mesh = SubResource("BoxMesh_g52p7")
 transform = Transform3D(0.0671092, 0.0623928, 0, -0.117163, 0.152791, 0, 0, 0, 0.624606, 0.483448, -0.284584, 0)
 mesh = SubResource("BoxMesh_mr14s")
 skeleton = NodePath("../..")
-
-[node name="Sprite3D" type="Sprite3D" parent="TruckModelPlaceholder"]
-transform = Transform3D(-1.98306e-08, 1.95962e-16, 1, 1.58234e-16, 0.56184, -3.48787e-16, -0.45367, 1.95962e-16, -4.37114e-08, 0.50402, 0, 0)
-texture = SubResource("ViewportTexture_hds5g")
-
-[node name="SubViewport" type="SubViewport" parent="TruckModelPlaceholder/Sprite3D"]
-size = Vector2i(130, 25)
-script = ExtResource("1_hhmri")
-
-[node name="Label" type="Label" parent="TruckModelPlaceholder/Sprite3D/SubViewport"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "back of the truck
-"
-label_settings = SubResource("LabelSettings_we7od")
-horizontal_alignment = 1
 
 [node name="DepositArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57952, 0, 0)
