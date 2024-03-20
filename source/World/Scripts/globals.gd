@@ -2,6 +2,7 @@ extends Node
 
 var day : int
 var dayName : String
+
 enum Regions {
 	NONE,
 	PLAINS,

@@ -1,15 +1,27 @@
 extends Node3D
 class_name PlantBase
 
+@export_category("Plant Data")
 @export var grow_time: float
 @export var plant_model: Mesh
 @export var crop_yield: int
+@export_category("Terrain Preference")
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_good : int
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_bad : int
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_bad_2 : int = 0
+@export_category("Default Transformations")
+@export var default_position: Vector3 = Vector3(0.0,0.0,0.0)
+@export var default_scale: Vector3 = Vector3(1.0,1.0,1.0)
+@export var collider_default_position: Vector3 = Vector3(0.0,0.0,0.0)
+@export var collider_default_scale: Vector3 = Vector3(1.0,1.0,1.0)
+
 
 func _ready():
 	$Plant/PlantBody.mesh = plant_model
+	$Plant.position = default_position
+	$Plant.scale = default_scale
+	$PlantBox.scale = collider_default_scale
+	$PlantBox.position = collider_default_position
 
 func with_vars(Variables: Dictionary):
 	var n = load("res://Farming/plant_base.tscn").instantiate()
@@ -22,20 +34,77 @@ func with_vars(Variables: Dictionary):
 		n.terrain_bad_2 = Variables.terrain_bad_2
 	else:
 		n.terrain_bad_2 = 0
+	n.default_position = Variables.default_position
+	n.default_scale = Variables.default_scale
+	n.collider_default_position = Variables.collider_default_position
+	n.collider_default_scale = Variables.collider_default_scale
 	return n
 
 func quick_init(Plant: int):
 	var settings = {}
 	
 	if Plant == Global.Plants.WHEAT:
-		settings = {"grow_time":0.5,"plant_model":load("res://Assets/Plants/wheat.obj"),"crop_yield":5,"terrain_good":Global.Regions.PLAINS,"terrain_bad":Global.Regions.MOUNTAINOUS, "terrain_bad_2":Global.Regions.FOREST}
+		settings = {
+			"grow_time":				0.5,
+			"plant_model":				load("res://Assets/Plants/wheat.obj"),
+			"crop_yield":				5,
+			"terrain_good":				Global.Regions.PLAINS,
+			"terrain_bad":				Global.Regions.MOUNTAINOUS,
+			"terrain_bad_2":			Global.Regions.FOREST,
+			"default_position":			Vector3(-0.254,0,0.16),
+			"default_scale":			Vector3(0.5,0.5,0.5),
+			"collider_default_position":Vector3(0.0,0.1,0.0),
+			"collider_default_scale":	Vector3(1.0,1.6,1.0),
+			}
 	elif Plant == Global.Plants.CORN:
-		settings = {"grow_time":1.5,"plant_model":load("res://Assets/Plants/corn.obj"),"crop_yield":5,"terrain_good":Global.Regions.PLAINS,"terrain_bad":Global.Regions.RIVER,"terrain_bad_2":Global.Regions.MOUNTAINOUS}
+		settings = {
+			"grow_time":				1.5,
+			"plant_model":				load("res://Assets/Plants/corn.obj"),
+			"crop_yield":				5,
+			"terrain_good":				Global.Regions.PLAINS,
+			"terrain_bad":				Global.Regions.MOUNTAINOUS,
+			"terrain_bad_2":			Global.Regions.RIVER,
+			"default_position":			Vector3(0.0,0,0.0),
+			"default_scale":			Vector3(1.0,1.0,1.0),
+			"collider_default_position":Vector3(0.0,0.13,0.0),
+			"collider_default_scale":	Vector3(1.0,2.6,1.0),
+			}
 	elif Plant == Global.Plants.POTATO:  # Potatoes are special, update this code later.
-		settings = {"grow_time":0.5,"plant_model":load("res://Assets/Plants/potato.obj"),"crop_yield":5,"terrain_good":Global.Regions.MOUNTAINOUS,"terrain_bad":Global.Regions.RIVER}
+		settings = {
+			"grow_time":				2.0,
+			"plant_model":				load("res://Assets/Plants/potato.obj"),
+			"crop_yield":				6,
+			"terrain_good":				Global.Regions.MOUNTAINOUS,
+			"terrain_bad":				Global.Regions.RIVER,
+			"default_position":			Vector3(0.0,0,0.0),
+			"default_scale":			Vector3(1.0,1.0,1.0),
+			"collider_default_position":Vector3(0.0,0.0,0.0),
+			"collider_default_scale":	Vector3(1.0,0.5,1.0),
+			}
 	elif Plant == Global.Plants.CARROT:
-		settings = {"grow_time":2.5,"plant_model":load("res://Assets/Plants/carrot.obj"),"crop_yield":3,"terrain_good":Global.Regions.RIVER,"terrain_bad":Global.Regions.MOUNTAINOUS}
+		settings = {
+			"grow_time":				2.5,
+			"plant_model":				load("res://Assets/Plants/carrot.obj"),
+			"crop_yield":				3,
+			"terrain_good":				Global.Regions.RIVER,
+			"terrain_bad":				Global.Regions.MOUNTAINOUS,
+			"default_position":			Vector3(-0.254,0,0.16),
+			"default_scale":			Vector3(0.5,0.5,0.5),
+			"collider_default_position":Vector3(0.0,0.0,0.0),
+			"collider_default_scale":	Vector3(1.0,1.0,1.0),
+			}
 	elif Plant == Global.Plants.MUSHROOM:
-		settings = {"grow_time":2.5,"plant_model":load("res://Assets/Plants/mushroom.obj"),"crop_yield":3,"terrain_good":Global.Regions.RIVER,"terrain_bad":Global.Regions.MOUNTAINOUS}
+		settings = {
+			"grow_time":				1.0,
+			"plant_model":				load("res://Assets/Plants/mushroom.obj"),
+			"crop_yield":				6,
+			"terrain_good":				Global.Regions.PLAINS,
+			"terrain_bad":				Global.Regions.MOUNTAINOUS,
+			"terrain_bad_2":			Global.Regions.FOREST,
+			"default_position":			Vector3(-0.254,0,0.16),
+			"default_scale":			Vector3(0.5,0.5,0.5),
+			"collider_default_position":Vector3(0.0,0.0,0.0),
+			"collider_default_scale":	Vector3(1.0,1.0,1.0),
+			}
 	
 	return with_vars(settings)

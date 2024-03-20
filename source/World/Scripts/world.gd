@@ -56,7 +56,7 @@ func l_IP_scan():
 		for i in IP.get_local_addresses():
 			if (!(i.begins_with("127.0"))) && (!(i.begins_with("f"))) && (!(i.begins_with("0:"))):
 				return i
-		print("error")
+		print("WiFi Disconnected.")
 		#ip_adress =  IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 	return ip_adress
 
