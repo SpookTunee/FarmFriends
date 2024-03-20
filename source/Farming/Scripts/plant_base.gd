@@ -76,10 +76,10 @@ func quick_init(Plant: int):
 			"crop_yield":				6,
 			"terrain_good":				Global.Regions.MOUNTAINOUS,
 			"terrain_bad":				Global.Regions.RIVER,
-			"default_position":			Vector3(0.0,0,0.0),
-			"default_scale":			Vector3(1.0,1.0,1.0),
+			"default_position":			Vector3(0.0,-0.44,0.0),
+			"default_scale":			Vector3(1.0,1.5,1.0),
 			"collider_default_position":Vector3(0.0,0.0,0.0),
-			"collider_default_scale":	Vector3(1.0,0.5,1.0),
+			"collider_default_scale":	Vector3(1.5,0.5,1.5),
 			}
 	elif Plant == Global.Plants.CARROT:
 		settings = {
@@ -88,10 +88,10 @@ func quick_init(Plant: int):
 			"crop_yield":				3,
 			"terrain_good":				Global.Regions.RIVER,
 			"terrain_bad":				Global.Regions.MOUNTAINOUS,
-			"default_position":			Vector3(-0.254,0,0.16),
-			"default_scale":			Vector3(0.5,0.5,0.5),
-			"collider_default_position":Vector3(0.0,0.0,0.0),
-			"collider_default_scale":	Vector3(1.0,1.0,1.0),
+			"default_position":			Vector3(0.0,-0.2,0.0),
+			"default_scale":			Vector3(1.6,1.0,1.6),
+			"collider_default_position":Vector3(0.0,-0.2,0.0),
+			"collider_default_scale":	Vector3(2.3,0.75,2.3),
 			}
 	elif Plant == Global.Plants.MUSHROOM:
 		settings = {
@@ -101,10 +101,10 @@ func quick_init(Plant: int):
 			"terrain_good":				Global.Regions.PLAINS,
 			"terrain_bad":				Global.Regions.MOUNTAINOUS,
 			"terrain_bad_2":			Global.Regions.FOREST,
-			"default_position":			Vector3(-0.254,0,0.16),
-			"default_scale":			Vector3(0.5,0.5,0.5),
+			"default_position":			Vector3(0.0,0.3,0.0),
+			"default_scale":			Vector3(0.125,0.125,0.125),
 			"collider_default_position":Vector3(0.0,0.0,0.0),
-			"collider_default_scale":	Vector3(1.0,1.0,1.0),
+			"collider_default_scale":	Vector3(1.0,0.76,1.0),
 			}
 	
 	return with_vars(settings)
