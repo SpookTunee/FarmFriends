@@ -9,9 +9,6 @@
 font_size = 64
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrk0f"]
-properties/0/path = NodePath(".:wheat_count")
-properties/0/spawn = true
-properties/0/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k4e8j"]
 properties/0/path = NodePath(".:position")
@@ -51,11 +48,6 @@ layout_mode = 0
 offset_right = 461.0
 offset_bottom = 138.0
 label_settings = SubResource("LabelSettings_d6qsl")
-
-[node name="MPcount" type="Label3D" parent="HUD"]
-transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 0, 2.29624, 0)
-text = "0 Wheat
-"
 
 [node name="Inventory" type="VBoxContainer" parent="HUD"]
 layout_mode = 0

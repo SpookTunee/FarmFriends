@@ -16,7 +16,6 @@ var scythe = preload("res://Tools/scythe.tscn")
 var gravity = 10.0
 
 func _enter_tree():
-	print(str(name).to_int())
 	set_multiplayer_authority(str(name).to_int())
 
 func _ready():
