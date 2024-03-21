@@ -5,6 +5,7 @@ class_name PlantBase
 @export var grow_time: float
 @export var plant_model: Mesh
 @export var crop_yield: int
+@export_enum("Wheat","Corn","Potato","Carrot","Mushroom") var plant_id: int
 @export_category("Terrain Preference")
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_good : int
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_bad : int
@@ -38,6 +39,7 @@ func with_vars(Variables: Dictionary):
 	n.default_scale = Variables.default_scale
 	n.collider_default_position = Variables.collider_default_position
 	n.collider_default_scale = Variables.collider_default_scale
+	n.plant_id = Variables.plant_id
 	return n
 
 func quick_init(Plant: int):
@@ -102,9 +104,13 @@ func quick_init(Plant: int):
 			"terrain_bad":				Global.Regions.MOUNTAINOUS,
 			"terrain_bad_2":			Global.Regions.FOREST,
 			"default_position":			Vector3(0.0,0.3,0.0),
-			"default_scale":			Vector3(0.125,0.125,0.125),
+			"default_scale":			Vector3(0.1,0.1,0.1),
 			"collider_default_position":Vector3(0.0,0.0,0.0),
-			"collider_default_scale":	Vector3(1.0,0.76,1.0),
+			"collider_default_scale":	Vector3(0.9,0.76,0.9),
 			}
+	else:
+		print("Crop instancing error")
+		return
+	settings["plant_id"] = Plant
 	
 	return with_vars(settings)

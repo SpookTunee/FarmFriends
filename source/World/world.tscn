@@ -107,7 +107,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player.tscn")
 spawn_path = NodePath("..")
 
 [node name="DayNightCycle" parent="." instance=ExtResource("4_j4k7p")]
-cycle_sec = 10
+cycle_sec = 3600
 
 [node name="TilledLand" type="Node" parent="."]
 script = ExtResource("4_6b5nx")

@@ -19,11 +19,11 @@ func gplant(plant):
 	add_child(growplant)
 	growplant.get_node("Plant/PlantBody/AnimationPlayer").play("Plant_Growth_anim")
 
-func harvest_plant():
+func harvest_plant(plant):
 	if !get_node_or_null("PLANT"): return
 	harvest()
 	$/root/World/TilledLand.harvest_plant.rpc(self.name)
-	get_node("/root/World/mpSpawned_" + str(multiplayer.get_unique_id())).get_node("Stats").add_wheat()
+	get_node("/root/World/mpSpawned_" + str(multiplayer.get_unique_id())).get_node("Stats").crop_counts[plant] += 1
 	
 func harvest():
 	get_node("PLANT").queue_free()
