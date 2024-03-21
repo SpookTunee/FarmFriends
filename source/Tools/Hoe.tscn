@@ -63,8 +63,8 @@ transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.279839, 1.11246, 0.00
 shape = SubResource("BoxShape3D_wufre")
 disabled = true
 
-[node name="protoHoe" parent="RigidBody3D" instance=ExtResource("2_uny4m")]
-transform = Transform3D(-1.88461, -2.4629e-16, -1.68794, 5.01243e-17, 2.53, -4.25121e-16, 1.68794, -3.50116e-16, -1.88461, 0, 0, 0)
+[node name="hoe" parent="RigidBody3D" instance=ExtResource("2_uny4m")]
+transform = Transform3D(-1.88605, 6.96622e-17, -1.68633, 8.82431e-16, 2.53, -8.82431e-16, 1.68633, -1.246e-15, -1.88605, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -18,7 +18,7 @@ func _physics_process(_delta):
 					break
 			if con:
 				#if !con.get_parent().get_node("Plant/PlantBody/AnimationPlayer").is_playing():
-				con.get_parent().get_parent().harvest_plant()
+				con.get_parent().get_parent().harvest_plant(con.get_parent().plant_id)
 
 func init_pos():
 	$scythe/AnimationPlayer.play("scythe")
