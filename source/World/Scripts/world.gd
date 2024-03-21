@@ -42,7 +42,7 @@ func _on_host_pressed():
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	
-	add_player(multiplayer.get_unique_id(),true)
+	add_player(multiplayer.get_unique_id(), true)
 	
 	#upnp_settup()
 
@@ -66,15 +66,12 @@ func _on_join_pressed():
 	enet_peer.create_client(ip.text, port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.server_disconnected.connect(on_host_disconnect)
-	for i in get_parent().get_children():
-		if i is CharacterBody3D:
-			if i.name.split("mpSpawned_")[-1] != str(multiplayer.get_unique_id()):
-				i.get_node("HUD").queue_free()
 
 @rpc("any_peer", "call_remote", "unreliable")
 func remove_player():
 	var player = get_node_or_null("mpSpawned_" + str(multiplayer.get_remote_sender_id()))
 	if player:
+		Global.players.erase(player)
 		player.queue_free()
 	remove_player_callback.rpc_id(multiplayer.get_remote_sender_id())
 
@@ -86,15 +83,16 @@ func remove_player_callback():
 	for i in get_children():
 		if i.name.begins_with("mpSpawned_"):
 			i.queue_free()
+	Global.players = []
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func add_player(id, isme = false):
 	var player = Player.instantiate()
 	player.name = "mpSpawned_" + str(id)
 	add_child(player)
+	Global.players.append(player)
 	if !isme:
 		player.get_node("HUD").queue_free()
-
 
 func upnp_settup():
 	var upnp = UPNP.new()

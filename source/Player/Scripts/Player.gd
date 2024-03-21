@@ -24,8 +24,9 @@ func _ready():
 		return
 	$Camera3D.make_current()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-	
+	for player in Global.players:
+		if player != self:
+			player.get_node("HUD").queue_free()
 	
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): 

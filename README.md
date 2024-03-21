@@ -6,7 +6,7 @@ TODO:
 
  - PRIORITY QUICKLIST:
    - [x] Fix wheat model
-   - [ ] Make player able to harvest
+   - [x] Make player able to harvest
    - [ ] Make map
    - [ ] Design doc
 
@@ -22,7 +22,7 @@ TODO:
    - [x] Tilling
    - [x] Planting
    - [ ] Watering
-   - [ ] Harvesting
+   - [x] Harvesting
  - [ ] Menu
    - [ ] Main menu when still in a game
    - [ ] Title Screen
@@ -37,7 +37,7 @@ TODO:
  - [ ] Animations
    - [x] Hoeing
    - [ ] Planting
-   - [ ] Harvesting
+   - [x] Harvesting
  - [ ] Map
    - [ ] Set map
    - [ ] Grass, rocks, etc. instancing
@@ -61,8 +61,8 @@ TODO:
    - [x] Wheat
    - [x] Carrots
    - [x] Potatoes
-   - [ ] Beets
-   - [ ] Corn
+   - [x] Mushrooms
+   - [x] Corn
  - [ ] Quota system
    - [ ] Increase over time
    - [ ] Combined
