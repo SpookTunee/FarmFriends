@@ -17,3 +17,6 @@ enum Plants {
 	CARROT,
 	MUSHROOM,
 }
+
+func get_day_name():
+	return ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][day]

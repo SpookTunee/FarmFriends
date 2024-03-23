@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcgwy6x2mj4yx"]
+
+[ext_resource type="Script" path="res://Player/Scripts/HUD.gd" id="1_5qcav"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yfxox"]
+font_size = 64
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+script = ExtResource("1_5qcav")
+
+[node name="Day" type="Label" parent="."]
+layout_mode = 0
+offset_right = 461.0
+offset_bottom = 138.0
+text = "Sunday"
+label_settings = SubResource("LabelSettings_yfxox")
+
+[node name="Inventory" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 2029.0
+offset_right = 2560.0
+offset_bottom = 749.0
+
+[node name="Wheat" type="Label" parent="Inventory"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+text = "0 Wheat"
+
+[node name="Corn" type="Label" parent="Inventory"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+text = "0 Corn"
+
+[node name="Potatoes" type="Label" parent="Inventory"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+text = "0 Potatoes"
+
+[node name="Carrots" type="Label" parent="Inventory"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+text = "0 Carrots"
+
+[node name="Mushrooms" type="Label" parent="Inventory"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+text = "0 Mushrooms"

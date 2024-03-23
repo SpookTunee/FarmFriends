@@ -24,9 +24,8 @@ func _ready():
 		return
 	$Camera3D.make_current()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	for player in Global.players:
-		if player != self:
-			player.get_node("HUD").queue_free()
+	var hud = load("res://Player/hud.tscn").instantiate()
+	add_child(hud)
 	
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): 
@@ -58,7 +57,6 @@ func switch_hand(id):
 func _physics_process(delta):
 	ticks += 1
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
-	
 	$Camera3D.make_current()
 	# Add the gravity.
 	if not is_on_floor():

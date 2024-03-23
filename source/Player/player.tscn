@@ -1,12 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://beqbayfw32u85"]
+[gd_scene load_steps=10 format=3 uid="uid://beqbayfw32u85"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_os5jd"]
 [ext_resource type="Script" path="res://Player/Scripts/Stats.gd" id="2_235ld"]
-[ext_resource type="Script" path="res://Player/Scripts/HUD.gd" id="2_mup06"]
 [ext_resource type="PackedScene" uid="uid://dux8g5ei8hovm" path="res://Tools/Hoe.tscn" id="4_ovib2"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_d6qsl"]
-font_size = 64
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrk0f"]
 
@@ -35,50 +31,6 @@ collision_layer = 2
 collision_mask = 257
 wall_min_slide_angle = 0.349066
 script = ExtResource("1_os5jd")
-
-[node name="HUD" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_mup06")
-
-[node name="Day" type="Label" parent="HUD"]
-layout_mode = 0
-offset_right = 461.0
-offset_bottom = 138.0
-label_settings = SubResource("LabelSettings_d6qsl")
-
-[node name="Inventory" type="VBoxContainer" parent="HUD"]
-layout_mode = 0
-offset_left = 2029.0
-offset_right = 2560.0
-offset_bottom = 749.0
-
-[node name="Wheat" type="Label" parent="HUD/Inventory"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Wheat"
-
-[node name="Corn" type="Label" parent="HUD/Inventory"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Corn"
-
-[node name="Potatoes" type="Label" parent="HUD/Inventory"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Potatoes"
-
-[node name="Carrots" type="Label" parent="HUD/Inventory"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Carrots"
-
-[node name="Mushrooms" type="Label" parent="HUD/Inventory"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Mushrooms"
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("2_235ld")
