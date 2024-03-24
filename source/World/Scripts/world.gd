@@ -19,7 +19,6 @@ func _unhandled_input(event):
 		#get_tree().quit()
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	$"CanvasLayer/Menu/MarginContainer/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
