@@ -1,10 +1,10 @@
-[gd_resource type="VisualShader" load_steps=17 format=3 uid="uid://72j0sm45y3u4"]
+[gd_resource type="VisualShader" load_steps=17 format=3 uid="uid://di0pbxvu8sr4v"]
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_wqvxf"]
-constant = Color(4.79961e-06, 0.859704, 0.154576, 1)
+constant = Color(0.18848, 0.31, 0.1364, 1)
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_6i3y0"]
-constant = Color(0.184919, 0.794002, 0.189946, 1)
+constant = Color(0.617434, 0.717436, 0.118278, 1)
 
 [sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_c3nq0"]
 default_input_values = [0, Vector2(0, 0), 1, Vector2(1, 1), 2, Vector2(0.5, 0.5)]
@@ -20,11 +20,11 @@ gradient = SubResource("Gradient_tkwb2")
 texture = SubResource("GradientTexture2D_ktjch")
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_fc8ye"]
-default_input_values = [0, 0.0, 1, 1.25]
+default_input_values = [0, 0.0, 1, 1.0]
 operator = 2
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_gng81"]
-input_name = "view_matrix"
+input_name = "projection_matrix"
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_e21dx"]
 input_name = "vertex"
@@ -34,7 +34,7 @@ input_name = "vertex"
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_8sp5t"]
 
 [sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_u8esk"]
-default_input_values = [0, 2.08165e-12]
+default_input_values = [0, 1.05]
 function = 0
 
 [sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_v8qj7"]
@@ -53,7 +53,6 @@ default_input_values = [0, Transform3D(1, 2.08165e-12, 2.08165e-12, 2.08165e-12,
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx;
 
-uniform sampler2D tex_frg_5;
 
 
 
@@ -73,7 +72,7 @@ void vertex() {
 
 
 // Input:10
-	mat4 n_out10p0 = VIEW_MATRIX;
+	mat4 n_out10p0 = PROJECTION_MATRIX;
 
 
 // TransformDecompose:9
@@ -106,34 +105,16 @@ void vertex() {
 }
 
 void fragment() {
-// ColorConstant:3
-	vec4 n_out3p0 = vec4(0.184919, 0.794002, 0.189946, 1.000000);
-
-
 // ColorConstant:2
-	vec4 n_out2p0 = vec4(0.000005, 0.859704, 0.154576, 1.000000);
-
-
-// Texture2D:5
-	vec4 n_out5p0 = texture(tex_frg_5, UV);
-
-
-// FloatOp:6
-	float n_in6p1 = 1.25000;
-	float n_out6p0 = n_out5p0.x * n_in6p1;
-
-
-// Mix:4
-	vec2 n_out4p0 = mix(vec2(n_out3p0.xy), vec2(n_out2p0.xy), vec2(n_out6p0));
+	vec4 n_out2p0 = vec4(0.188480, 0.310000, 0.136400, 1.000000);
 
 
 // Output:0
-	ALBEDO = vec3(n_out4p0, 0.0);
+	ALBEDO = vec3(n_out2p0.xyz);
 
 
 }
 "
-graph_offset = Vector2(-1285.5, 65.3969)
 modes/cull = 2
 nodes/vertex/0/position = Vector2(1220, 60)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_e21dx")
@@ -154,8 +135,8 @@ nodes/vertex/9/node = SubResource("VisualShaderNodeTransformDecompose_3cob4")
 nodes/vertex/9/position = Vector2(-1585.01, 756.794)
 nodes/vertex/10/node = SubResource("VisualShaderNodeInput_gng81")
 nodes/vertex/10/position = Vector2(-2480, 860)
-nodes/vertex/connections = PackedInt32Array(2, 0, 3, 0, 5, 0, 4, 1, 6, 0, 0, 0, 3, 1, 6, 1, 4, 0, 6, 0, 3, 0, 4, 0, 3, 2, 6, 2, 7, 0, 8, 0, 8, 0, 5, 0, 9, 1, 8, 1, 10, 0, 9, 0)
-nodes/fragment/0/position = Vector2(1080, 120)
+nodes/vertex/connections = PackedInt32Array(2, 0, 3, 0, 5, 0, 4, 1, 6, 0, 0, 0, 3, 1, 6, 1, 4, 0, 6, 0, 3, 0, 4, 0, 3, 2, 6, 2, 7, 0, 8, 0, 10, 0, 9, 0, 8, 0, 5, 0, 9, 1, 8, 1)
+nodes/fragment/0/position = Vector2(1480, -40)
 nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_wqvxf")
 nodes/fragment/2/position = Vector2(-640, 140)
 nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_6i3y0")
@@ -166,4 +147,4 @@ nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_farel")
 nodes/fragment/5/position = Vector2(-1160, 560)
 nodes/fragment/6/node = SubResource("VisualShaderNodeFloatOp_fc8ye")
 nodes/fragment/6/position = Vector2(-529.98, 925.479)
-nodes/fragment/connections = PackedInt32Array(4, 0, 0, 0, 5, 0, 6, 0, 6, 0, 4, 2, 2, 0, 4, 1, 3, 0, 4, 0)
+nodes/fragment/connections = PackedInt32Array(5, 0, 6, 0, 6, 0, 4, 2, 3, 0, 4, 0, 2, 0, 0, 0)
