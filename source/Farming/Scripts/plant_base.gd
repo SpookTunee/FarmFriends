@@ -16,6 +16,21 @@ class_name PlantBase
 @export var collider_default_position: Vector3 = Vector3(0.0,0.0,0.0)
 @export var collider_default_scale: Vector3 = Vector3(1.0,1.0,1.0)
 
+var is_in_preffered_terrain: int = 0  #1=true, 0=false, -1=bad terrain
+var start_grow_time: float = 0.0
+var actual_grow_time: float = 0.0
+
+
+func _physics_process(delta):
+	pass
+
+
+
+
+
+
+
+
 
 func _ready():
 	$Plant/PlantBody.mesh = plant_model
@@ -23,6 +38,9 @@ func _ready():
 	$Plant.scale = default_scale
 	$PlantBox.scale = collider_default_scale
 	$PlantBox.position = collider_default_position
+	start_grow_time = Global.dayfloat
+	#dayfloat is 0.0 at 1/6 the way through the day
+	
 
 func with_vars(Variables: Dictionary):
 	var n = load("res://Farming/plant_base.tscn").instantiate()

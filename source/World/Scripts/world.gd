@@ -19,7 +19,6 @@ func _unhandled_input(event):
 		#get_tree().quit()
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	$"CanvasLayer/Menu/MarginContainer/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,7 +41,7 @@ func _on_host_pressed():
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	
-	add_player(multiplayer.get_unique_id(), true)
+	add_player(multiplayer.get_unique_id())
 	
 	#upnp_settup()
 
@@ -86,13 +85,11 @@ func remove_player_callback():
 	Global.players = []
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func add_player(id, isme = false):
+func add_player(id):
 	var player = Player.instantiate()
 	player.name = "mpSpawned_" + str(id)
 	add_child(player)
 	Global.players.append(player)
-	if !isme:
-		player.get_node("HUD").queue_free()
 
 func upnp_settup():
 	var upnp = UPNP.new()
