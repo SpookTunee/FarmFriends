@@ -22,7 +22,8 @@ func gplant(plant):
 func harvest_plant(plant):
 	if !get_node_or_null("PLANT"): return
 	$/root/World/TilledLand.harvest_plant.rpc(self.name)
-	get_node("/root/World/mpSpawned_" + str(multiplayer.get_unique_id())).get_node("Stats").crop_counts[plant] += get_node("PLANT").crop_yield
+	if get_node("PLANT/Plant/PlantBody/AnimationPlayer").current_animation_position == 1:
+		get_node("/root/World/mpSpawned_" + str(multiplayer.get_unique_id())).get_node("Stats").crop_counts[plant] += get_node("PLANT").crop_yield
 	harvest()
 	
 func harvest():

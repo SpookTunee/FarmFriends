@@ -21,16 +21,6 @@ var start_grow_time: float = 0.0
 var actual_grow_time: float = 0.0
 
 
-func _physics_process(delta):
-	pass
-
-
-
-
-
-
-
-
 
 func _ready():
 	$Plant/PlantBody.mesh = plant_model
@@ -39,8 +29,23 @@ func _ready():
 	$PlantBox.scale = collider_default_scale
 	$PlantBox.position = collider_default_position
 	start_grow_time = Global.dayfloat
-	#dayfloat is 0.0 at 1/6 the way through the day
-	
+	#dayfloat is 0.0 at 1/6 the way through the day (1/12 through the real day)
+	#grow from 0.0 -> 0.333
+	#day is 7min, 1/3 of which is growing time
+	actual_grow_time = grow_time/3
+	$Plant/PlantBody/AnimationPlayer.speed_scale = \
+	(1.0 if is_in_preffered_terrain == 1 else 0.75 if is_in_preffered_terrain == 0 else 0.5) \
+	/(
+		actual_grow_time
+		*420
+		)
+
+func start_grow():
+	if $Plant/PlantBody/AnimationPlayer.current_animation_position != 1.0:
+		$Plant/PlantBody/AnimationPlayer.play("Plant_Growth_anim")
+func stop_grow():
+	if $Plant/PlantBody/AnimationPlayer.current_animation_position != 1.0:
+		$Plant/PlantBody/AnimationPlayer.pause()
 
 func with_vars(Variables: Dictionary):
 	var n = load("res://Farming/plant_base.tscn").instantiate()

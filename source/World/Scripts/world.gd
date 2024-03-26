@@ -7,6 +7,7 @@ const tilLand = preload("res://Farming/tilled_land.tscn")
 const Player = preload("res://Player/player.tscn")
 var port = 6009
 var enet_peer = ENetMultiplayerPeer.new()
+var newday: bool = true
 
 func disconnect_from_server():
 	remove_player.rpc()
@@ -22,8 +23,23 @@ func _ready():
 	$"CanvasLayer/Menu/MarginContainer/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _process(_delta):
+	if newday && ((Global.dayfloat-float(Global.day)) >= 0.0):
+		handle_plant_growing(true)
+		newday = false
+	if !newday && ((Global.dayfloat-float(Global.day)) >= 0.333):
+		handle_plant_growing(false)
+		newday = true
+
+func handle_plant_growing(gon):
+	if gon:
+		for tland in $TilledLand.get_children():
+			if tland.get_node_or_null("PLANT"):
+				tland.get_node("PLANT").start_grow()
+	else:
+		for tland in $TilledLand.get_children():
+			if tland.get_node_or_null("PLANT"):
+				tland.get_node("PLANT").stop_grow()
 
 func on_host_disconnect():
 	multiplayer.multiplayer_peer.close()
