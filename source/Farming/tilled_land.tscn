@@ -26,3 +26,7 @@ sides = 7
 ring_sides = 7
 smooth_faces = false
 material = SubResource("StandardMaterial3D_ghmv7")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Farming/tilled_land.tscn")
+spawn_path = NodePath("..")
