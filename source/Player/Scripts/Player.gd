@@ -5,7 +5,7 @@ var sprinting = false
 var ticks = 0
 
 var SPEED = 5.0
-const JUMP_VELOCITY = 5.0
+@export var JUMP_VELOCITY = 8.5
 var camera_sense = 0.005
 @onready var Hand = $Camera3D/Hand
 var hoe = preload("res://Tools/Hoe.tscn")
@@ -19,13 +19,29 @@ func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 
 func _ready():
-
 	if not is_multiplayer_authority():
 		return
 	$Camera3D.make_current()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	var hud = load("res://Player/hud.tscn").instantiate()
 	add_child(hud)
+	request_mp_spawned.rpc()
+	
+@rpc("call_remote","authority","reliable")
+func request_mp_spawned():
+	request_mp_spawned_callback.rpc_id(multiplayer.get_remote_sender_id(),Global.mpSpawned)
+
+@rpc("call_remote","any_peer","reliable")
+func request_mp_spawned_callback(mps):
+	var tillI = load("res://Farming/tilled_land.tscn")
+	Global.mpSpawned = mps
+	for mpTill in Global.mpSpawned["TilledLand"].keys():
+		var till = tillI.instantiate()
+		till.name = Global.mpSpawned["TilledLand"][mpTill][0]
+		till.position = Global.mpSpawned["TilledLand"][mpTill][1]
+		Global.mpSpawned["TilledLand"][till] = Global.mpSpawned["TilledLand"][mpTill]
+		Global.mpSpawned["TilledLand"].erase(mpTill)
+		get_node("/root/World/TilledLand").add_child(till)
 	
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): 

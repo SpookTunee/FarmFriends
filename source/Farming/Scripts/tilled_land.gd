@@ -17,6 +17,7 @@ func gplant(plant):
 	var growplant = get_node("/root/World/PlantSpawner").quick_init(plant)
 	growplant.name = "PLANT"
 	add_child(growplant)
+	Global.mpSpawned["TilledLand"][self][2] = true
 	growplant.get_node("Plant/PlantBody/AnimationPlayer").play("Plant_Growth_anim")
 
 func harvest_plant(plant):
