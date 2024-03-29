@@ -12,7 +12,7 @@ func is_day():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	Global.dayfloat += (delta/cycle_sec)
-	Global.day = floor(delta/cycle_sec)
+	Global.day = floor(Global.dayfloat)
 	$DirectionalLight3D.rotation.x += deg_to_rad(360.0*(delta/cycle_sec))
 	$DirectionalLight3D2.rotation.x = -$DirectionalLight3D.rotation.x
 	$DirectionalLight3D.light_energy = 1+(cos($DirectionalLight3D.rotation.x)/2)

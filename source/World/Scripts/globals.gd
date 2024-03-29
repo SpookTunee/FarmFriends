@@ -3,9 +3,6 @@ extends Node
 @export var day: int = 0
 @export var dayfloat: float = 0.0
 @export var players: Array = []
-@export var mpSpawned: Dictionary = {
-	"TilledLand": {}
-}
 
 enum Regions {
 	NONE,

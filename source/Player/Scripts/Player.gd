@@ -29,18 +29,34 @@ func _ready():
 	
 @rpc("call_remote","authority","reliable")
 func request_mp_spawned():
-	request_mp_spawned_callback.rpc_id(multiplayer.get_remote_sender_id(),Global.mpSpawned)
+	var mps = []
+	for node in get_node("/root/World/TilledLand").get_children():
+		var sgs = {"has_plant":null}
+		sgs["position"] = node.position
+		sgs["name"] = node.name
+		var ip = node.get_node_or_null("PLANT")
+		if ip:
+			sgs["has_plant"] = true
+			sgs["plant_settings"] = ip.quick_settings
+			sgs["plant_anim_pos"] = ip.get_node("Plant/PlantBody/AnimationPlayer").current_animation_position
+			sgs["plant_is_growing"] = ip.get_node("Plant/PlantBody/AnimationPlayer").is_playing()
+		mps.append(sgs)
+	request_mp_spawned_callback.rpc_id(multiplayer.get_remote_sender_id(),mps)
 
 @rpc("call_remote","any_peer","reliable")
 func request_mp_spawned_callback(mps):
 	var tillI = load("res://Farming/tilled_land.tscn")
-	Global.mpSpawned = mps
-	for mpTill in Global.mpSpawned["TilledLand"].keys():
+	for sgs in mps:
 		var till = tillI.instantiate()
-		till.name = Global.mpSpawned["TilledLand"][mpTill][0]
-		till.position = Global.mpSpawned["TilledLand"][mpTill][1]
-		Global.mpSpawned["TilledLand"][till] = Global.mpSpawned["TilledLand"][mpTill]
-		Global.mpSpawned["TilledLand"].erase(mpTill)
+		till.position = sgs.position
+		till.name = sgs.name
+		if sgs.has_plant:
+			var plant = get_node("/root/World/PlantSpawner").quick_init(sgs.plant_settings.plant_id)
+			plant.name = "PLANT"
+			plant.get_node("Plant/PlantBody/AnimationPlayer").seek(sgs.plant_anim_pos)
+			if sgs.plant_is_growing:
+				plant.start_grow()
+			till.add_child(plant)
 		get_node("/root/World/TilledLand").add_child(till)
 	
 func _unhandled_input(event):
@@ -50,7 +66,7 @@ func _unhandled_input(event):
 		rotate_y(-event.relative.x * camera_sense)
 		$Camera3D.rotate_x(-event.relative.y * camera_sense)
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
-		
+
 
 
 @rpc("call_remote","any_peer","reliable")
