@@ -100,7 +100,7 @@ func remove_player_callback():
 			i.queue_free()
 	Global.players = []
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
+ 
 func add_player(id):
 	var player = Player.instantiate()
 	player.name = "mpSpawned_" + str(id)

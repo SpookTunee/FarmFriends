@@ -22,4 +22,4 @@ func instant_till(id,count,pos):
 	var till = tilledLand.instantiate()
 	till.name = "mpSpawned_" + str(id) + "_till_" + str(count)
 	get_node("/root/World/TilledLand").add_child(till)
-	till.position = (pos)
+	till.position = pos

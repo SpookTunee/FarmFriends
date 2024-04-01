@@ -6,16 +6,19 @@ class_name PlantBase
 @export var plant_model: Mesh
 @export var crop_yield: int
 @export_enum("Wheat","Corn","Potato","Carrot","Mushroom") var plant_id: int
+
 @export_category("Terrain Preference")
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_good : int
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_bad : int
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_bad_2 : int = 0
+
 @export_category("Default Transformations")
 @export var default_position: Vector3 = Vector3(0.0,0.0,0.0)
 @export var default_scale: Vector3 = Vector3(1.0,1.0,1.0)
 @export var collider_default_position: Vector3 = Vector3(0.0,0.0,0.0)
 @export var collider_default_scale: Vector3 = Vector3(1.0,1.0,1.0)
 
+var quick_settings: Dictionary = {}
 var is_in_preffered_terrain: int = 0  #1=true, 0=false, -1=bad terrain
 var start_grow_time: float = 0.0
 var actual_grow_time: float = 0.0
@@ -39,6 +42,9 @@ func _ready():
 		actual_grow_time
 		*420
 		)
+	$Plant/PlantBody/AnimationPlayer.play("Plant_Growth_anim")
+	$Plant/PlantBody/AnimationPlayer.seek(0.001)
+	$Plant/PlantBody/AnimationPlayer.pause()
 
 func start_grow():
 	if $Plant/PlantBody/AnimationPlayer.current_animation_position != 1.0:
@@ -63,6 +69,7 @@ func with_vars(Variables: Dictionary):
 	n.collider_default_position = Variables.collider_default_position
 	n.collider_default_scale = Variables.collider_default_scale
 	n.plant_id = Variables.plant_id
+	n.quick_settings = Variables
 	return n
 
 func quick_init(Plant: int):

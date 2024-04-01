@@ -77,7 +77,7 @@ parameter_name = "WindNoise"
 
 [resource]
 code = "shader_type spatial;
-render_mode cull_disabled, diffuse_toon;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_toon, specular_schlick_ggx;
 
 uniform sampler2D WindNoise;
 uniform vec4 BaseColor : source_color = vec4(0.141176, 0.156863, 0.074510, 1.000000);
@@ -200,7 +200,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-455.005, -26.6961)
 modes/cull = 2
 modes/diffuse = 3
 nodes/vertex/0/position = Vector2(1320, 520)
