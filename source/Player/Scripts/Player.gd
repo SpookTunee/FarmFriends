@@ -87,6 +87,10 @@ func switch_hand(id):
 
 
 func _physics_process(delta):
+	if Input.is_action_just_released("scroll_up"):
+		print("up")
+	if Input.is_action_just_pressed("scroll_down"):
+		print("down")
 	ticks += 1
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	$Camera3D.make_current()
