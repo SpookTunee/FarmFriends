@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://b28o3walu13yj"]
+
+[ext_resource type="Script" path="res://Player/Scripts/menu.gd" id="1_xklok"]
+[ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="2_ooqjh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r48jk"]
+bg_color = Color(0.396078, 0.537255, 0.6, 0.635294)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avfpv"]
+bg_color = Color(0.6, 0.6, 0.6, 0.67451)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xklok")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1280.0
+offset_top = -800.0
+offset_right = 1280.0
+offset_bottom = 800.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+alignment = 1
+
+[node name="Return" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_ooqjh")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_r48jk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_avfpv")
+text = "return to game"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_ooqjh")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_r48jk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_avfpv")
+text = "settings"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_ooqjh")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_r48jk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_avfpv")
+text = "Quit Game"
