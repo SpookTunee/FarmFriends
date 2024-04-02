@@ -7,12 +7,12 @@ TODO:
  - PRIORITY QUICKLIST:
    - [x] Fix wheat model
    - [x] Make player able to harvest
-   - [ ] Make map
-   - [ ] Design doc
+   - [x] Make map
+   - [x] Design doc
 
 
- - [ ] Design doc
-   - [ ] Design doc
+ - [x] Design doc
+   - [x] Design doc
  - [ ] Fix models
    - [x] Wheat
    - [x] Lag when instancing too many models
@@ -39,14 +39,14 @@ TODO:
    - [ ] Planting
    - [x] Harvesting
  - [ ] Map
-   - [ ] Set map
+   - [x] Set map
    - [ ] Grass, rocks, etc. instancing
    - [ ] Wind
    - [ ] Designated farming areas
-     - [ ] Certain plants grow better in certain areas
-     - [ ] Terrain to naturally separate farms
-       - [ ] Mountains
-       - [ ] River
+     - [x] Certain plants grow better in certain areas
+     - [x] Terrain to naturally separate farms
+       - [x] Mountains
+       - [x] River
        - [ ] Forest
  - [ ] Barn
    - [ ] Will store your plants
@@ -67,15 +67,15 @@ TODO:
    - [ ] Increase over time
    - [ ] Combined
    - [ ] How often
- - [ ] Day night cycle
-   - [ ] Affecting plants
+ - [x] Day night cycle
+   - [x] Affecting plants
  - [ ] Different signs to get area effects
    - [ ] No trespassing
    - [ ] Higher farming yield
  - [ ] Tools
    - [ ] Auto waterer
    - [ ] Shovel
-   - [ ] Fast hoe
+   - [x] Fast hoe
    - [ ] Seed pouch
      - [ ] Counter for each seed
      - [ ] Scroll wheel to switch to different seed types
