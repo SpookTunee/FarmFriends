@@ -2,7 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://g15hb0rimiiu" path="res://Assets/Menu/titleScreen.obj" id="1_jlghn"]
 [ext_resource type="ArrayMesh" uid="uid://b3ig28s5qour3" path="res://Assets/Menu/titleScreenDecor.obj" id="2_iei6g"]
-[ext_resource type="Shader" uid="uid://cgdyfh3op1eia" path="res://Assets/Menu/terrain.tres" id="2_ohmrc"]
+[ext_resource type="Shader" path="res://Assets/Menu/terrain.tres" id="2_ohmrc"]
 [ext_resource type="Shader" uid="uid://5u26i7jn4xi3" path="res://Assets/Menu/grass.tres" id="3_1wjny"]
 [ext_resource type="PackedScene" uid="uid://blnfsm62uxxor" path="res://Assets/Menu/grass.glb" id="6_b8dsy"]
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="7_pxltr"]

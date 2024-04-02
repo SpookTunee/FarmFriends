@@ -1,10 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwpeukfquy1s4"]
+[gd_scene load_steps=6 format=3 uid="uid://bwpeukfquy1s4"]
 
 [ext_resource type="Script" path="res://Tools/Scripts/bag_of_seeds.gd" id="1_7h24k"]
-[ext_resource type="PackedScene" uid="uid://dq6f10n125d4r" path="res://Assets/Tools/seed_pouch.blend" id="2_jfjp1"]
+[ext_resource type="ArrayMesh" uid="uid://dxgkkd27wfxug" path="res://Assets/Tools/seed_pouch.obj" id="3_odlhn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i2ijf"]
+albedo_color = Color(0.4, 0.211765, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76r2c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvup7"]
+albedo_color = Color(1, 0.678431, 0.443137, 1)
 
 [node name="BagOfSeeds" type="Node3D"]
 script = ExtResource("1_7h24k")
 
-[node name="protoSeedPouch" parent="." instance=ExtResource("2_jfjp1")]
-transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+[node name="seedPouchMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.377, 0, 0, 0, 0.377, 0, 0, 0, 0.377, 0, 0, 0)
+mesh = ExtResource("3_odlhn")
+surface_material_override/0 = SubResource("StandardMaterial3D_i2ijf")
+surface_material_override/1 = SubResource("StandardMaterial3D_76r2c")
+surface_material_override/2 = SubResource("StandardMaterial3D_xvup7")

@@ -6,7 +6,7 @@ var ticks = 0
 
 var SPEED = 5.0
 @export var JUMP_VELOCITY = 8.5
-var camera_sense = 0.005
+var camera_sense = 0.002
 @onready var Hand = $Camera3D/Hand
 var hoe = preload("res://Tools/Hoe.tscn")
 var seeds = preload("res://Tools/bag_of_seeds.tscn")
