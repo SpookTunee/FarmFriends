@@ -1,7 +1,7 @@
 extends Node3D
 
-@onready var menu = $CanvasLayer/Menu
-@onready var ip = $CanvasLayer/Menu/MarginContainer/VBoxContainer/IPEntry
+@onready var menu = $Menu/Control
+@onready var ip = $Menu/Control/IPEntry
 
 const tilLand = preload("res://Farming/tilled_land.tscn")
 const Player = preload("res://Player/player.tscn")
@@ -16,11 +16,17 @@ func disconnect_from_server():
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("menu"):
 		if multiplayer.multiplayer_peer:
+			#switch cameras to the one in the menu
 			disconnect_from_server()
 		#get_tree().quit()
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$"CanvasLayer/Menu/MarginContainer/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+	$Menu/Camera3D.current = true
+	$Terrain.hide()
+	$WaterPlane.hide()
+	$DayNightCycle.hide()
+	$"Menu/Control/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -52,7 +58,10 @@ func on_host_disconnect():
 
 func _on_host_pressed():
 	menu.hide()
-	
+	$Terrain.show()
+	$WaterPlane.show()
+	$DayNightCycle.show()
+	$Menu/Camera3D.current = false
 	enet_peer.create_server(port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
@@ -77,6 +86,10 @@ func l_IP_scan():
 
 func _on_join_pressed():
 	menu.hide()
+	$Terrain.show()
+	$WaterPlane.show()
+	$DayNightCycle.show()
+	$Menu/Camera3D.active = false
 	enet_peer = ENetMultiplayerPeer.new()
 	enet_peer.create_client(ip.text, port)
 	multiplayer.multiplayer_peer = enet_peer
