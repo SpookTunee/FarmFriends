@@ -126,6 +126,8 @@ skeleton = NodePath("../..")
 
 [node name="DepositArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57952, 0, 0)
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DepositArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19137, 0.950155, 0.00526267)

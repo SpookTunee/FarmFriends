@@ -107,7 +107,7 @@ func _physics_process(delta):
 	mov_dirs()
 	mov_hands()
 	move_and_slide()
-
+	deposit()
 
 
 func mov_sprint(delta):
@@ -143,3 +143,24 @@ func mov_dirs():
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+
+func deposit():
+	if Input.is_action_pressed("interact"):
+		if $Camera3D.get_child(0).get_collider() != null:
+			if $Camera3D.get_child(0).get_collider().name == "DepositArea":
+				$DepositTimer.start()
+				print("working")
+		else:
+			$DepositTimer.stop()
+			$DepositTimer.time_left - 0.5
+
+
+func _on_deposit_timer_timeout():
+	var count = 0
+	if $Stats.cropcount[count] > 0:
+		$Stats.cropcount[count] -1 
+	else:
+		count += 1
+	if not Input.is_action_pressed("interact"):
+		count = 0
