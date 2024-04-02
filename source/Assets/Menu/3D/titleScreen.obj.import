@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://g15hb0rimiiu"
+path="res://.godot/imported/titleScreen.obj-35dc35a7c30ec962e63c5219629b8bbc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/titleScreen.obj-35dc35a7c30ec962e63c5219629b8bbc.mesh"]
+
+source_file="res://Assets/Menu/3D/titleScreen.obj"
+dest_files=["res://.godot/imported/titleScreen.obj-35dc35a7c30ec962e63c5219629b8bbc.mesh", "res://.godot/imported/titleScreen.obj-35dc35a7c30ec962e63c5219629b8bbc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -6,7 +6,8 @@ var ticks = 0
 
 var SPEED = 5.0
 @export var JUMP_VELOCITY = 8.5
-var camera_sense = 0.002
+var camera_sense = 0.004
+var camera_sense_multiplier = 1.0
 @onready var Hand = $Camera3D/Hand
 var hoe = preload("res://Tools/Hoe.tscn")
 var seeds = preload("res://Tools/bag_of_seeds.tscn")
@@ -62,11 +63,14 @@ func request_mp_spawned_callback(mps):
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): 
 		return
+	var ncams = camera_sense * camera_sense_multiplier
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * camera_sense)
-		$Camera3D.rotate_x(-event.relative.y * camera_sense)
+		rotate_y(-event.relative.x * ncams)
+		$Camera3D.rotate_x(-event.relative.y * ncams)
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 
+func change_sensitivity(sense):
+	camera_sense_multiplier = sense/100.0
 
 @rpc("call_remote","any_peer","reliable")
 func switch_hand(id):

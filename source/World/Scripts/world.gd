@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var menu = $Menu/Control
+@onready var menu = $Menu
 @onready var ip = $Menu/Control/IPEntry
 
 const tilLand = preload("res://Farming/tilled_land.tscn")
