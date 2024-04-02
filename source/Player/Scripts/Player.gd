@@ -68,7 +68,6 @@ func _unhandled_input(event):
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 
 
-
 @rpc("call_remote","any_peer","reliable")
 func switch_hand(id):
 	if id == 1:
@@ -87,12 +86,9 @@ func switch_hand(id):
 
 
 func _physics_process(delta):
-	if Input.is_action_just_released("scroll_up"):
-		print("up")
-	if Input.is_action_just_pressed("scroll_down"):
-		print("down")
-	ticks += 1
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
+	if Input.is_action_just_released("menu"):
+		pass
 	$Camera3D.make_current()
 	# Add the gravity.
 	if not is_on_floor():

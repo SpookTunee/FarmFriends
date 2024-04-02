@@ -11,15 +11,7 @@ var newday: bool = true
 
 func disconnect_from_server():
 	remove_player.rpc()
-	get_tree().quit()
 
-func _unhandled_input(event):
-	if Input.is_action_just_pressed("menu"):
-		if multiplayer.multiplayer_peer:
-			#switch cameras to the one in the menu
-			disconnect_from_server()
-		#get_tree().quit()
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$Menu/Camera3D.current = true
 	$Terrain.hide()
@@ -111,6 +103,8 @@ func remove_player_callback():
 	for i in get_children():
 		if i.name.begins_with("mpSpawned_"):
 			i.queue_free()
+	for i in get_node("TilledLand").get_children():
+		i.queue_free()
 	Global.players = []
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
  

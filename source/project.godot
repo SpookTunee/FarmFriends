@@ -24,6 +24,7 @@ Global="*res://World/Scripts/globals.gd"
 window/size/viewport_width=2560
 window/size/viewport_height=1600
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 

@@ -11,32 +11,25 @@ bg_color = Color(0.6, 0.6, 0.6, 0.67451)
 
 [node name="Menu" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xklok")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Main" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1280.0
-offset_top = -800.0
-offset_right = 1280.0
-offset_bottom = 800.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Return" type="Button" parent="VBoxContainer"]
+[node name="Return" type="Button" parent="Main"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("2_ooqjh")
@@ -45,7 +38,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_r48jk")
 theme_override_styles/hover = SubResource("StyleBoxFlat_avfpv")
 text = "return to game"
 
-[node name="Settings" type="Button" parent="VBoxContainer"]
+[node name="Settings" type="Button" parent="Main"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("2_ooqjh")
@@ -54,7 +47,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_r48jk")
 theme_override_styles/hover = SubResource("StyleBoxFlat_avfpv")
 text = "settings"
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="Quit" type="Button" parent="Main"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("2_ooqjh")
@@ -62,3 +55,66 @@ theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_r48jk")
 theme_override_styles/hover = SubResource("StyleBoxFlat_avfpv")
 text = "Quit Game"
+
+[node name="Settings" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ColorFix" type="Button" parent="Settings"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("2_ooqjh")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_r48jk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_avfpv")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_r48jk")
+disabled = true
+text = " "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/ColorFix"]
+layout_mode = 0
+offset_right = 2560.0
+offset_bottom = 97.0
+theme_override_constants/separation = 100
+
+[node name="Label" type="Label" parent="Settings/ColorFix/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ooqjh")
+theme_override_font_sizes/font_size = 80
+text = "  Sensitivity"
+
+[node name="Sensitivity" type="HSlider" parent="Settings/ColorFix/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 60.0
+scrollable = false
+tick_count = 20
+ticks_on_borders = true
+
+[node name="whitespace" type="Label" parent="Settings/ColorFix/HBoxContainer"]
+layout_mode = 2
+
+[node name="Return" type="Button" parent="Settings"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ooqjh")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_r48jk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_avfpv")
+text = "return to game"
+
+[connection signal="pressed" from="Main/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="Main/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Main/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="Settings/ColorFix/HBoxContainer/Sensitivity" to="." method="_on_sensitivity_value_changed"]
+[connection signal="pressed" from="Settings/Return" to="." method="_on_settings_return_pressed"]
