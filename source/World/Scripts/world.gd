@@ -49,11 +49,10 @@ func on_host_disconnect():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_host_pressed():
-	menu.hide()
+	menu.hideme()
 	$Terrain.show()
 	$WaterPlane.show()
 	$DayNightCycle.show()
-	$Menu/Camera3D.current = false
 	enet_peer.create_server(port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
@@ -77,7 +76,7 @@ func l_IP_scan():
 	return ip_adress
 
 func _on_join_pressed():
-	menu.hide()
+	menu.hideme()
 	$Terrain.show()
 	$WaterPlane.show()
 	$DayNightCycle.show()
@@ -111,6 +110,8 @@ func remove_player_callback():
 func add_player(id):
 	var player = Player.instantiate()
 	player.name = "mpSpawned_" + str(id)
+	if is_multiplayer_authority():
+		player.get_node("Camera3D").current = true
 	add_child(player)
 	Global.players.append(player)
 
@@ -128,7 +129,3 @@ func upnp_settup():
 	
 	print("Successful UPNP")
 	
-
-
-func _on_quit_pressed():
-	get_tree().quit()

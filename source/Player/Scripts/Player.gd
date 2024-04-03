@@ -70,7 +70,7 @@ func _unhandled_input(event):
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 
 func change_sensitivity(sense):
-	camera_sense_multiplier = sense/100.0
+	camera_sense_multiplier = sense/50.0 + .03
 
 @rpc("call_remote","any_peer","reliable")
 func switch_hand(id):
@@ -91,14 +91,21 @@ func switch_hand(id):
 
 func _physics_process(delta):
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
+	ticks += 1
 	if Input.is_action_just_released("menu"):
-		pass
+		if !get_node_or_null("Menu"):
+			var mnu = load("res://Player/menu.tscn").instantiate()
+			mnu.name = "Menu"
+			add_child(mnu)
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			get_node("Menu").queue_free()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	$Camera3D.make_current()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -113,8 +120,8 @@ func _physics_process(delta):
 func mov_sprint(delta):
 	if Input.is_action_pressed("sprint"):
 		SPEED = 16.8
-		if is_on_floor():
-			$Camera3D.rotation.x += (cos((ticks%360)*delta*15))*.0015
+		if is_on_floor() && velocity.length() > 5:
+			$Camera3D.rotation.x += (cos((ticks%360)*delta*15))*.00075
 	else:
 		SPEED = 5.0
 

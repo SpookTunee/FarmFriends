@@ -1,16 +1,27 @@
-extends Node3D
+extends Control
 
-signal host
-signal join
-signal quit
-
-func _on_host_pressed():
-	emit_signal("host")
-
-
-func _on_join_pressed():
-	emit_signal("join")
-
+func _ready():
+	$Settings/ColorFix/HBoxContainer/Sensitivity.value = ((get_parent().camera_sense_multiplier - 0.03) * 50.0)
 
 func _on_quit_pressed():
-	emit_signal("quit")
+	get_node("/root/World/").disconnect_from_server()
+	self.queue_free()
+
+
+func _on_settings_pressed():
+	$Main.visible = false
+	$Settings.visible = true
+
+
+func _on_return_pressed():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	self.queue_free()
+
+
+func _on_settings_return_pressed():
+	$Main.visible = true
+	$Settings.visible = false
+
+
+func _on_sensitivity_value_changed(value):
+	get_parent().change_sensitivity(value)
