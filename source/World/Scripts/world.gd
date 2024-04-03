@@ -12,7 +12,7 @@ var newday: bool = true
 func disconnect_from_server():
 	remove_player.rpc()
 
-func _ready():
+func ready():
 	$Menu/Camera3D.current = true
 	$Terrain.hide()
 	$WaterPlane.hide()
