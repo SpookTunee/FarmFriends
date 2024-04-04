@@ -40,7 +40,7 @@ func _ready():
 	(1.0 if is_in_preffered_terrain == 1 else 0.75 if is_in_preffered_terrain == 0 else 0.5) \
 	/(
 		actual_grow_time
-		*60
+		*20
 		)
 	$Plant/PlantBody/AnimationPlayer.play("Plant_Growth_anim")
 	$Plant/PlantBody/AnimationPlayer.seek(0.001)
@@ -108,7 +108,7 @@ func quick_init(Plant: int):
 			"crop_yield":				6,
 			"terrain_good":				Global.Regions.MOUNTAINOUS,
 			"terrain_bad":				Global.Regions.RIVER,
-			"default_position":			Vector3(0.0,-0.44,0.0),
+			"default_position":			Vector3(0.0,0.0,0.0),
 			"default_scale":			Vector3(1.0,1.5,1.0),
 			"collider_default_position":Vector3(0.0,0.0,0.0),
 			"collider_default_scale":	Vector3(1.5,0.5,1.5),
@@ -120,7 +120,7 @@ func quick_init(Plant: int):
 			"crop_yield":				3,
 			"terrain_good":				Global.Regions.RIVER,
 			"terrain_bad":				Global.Regions.MOUNTAINOUS,
-			"default_position":			Vector3(0.0,-0.2,0.0),
+			"default_position":			Vector3(0.0,0.05,0.0),
 			"default_scale":			Vector3(1.6,1.0,1.6),
 			"collider_default_position":Vector3(0.0,-0.2,0.0),
 			"collider_default_scale":	Vector3(2.3,0.75,2.3),
@@ -133,7 +133,7 @@ func quick_init(Plant: int):
 			"terrain_good":				Global.Regions.PLAINS,
 			"terrain_bad":				Global.Regions.MOUNTAINOUS,
 			"terrain_bad_2":			Global.Regions.FOREST,
-			"default_position":			Vector3(0.0,0.3,0.0),
+			"default_position":			Vector3(0.0,0.1,0.0),
 			"default_scale":			Vector3(0.1,0.1,0.1),
 			"collider_default_position":Vector3(0.0,0.0,0.0),
 			"collider_default_scale":	Vector3(0.9,0.76,0.9),
