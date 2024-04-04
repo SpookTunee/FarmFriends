@@ -114,6 +114,17 @@ func _physics_process(delta):
 			pause_movement = false
 	
 	var tooltip = $Camera3D/ToolTip.get_collider()
+	if tooltip:
+		if tooltip.name == "PlantBox":
+			get_node("HUD/ToolTip").text = (
+			["Wheat","Corn","Potato","Carrot","Mushroom"][tooltip.get_parent().plant_id] + 
+			", " + 
+			str(int(tooltip.get_parent().get_node("Plant/PlantBody/AnimationPlayer").current_animation_position*100)) + 
+			"% Grown"
+			)
+	else:
+		get_node("HUD/ToolTip").text = " "
+		
 	if !pause_movement:
 		$Camera3D.make_current()
 		# Add the gravity.

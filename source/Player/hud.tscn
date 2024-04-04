@@ -75,7 +75,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="ToolTip" type="Label" parent="."]
 layout_mode = 0
 offset_left = 1293.0
 offset_top = 771.0

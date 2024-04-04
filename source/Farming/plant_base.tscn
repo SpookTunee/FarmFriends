@@ -71,6 +71,7 @@ script = ExtResource("1_jbvpf")
 
 [node name="PlantBox" type="Area3D" parent="."]
 transform = Transform3D(1.35, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 0, 0, 0)
+collision_layer = 2049
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlantBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.477622, 0)
