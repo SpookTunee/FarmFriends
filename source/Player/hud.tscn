@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcgwy6x2mj4yx"]
+[gd_scene load_steps=4 format=3 uid="uid://bcgwy6x2mj4yx"]
 
 [ext_resource type="Script" path="res://Player/Scripts/HUD.gd" id="1_5qcav"]
+[ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="2_ad6ml"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yfxox"]
 font_size = 64
@@ -33,23 +34,53 @@ offset_bottom = 749.0
 layout_mode = 2
 theme_override_font_sizes/font_size = 51
 text = "0 Wheat"
+horizontal_alignment = 2
 
 [node name="Corn" type="Label" parent="Inventory"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 51
 text = "0 Corn"
+horizontal_alignment = 2
 
 [node name="Potatoes" type="Label" parent="Inventory"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 51
 text = "0 Potatoes"
+horizontal_alignment = 2
 
 [node name="Carrots" type="Label" parent="Inventory"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 51
 text = "0 Carrots"
+horizontal_alignment = 2
 
 [node name="Mushrooms" type="Label" parent="Inventory"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 51
 text = "0 Mushrooms"
+horizontal_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1293.0
+offset_top = 771.0
+offset_right = 1842.0
+offset_bottom = 832.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.431373)
+theme_override_fonts/font = ExtResource("2_ad6ml")
+theme_override_font_sizes/font_size = 50
