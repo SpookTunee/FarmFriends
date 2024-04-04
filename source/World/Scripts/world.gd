@@ -10,7 +10,19 @@ var enet_peer = ENetMultiplayerPeer.new()
 var newday: bool = true
 
 func disconnect_from_server():
-	remove_player.rpc()
+	if Global.players.size() > 1:
+		remove_player.rpc()
+	else:
+		multiplayer.multiplayer_peer.close()
+		multiplayer.multiplayer_peer = null
+		menu.showme()
+		for i in get_children():
+			if i.name.begins_with("mpSpawned_"):
+				i.queue_free()
+		for i in get_node("TilledLand").get_children():
+			i.queue_free()
+		Global.players = []
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func ready():
 	$Menu/Camera3D.current = true
@@ -92,13 +104,14 @@ func remove_player():
 	if player:
 		Global.players.erase(player)
 		player.queue_free()
-	remove_player_callback.rpc_id(multiplayer.get_remote_sender_id())
+	if multiplayer.is_server():
+		remove_player_callback.rpc_id(multiplayer.get_remote_sender_id())
 
 @rpc("any_peer","call_remote","unreliable")
 func remove_player_callback():
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
-	menu.show()
+	menu.showme()
 	for i in get_children():
 		if i.name.begins_with("mpSpawned_"):
 			i.queue_free()

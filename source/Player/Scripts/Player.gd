@@ -94,7 +94,7 @@ func _physics_process(delta):
 	ticks += 1
 	if Input.is_action_just_released("menu"):
 		if !get_node_or_null("Menu"):
-			var mnu = load("res://Player/menu.tscn").instantiate()
+			var mnu = load("res://Menus/menu.tscn").instantiate()
 			mnu.name = "Menu"
 			add_child(mnu)
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

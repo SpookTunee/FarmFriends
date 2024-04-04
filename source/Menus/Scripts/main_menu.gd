@@ -7,6 +7,10 @@ func hideme():
 	visible = false
 	$Control.visible = false
 
+func showme():
+	visible = true
+	$Control.visible = true
+
 func _on_host_pressed():
 	emit_signal("host")
 
