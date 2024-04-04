@@ -12,6 +12,8 @@ var hoe = preload("res://Tools/Hoe.tscn")
 var seeds = preload("res://Tools/bag_of_seeds.tscn")
 var scythe = preload("res://Tools/scythe.tscn")
 
+@onready var plantcount = 0
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
 
@@ -107,7 +109,7 @@ func _physics_process(delta):
 	mov_dirs()
 	mov_hands()
 	move_and_slide()
-	deposit()
+	deposit(delta)
 
 
 func mov_sprint(delta):
@@ -145,23 +147,22 @@ func mov_dirs():
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
 
-func deposit():
+func deposit(delta):
 	if Input.is_action_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
 			print($Camera3D.get_child(0).get_collider().name)
 			if $Camera3D.get_child(0).get_collider().name == "DepositArea":
-				$DepositTimer.start()
-				print("working")
-		else:
-			$DepositTimer.stop()
-			$DepositTimer.time_left - 0.5
-
-
-func _on_deposit_timer_timeout():
-	var count = 0
-	if $Stats.crop_counts[Global.Plants.WHEAT] > 0:
-		$Stats.crop_counts[Global.Plants.WHEAT] -= 1 
-	else:
-		count += 1
+				if plantcount > 4:
+					plantcount = 0
+				if $Stats.crop_counts[plantcount] > 0:
+					$Stats.crop_counts[plantcount] -= 1 
+				else:
+					plantcount += 1
 	if not Input.is_action_pressed("interact"):
-		count = 0
+		plantcount = 0
+
+	
+
+
+
+	
