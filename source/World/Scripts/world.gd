@@ -23,10 +23,15 @@ func disconnect_from_server():
 			i.queue_free()
 		Global.players = []
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		$Menu/Camera3D.current = true
+		$Terrain.hide()
+		$WaterPlane.hide()
+		$DayNightCycle.hide()
+		$"Menu/Control/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
 
 func ready():
 	$Menu/Camera3D.current = true
-	$Terrain.hideme()
+	$Terrain.hide()
 	$WaterPlane.hide()
 	$DayNightCycle.hide()
 	$"Menu/Control/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
@@ -119,6 +124,11 @@ func remove_player_callback():
 		i.queue_free()
 	Global.players = []
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	$Menu/Camera3D.current = true
+	$Terrain.hide()
+	$WaterPlane.hide()
+	$DayNightCycle.hide()
+	$"Menu/Control/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
  
 func add_player(id):
 	var player = Player.instantiate()
