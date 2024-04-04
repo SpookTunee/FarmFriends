@@ -26,7 +26,7 @@ func disconnect_from_server():
 
 func ready():
 	$Menu/Camera3D.current = true
-	$Terrain.hide()
+	$Terrain.hideme()
 	$WaterPlane.hide()
 	$DayNightCycle.hide()
 	$"Menu/Control/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
