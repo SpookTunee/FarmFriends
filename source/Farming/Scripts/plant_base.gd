@@ -40,7 +40,7 @@ func _ready():
 	(1.0 if is_in_preffered_terrain == 1 else 0.75 if is_in_preffered_terrain == 0 else 0.5) \
 	/(
 		actual_grow_time
-		*60
+		*20
 		)
 	$Plant/PlantBody/AnimationPlayer.play("Plant_Growth_anim")
 	$Plant/PlantBody/AnimationPlayer.seek(0.001)

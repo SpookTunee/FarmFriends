@@ -148,6 +148,7 @@ func mov_dirs():
 func deposit():
 	if Input.is_action_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
+			print($Camera3D.get_child(0).get_collider().name)
 			if $Camera3D.get_child(0).get_collider().name == "DepositArea":
 				$DepositTimer.start()
 				print("working")
@@ -158,8 +159,8 @@ func deposit():
 
 func _on_deposit_timer_timeout():
 	var count = 0
-	if $Stats.cropcount[count] > 0:
-		$Stats.cropcount[count] -1 
+	if $Stats.crop_counts[Global.Plants.WHEAT] > 0:
+		$Stats.crop_counts[Global.Plants.WHEAT] -= 1 
 	else:
 		count += 1
 	if not Input.is_action_pressed("interact"):
