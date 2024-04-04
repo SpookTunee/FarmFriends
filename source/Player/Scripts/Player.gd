@@ -12,6 +12,7 @@ var camera_sense_multiplier = 1.0
 var hoe = preload("res://Tools/Hoe.tscn")
 var seeds = preload("res://Tools/bag_of_seeds.tscn")
 var scythe = preload("res://Tools/scythe.tscn")
+var pause_movement = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -63,6 +64,7 @@ func request_mp_spawned_callback(mps):
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): 
 		return
+	if pause_movement: return
 	var ncams = camera_sense * camera_sense_multiplier
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * ncams)
@@ -98,21 +100,29 @@ func _physics_process(delta):
 			mnu.name = "Menu"
 			add_child(mnu)
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			pause_movement = true
 		else:
 			get_node("Menu").queue_free()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	$Camera3D.make_current()
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+			pause_movement = false
+	if !pause_movement:
+		$Camera3D.make_current()
+		# Add the gravity.
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-	
-	mov_sprint(delta)
-	mov_dirs()
-	mov_hands()
+		# Handle jump.
+		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+		
+		mov_sprint(delta)
+		mov_dirs()
+		mov_hands()
+		if not is_on_floor():
+			velocity.y -= gravity * delta
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+		if not is_on_floor():
+			velocity.y -= gravity * delta
 	move_and_slide()
 
 

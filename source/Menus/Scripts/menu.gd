@@ -15,6 +15,7 @@ func _on_settings_pressed():
 
 func _on_return_pressed():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	get_parent().pause_movement = false
 	self.queue_free()
 
 
