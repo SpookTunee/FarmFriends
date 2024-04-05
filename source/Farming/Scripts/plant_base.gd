@@ -109,8 +109,8 @@ func quick_init(Plant: int):
 			"terrain_good":				Global.Regions.MOUNTAINOUS,
 			"terrain_bad":				Global.Regions.RIVER,
 			"default_position":			Vector3(0.0,0.0,0.0),
-			"default_scale":			Vector3(1.0,1.5,1.0),
-			"collider_default_position":Vector3(0.0,0.0,0.0),
+			"default_scale":			Vector3(1.0,0.55,1.0),
+			"collider_default_position":Vector3(0.0,-0.075,0.0),
 			"collider_default_scale":	Vector3(1.5,0.5,1.5),
 			}
 	elif Plant == Global.Plants.CARROT:
