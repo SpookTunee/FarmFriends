@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://5frcq064xyc7"]
+[gd_scene load_steps=8 format=3 uid="uid://5frcq064xyc7"]
 
 [ext_resource type="Script" path="res://Farming/Scripts/plant_base.gd" id="1_jbvpf"]
 
@@ -66,8 +66,29 @@ _data = {
 "RESET": SubResource("Animation_gh88v")
 }
 
+[sub_resource type="Animation" id="Animation_w7ano"]
+resource_name = "WaterLoss"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:water_state")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4muoh"]
+_data = {
+"WaterLoss": SubResource("Animation_w7ano")
+}
+
 [node name="plant_base" type="Node3D"]
 script = ExtResource("1_jbvpf")
+water_state = 0.354739
 
 [node name="PlantBox" type="Area3D" parent="."]
 transform = Transform3D(1.35, 0, 0, 0, 1.35, 0, 0, 0, 1.35, 0, 0, 0)
@@ -89,3 +110,9 @@ gi_mode = 0
 libraries = {
 "": SubResource("AnimationLibrary_i0xur")
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4muoh")
+}
+speed_scale = 0.008

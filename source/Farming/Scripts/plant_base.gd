@@ -18,10 +18,14 @@ class_name PlantBase
 @export var collider_default_position: Vector3 = Vector3(0.0,0.0,0.0)
 @export var collider_default_scale: Vector3 = Vector3(1.0,1.0,1.0)
 
+@export_category("Internal Externals")
+@export var water_state: float = 1.0
+
 var quick_settings: Dictionary = {}
 var is_in_preffered_terrain: int = 0  #1=true, 0=false, -1=bad terrain
 var start_grow_time: float = 0.0
 var actual_grow_time: float = 0.0
+var default_growth_modifier: float = 0.0
 
 
 
@@ -36,15 +40,19 @@ func _ready():
 	#grow from 0.0 -> 0.333
 	#day is 7min, 1/3 of which is growing time
 	actual_grow_time = grow_time/3
-	$Plant/PlantBody/AnimationPlayer.speed_scale = \
+	default_growth_modifier = \
 	(1.0 if is_in_preffered_terrain == 1 else 0.75 if is_in_preffered_terrain == 0 else 0.5) \
 	/(
 		actual_grow_time
 		*20
 		)
+	$Plant/PlantBody/AnimationPlayer.speed_scale = default_growth_modifier*water_state
 	$Plant/PlantBody/AnimationPlayer.play("Plant_Growth_anim")
 	$Plant/PlantBody/AnimationPlayer.seek(0.001)
 	$Plant/PlantBody/AnimationPlayer.pause()
+
+func water_change():
+	$Plant/PlantBody/AnimationPlayer.speed_scale = default_growth_modifier*water_state
 
 func start_grow():
 	if $Plant/PlantBody/AnimationPlayer.current_animation_position != 1.0:
