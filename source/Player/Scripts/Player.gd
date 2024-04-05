@@ -13,7 +13,6 @@ var hoe = preload("res://Tools/Hoe.tscn")
 var seeds = preload("res://Tools/bag_of_seeds.tscn")
 var scythe = preload("res://Tools/scythe.tscn")
 var pause_movement = false
-var seed_bag_save = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -80,25 +79,19 @@ func switch_hand(id):
 	if id == 1:
 		Hand.get_child(0).queue_free()
 		var nscn = hoe.instantiate()
-		nscn.name = "Hoe"
 		Hand.add_child(nscn)
 	if id == 2:
 		Hand.get_child(0).queue_free()
 		var nscn = seeds.instantiate()
-		nscn.name = "BagOfSeeds"
 		Hand.add_child(nscn)
-		nscn.plant = seed_bag_save
 	if id == 3:
 		Hand.get_child(0).queue_free()
 		var nscn = scythe.instantiate()
-		nscn.name = "Scythe"
 		Hand.add_child(nscn)
 		nscn.init_pos()
 
 
 func _physics_process(delta):
-	if get_node("Camera3D/Hand").get_child(0).name == "BagOfSeeds":
-		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	ticks += 1
 	if Input.is_action_just_released("menu"):
@@ -112,19 +105,6 @@ func _physics_process(delta):
 			get_node("Menu").queue_free()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			pause_movement = false
-	
-	var tooltip = $Camera3D/ToolTip.get_collider()
-	if tooltip:
-		if tooltip.name == "PlantBox":
-			get_node("HUD/ToolTip").text = (
-			["Wheat","Corn","Potato","Carrot","Mushroom"][tooltip.get_parent().plant_id] + 
-			", " + 
-			str(int(tooltip.get_parent().get_node("Plant/PlantBody/AnimationPlayer").current_animation_position*100)) + 
-			"% Grown"
-			)
-	else:
-		get_node("HUD/ToolTip").text = " "
-		
 	if !pause_movement:
 		$Camera3D.make_current()
 		# Add the gravity.
