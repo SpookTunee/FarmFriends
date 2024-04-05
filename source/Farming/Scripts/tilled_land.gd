@@ -2,7 +2,6 @@ extends Node3D
 
 var wheatplant = preload("res://Farming/plant_prototype.tscn")
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
