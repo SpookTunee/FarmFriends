@@ -148,6 +148,7 @@ func mov_dirs():
 		
 
 func deposit(delta):
+	print($DepositTimer.time_left)
 	if Input.is_action_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
 			print($Camera3D.get_child(0).get_collider().name)
@@ -155,14 +156,17 @@ func deposit(delta):
 				if plantcount > 4:
 					plantcount = 0
 				if $Stats.crop_counts[plantcount] > 0:
-					$Stats.crop_counts[plantcount] -= 1 
+					_on_deposit_timer_timeout(plantcount)
 				else:
 					plantcount += 1
-	if not Input.is_action_pressed("interact"):
+	if Input.is_action_just_pressed("interact"):
+		$DepositTimer.start()
+		
+	if Input.is_action_just_released("interact"):
+		$DepositTimer.stop()
 		plantcount = 0
 
-	
 
 
-
-	
+func _on_deposit_timer_timeout(plantcount):
+	$Stats.crop_counts[plantcount] -= 1
