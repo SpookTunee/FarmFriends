@@ -32,6 +32,7 @@ collision_layer = 2
 collision_mask = 257
 wall_min_slide_angle = 0.349066
 script = ExtResource("1_os5jd")
+JUMP_VELOCITY = null
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("2_235ld")

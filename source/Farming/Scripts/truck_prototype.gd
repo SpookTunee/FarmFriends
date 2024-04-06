@@ -4,7 +4,8 @@ var check : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#position.y = 100000000
-	pass
+	print_rich("[rainbow][wave]david pls fix[/wave][/rainbow]")
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

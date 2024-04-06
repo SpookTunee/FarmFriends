@@ -11,6 +11,7 @@ var camera_sense = 0.002
 var hoe = preload("res://Tools/Hoe.tscn")
 var seeds = preload("res://Tools/bag_of_seeds.tscn")
 var scythe = preload("res://Tools/scythe.tscn")
+signal deposited
 
 @onready var plantcount = 0
 
@@ -148,7 +149,6 @@ func mov_dirs():
 		
 
 func deposit(delta):
-	print($DepositTimer.time_left)
 	if Input.is_action_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
 			print($Camera3D.get_child(0).get_collider().name)
@@ -156,7 +156,7 @@ func deposit(delta):
 				if plantcount > 4:
 					plantcount = 0
 				if $Stats.crop_counts[plantcount] > 0:
-					_on_deposit_timer_timeout(plantcount)
+					 
 				else:
 					plantcount += 1
 	if Input.is_action_just_pressed("interact"):
@@ -166,7 +166,8 @@ func deposit(delta):
 		$DepositTimer.stop()
 		plantcount = 0
 
-
-
-func _on_deposit_timer_timeout(plantcount):
+func subtract():
 	$Stats.crop_counts[plantcount] -= 1
+
+func _on_deposit_timer_timeout():
+	emit_signal("deposited")
