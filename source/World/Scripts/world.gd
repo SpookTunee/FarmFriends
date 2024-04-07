@@ -97,7 +97,7 @@ func _on_join_pressed():
 	$Terrain.show()
 	$WaterPlane.show()
 	$DayNightCycle.show()
-	$Menu/Camera3D.active = false
+	$Menu/Camera3D.current = false
 	enet_peer = ENetMultiplayerPeer.new()
 	enet_peer.create_client(ip.text, port)
 	multiplayer.multiplayer_peer = enet_peer
