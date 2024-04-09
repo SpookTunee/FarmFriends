@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://j01xwsym3ipn"]
+
+[ext_resource type="PackedScene" uid="uid://bpsjx8mcj3g4" path="res://Assets/Tools/watering_can.blend" id="1_bg0lj"]
+
+[node name="Watering_Can" type="Node3D"]
+
+[node name="watering_can" parent="." instance=ExtResource("1_bg0lj")]
