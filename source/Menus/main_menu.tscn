@@ -95,7 +95,8 @@ light_energy = 1.111
 light_angular_distance = 10.62
 
 [node name="sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.950288, -0.303568, -0.0692753, 0.237442, -0.850422, 0.469472, -0.20143, 0.429684, 0.880226, 0, 2.16055, 0)
+transform = Transform3D(-0.960193, -0.268091, -0.0784591, 0.26892, -0.963162, 1.74846e-07, -0.0755689, -0.021099, 0.996918, 0, 2.16055, 0)
+light_energy = 1.41
 light_angular_distance = 52.39
 
 [node name="grass" parent="." instance=ExtResource("6_b8dsy")]
