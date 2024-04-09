@@ -48,7 +48,7 @@ default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
 op_type = 0
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_pb14q"]
-default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0.2, 0.2, 0.2)]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0.1, 0.1, 0.1)]
 operator = 2
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7ei5d"]
@@ -140,7 +140,7 @@ void vertex() {
 
 
 // VectorOp:16
-	vec3 n_in16p1 = vec3(0.20000, 0.20000, 0.20000);
+	vec3 n_in16p1 = vec3(0.10000, 0.10000, 0.10000);
 	vec3 n_out16p0 = n_out9p0 * n_in16p1;
 
 
@@ -200,6 +200,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-877.641, -157.322)
 modes/cull = 2
 modes/diffuse = 3
 nodes/vertex/0/position = Vector2(1540, 80)
