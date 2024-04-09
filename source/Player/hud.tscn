@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcgwy6x2mj4yx"]
+[gd_scene load_steps=4 format=3 uid="uid://bcgwy6x2mj4yx"]
 
 [ext_resource type="Script" path="res://Player/Scripts/HUD.gd" id="1_5qcav"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yfxox"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_pbdla"]
 font_size = 64
 
 [node name="HUD" type="Control"]
@@ -22,6 +25,14 @@ offset_right = 461.0
 offset_bottom = 138.0
 text = "Sunday"
 label_settings = SubResource("LabelSettings_yfxox")
+
+[node name="Money" type="Label" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 984.0
+offset_right = 894.0
+offset_bottom = 1103.0
+label_settings = SubResource("LabelSettings_pbdla")
 
 [node name="Inventory" type="VBoxContainer" parent="."]
 layout_mode = 0

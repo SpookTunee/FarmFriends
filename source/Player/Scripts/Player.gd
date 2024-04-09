@@ -149,25 +149,39 @@ func mov_dirs():
 		
 
 func deposit(delta):
-	if Input.is_action_pressed("interact"):
-		if $Camera3D.get_child(0).get_collider() != null:
-			print($Camera3D.get_child(0).get_collider().name)
-			if $Camera3D.get_child(0).get_collider().name == "DepositArea":
-				if plantcount > 4:
-					plantcount = 0
-				if $Stats.crop_counts[plantcount] > 0:
-					 
-				else:
-					plantcount += 1
+	
 	if Input.is_action_just_pressed("interact"):
 		$DepositTimer.start()
 		
 	if Input.is_action_just_released("interact"):
 		$DepositTimer.stop()
+		$DepositTimer.wait_time = 0.5
 		plantcount = 0
 
-func subtract():
-	$Stats.crop_counts[plantcount] -= 1
-
 func _on_deposit_timer_timeout():
-	emit_signal("deposited")
+	if $Camera3D.get_child(0).get_collider() != null:
+		if $Camera3D.get_child(0).get_collider().name == "DepositArea":
+			if plantcount > 4:
+				plantcount = 0
+			if $Stats.crop_counts[plantcount] > 0:
+				$Stats.money += calcReturn(plantcount)
+				$Stats.crop_counts[plantcount] -= 1
+			else:
+				plantcount += 1
+				
+	if $DepositTimer.wait_time > 0:
+		$DepositTimer.wait_time *= 0.90
+
+func calcReturn(plantcount) -> float:
+	if plantcount == 0:
+		return 1.0
+	elif plantcount == 1:
+		return 19.0
+	elif plantcount == 2:
+		return 3.75
+	elif plantcount == 3:
+		return 8.0
+	elif plantcount == 4:
+		return 5
+	else:
+		return 0
