@@ -12,6 +12,7 @@ var camera_sense_multiplier = 1.0
 var hoe = preload("res://Tools/Hoe.tscn")
 var seeds = preload("res://Tools/bag_of_seeds.tscn")
 var scythe = preload("res://Tools/scythe.tscn")
+var watering_can = preload("res://Tools/watering_can.tscn")
 var pause_movement = false
 var seed_bag_save = 0
 
@@ -94,7 +95,11 @@ func switch_hand(id):
 		nscn.name = "Scythe"
 		Hand.add_child(nscn)
 		nscn.init_pos()
-
+	if id == 4:
+		Hand.get_child(0).queue_free()
+		var nscn = watering_can.instantiate()
+		nscn.name = "WateringCan"
+		Hand.add_child(nscn)
 
 func _physics_process(delta):
 	if get_node("Camera3D/Hand").get_child(0).name == "BagOfSeeds":
@@ -121,6 +126,11 @@ func _physics_process(delta):
 			", " + 
 			str(int(tooltip.get_parent().get_node("Plant/PlantBody/AnimationPlayer").current_animation_position*100)) + 
 			"% Grown"
+			)
+		if tooltip.name == "TilledLand":
+			get_node("HUD/ToolTip").text = (
+			str(int(tooltip.get_parent().water_level*100)) + 
+			"% watered"
 			)
 	else:
 		get_node("HUD/ToolTip").text = " "
@@ -167,6 +177,9 @@ func mov_hands():
 	elif Input.is_action_just_pressed("3"):
 		switch_hand.rpc(3)
 		switch_hand(3)
+	elif Input.is_action_just_pressed("4"):
+		switch_hand.rpc(4)
+		switch_hand(4)
 	if Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
