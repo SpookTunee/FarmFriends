@@ -215,13 +215,18 @@ func _on_deposit_timer_timeout():
 			if plantcount > 4:
 				plantcount = 0
 			if $Stats.crop_counts[plantcount] > 0:
-				$Stats.money += calcReturn(plantcount)
+				
 				if $DepositTimer.wait_time > 0.001:
 					$Stats.crop_counts[plantcount] -= 1
-				elif $DepositTimer.wait_time > 0.0001:
+					$Stats.money += calcReturn(plantcount)
+				elif $DepositTimer.wait_time > 0.0001 && $Stats.crop_counts[plantcount] >= 2:
 					$Stats.crop_counts[plantcount] -= 2
+					$Stats.money += calcReturn(plantcount) *2
+				elif $DepositTimer.wait_time <= 0.0001 && $Stats.crop_counts[plantcount] >= 4:
+					$Stats.crop_counts[plantcount] -= 4 
+					$Stats.money += calcReturn(plantcount) * 4
 				else:
-					$Stats.crop_counts[plantcount] -= 4
+					$Stats.crop_counts[plantcount] -= 1
 			else:
 				plantcount += 1
 				
