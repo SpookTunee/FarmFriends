@@ -2,7 +2,7 @@
 
 [ext_resource type="Environment" uid="uid://dey8er63dfj3b" path="res://DNCycle/environment.tres" id="1_7lrv6"]
 [ext_resource type="ArrayMesh" uid="uid://g15hb0rimiiu" path="res://Assets/Menu/3D/titleScreen.obj" id="1_jlghn"]
-[ext_resource type="Script" path="res://Farming/Menus/Scripts/main_menu.gd" id="1_vctkd"]
+[ext_resource type="Script" path="res://Menus/Scripts/main_menu.gd" id="1_vctkd"]
 [ext_resource type="ArrayMesh" uid="uid://b3ig28s5qour3" path="res://Assets/Menu/3D/titleScreenDecor.obj" id="2_iei6g"]
 [ext_resource type="Shader" uid="uid://5u26i7jn4xi3" path="res://Assets/Menu/Shaders/grass.tres" id="4_ovr27"]
 [ext_resource type="PackedScene" uid="uid://blnfsm62uxxor" path="res://Assets/Menu/3D/grass.glb" id="6_b8dsy"]

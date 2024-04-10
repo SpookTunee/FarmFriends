@@ -24,6 +24,15 @@ offset_bottom = 138.0
 text = "Sunday"
 label_settings = SubResource("LabelSettings_yfxox")
 
+[node name="Money" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 1059.0
+offset_right = 513.0
+offset_bottom = 1197.0
+text = "Sunday"
+label_settings = SubResource("LabelSettings_yfxox")
+
 [node name="Inventory" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 2029.0

@@ -15,6 +15,7 @@ var scythe = preload("res://Tools/scythe.tscn")
 var watering_can = preload("res://Tools/watering_can.tscn")
 var pause_movement = false
 var seed_bag_save = 0
+var plantcount : int = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -154,6 +155,7 @@ func _physics_process(delta):
 		if not is_on_floor():
 			velocity.y -= gravity * delta
 	move_and_slide()
+	deposit()
 	
 	
 
@@ -194,3 +196,43 @@ func mov_dirs():
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+
+
+func deposit():
+	
+	if Input.is_action_just_pressed("interact"):
+		$DepositTimer.start()
+		
+	if Input.is_action_just_released("interact"):
+		$DepositTimer.stop()
+		$DepositTimer.wait_time = 0.5
+		plantcount = 0
+
+func _on_deposit_timer_timeout():
+	if $Camera3D.get_child(0).get_collider() != null:
+		if $Camera3D.get_child(0).get_collider().name == "DepositArea":
+			if plantcount > 4:
+				plantcount = 0
+			if $Stats.crop_counts[plantcount] > 0:
+				$Stats.money += calcReturn(plantcount)
+				$Stats.crop_counts[plantcount] -= 1
+			else:
+				plantcount += 1
+				
+	if $DepositTimer.wait_time > 0:
+		$DepositTimer.wait_time *= 0.90
+
+func calcReturn(plantcount) -> float:
+	if plantcount == 0:
+		return 1.0
+	elif plantcount == 1:
+		return 19.0
+	elif plantcount == 2:
+		return 3.75
+	elif plantcount == 3:
+		return 8.0
+	elif plantcount == 4:
+		return 5
+	else:
+		return 0

@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://8rucd3btna6i"]
+[gd_scene load_steps=9 format=3 uid="uid://8rucd3btna6i"]
 
 [ext_resource type="Script" path="res://Farming/Scripts/truck_prototype.gd" id="1_xm525"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g52p7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mr14s"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j65no"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f4xsc"]
 size = Vector3(0.513672, 0.359924, 1.56229)
@@ -124,8 +127,14 @@ transform = Transform3D(0.0671092, 0.0623928, 0, -0.117163, 0.152791, 0, 0, 0, 0
 mesh = SubResource("BoxMesh_mr14s")
 skeleton = NodePath("../..")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="TruckModelPlaceholder"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TruckModelPlaceholder/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_j65no")
+
 [node name="DepositArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57952, 0, 0)
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DepositArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19137, 0.950155, 0.00526267)

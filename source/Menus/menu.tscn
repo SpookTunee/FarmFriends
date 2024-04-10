@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b28o3walu13yj"]
 
-[ext_resource type="Script" path="res://Farming/Menus/Scripts/menu.gd" id="1_2abr3"]
+[ext_resource type="Script" path="res://Menus/Scripts/menu.gd" id="1_2abr3"]
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="7_pxltr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r48jk"]

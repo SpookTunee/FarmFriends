@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c320fa8ntbu7o"]
 
-[ext_resource type="Script" path="res://Farming/Menus/Scripts/shop_menu.gd" id="1_t5gdb"]
+[ext_resource type="Script" path="res://Menus/Scripts/shop_menu.gd" id="1_t5gdb"]
 
 [node name="ShopMenu" type="Control"]
 layout_mode = 3
