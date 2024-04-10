@@ -200,7 +200,7 @@ func mov_dirs():
 
 
 func deposit():
-	
+	print($DepositTimer.wait_time)
 	if Input.is_action_just_pressed("interact"):
 		$DepositTimer.start()
 		
@@ -216,7 +216,12 @@ func _on_deposit_timer_timeout():
 				plantcount = 0
 			if $Stats.crop_counts[plantcount] > 0:
 				$Stats.money += calcReturn(plantcount)
-				$Stats.crop_counts[plantcount] -= 1
+				if $DepositTimer.wait_time > 0.001:
+					$Stats.crop_counts[plantcount] -= 1
+				elif $DepositTimer.wait_time > 0.0001:
+					$Stats.crop_counts[plantcount] -= 2
+				else:
+					$Stats.crop_counts[plantcount] -= 4
 			else:
 				plantcount += 1
 				
@@ -227,12 +232,12 @@ func calcReturn(plantcount) -> float:
 	if plantcount == 0:
 		return 1.0
 	elif plantcount == 1:
-		return 19.0
+		return 4.0
 	elif plantcount == 2:
 		return 3.75
 	elif plantcount == 3:
 		return 8.0
 	elif plantcount == 4:
-		return 5
+		return 5.0
 	else:
 		return 0
