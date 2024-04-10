@@ -9,7 +9,7 @@ func _process(delta):
 	if !newday && ((Global.dayfloat-float(Global.day)) >= 0.333):
 		handle_plant_growing(false)
 		newday = true
-	handle_plant_watering(delta/20)
+	handle_plant_watering(delta/120)
 
 func handle_plant_watering(delta):
 	for tland in get_node("../TilledLand").get_children():

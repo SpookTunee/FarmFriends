@@ -11,8 +11,8 @@ func _physics_process(_delta):
 		is_active = false
 	if is_active:
 		for till in $water_area.get_overlapping_bodies():
-			if till.get_parent().water_level < (1.0-0.0125):
-				till.get_parent().water_level += 0.010
+			if till.get_parent().water_level < (1.0-0.025):
+				till.get_parent().water_level += 0.024
 
 func activate():
 	is_active = true

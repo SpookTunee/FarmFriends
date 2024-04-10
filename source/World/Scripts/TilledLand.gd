@@ -21,5 +21,8 @@ func instant_till(id,count,pos):
 	till_count += 1
 	var till = tilledLand.instantiate()
 	till.name = "mpSpawned_" + str(id) + "_till_" + str(count)
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color.from_hsv(31.0/255.0,1.0,43.0/100.0,1.0)
+	till.get_node("CSGTorus3D").material = mat
 	get_node("/root/World/TilledLand").add_child(till)
 	till.position = pos
