@@ -17,6 +17,10 @@ func handle_plant_watering(delta):
 		if tland.get_node_or_null("PLANT"):
 			tland.get_node("PLANT").water_change()
 
+@rpc("any_peer","call_remote","unreliable")
+func drought(info:Dictionary):
+	for tl in info.keys():
+		get_node("../TilledLand/" + tl).water_level = info[tl]
 
 func handle_plant_growing(gon):
 	if gon:
