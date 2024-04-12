@@ -1,7 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://j01xwsym3ipn"]
+[gd_scene load_steps=7 format=3 uid="uid://j01xwsym3ipn"]
 
 [ext_resource type="PackedScene" uid="uid://bpsjx8mcj3g4" path="res://Assets/Tools/watering_can.blend" id="1_bg0lj"]
+[ext_resource type="Script" path="res://Tools/Scripts/watering_can.gd" id="1_wtwr0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aqtfb"]
+size = Vector3(1.25098, 3.03809, 2.0293)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vluoj"]
+albedo_color = Color(0.278431, 0.388235, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e73xn"]
+direction = Vector3(1, 2.08165e-12, 2.08165e-12)
+spread = 8.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(2.08165e-12, -2, 2.08165e-12)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ruo4f"]
+radius = 0.01
+height = 0.02
+radial_segments = 4
+rings = 4
 
 [node name="Watering_Can" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0.016325, 0.0078516, 0.00605965)
+script = ExtResource("1_wtwr0")
 
 [node name="watering_can" parent="." instance=ExtResource("1_bg0lj")]
+
+[node name="water_area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="water_area"]
+transform = Transform3D(0.281437, -0.95958, 0, 0.95958, 0.281437, 0, 0, 0, 1, 1.78543, -0.21987, 0)
+shape = SubResource("BoxShape3D_aqtfb")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.958849, 0.283915, 0, -0.283915, 0.958849, 0, 0, 0, 1, 0.731178, 0.415174, 0.00295162)
+material_override = SubResource("StandardMaterial3D_vluoj")
+emitting = false
+amount = 64
+speed_scale = 5.06
+randomness = 0.13
+visibility_aabb = AABB(-4, -2.15227, -2.03154, 8, 4.30454, 4.06309)
+trail_lifetime = 1.3
+process_material = SubResource("ParticleProcessMaterial_e73xn")
+draw_pass_1 = SubResource("CapsuleMesh_ruo4f")

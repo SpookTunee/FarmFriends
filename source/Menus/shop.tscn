@@ -1,0 +1,426 @@
+[gd_scene load_steps=9 format=3 uid="uid://yncwijbbpmb2"]
+
+[ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="1_isg4c"]
+[ext_resource type="Script" path="res://Menus/Scripts/shop.gd" id="1_ng0yv"]
+[ext_resource type="Texture2D" uid="uid://bifh8ml83jcuh" path="res://icon.svg" id="2_j1qt6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkeh6"]
+bg_color = Color(0.172549, 0.172549, 0.172549, 0.564706)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utdbb"]
+bg_color = Color(0.172549, 0.172549, 0.172549, 0.827451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfwor"]
+bg_color = Color(0.172549, 0.172549, 0.172549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3oq2m"]
+bg_color = Color(0.172549, 0.172549, 0.172549, 0.564706)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igbb2"]
+bg_color = Color(0.172549, 0.172549, 0.172549, 0.564706)
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_ng0yv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Categories" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Tools" type="Button" parent="HBoxContainer/Categories"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 120
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+text = "Tools"
+
+[node name="Seeds" type="Button" parent="HBoxContainer/Categories"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 120
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+text = "Seeds"
+
+[node name="Signs" type="Button" parent="HBoxContainer/Categories"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 120
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+text = "Signs
+"
+
+[node name="Structures" type="Button" parent="HBoxContainer/Categories"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 120
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+text = "Structures"
+
+[node name="CloseBar" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 120
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+text = ">"
+
+[node name="Tools" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="basic_hoe" type="Panel" parent="HBoxContainer/Tools"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3oq2m")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Tools/basic_hoe"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Tools/basic_hoe/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Basic Hoe
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Tools/basic_hoe/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Tools/basic_hoe/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("2_j1qt6")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Tools/basic_hoe/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "This tool is a staple of any farm. It allows you to till the land, though it's not particularly fast."
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Tools/basic_hoe"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Tools/basic_hoe/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "450 WEU"
+
+[node name="fast_hoe" type="Panel" parent="HBoxContainer/Tools"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3oq2m")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Tools/fast_hoe"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Tools/fast_hoe/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Fast Hoe
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Tools/fast_hoe/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Tools/fast_hoe/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("2_j1qt6")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Tools/fast_hoe/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "A state-of-the-art upgrade to the classic, this hoe allows you to till your land with breathtaking speed."
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Tools/fast_hoe"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Tools/fast_hoe/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "3500 WEU"
+
+[node name="shovel" type="Panel" parent="HBoxContainer/Tools"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3oq2m")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Tools/shovel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Tools/shovel/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Shovel
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Tools/shovel/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Tools/shovel/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("2_j1qt6")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Tools/shovel/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "The shovel is another of the big-shot tools in any farmer's repertoire. It allows you to remove your tilled land... and defend your property."
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Tools/shovel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Tools/shovel/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "650 WEU"
+
+[node name="boots" type="Panel" parent="HBoxContainer/Tools"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3oq2m")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Tools/boots"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Tools/boots/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Boots
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Tools/boots/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Tools/boots/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("2_j1qt6")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Tools/boots/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "A shiny new pair of boots for your grody old dogs.
+ "
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Tools/boots"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Tools/boots/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "2000 WEU"
+
+[connection signal="pressed" from="HBoxContainer/Categories/Tools" to="." method="_on_tools_pressed"]
+[connection signal="pressed" from="HBoxContainer/Categories/Seeds" to="." method="_on_seeds_pressed"]
+[connection signal="pressed" from="HBoxContainer/Categories/Signs" to="." method="_on_signs_pressed"]
+[connection signal="pressed" from="HBoxContainer/Categories/Structures" to="." method="_on_structures_pressed"]
+[connection signal="pressed" from="HBoxContainer/CloseBar" to="." method="_on_close_bar_pressed"]

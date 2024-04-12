@@ -12,8 +12,11 @@ var camera_sense_multiplier = 1.0
 var hoe = preload("res://Tools/Hoe.tscn")
 var seeds = preload("res://Tools/bag_of_seeds.tscn")
 var scythe = preload("res://Tools/scythe.tscn")
+var watering_can = preload("res://Tools/watering_can.tscn")
 var pause_movement = false
 var seed_bag_save = 0
+var plantcount : int = 0
+var isunlocked: Dictionary = {"1":false,"2":true,"3":true,"4":true}
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -94,7 +97,11 @@ func switch_hand(id):
 		nscn.name = "Scythe"
 		Hand.add_child(nscn)
 		nscn.init_pos()
-
+	if id == 4:
+		Hand.get_child(0).queue_free()
+		var nscn = watering_can.instantiate()
+		nscn.name = "WateringCan"
+		Hand.add_child(nscn)
 
 func _physics_process(delta):
 	if get_node("Camera3D/Hand").get_child(0).name == "BagOfSeeds":
@@ -122,6 +129,11 @@ func _physics_process(delta):
 			str(int(tooltip.get_parent().get_node("Plant/PlantBody/AnimationPlayer").current_animation_position*100)) + 
 			"% Grown"
 			)
+		if tooltip.name == "TilledLand":
+			get_node("HUD/ToolTip").text = (
+			str(int(tooltip.get_parent().water_level*100)) + 
+			"% watered"
+			)
 	else:
 		get_node("HUD/ToolTip").text = " "
 		
@@ -144,6 +156,7 @@ func _physics_process(delta):
 		if not is_on_floor():
 			velocity.y -= gravity * delta
 	move_and_slide()
+	deposit()
 	
 	
 
@@ -159,14 +172,21 @@ func mov_sprint(delta):
 
 func mov_hands():
 	if Input.is_action_just_pressed("1"):
-		switch_hand.rpc(1)
-		switch_hand(1)
+		if isunlocked["1"]:
+			switch_hand.rpc(1)
+			switch_hand(1)
 	elif Input.is_action_just_pressed("2"):
-		switch_hand.rpc(2)
-		switch_hand(2)
+		if isunlocked["2"]:
+			switch_hand.rpc(2)
+			switch_hand(2)
 	elif Input.is_action_just_pressed("3"):
-		switch_hand.rpc(3)
-		switch_hand(3)
+		if isunlocked["3"]:
+			switch_hand.rpc(3)
+			switch_hand(3)
+	elif Input.is_action_just_pressed("4"):
+		if isunlocked["4"]:
+			switch_hand.rpc(4)
+			switch_hand(4)
 	if Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
@@ -181,3 +201,48 @@ func mov_dirs():
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+
+
+func deposit():
+	print($DepositTimer.wait_time)
+	if Input.is_action_just_pressed("interact"):
+		$DepositTimer.start()
+		
+	if Input.is_action_just_released("interact"):
+		$DepositTimer.stop()
+		$DepositTimer.wait_time = 0.5
+		plantcount = 0
+
+func _on_deposit_timer_timeout():
+	if $Camera3D.get_child(0).get_collider() != null:
+		if $Camera3D.get_child(0).get_collider().name == "DepositArea":
+			if plantcount > 4:
+				plantcount = 0
+			if $Stats.crop_counts[plantcount] > 0:
+				$Stats.money += calcReturn(plantcount)
+				if $DepositTimer.wait_time > 0.001:
+					$Stats.crop_counts[plantcount] -= 1
+				elif $DepositTimer.wait_time > 0.0001:
+					$Stats.crop_counts[plantcount] -= 2
+				else:
+					$Stats.crop_counts[plantcount] -= 4
+			else:
+				plantcount += 1
+				
+	if $DepositTimer.wait_time > 0:
+		$DepositTimer.wait_time *= 0.90
+
+func calcReturn(plantcount) -> float:
+	if plantcount == 0:
+		return 1.0
+	elif plantcount == 1:
+		return 4.0
+	elif plantcount == 2:
+		return 3.75
+	elif plantcount == 3:
+		return 8.0
+	elif plantcount == 4:
+		return 5.0
+	else:
+		return 0

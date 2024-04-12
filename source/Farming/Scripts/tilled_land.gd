@@ -7,10 +7,10 @@ var wheatplant = preload("res://Farming/plant_prototype.tscn")
 func _ready():
 	pass
 
-func reduce_water():
-	if water_level > (1.0/12.0):
-		water_level = water_level - (1.0/12.0)
-		$CSGTorus3D.material.albedo_color = Color.from_hsv(31.0/255.0,1.0,(43.0-(water_level*20))/100.0,1.0)
+func reduce_water(delta):
+	if water_level > delta:
+		water_level = water_level - delta
+		$CSGTorus3D.material.albedo_color = Color.from_hsv(31.0/255.0,((100.0-(water_level*30.0))/100.0),(43.0-(water_level*20))/100.0,1.0)
 
 func grow(plant):
 	if get_node_or_null("PLANT"): return

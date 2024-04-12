@@ -4,7 +4,6 @@ extends Node
 @export var dayfloat: float = 0.0
 @export var players: Array = []
 
-
 enum Regions {
 	NONE,
 	PLAINS,
