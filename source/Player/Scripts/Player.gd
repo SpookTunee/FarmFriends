@@ -16,6 +16,7 @@ var watering_can = preload("res://Tools/watering_can.tscn")
 var pause_movement = false
 var seed_bag_save = 0
 var plantcount : int = 0
+var isunlocked: Dictionary = {"1":false,"2":true,"3":true,"4":true}
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -171,17 +172,21 @@ func mov_sprint(delta):
 
 func mov_hands():
 	if Input.is_action_just_pressed("1"):
-		switch_hand.rpc(1)
-		switch_hand(1)
+		if isunlocked["1"]:
+			switch_hand.rpc(1)
+			switch_hand(1)
 	elif Input.is_action_just_pressed("2"):
-		switch_hand.rpc(2)
-		switch_hand(2)
+		if isunlocked["2"]:
+			switch_hand.rpc(2)
+			switch_hand(2)
 	elif Input.is_action_just_pressed("3"):
-		switch_hand.rpc(3)
-		switch_hand(3)
+		if isunlocked["3"]:
+			switch_hand.rpc(3)
+			switch_hand(3)
 	elif Input.is_action_just_pressed("4"):
-		switch_hand.rpc(4)
-		switch_hand(4)
+		if isunlocked["4"]:
+			switch_hand.rpc(4)
+			switch_hand(4)
 	if Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
