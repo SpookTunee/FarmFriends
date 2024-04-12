@@ -16,7 +16,8 @@ var watering_can = preload("res://Tools/watering_can.tscn")
 var pause_movement = false
 var seed_bag_save = 0
 var plantcount : int = 0
-var isunlocked: Dictionary = {"1":false,"2":true,"3":true,"4":true}
+var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true}
+var isShop : bool = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -108,17 +109,19 @@ func _physics_process(delta):
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	ticks += 1
-	if Input.is_action_just_released("menu"):
-		if !get_node_or_null("Menu"):
-			var mnu = load("res://Menus/menu.tscn").instantiate()
-			mnu.name = "Menu"
-			add_child(mnu)
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			pause_movement = true
-		else:
-			get_node("Menu").queue_free()
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			pause_movement = false
+	
+	if !isShop:
+		if Input.is_action_just_released("menu"):
+			if !get_node_or_null("Menu"):
+				var mnu = load("res://Menus/menu.tscn").instantiate()
+				mnu.name = "Menu"
+				add_child(mnu)
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				pause_movement = true
+			else:
+				get_node("Menu").queue_free()
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+				pause_movement = false
 	
 	var tooltip = $Camera3D/ToolTip.get_collider()
 	if tooltip:
@@ -207,7 +210,9 @@ func mov_dirs():
 func deposit():
 	print($DepositTimer.wait_time)
 	if Input.is_action_just_pressed("interact"):
-		$DepositTimer.start()
+		if $Camera3D.get_child(0).get_collider() != null:
+			if $Camera3D.get_child(0).get_collider().name == "DepositArea":
+				$DepositTimer.start()
 		
 	if Input.is_action_just_released("interact"):
 		$DepositTimer.stop()
@@ -251,3 +256,20 @@ func calcReturn(plantcount) -> float:
 		return 5.0
 	else:
 		return 0
+		
+		
+		
+
+func shop():
+	if Input.is_action_just_pressed("interact"):
+		if $Camera3D.get_child(0).get_collider() != null:
+			if $Camera3D.get_child(0).get_collider().name == "ShopArea":
+				isShop = true
+				var shp = load("res://Menus/shop.tscn")
+				shp.name = "ShopMenu"
+				add_child(shp)
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				pause_movement = true
+	if (isShop && Input.is_action_just_pressed("menu")):
+		get_node("ShopMenu").queue_free()
+		isShop = false
