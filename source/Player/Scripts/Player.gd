@@ -16,7 +16,7 @@ var watering_can = preload("res://Tools/watering_can.tscn")
 var pause_movement = false
 var seed_bag_save = 0
 var plantcount : int = 0
-var isunlocked: Dictionary = {"1":false,"2":true,"3":true,"4":true}
+var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true}
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -205,7 +205,7 @@ func mov_dirs():
 
 
 func deposit():
-	print($DepositTimer.wait_time)
+
 	if Input.is_action_just_pressed("interact"):
 		$DepositTimer.start()
 		
