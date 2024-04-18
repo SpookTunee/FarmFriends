@@ -101,6 +101,7 @@ light_angular_distance = 52.39
 
 [node name="grass" parent="." instance=ExtResource("6_b8dsy")]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 9.31713, 2.14891, 0)
+visible = false
 
 [node name="Grass" parent="grass" index="0"]
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 6.31208, -2.78261, 0.625671)
