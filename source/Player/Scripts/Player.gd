@@ -160,7 +160,7 @@ func _physics_process(delta):
 			velocity.y -= gravity * delta
 	move_and_slide()
 	deposit()
-	
+	shop()
 	
 
 func mov_sprint(delta):
@@ -261,15 +261,18 @@ func calcReturn(plantcount) -> float:
 		
 
 func shop():
+	if $Camera3D.get_child(0).get_collider() != null:
+		print($Camera3D.get_child(0).get_collider().name)
 	if Input.is_action_just_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
 			if $Camera3D.get_child(0).get_collider().name == "ShopArea":
 				isShop = true
-				var shp = load("res://Menus/shop.tscn")
+				var shp = load("res://Menus/shop.tscn").instantiate()
 				shp.name = "ShopMenu"
 				add_child(shp)
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				pause_movement = true
 	if (isShop && Input.is_action_just_pressed("menu")):
-		get_node("ShopMenu").queue_free()
 		isShop = false
+		get_node("ShopMenu").queue_free()
+		
