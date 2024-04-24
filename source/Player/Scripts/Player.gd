@@ -111,18 +111,22 @@ func _physics_process(delta):
 	ticks += 1
 	
 	
-	if !isShop:
-		if Input.is_action_just_released("menu"):
-			if !get_node_or_null("Menu"):
-				var mnu = load("res://Menus/menu.tscn").instantiate()
-				mnu.name = "Menu"
-				add_child(mnu)
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-				pause_movement = true
-			else:
-				get_node("Menu").queue_free()
-				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-				pause_movement = false
+	if Input.is_action_just_pressed("menu"):
+		if get_node_or_null("ShopMenu"):
+			print("HI <3")
+			get_node("ShopMenu").queue_free()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			pause_movement = false
+		elif !get_node_or_null("Menu"):
+			var mnu = load("res://Menus/menu.tscn").instantiate()
+			mnu.name = "Menu"
+			add_child(mnu)
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			pause_movement = true
+		else:
+			get_node("Menu").queue_free()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			pause_movement = false
 	
 	var tooltip = $Camera3D/ToolTip.get_collider()
 	if tooltip:
@@ -166,7 +170,7 @@ func _physics_process(delta):
 
 func mov_sprint(delta):
 	if Input.is_action_pressed("sprint"):
-		SPEED = 16.8
+		SPEED = 7.678
 		if is_on_floor() && velocity.length() > 5:
 			$Camera3D.rotation.x += (cos((ticks%360)*delta*15))*.00075
 	else:
@@ -263,12 +267,8 @@ func shop():
 	if Input.is_action_just_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
 			if $Camera3D.get_child(0).get_collider().name == "ShopArea":
-				isShop = true
 				var shp = load("res://Menus/shop.tscn").instantiate()
 				shp.name = "ShopMenu"
 				add_child(shp)
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				pause_movement = true
-	if (isShop && Input.is_action_just_pressed("menu")):
-		isShop = false
-		get_node("ShopMenu").queue_free()

@@ -9,4 +9,4 @@ func _process(delta):
 	$Inventory/Potatoes.text = str(get_node("../Stats").crop_counts[Global.Plants.POTATO]) + " Potatoes"
 	$Inventory/Carrots.text = str(get_node("../Stats").crop_counts[Global.Plants.CARROT]) + " Carrots"
 	$Inventory/Mushrooms.text = str(get_node("../Stats").crop_counts[Global.Plants.MUSHROOM]) + " Mushrooms"
-	$Money.text = "$" + str(get_node("../Stats").money)
+	$Inventory/Money.text = "$" + str(get_node("../Stats").money)

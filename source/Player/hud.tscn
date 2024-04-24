@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcgwy6x2mj4yx"]
+[gd_scene load_steps=5 format=3 uid="uid://bcgwy6x2mj4yx"]
 
 [ext_resource type="Script" path="res://Player/Scripts/HUD.gd" id="1_5qcav"]
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="2_ad6ml"]
+[ext_resource type="Texture2D" uid="uid://bifh8ml83jcuh" path="res://icon.svg" id="3_5wt4m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yfxox"]
 font_size = 64
@@ -21,15 +22,6 @@ script = ExtResource("1_5qcav")
 layout_mode = 0
 offset_right = 461.0
 offset_bottom = 138.0
-text = "Sunday"
-label_settings = SubResource("LabelSettings_yfxox")
-
-[node name="Money" type="Label" parent="."]
-layout_mode = 0
-offset_left = 52.0
-offset_top = 1059.0
-offset_right = 513.0
-offset_bottom = 1197.0
 text = "Sunday"
 label_settings = SubResource("LabelSettings_yfxox")
 
@@ -69,6 +61,18 @@ theme_override_font_sizes/font_size = 51
 text = "0 Mushrooms"
 horizontal_alignment = 2
 
+[node name="Spacer" type="Label" parent="Inventory"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+horizontal_alignment = 2
+
+[node name="Money" type="Label" parent="Inventory"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+text = "$0
+"
+horizontal_alignment = 2
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -90,6 +94,160 @@ offset_left = 1293.0
 offset_top = 771.0
 offset_right = 1842.0
 offset_bottom = 832.0
-theme_override_colors/font_color = Color(1, 1, 1, 0.431373)
+theme_override_colors/font_color = Color(1, 1, 1, 0.603922)
 theme_override_fonts/font = ExtResource("2_ad6ml")
 theme_override_font_sizes/font_size = 50
+
+[node name="Hotbar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -571.5
+offset_top = -115.0
+offset_right = 571.5
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Hoe" type="ColorRect" parent="Hotbar"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+color = Color(1, 1, 1, 0.458824)
+
+[node name="Control" type="Control" parent="Hotbar/Hoe"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe/Control"]
+modulate = Color(1, 1, 1, 0.721569)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_5wt4m")
+
+[node name="Hoe2" type="ColorRect" parent="Hotbar"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+color = Color(1, 1, 1, 0.458824)
+
+[node name="Control" type="Control" parent="Hotbar/Hoe2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe2/Control"]
+modulate = Color(1, 1, 1, 0.721569)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_5wt4m")
+
+[node name="Hoe3" type="ColorRect" parent="Hotbar"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+color = Color(1, 1, 1, 0.458824)
+
+[node name="Control" type="Control" parent="Hotbar/Hoe3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe3/Control"]
+modulate = Color(1, 1, 1, 0.721569)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_5wt4m")
+
+[node name="Hoe4" type="ColorRect" parent="Hotbar"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+color = Color(1, 1, 1, 0.458824)
+
+[node name="Control" type="Control" parent="Hotbar/Hoe4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe4/Control"]
+modulate = Color(1, 1, 1, 0.721569)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_5wt4m")
+
+[node name="Hoe5" type="ColorRect" parent="Hotbar"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+color = Color(1, 1, 1, 0.458824)
+
+[node name="Control" type="Control" parent="Hotbar/Hoe5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe5/Control"]
+modulate = Color(1, 1, 1, 0.721569)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_5wt4m")
+
+[node name="Hoe6" type="ColorRect" parent="Hotbar"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+color = Color(1, 1, 1, 0.458824)
+
+[node name="Control" type="Control" parent="Hotbar/Hoe6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe6/Control"]
+modulate = Color(1, 1, 1, 0.721569)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_5wt4m")
+
+[node name="Hoe7" type="ColorRect" parent="Hotbar"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+color = Color(1, 1, 1, 0.458824)
+
+[node name="Control" type="Control" parent="Hotbar/Hoe7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe7/Control"]
+modulate = Color(1, 1, 1, 0.721569)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_5wt4m")
