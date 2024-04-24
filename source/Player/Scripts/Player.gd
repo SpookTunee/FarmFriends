@@ -113,7 +113,6 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("menu"):
 		if get_node_or_null("ShopMenu"):
-			print("HI <3")
 			get_node("ShopMenu").queue_free()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			pause_movement = false
@@ -262,8 +261,7 @@ func calcReturn(plantcount) -> float:
 
 
 func shop():
-	if $Camera3D.get_child(0).get_collider() != null:
-		print($Camera3D.get_child(0).get_collider().name)
+	if get_node_or_null("ShopMenu"): return
 	if Input.is_action_just_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
 			if $Camera3D.get_child(0).get_collider().name == "ShopArea":
