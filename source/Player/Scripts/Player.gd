@@ -138,12 +138,12 @@ func _physics_process(delta):
 			["Wheat","Corn","Potato","Carrot","Mushroom"][tooltip.get_parent().plant_id] + 
 			", " + 
 			str(int(tooltip.get_parent().get_node("Plant/PlantBody/AnimationPlayer").current_animation_position*100)) + 
-			"% Grown"
+			"% Grown, " + str(int(tooltip.get_parent().get_parent().water_level*100)) + "% Watered"
 			)
 		if tooltip.name == "TilledLand":
 			get_node("HUD/ToolTip").text = (
 			str(int(tooltip.get_parent().water_level*100)) + 
-			"% watered"
+			"% Watered"
 			)
 	else:
 		get_node("HUD/ToolTip").text = " "
