@@ -9,3 +9,6 @@ extends Node
 	}
 	
 @export var money : float = 0
+
+
+@export var moneyPaid : float = 0
