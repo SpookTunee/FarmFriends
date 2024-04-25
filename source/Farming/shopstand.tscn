@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://d15rnfo3riwp8"]
+[gd_scene load_steps=4 format=3 uid="uid://d15rnfo3riwp8"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_ertxo"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_nbbnj"]
+[ext_resource type="ArrayMesh" uid="uid://b5tymw2exwmcm" path="res://Assets/Buildings/shopStand.obj" id="1_v7x2q"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fi2ma"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
@@ -13,17 +11,15 @@ size = Vector3(1.5777, 0.755371, 0.751953)
 [node name="ShopStand" type="Node3D"]
 
 [node name="ShopPlaceholderMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.6, 0, 0, 0, 1.9, 0, 0, 0, 0.4, 0, 0.968639, 0)
-mesh = SubResource("BoxMesh_ertxo")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ShopPlaceholderMesh"]
-transform = Transform3D(1, 0, 0, 0, 0.0545715, 0, 0, 0, 1, 0, -0.0906471, 0.591287)
-mesh = SubResource("BoxMesh_nbbnj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.369744, 0)
+mesh = ExtResource("1_v7x2q")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ShopPlaceholderMesh"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ShopPlaceholderMesh/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_fi2ma")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShopPlaceholderMesh/StaticBody3D"]
 
 [node name="ShopArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.818925, 0.271661)
