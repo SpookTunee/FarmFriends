@@ -19,6 +19,10 @@ var plantcount : int = 0
 var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true}
 var isShop : bool = false
 
+var quotaSecond : bool = false
+var addedQuota : float = 0
+var quotaCheck : bool = true
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
 
@@ -134,12 +138,12 @@ func _physics_process(delta):
 			["Wheat","Corn","Potato","Carrot","Mushroom"][tooltip.get_parent().plant_id] + 
 			", " + 
 			str(int(tooltip.get_parent().get_node("Plant/PlantBody/AnimationPlayer").current_animation_position*100)) + 
-			"% Grown"
+			"% Grown, " + str(int(tooltip.get_parent().get_parent().water_level*100)) + "% Watered"
 			)
 		if tooltip.name == "TilledLand":
 			get_node("HUD/ToolTip").text = (
 			str(int(tooltip.get_parent().water_level*100)) + 
-			"% watered"
+			"% Watered"
 			)
 	else:
 		get_node("HUD/ToolTip").text = " "
@@ -270,3 +274,23 @@ func shop():
 				add_child(shp)
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				pause_movement = true
+
+
+func quotacheck():
+	if quotacheck:
+		if Global.get_day_name() == "Sunday" && Global.dayfloat - float(Global.day) > 0.5:
+			quotadue(Global.quotaPrice + addedQuota)
+			quotaCheck = false
+	if Global.get_day_name() != "Sunday":
+		quotaCheck = true
+
+func quotadue(price : float):
+	if $Stats.moneyPaid >= price:
+		addedQuota = 0
+		quotaSecond = false
+	elif quotaSecond != true:
+		#add thing to say you have not reached quota 
+		addedQuota = Global.quotaPrice * 0.5
+	else:
+		#you lose :( by explosion
+		pass
