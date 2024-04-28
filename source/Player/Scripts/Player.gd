@@ -224,6 +224,15 @@ func deposit():
 		$DepositTimer.stop()
 		$DepositTimer.wait_time = 0.5
 		plantcount = 0
+		
+	if Input.is_action_just_pressed("interact"):
+		if $Camera3D.get_child(0).get_collider() != null:
+			if $Camera3D.get_child(0).get_collider().name == "DepositArea":
+				if plantcount > 4:
+					plantcount = 0
+				if $Stats.crop_counts[plantcount] > 0:
+					$Stats.crop_counts[plantcount] -= 1
+					$Stats.money += calcReturn(plantcount)
 
 func _on_deposit_timer_timeout():
 	if $Camera3D.get_child(0).get_collider() != null:
@@ -248,6 +257,8 @@ func _on_deposit_timer_timeout():
 				
 	if $DepositTimer.wait_time > 0:
 		$DepositTimer.wait_time *= 0.90
+	
+
 
 func calcReturn(plantcount) -> float:
 	if plantcount == 0:
@@ -274,6 +285,8 @@ func shop():
 				add_child(shp)
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				pause_movement = true
+
+			
 
 
 func quotacheck():
