@@ -6,7 +6,7 @@ var ticks = 0
 
 var SPEED = 5.0
 @export var JUMP_VELOCITY = 8.5
-var camera_sense = 0.004
+var camera_sense = 0.002
 var camera_sense_multiplier = 1.0
 @onready var Hand = $Camera3D/Hand
 var hoe = preload("res://Tools/Hoe.tscn")
@@ -224,6 +224,15 @@ func deposit():
 		$DepositTimer.stop()
 		$DepositTimer.wait_time = 0.5
 		plantcount = 0
+		
+	if Input.is_action_just_pressed("interact"):
+		if $Camera3D.get_child(0).get_collider() != null:
+			if $Camera3D.get_child(0).get_collider().name == "DepositArea":
+				if plantcount > 4:
+					plantcount = 0
+				if $Stats.crop_counts[plantcount] > 0:
+					$Stats.crop_counts[plantcount] -= 1
+					$Stats.money += calcReturn(plantcount)
 
 func _on_deposit_timer_timeout():
 	if $Camera3D.get_child(0).get_collider() != null:
@@ -248,6 +257,8 @@ func _on_deposit_timer_timeout():
 				
 	if $DepositTimer.wait_time > 0:
 		$DepositTimer.wait_time *= 0.90
+	
+
 
 func calcReturn(plantcount) -> float:
 	if plantcount == 0:
@@ -274,6 +285,8 @@ func shop():
 				add_child(shp)
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				pause_movement = true
+
+			
 
 
 func quotacheck():
