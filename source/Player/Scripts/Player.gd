@@ -169,7 +169,8 @@ func _physics_process(delta):
 	move_and_slide()
 	deposit()
 	shop()
-	
+	#quotacheck()
+	payQuota()
 
 func mov_sprint(delta):
 	if Input.is_action_pressed("sprint"):
@@ -307,3 +308,16 @@ func quotadue(price : float):
 	else:
 		#you lose :( by explosion
 		pass
+
+
+func payQuota():
+	if Input.is_action_just_pressed("interact"):
+		if $Camera3D.get_child(0).get_collider() != null:
+			if $Camera3D.get_child(0).get_collider().name == "QuotaArea":
+				if $Stats.money <= Global.quotaPrice - $Stats.moneyPaid:
+					$Stats.moneyPaid += $Stats.money
+					$Stats.money = 0
+				else:
+					var due = Global.quotaPrice - $Stats.moneyPaid
+					$Stats.money -= due
+					$Stats.moneyPaid += due

@@ -148,11 +148,11 @@ visible = false
 visible = false
 shape = SubResource("ConcavePolygonShape3D_j65no")
 
-[node name="DepositArea" type="Area3D" parent="."]
+[node name="QuotaArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.924034, 0, 0)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DepositArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="QuotaArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.81185, -0.319826, -0.0497814)
 shape = SubResource("BoxShape3D_f4xsc")
 
