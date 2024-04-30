@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bopp4yqi2le1q"]
+
+[ext_resource type="Script" path="res://Farming/Scripts/farm_zone.gd" id="1_kqrao"]
+
+[node name="FarmZone" type="Area3D"]
+script = ExtResource("1_kqrao")
