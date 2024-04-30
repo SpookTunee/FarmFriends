@@ -1,4 +1,4 @@
-extends Node3D
+extends Area3D
 
 @export var property_owner: Node3D
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_type : int = 0

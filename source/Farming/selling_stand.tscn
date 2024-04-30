@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbjmwx2ytbshu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ado6v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rsqx1"]
+size = Vector3(1.5, 1, 0.5)
+
+[node name="SellingStand" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.04, 0, 0, 0, 0.311033, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_ado6v")
+
+[node name="DepositArea" type="Area3D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DepositArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.25)
+shape = SubResource("BoxShape3D_rsqx1")
