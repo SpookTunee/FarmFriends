@@ -9,12 +9,11 @@ void vertex() {
 }
 
 void fragment() {
-	vec3 falb = vec3(0.03,0.1,0.002);
+	vec3 falb = vec3(0.03,0.13,0.0);
 	vec3 nalb = vec3(0.1,0.1,0.2);
-	vec3 lalb = vec3(0.2,0.2,0.1);
 	if (pos.y < 1.0) {
-		if (pos.y >= 0.45) {
-			ALBEDO = lalb;
+		if (pos.y > 0.0) {
+			ALBEDO = falb;
 		}
 		else if (pos.y >= -1.0){
 			nalb *= ((-1.0)*pos.y);
