@@ -28,6 +28,7 @@ var gravity = 10.0
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
+	get_node("/root/World/Fence").start()
 
 func _ready():
 	if not is_multiplayer_authority():

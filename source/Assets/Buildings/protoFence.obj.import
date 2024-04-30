@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ce63y1h0k1v84"
+path="res://.godot/imported/protoFence.obj-7b4c8317a080ba93291a4f3ad33821ce.mesh"
+
+[deps]
+
+files=["res://.godot/imported/protoFence.obj-7b4c8317a080ba93291a4f3ad33821ce.mesh"]
+
+source_file="res://Assets/Buildings/protoFence.obj"
+dest_files=["res://.godot/imported/protoFence.obj-7b4c8317a080ba93291a4f3ad33821ce.mesh", "res://.godot/imported/protoFence.obj-7b4c8317a080ba93291a4f3ad33821ce.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
