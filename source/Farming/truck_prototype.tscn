@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://8rucd3btna6i"]
 
 [ext_resource type="Script" path="res://Farming/Scripts/truck_prototype.gd" id="1_xm525"]
-[ext_resource type="ArrayMesh" uid="uid://b7ie3l3xqml57" path="res://Assets/TRUE TRUCK.obj" id="2_4olc3"]
-[ext_resource type="Texture2D" uid="uid://oeku5arojl58" path="res://Assets/download.jpeg" id="3_l8p52"]
-[ext_resource type="ArrayMesh" uid="uid://j5qti0xslvxc" path="res://Assets/tire.obj" id="3_rihim"]
+[ext_resource type="ArrayMesh" uid="uid://b7ie3l3xqml57" path="res://Assets/Vehicles/TRUE TRUCK.obj" id="2_4olc3"]
+[ext_resource type="Texture2D" uid="uid://oeku5arojl58" path="res://Assets/Vehicles/download.jpeg" id="3_l8p52"]
+[ext_resource type="ArrayMesh" uid="uid://j5qti0xslvxc" path="res://Assets/Vehicles/tire.obj" id="3_rihim"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g52p7"]
 
