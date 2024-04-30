@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://beqbayfw32u85"]
+[gd_scene load_steps=12 format=3 uid="uid://beqbayfw32u85"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_os5jd"]
 [ext_resource type="Script" path="res://Player/Scripts/Stats.gd" id="2_235ld"]
+[ext_resource type="ArrayMesh" uid="uid://ch07l8d3wtasp" path="res://Assets/Player/player.obj" id="3_aa578"]
+[ext_resource type="Texture2D" uid="uid://c65wdgt6hb24n" path="res://Assets/Player/Manface.png" id="4_06gp4"]
 [ext_resource type="PackedScene" uid="uid://dux8g5ei8hovm" path="res://Tools/Hoe.tscn" id="4_ovib2"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrk0f"]
@@ -17,7 +19,8 @@ properties/2/path = NodePath("Camera3D:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_78iyh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpjd2"]
+albedo_texture = ExtResource("4_06gp4")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5t3x"]
 radius = 0.601029
@@ -44,8 +47,9 @@ replication_config = SubResource("SceneReplicationConfig_mrk0f")
 replication_config = SubResource("SceneReplicationConfig_k4e8j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_78iyh")
+transform = Transform3D(-1.04, 3.62738e-16, -9.09197e-08, 3.62738e-16, 1.04, -3.62738e-16, 9.09197e-08, -3.62738e-16, -1.04, 0, -0.0518808, 0)
+mesh = ExtResource("3_aa578")
+surface_material_override/0 = SubResource("StandardMaterial3D_jpjd2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00005, 0)
