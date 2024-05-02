@@ -1,24 +1,43 @@
-extends Path3D
-var fence = preload("res://Assets/Buildings/protoFence.obj")
+extends Node
+var fenc = preload("res://Farming/fence.tscn")
 
-func start():
-	var pf = get_node("PathFollow3D")
-	pf.progress_ratio = 1.0
-	var l = pf.progress
-	pf.progress_ratio = 0.0
-	l = l*.90
-	for i in range(int(l)):
-		pf.progress_ratio = (float(i)/float(l))
-		var b = MeshInstance3D.new()
-		b.mesh = fence
-		var Look = RayCast3D.new()
-		Look.target_position = Vector3(0,-30,0)
-		Look.collision_mask = 2
-		Look.position = pf.position
-		get_node("root/World").add_child(Look)
-		if Look.get_collider() && (Look.get_collider().name == "Terrain"):
-			print(Look.get_collision_point())
-			b.position = Look.get_collision_point()
-			b.rotation = Look.get_collision_normal()
-			add_child(b)
-		Look.queue_free()
+var cs = []
+var prev = []
+var pim = []
+var prog = []
+var max = [] 
+
+func _ready():
+	for i in get_children():
+		var pf = i.get_node("PathFollow3D")
+		pf.progress_ratio = 1.0
+		max.append(int(pf.progress)*0.84)
+		pf.progress_ratio = 0.0
+		prev.append(null)
+		pim.append(true)
+		prog.append(0)
+		cs.append(i)
+
+func step(i):
+	
+	var b = fenc.instantiate()
+	var Look = cs[i].get_node("PathFollow3D/RayCast3D")
+	var pf = cs[i].get_node("PathFollow3D")
+	if Look.get_collider() && (Look.get_collider().name == "Terrain"):
+		b.position = Look.get_collision_point()
+		if prev[i]:
+			b.look_at_from_position(b.position,prev[i].position)
+			if pim[i]:
+				pim[i] = false
+				prev[i].rotation = b.rotation
+		#b.rotation = Look.get_collision_normal() + Vector3(0,b.rotation.y,0)
+		get_node("/root/World/Fences").add_child(b)
+		prev[i] = b
+	pf.progress_ratio = float(prog[i])/float(max[i])
+	prog[i] += 1
+	
+
+func _physics_process(delta):
+	for i in range(len(cs)):
+		if prog[i] > max[i]: continue
+		step(i)

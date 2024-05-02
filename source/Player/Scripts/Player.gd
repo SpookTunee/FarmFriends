@@ -28,7 +28,6 @@ var gravity = 10.0
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
-	get_node("/root/World/Fence").start()
 
 func _ready():
 	if not is_multiplayer_authority():
@@ -114,7 +113,8 @@ func _physics_process(delta):
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	ticks += 1
-	
+	if Input.is_action_just_pressed("ui_down"):
+		get_node("/root/World/Fence").start()
 	
 	if Input.is_action_just_pressed("menu"):
 		if get_node_or_null("ShopMenu"):

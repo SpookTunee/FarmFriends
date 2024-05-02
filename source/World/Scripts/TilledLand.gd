@@ -6,8 +6,8 @@ var till_count = 0
 var tillposs = []
 
 @rpc("any_peer","call_remote","reliable")
-func spawn_till(count,pos):
-	instant_till(multiplayer.get_remote_sender_id(),count,pos)
+func spawn_till(count,pos,rot):
+	instant_till(multiplayer.get_remote_sender_id(),count,pos,rot)
 	
 @rpc("any_peer","call_remote","reliable")
 func grow_plant(id: String, plant: int):
@@ -17,7 +17,7 @@ func grow_plant(id: String, plant: int):
 func harvest_plant(id: String):
 	get_node(id).harvest()
 	
-func instant_till(id,count,pos):
+func instant_till(id,count,pos,rot):
 	till_count += 1
 	var till = tilledLand.instantiate()
 	till.name = "mpSpawned_" + str(id) + "_till_" + str(count)
@@ -26,3 +26,4 @@ func instant_till(id,count,pos):
 	till.get_node("CSGTorus3D").material = mat
 	get_node("/root/World/TilledLand").add_child(till)
 	till.position = pos
+	till.rotation = rot
