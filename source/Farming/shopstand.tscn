@@ -58,3 +58,14 @@ surface_material_override/1 = SubResource("StandardMaterial3D_uymii")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
 shape = SubResource("ConcavePolygonShape3D_vhiyn")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, -6.97574e-16, 4.15924e-24, 4.15924e-24, 1.19249e-08, 1, -6.97574e-16, -1, 1.19249e-08, 0.0105521, 1.29306, -0.137253)
+light_color = Color(1, 0.741176, 0.258824, 1)
+light_energy = 1.404
+light_size = 0.606
+shadow_enabled = true
+spot_range = 3.24495
+spot_attenuation = 2.14355
+spot_angle = 63.9246
+spot_angle_attenuation = 0.870551

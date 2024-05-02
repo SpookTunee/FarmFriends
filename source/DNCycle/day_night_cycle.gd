@@ -21,3 +21,9 @@ func _process(delta):
 	$DirectionalLight3D3.light_energy = 1+(cos(-($DirectionalLight3D.rotation.x))/2) * 1.5 + 0.8
 	if $DirectionalLight3D.rotation.x >= 2*PI:
 		$DirectionalLight3D.rotation.x = 0
+		
+		
+		
+	
+	if Global.get_day_name() == "Monday" && (Global.dayfloat - float(Global.day)) < delta && Global.day > 3:
+		Global.quotaPrice * 1.1
