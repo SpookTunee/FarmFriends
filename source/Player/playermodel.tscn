@@ -8,5 +8,30 @@ albedo_texture = ExtResource("2_holoo")
 
 [node name="player" instance=ExtResource("1_cagvo")]
 
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(-0.000206321, 0.650303, -0.00868388)
+bones/0/rotation = Quaternion(0, 0.0448171, 0, 0.998995)
+bones/1/rotation = Quaternion(0.0510397, 0.00319445, 0.000163257, 0.998692)
+bones/2/rotation = Quaternion(0.920841, 0.310365, -0.217762, -0.0911302)
+bones/3/rotation = Quaternion(0.0121772, 0.00933116, 0.344181, 0.938778)
+bones/4/rotation = Quaternion(0.960268, -0.0208147, 0.0423559, 0.27506)
+bones/4/scale = Vector3(1, 1, 1.0001)
+bones/5/rotation = Quaternion(0.343986, -0.00133251, -0.0154084, 0.938848)
+bones/5/scale = Vector3(1, 0.99999, 1.00001)
+bones/6/rotation = Quaternion(-0.554141, -0.312687, 0.243849, 0.73191)
+bones/6/scale = Vector3(1.00001, 1.00003, 0.999993)
+bones/7/rotation = Quaternion(0.884015, -0.235611, 0.314526, 0.253139)
+bones/8/rotation = Quaternion(0.026863, 0.0552462, -0.471443, 0.879755)
+bones/9/rotation = Quaternion(0.994036, 0.0134839, 0.0414138, 0.0999805)
+bones/9/scale = Vector3(1, 1.00001, 1.00009)
+bones/10/rotation = Quaternion(0.380443, 0.00131243, 0.0170415, 0.924647)
+bones/10/scale = Vector3(1, 0.999983, 1.00001)
+bones/11/rotation = Quaternion(-0.703576, 0.259033, -0.297185, 0.591238)
+bones/11/scale = Vector3(1.00001, 1.00002, 0.999999)
+bones/13/position = Vector3(0.0996383, 0.066907, 0.082625)
+bones/13/rotation = Quaternion(-0.50141, -0.498586, 0.498586, 0.50141)
+bones/15/position = Vector3(-0.0996383, 0.066907, -0.154236)
+bones/15/rotation = Quaternion(-0.50141, 0.498586, -0.498586, 0.50141)
+
 [node name="Cube" parent="Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_5j25k")
