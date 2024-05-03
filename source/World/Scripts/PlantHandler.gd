@@ -26,8 +26,8 @@ func handle_plant_growing(gon):
 	if gon:
 		for tland in get_node("../TilledLand").get_children():
 			if tland.get_node_or_null("PLANT"):
-				tland.get_node("PLANT").start_grow()
+				tland.get_node("PLANT").dnmod(true)
 	else:
 		for tland in get_node("../TilledLand").get_children():
 			if tland.get_node_or_null("PLANT"):
-				tland.get_node("PLANT").stop_grow()
+				tland.get_node("PLANT").dnmod(false)

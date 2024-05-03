@@ -24,6 +24,7 @@ var is_in_preffered_terrain: int = 0  #1=true, 0=false, -1=bad terrain
 var start_grow_time: float = 0.0
 var actual_grow_time: float = 0.0
 var default_growth_modifier: float = 0.0
+var external_growth_rate_modifier: float = 1.0
 
 
 
@@ -51,7 +52,14 @@ func _ready():
 	$Plant/PlantBody/AnimationPlayer.pause()
 
 func water_change():
-	$Plant/PlantBody/AnimationPlayer.speed_scale = default_growth_modifier*get_parent().water_level
+	$Plant/PlantBody/AnimationPlayer.speed_scale = default_growth_modifier*get_parent().water_level*external_growth_rate_modifier
+
+func dnmod(d):
+	if d:
+		external_growth_rate_modifier = 1.05
+	else:
+		external_growth_rate_modifier = 0.45
+	water_change()
 
 func start_grow():
 	if $Plant/PlantBody/AnimationPlayer.current_animation_position != 1.0:
