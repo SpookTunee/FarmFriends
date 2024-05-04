@@ -202,18 +202,27 @@ func mov_hands():
 		Hand.get_child(0).activate()
 
 
-
+@rpc("call_remote","any_peer","reliable")
 func mov_dirs():
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
+		walk_animation.rpc()
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
+		idle_animation.rpc()
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
+		
+@rpc("call_local","any_peer","reliable")
+func walk_animation():
+	$Node3D/AnimationPlayer.play("walk")
 
+@rpc("call_local","any_peer","reliable")
+func idle_animation():
+	$Node3D/AnimationPlayer.play("idle")
 
 func deposit():
 
