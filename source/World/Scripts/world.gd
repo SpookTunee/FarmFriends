@@ -53,7 +53,7 @@ func _on_host_pressed():
 	enet_peer.create_server(port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
-	
+	multiplayer.peer_disconnected.connect(on_host_disconnect)
 	add_player(multiplayer.get_unique_id())
 	
 	#upnp_settup()
@@ -86,6 +86,7 @@ func _on_join_pressed():
 @rpc("any_peer", "call_remote", "unreliable")
 func remove_player():
 	var player = get_node_or_null("mpSpawned_" + str(multiplayer.get_remote_sender_id()))
+	print(player)
 	if player:
 		Global.players.erase(player)
 		player.queue_free()
