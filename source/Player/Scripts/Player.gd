@@ -153,10 +153,12 @@ func _physics_process(delta):
 	if !pause_movement:
 		$Camera3D.make_current()
 		# Add the gravity.
-
+		
 		# Handle jump.
+
 		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
+			jump_animation.rpc()
 		
 		mov_sprint(delta)
 		mov_dirs()
@@ -212,11 +214,15 @@ func mov_dirs():
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		walk_animation.rpc()
+		if is_on_floor():
+			$Node3D/AnimationPlayer2.stop()
+			walk_animation.rpc()
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
-		idle_animation.rpc()
+		if is_on_floor():
+			$Node3D/AnimationPlayer2.stop()
+			idle_animation.rpc()
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
@@ -229,6 +235,9 @@ func walk_animation():
 func idle_animation():
 	$Node3D/AnimationPlayer.play("idle")
 
+@rpc("call_local","any_peer","reliable")
+func jump_animation():
+	$Node3D/AnimationPlayer2.play("jump")
 func deposit():
 
 	if Input.is_action_just_pressed("interact"):
