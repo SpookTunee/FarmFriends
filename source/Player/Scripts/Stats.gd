@@ -8,7 +8,7 @@ extends Node
 	Global.Plants.MUSHROOM : 0,
 	}
 	
-@export var money : float = 0
+@export var money : float = 10000
 
 
 @export var moneyPaid : float = 0

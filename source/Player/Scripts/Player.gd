@@ -22,6 +22,9 @@ var isShop : bool = false
 var quotaSecond : bool = false
 var addedQuota : float = 0
 var quotaCheck : bool = true
+var addCheck : bool = false
+var plsCheck : bool = true
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 10.0
@@ -168,8 +171,10 @@ func _physics_process(delta):
 	move_and_slide()
 	deposit()
 	shop()
-	#quotacheck()
+	if Global.day > 1:
+		quotacheck(delta)
 	payQuota()
+
 
 func mov_sprint(delta):
 	if Input.is_action_pressed("sprint"):
@@ -298,34 +303,54 @@ func shop():
 			
 
 
-func quotacheck():
-	if quotacheck:
-		if Global.get_day_name() == "Sunday" && Global.dayfloat - float(Global.day) > 0.5:
-			quotadue(Global.quotaPrice + addedQuota)
-			quotaCheck = false
+func quotacheck(delta):
 	if Global.get_day_name() != "Sunday":
 		quotaCheck = true
-
-func quotadue(price : float):
-	if $Stats.moneyPaid >= price:
+		
+	if Global.get_day_name() == "Monday":
+		plsCheck = true
+	
+	if Global.get_day_name() == "Monday" && (Global.dayfloat - float(Global.day)) < delta && quotaSecond == false:
+		addCheck = false
 		addedQuota = 0
-		quotaSecond = false
+	
+	if quotacheck:
+		if Global.get_day_name() == "Sunday" && (Global.dayfloat - float(Global.day)) < delta:
+			quotadue(Global.quotaPrice + addedQuota, delta)
+			quotaCheck = false
+	
+	if Global.get_day_name() == "Monday" && (Global.dayfloat - float(Global.day)) < delta:
+		$Stats.moneyPaid = 0
+	
+
+func quotadue(price : float, delta):
+	if $Stats.moneyPaid >= price:
+		if plsCheck:
+			plsCheck = false
+			addCheck = true
+			quotaSecond = false
+			print("Quota reached mfs")
 	elif quotaSecond != true:
-		#add thing to say you have not reached quota 
-		addedQuota = Global.quotaPrice * 0.5
+		if plsCheck:
+			plsCheck = false
+			print("Quota not reached")
+			#add thing to say you have not reached quota 
+			addedQuota = Global.quotaPrice * 0.5
+			quotaSecond = true
 	else:
+		print("You dieded")
 		#you lose :( by explosion
-		pass
+	
 
 
 func payQuota():
 	if Input.is_action_just_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
 			if $Camera3D.get_child(0).get_collider().name == "QuotaArea":
-				if $Stats.money <= Global.quotaPrice - $Stats.moneyPaid:
+				if $Stats.money <= Global.quotaPrice + addedQuota - $Stats.moneyPaid:
 					$Stats.moneyPaid += $Stats.money
 					$Stats.money = 0
 				else:
-					var due = Global.quotaPrice - $Stats.moneyPaid
+					var due = Global.quotaPrice + addedQuota - $Stats.moneyPaid
 					$Stats.money -= due
 					$Stats.moneyPaid += due
