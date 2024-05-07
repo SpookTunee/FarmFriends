@@ -36,7 +36,7 @@ func ready():
 	$"Menu/Control/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
 	
 
-func on_host_disconnect():
+func on_host_disconnect(e):
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 	menu.show()
