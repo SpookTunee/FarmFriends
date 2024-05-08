@@ -106,12 +106,14 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
 offset_left = 22.0
 offset_right = 2564.0
 offset_bottom = 417.0
+scale = Vector2(0.495042, 0.495042)
 theme_override_colors/font_color = Color(0.760784, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 70
@@ -121,73 +123,72 @@ text = "Farm Frenzy"
 autowrap_mode = 2
 text_overrun_behavior = 1
 
-[node name="Host" type="Button" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 16.417
+anchor_right = 16.533
+anchor_bottom = 27.805
+offset_left = 6.0
+offset_top = -598.68
+offset_right = 564.68
+offset_bottom = -354.2
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.622333, 0.622333)
+pivot_offset = Vector2(2.08165e-12, 750)
+theme_override_constants/separation = 10
+
+[node name="Host" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
-offset_left = 49.0
-offset_top = 859.0
-offset_right = 1308.0
-offset_bottom = 965.0
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("7_pxltr")
 theme_override_font_sizes/font_size = 81
 text = "Host"
 
-[node name="Your Ip" type="LineEdit" parent="Control"]
+[node name="Your Ip" type="LineEdit" parent="Control/VBoxContainer"]
 layout_mode = 2
-offset_left = 49.0
-offset_top = 978.0
-offset_right = 1305.0
-offset_bottom = 1086.0
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("7_pxltr")
 theme_override_font_sizes/font_size = 80
 placeholder_text = "Your Local IP: "
 alignment = 1
 editable = false
 
-[node name="Your Ip2" type="LineEdit" parent="Control"]
+[node name="Your Ip2" type="LineEdit" parent="Control/VBoxContainer"]
 layout_mode = 2
-offset_left = 56.0
-offset_top = 1229.0
-offset_right = 1301.0
-offset_bottom = 1338.0
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("7_pxltr")
 theme_override_font_sizes/font_size = 80
 placeholder_text = "Global IP Not Found "
 alignment = 1
 editable = false
 
-[node name="Join" type="Button" parent="Control"]
+[node name="IPEntry" type="LineEdit" parent="Control/VBoxContainer"]
 layout_mode = 2
-offset_left = 52.0
-offset_top = 1341.0
-offset_right = 1301.0
-offset_bottom = 1446.0
-theme_override_fonts/font = ExtResource("7_pxltr")
-theme_override_font_sizes/font_size = 80
-text = "Join"
-
-[node name="IPEntry" type="LineEdit" parent="Control"]
-layout_mode = 2
-offset_left = 54.0
-offset_top = 1102.0
-offset_right = 1302.0
-offset_bottom = 1211.0
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("7_pxltr")
 theme_override_font_sizes/font_size = 80
 placeholder_text = "Enter IP"
 alignment = 1
 
-[node name="Quit" type="Button" parent="Control"]
+[node name="Join" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
-offset_left = 48.0
-offset_top = 1465.0
-offset_right = 1307.0
-offset_bottom = 1571.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("7_pxltr")
+theme_override_font_sizes/font_size = 80
+text = "Join"
+
+[node name="Quit" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("7_pxltr")
 theme_override_font_sizes/font_size = 81
 text = "Quit"
 
-[connection signal="pressed" from="Control/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Control/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 
 [editable path="grass"]

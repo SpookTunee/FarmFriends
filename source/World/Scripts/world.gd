@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var menu = $Menu
-@onready var ip = $Menu/Control/IPEntry
+@onready var ip = $Menu/Control/VBoxContainer/IPEntry
 
 const tilLand = preload("res://Farming/tilled_land.tscn")
 const Player = preload("res://Player/player.tscn")
@@ -26,14 +26,14 @@ func disconnect_from_server():
 		$Terrain.hide()
 		$WaterPlane.hide()
 		$DayNightCycle.hide()
-		$"Menu/Control/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+		$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
 
 func ready():
 	$Menu/Camera3D.current = true
 	$Terrain.hide()
 	$WaterPlane.hide()
 	$DayNightCycle.hide()
-	$"Menu/Control/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+	$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
 	
 
 func on_host_disconnect(e):
@@ -109,7 +109,7 @@ func remove_player_callback():
 	$Terrain.hide()
 	$WaterPlane.hide()
 	$DayNightCycle.hide()
-	$"Menu/Control/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+	$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
  
 func add_player(id):
 	var player = Player.instantiate()
