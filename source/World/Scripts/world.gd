@@ -7,6 +7,7 @@ const tilLand = preload("res://Farming/tilled_land.tscn")
 const Player = preload("res://Player/player.tscn")
 var port = 6009
 var enet_peer = ENetMultiplayerPeer.new()
+var zone_count = 1
 
 func disconnect_from_server():
 	if Global.players.size() > 1:
@@ -120,6 +121,8 @@ func add_player(id):
 		player.get_node("Camera3D").current = true
 	add_child(player)
 	Global.players.append(player)
+	get_node("zones").get_children()[zone_count].property_owner = player
+	zone_count += 1
 
 func upnp_settup():
 	var upnp = UPNP.new()

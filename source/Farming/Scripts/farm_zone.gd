@@ -1,5 +1,6 @@
 extends Area3D
 
+@export var zone_name: String
 @export var property_owner: Node3D
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_type : int = 0
 @export var farmable: bool = true
