@@ -28,7 +28,7 @@ var plsCheck : bool = true
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = 10.0
+var gravity = 20.0
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
