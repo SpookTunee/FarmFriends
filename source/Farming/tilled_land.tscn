@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxsw5lvqdwoew"]
+[gd_scene load_steps=6 format=3 uid="uid://bxsw5lvqdwoew"]
 
 [ext_resource type="Script" path="res://Farming/Scripts/tilled_land.gd" id="1_ika8j"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="2_w4s2e"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="3_hnewo"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_b4650"]
 height = 0.3
 radius = 0.75
+
+[sub_resource type="Resource" id="Resource_r5o2j"]
+script = ExtResource("3_hnewo")
+radius = 0.77806
 
 [node name="TilledLand" type="Node3D"]
 script = ExtResource("1_ika8j")
@@ -21,3 +27,8 @@ inner_radius = 0.082
 outer_radius = 0.75
 sides = 7
 ring_sides = 7
+
+[node name="ScatterShape" type="Node3D" parent="."]
+script = ExtResource("2_w4s2e")
+negative = true
+shape = SubResource("Resource_r5o2j")
