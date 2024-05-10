@@ -1,4 +1,5 @@
-extends Node
+extends Node3D
+
 var fenc = preload("res://Farming/fence.tscn")
 
 var cs = []
