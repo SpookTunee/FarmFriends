@@ -4,6 +4,7 @@ extends CharacterBody3D
 var sprinting = false
 var ticks = 0
 
+@export var zone = 1
 var SPEED = 5.0
 @export var JUMP_VELOCITY = 8.5
 var camera_sense = 0.002
@@ -25,6 +26,7 @@ var addedQuota : float = 0
 var quotaCheck : bool = true
 var addCheck : bool = false
 var plsCheck : bool = true
+var canFarm: bool = false
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -117,6 +119,12 @@ func _physics_process(delta):
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	ticks += 1
+
+	var zones = get_node("/root/World/zones").get_children()
+	for i in zones:
+		if (i.property_owner == null) || (i.property_owner == self):
+			if $Hitbox.overlaps_area(i):
+				canFarm = i.farmable
 
 	if Input.is_action_just_pressed("menu"):
 		if get_node_or_null("ShopMenu"):
@@ -211,6 +219,7 @@ func mov_hands():
 		if isunlocked["4"]:
 			switch_hand.rpc(4)
 			switch_hand(4)
+	if !canFarm: return
 	if Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
