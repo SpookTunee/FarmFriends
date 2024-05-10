@@ -841,21 +841,21 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(0.99998, 0, 0.0063972, 0.000721294, 0.993623, -0.112749, -0.00635641, 0.112751, 0.993603, 0, 0.675051, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.675051, 0)
-bones/1/rotation = Quaternion(-0.113951, 0.00317778, -0.000364488, 0.993481)
+bones/1/rotation = Quaternion(0.0510397, 0.00319445, 0.000163257, 0.998691)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "upperarm.l"
 bones/2/parent = 0
 bones/2/rest = Transform3D(0.51924, 0.845837, -0.122267, 0.569828, -0.449268, -0.68808, -0.636934, 0.287608, -0.71526, 0.19431, 0.599431, -0.0293938)
 bones/2/enabled = true
 bones/2/position = Vector3(0.19431, 0.599431, -0.0293938)
-bones/2/rotation = Quaternion(0.871066, 0.378368, -0.26363, 0.169057)
+bones/2/rotation = Quaternion(0.916215, 0.249937, -0.285093, 0.129627)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "lowerarm.l"
 bones/3/parent = 2
 bones/3/rest = Transform3D(0.821664, -0.568882, 0.0352306, 0.566106, 0.821717, 0.0656059, -0.0662717, -0.0339617, 0.997223, 1.19209e-07, 0.389531, -3.35276e-08)
 bones/3/enabled = true
 bones/3/position = Vector3(1.19209e-07, 0.389531, -3.35276e-08)
-bones/3/rotation = Quaternion(-0.0194085, 0.168789, 0.186379, 0.967676)
+bones/3/rotation = Quaternion(-0.0454532, -0.00741024, 0.372291, 0.926973)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "upperleg.l"
 bones/4/parent = 0
@@ -883,14 +883,14 @@ bones/7/parent = 0
 bones/7/rest = Transform3D(0.519241, -0.845837, 0.122267, -0.569828, -0.449268, -0.68808, 0.636935, 0.287608, -0.71526, -0.193898, 0.599431, -0.0293938)
 bones/7/enabled = true
 bones/7/position = Vector3(-0.193898, 0.599431, -0.0293938)
-bones/7/rotation = Quaternion(0.829847, -0.461814, 0.245817, 0.194051)
+bones/7/rotation = Quaternion(0.909259, -0.274166, 0.281553, 0.137148)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "lowerarm.r"
 bones/8/parent = 7
 bones/8/rest = Transform3D(0.821664, 0.568882, -0.0352308, -0.566106, 0.821718, 0.0656059, 0.0662718, -0.0339616, 0.997223, -6.33299e-08, 0.389532, -3.72529e-09)
 bones/8/enabled = true
 bones/8/position = Vector3(-6.33299e-08, 0.389532, -3.72529e-09)
-bones/8/rotation = Quaternion(-0.016953, -0.0775884, -0.307161, 0.948338)
+bones/8/rotation = Quaternion(0.026863, 0.0552462, -0.471443, 0.879755)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "upperleg.r"
 bones/9/parent = 0
@@ -972,5 +972,9 @@ speed_scale = 3.0
 libraries = {
 "": SubResource("AnimationLibrary_5bkn8")
 }
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
 
 [connection signal="timeout" from="DepositTimer" to="." method="_on_deposit_timer_timeout"]

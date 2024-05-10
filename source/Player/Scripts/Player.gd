@@ -19,6 +19,7 @@ var plantcount : int = 0
 var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true}
 var isShop : bool = false
 
+var jumping : bool = false
 var quotaSecond : bool = false
 var addedQuota : float = 0
 var quotaCheck : bool = true
@@ -73,12 +74,11 @@ func request_mp_spawned_callback(mps):
 			till.add_child(plant)
 		get_node("/root/World/TilledLand").add_child(till)
 	
-func _unhandled_input(event):
+func _input(event):
 	if not is_multiplayer_authority(): 
 		return
 	if pause_movement: return
 	var ncams = camera_sense * camera_sense_multiplier
-	print(event)
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * ncams)
 		$Camera3D.rotate_x(-event.relative.y * ncams)
@@ -117,15 +117,17 @@ func _physics_process(delta):
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	ticks += 1
-	
-	if Input.is_action_just_pressed("ui_down"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 	if Input.is_action_just_pressed("menu"):
 		if get_node_or_null("ShopMenu"):
 			get_node("ShopMenu").queue_free()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			pause_movement = false
 		elif !get_node_or_null("Menu"):
+			$Node3D/AnimationPlayer.stop()
+			if not is_on_floor():
+				$Node3D/AnimationPlayer2.stop()
+				idle_animation.rpc()
 			var mnu = load("res://Menus/menu.tscn").instantiate()
 			mnu.name = "Menu"
 			add_child(mnu)
@@ -156,11 +158,12 @@ func _physics_process(delta):
 	if !pause_movement:
 		$Camera3D.make_current()
 		# Add the gravity.
-		
 		# Handle jump.
 
-		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		if (Input.is_action_just_pressed("jump") and is_on_floor()):
+			$JumpTimer.start()
 			velocity.y = JUMP_VELOCITY
+		if (Input.is_action_just_pressed("jump") and is_on_floor()) or not $JumpTimer.is_stopped():
 			jump_animation.rpc()
 		
 		mov_sprint(delta)
@@ -217,12 +220,12 @@ func mov_dirs():
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		if is_on_floor() and ($Node3D/AnimationPlayer.current_animation != "walk" or $Node3D/AnimationPlayer2.current_animation != "walk"):
+		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "walk")):
 			walk_animation.rpc()
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
-		if is_on_floor() and ($Node3D/AnimationPlayer.current_animation != "idle" or $Node3D/AnimationPlayer2.current_animation != "idle"):
+		if is_on_floor() and ((not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation != "idle"))):
 			idle_animation.rpc()
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
@@ -230,21 +233,21 @@ func mov_dirs():
 		
 @rpc("call_local","any_peer","reliable")
 func walk_animation():
-	if $Node3D/AnimationPlayer.current_animation != "walk" or $Node3D/AnimationPlayer2.current_animation != "walk":
+	if (not ($Node3D/AnimationPlayer.current_animation == "walk")):
 		$Node3D/AnimationPlayer2.stop()
 		$Node3D/AnimationPlayer.stop()
 	$Node3D/AnimationPlayer.play("walk")
 
 @rpc("call_local","any_peer","reliable")
 func idle_animation():
-	if $Node3D/AnimationPlayer.current_animation != "idle" or $Node3D/AnimationPlayer2.current_animation != "idle":
+	if (not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation == "idle")):
 		$Node3D/AnimationPlayer2.stop()
 		$Node3D/AnimationPlayer.stop()
 	$Node3D/AnimationPlayer.play("idle")
 
 @rpc("call_local","any_peer","reliable")
 func jump_animation():
-	if $Node3D/AnimationPlayer.current_animation != "jump" or $Node3D/AnimationPlayer2.current_animation != "jump":
+	if (not ($Node3D/AnimationPlayer2.current_animation == "jump")):
 		$Node3D/AnimationPlayer2.stop()
 		$Node3D/AnimationPlayer.stop()
 	$Node3D/AnimationPlayer2.play("jump")
@@ -313,7 +316,7 @@ func shop():
 	if Input.is_action_just_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
 			if $Camera3D.get_child(0).get_collider().name == "ShopArea":
-				print("hi")
+				
 				var shp = load("res://Menus/shop.tscn").instantiate()
 				shp.name = "ShopMenu"
 				add_child(shp)
