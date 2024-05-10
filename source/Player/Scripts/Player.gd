@@ -4,7 +4,6 @@ extends CharacterBody3D
 var sprinting = false
 var ticks = 0
 
-@export var zone = 1
 var SPEED = 5.0
 @export var JUMP_VELOCITY = 8.5
 var camera_sense = 0.002
@@ -122,8 +121,10 @@ func _physics_process(delta):
 
 	var zones = get_node("/root/World/zones").get_children()
 	for i in zones:
-		if (i.property_owner == null) || (i.property_owner == self):
-			if $Hitbox.overlaps_area(i):
+		if $Hitbox.overlaps_area(i):
+			if i.property_owner != self:
+				canFarm = false
+			else:
 				canFarm = i.farmable
 
 	if Input.is_action_just_pressed("menu"):
