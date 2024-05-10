@@ -67,6 +67,20 @@ func start_grow():
 func stop_grow():
 	if $Plant/PlantBody/AnimationPlayer.current_animation_position != 1.0:
 		$Plant/PlantBody/AnimationPlayer.pause()
+		
+func _process(delta):
+	if $Plant/PlantBody/AnimationPlayer.is_playing() != true:
+		if $Plant/PlantBody.get_child(1) != null:
+			var plantMesh = $Plant/PlantBody.get_child(1)
+			print("hi")
+			print(plantMesh.name)
+			for part in plantMesh.get_child_count():
+				var mat = plantMesh.get_child(part).mesh.get_active_material()
+				print(mat.name)
+				mat.emmision_enabled = true
+				mat.set_emmision(0,0,0,1)
+				mat.emission_energy_multiplier = 1
+
 
 func with_vars(Variables: Dictionary):
 	var n = load("res://Farming/plant_base.tscn").instantiate()
