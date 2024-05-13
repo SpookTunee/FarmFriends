@@ -14,18 +14,21 @@ func disconnect_from_server():
 	print(Global.players)
 	if Global.players.size() > 1:
 		if multiplayer.is_server():
+			multiplayer.multiplayer_peer.close()
+			multiplayer.peer_connected.disconnect(add_player)
 			cleanup()
 		else:
 			remove_player.rpc()
 	else:
 		cleanup()
 
-func ready():
+func _ready():
 	$Menu/Camera3D.current = true
 	$Terrain.hide()
 	$WaterPlane.hide()
 	$DayNightCycle.hide()
 	$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+	#$Terrain/ProtonScatter.enabled = true
 	
 
 func on_host_disconnect():
@@ -69,13 +72,13 @@ func _on_join_pressed():
 	enet_peer = ENetMultiplayerPeer.new()
 	enet_peer.create_client(ip.text, port)
 	multiplayer.multiplayer_peer = enet_peer
+	print(multiplayer.get_unique_id())
 	multiplayer.server_disconnected.connect(on_host_disconnect)
 
 @rpc("any_peer", "call_remote", "reliable")
 func remove_player():
-	print("rplyr")
 	var player = get_node_or_null("mpSpawned_" + str(multiplayer.get_remote_sender_id()))
-	print(player)
+	zone_count -= 1
 	if player:
 		Global.players.erase(player)
 		player.queue_free()
@@ -115,7 +118,6 @@ func upnp_settup():
 	print("Successful UPNP")
 	
 func cleanup():
-	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 	menu.showme()
 	for i in get_children():
