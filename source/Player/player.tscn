@@ -768,7 +768,7 @@ _data = {
 "jump": SubResource("Animation_q6y1q")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 collision_mask = 257
 wall_min_slide_angle = 0.349066

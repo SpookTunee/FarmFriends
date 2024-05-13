@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4yyvd0ufsiax"]
+
+[ext_resource type="Script" path="res://Tools/vacuum.gd" id="1_8gmgr"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xmf2n"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mpo1x"]
+top_radius = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_tb3he"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_46fl2"]
+
+[node name="vacuum" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.226884, 0.323376, 0)
+script = ExtResource("1_8gmgr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.98606e-08, -0.90247, 0, 0.454358, -3.94482e-08, 0, 0, 0, 0.454358, 0, 0, 0)
+mesh = SubResource("CylinderMesh_xmf2n")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-08, -0.3, 0, 0.5, -1.31134e-08, 0, 0, 0, 0.5, 0.857216, 0, 0)
+mesh = SubResource("CylinderMesh_mpo1x")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.104287, 0, 0, 0, 0.56006, 0, 0, 0, 0.0807091, 0.235756, -0.186004, 0)
+mesh = SubResource("BoxMesh_tb3he")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(-1.11464e-07, -2.08, 0, 2.55, -9.09197e-08, 0, 0, 0, 2.55, 3, 0, 0)
+shape = SubResource("CylinderShape3D_46fl2")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
