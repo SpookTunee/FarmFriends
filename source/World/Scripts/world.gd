@@ -10,11 +10,13 @@ var enet_peer = ENetMultiplayerPeer.new()
 var zone_count = 1
 
 func disconnect_from_server():
-	print("a")
+	print(multiplayer.get_unique_id())
+	print(Global.players)
 	if Global.players.size() > 1:
-		print("aa")
 		if multiplayer.is_server():
 			cleanup()
+		else:
+			remove_player.rpc()
 	else:
 		cleanup()
 
@@ -128,6 +130,7 @@ func cleanup():
 	$WaterPlane.hide()
 	$DayNightCycle.hide()
 	$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+	zone_count = 1
 
 
 func _on_quit_pressed():

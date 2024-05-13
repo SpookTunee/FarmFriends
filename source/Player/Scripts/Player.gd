@@ -54,7 +54,10 @@ func request_mp_spawned():
 		else:
 			mpst.append(null)
 	mps["zones"] = mpst
-	
+	mpst = []
+	for i in Global.players:
+		mpst.append(i.name.split("_")[-1])
+	mps["players"] = mpst
 	#var mps = []
 	#for node in get_node("/root/World/TilledLand").get_children():
 		#var sgs = {"has_plant":null}
@@ -77,6 +80,8 @@ func request_mp_spawned_callback(mps):
 		j += 1
 		if !i: continue
 		get_node("/root/World/zones").get_children()[j].property_owner = get_node("/root/World/mpSpawned_" + i)
+	for i in mps["players"]:
+		Global.players.append(get_node("/root/World/mpSpawned_" + i))
 	#var tillI = load("res://Farming/tilled_land.tscn")
 	#for sgs in mps:
 		#var till = tillI.instantiate()
