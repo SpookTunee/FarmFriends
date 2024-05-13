@@ -5,7 +5,6 @@ func _ready():
 
 func _on_quit_pressed():
 	get_node("/root/World/").disconnect_from_server()
-	self.queue_free()
 
 
 func _on_settings_pressed():

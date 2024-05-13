@@ -10,24 +10,15 @@ var enet_peer = ENetMultiplayerPeer.new()
 var zone_count = 1
 
 func disconnect_from_server():
+	print(multiplayer.get_unique_id())
+	print(Global.players)
 	if Global.players.size() > 1:
-		remove_player.rpc()
+		if multiplayer.is_server():
+			cleanup()
+		else:
+			remove_player.rpc()
 	else:
-		multiplayer.multiplayer_peer.close()
-		multiplayer.multiplayer_peer = null
-		menu.showme()
-		for i in get_children():
-			if i.name.begins_with("mpSpawned_"):
-				i.queue_free()
-		for i in get_node("TilledLand").get_children():
-			i.queue_free()
-		Global.players = []
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		$Menu/Camera3D.current = true
-		$Terrain.hide()
-		$WaterPlane.hide()
-		$DayNightCycle.hide()
-		$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+		cleanup()
 
 func ready():
 	$Menu/Camera3D.current = true
@@ -37,14 +28,8 @@ func ready():
 	$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
 	
 
-func on_host_disconnect(e):
-	multiplayer.multiplayer_peer.close()
-	multiplayer.multiplayer_peer = null
-	menu.show()
-	for i in get_children():
-		if i.name.begins_with("mpSpawned_"):
-			i.queue_free()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+func on_host_disconnect():
+	cleanup()
 
 func _on_host_pressed():
 	menu.hideme()
@@ -55,7 +40,7 @@ func _on_host_pressed():
 	enet_peer.create_server(port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
-	multiplayer.peer_disconnected.connect(on_host_disconnect)
+	multiplayer.server_disconnected.connect(on_host_disconnect)
 	add_player(multiplayer.get_unique_id())
 	
 	#upnp_settup()
@@ -86,8 +71,9 @@ func _on_join_pressed():
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.server_disconnected.connect(on_host_disconnect)
 
-@rpc("any_peer", "call_remote", "unreliable")
+@rpc("any_peer", "call_remote", "reliable")
 func remove_player():
+	print("rplyr")
 	var player = get_node_or_null("mpSpawned_" + str(multiplayer.get_remote_sender_id()))
 	print(player)
 	if player:
@@ -96,32 +82,22 @@ func remove_player():
 	if multiplayer.is_server():
 		remove_player_callback.rpc_id(multiplayer.get_remote_sender_id())
 
-@rpc("any_peer","call_remote","unreliable")
+@rpc("any_peer","call_remote","reliable")
+func server_disconnect():
+	on_host_disconnect()
+
+@rpc("any_peer","call_remote","reliable")
 func remove_player_callback():
-	multiplayer.multiplayer_peer.close()
-	multiplayer.multiplayer_peer = null
-	menu.showme()
-	for i in get_children():
-		if i.name.begins_with("mpSpawned_"):
-			i.queue_free()
-	for i in get_node("TilledLand").get_children():
-		i.queue_free()
-	Global.players = []
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	$Menu/Camera3D.current = true
-	$Terrain.hide()
-	$WaterPlane.hide()
-	$DayNightCycle.hide()
-	$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+	cleanup()
  
 func add_player(id):
 	var player = Player.instantiate()
 	player.name = "mpSpawned_" + str(id)
 	if is_multiplayer_authority():
 		player.get_node("Camera3D").current = true
+	get_node("zones").get_children()[zone_count].property_owner = player
 	add_child(player)
 	Global.players.append(player)
-	get_node("zones").get_children()[zone_count].property_owner = player
 	zone_count += 1
 
 func upnp_settup():
@@ -138,3 +114,24 @@ func upnp_settup():
 	
 	print("Successful UPNP")
 	
+func cleanup():
+	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = null
+	menu.showme()
+	for i in get_children():
+		if i.name.begins_with("mpSpawned_"):
+			i.queue_free()
+	for i in get_node("TilledLand").get_children():
+		i.queue_free()
+	Global.players = []
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	$Menu/Camera3D.current = true
+	$Terrain.hide()
+	$WaterPlane.hide()
+	$DayNightCycle.hide()
+	$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+	zone_count = 1
+
+
+func _on_quit_pressed():
+	disconnect_from_server()
