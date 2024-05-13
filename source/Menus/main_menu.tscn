@@ -175,6 +175,7 @@ layout_mode = 2
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("7_pxltr")
 theme_override_font_sizes/font_size = 80
+text = "localhost"
 placeholder_text = "Enter IP"
 alignment = 1
 
