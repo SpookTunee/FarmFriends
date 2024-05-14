@@ -31,10 +31,12 @@ func _process(delta):
 		plant = 0
 	if (plant == -1):
 		plant = 4
+	for x in range(5):
+		if plants_list[x].visible:
+			if not (plants_list[x] == plants_list[plant]):
+				plants_list[x].hide()
 	if not plants_list[plant].visible:
 		plants_list[plant].show()
-	if plants_list[plant-1].visible:
-		plants_list[plant-1].hide()
 	if not ($seedPouchMesh.get_active_material(1).albedo_color == color_list[plant]):
 		print(color_list[plant])
 		print(plant)

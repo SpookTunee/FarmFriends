@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwpeukfquy1s4"]
+[gd_scene load_steps=11 format=3 uid="uid://bwpeukfquy1s4"]
 
 [ext_resource type="Script" path="res://Tools/Scripts/bag_of_seeds.gd" id="1_7h24k"]
 [ext_resource type="ArrayMesh" uid="uid://dxcrtpbbqcjt6" path="res://Assets/Plants/mushroom_seedbag.obj" id="3_h6pmm"]
 [ext_resource type="ArrayMesh" uid="uid://dxgkkd27wfxug" path="res://Assets/Tools/seed_pouch.obj" id="3_odlhn"]
+[ext_resource type="ArrayMesh" uid="uid://chul57bvlt0vh" path="res://Assets/Plants/wheat_seedbag.obj" id="4_lu4qa"]
+[ext_resource type="Texture2D" uid="uid://dcwodj3n0g2du" path="res://Assets/Plants/wheatfield.jpg" id="5_klo4f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i2ijf"]
 albedo_color = Color(0.4, 0.211765, 0, 1)
@@ -15,6 +17,9 @@ albedo_color = Color(1, 0.678431, 0.443137, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vmn6"]
 albedo_color = Color(0.254902, 0.188235, 0.0823529, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tiutw"]
+albedo_texture = ExtResource("5_klo4f")
 
 [node name="BagOfSeeds" type="Node3D"]
 script = ExtResource("1_7h24k")
@@ -97,6 +102,66 @@ visible = false
 
 [node name="Wheat" type="Node3D" parent="."]
 visible = false
+
+[node name="WheatSeedbag" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(-0.0867599, 0.248289, 0.586986, -0.117792, 0.226191, -0.271897, -0.474713, -0.101504, -0.0398125, 0.121296, 0.225406, -0.0875652)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../WheatSeedbag2")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
+
+[node name="WheatSeedbag8" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(0.400928, 0.191963, 0.270215, -0.140438, 0.241455, -0.225978, -0.257466, 0.167221, 0.544043, 0.0409971, 0.216532, -0.168922)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../WheatSeedbag2")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
+
+[node name="WheatSeedbag9" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(0.400928, 0.191963, 0.270215, -0.140438, 0.241455, -0.225978, -0.257466, 0.167221, 0.544043, -0.0299801, 0.216532, -0.0228458)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../WheatSeedbag2")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
+
+[node name="WheatSeedbag10" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(0.0901292, -0.226559, -0.605488, -0.140438, 0.241455, -0.225978, 0.467877, 0.116119, 0.0488083, 0.154588, 0.207332, 0.00267006)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../WheatSeedbag2")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
+
+[node name="WheatSeedbag7" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(0.300201, -0.171173, -0.498984, -0.117792, 0.226191, -0.271897, 0.377834, 0.206519, 0.311693, -0.171806, 0.225406, 0.0294838)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../WheatSeedbag2")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
+
+[node name="WheatSeedbag2" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(0.704801, 0, 0, 0, 0.508583, -0.290847, 0, 0.186407, 0.793533, 0.0639593, 0.203297, 0.0607848)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
+
+[node name="WheatSeedbag6" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(0.0155473, 0.186361, 0.79334, 0, 0.508583, -0.290848, -0.704629, 0.00411198, 0.0175047, -0.013148, 0.203297, 0.182147)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
+
+[node name="WheatSeedbag3" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(-0.664772, -0.0985354, -0.234935, 0, 0.453243, -0.462788, 0.234142, -0.27976, -0.667023, -0.0640512, 0.208144, 0.0607848)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
+
+[node name="WheatSeedbag4" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(-0.442395, 0.146437, 0.616976, -0.0779504, 0.486028, -0.361206, -0.543098, -0.189043, -0.450731, -0.0670856, 0.211447, -0.117787)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
+
+[node name="WheatSeedbag5" type="MeshInstance3D" parent="Wheat"]
+transform = Transform3D(-0.44921, 0.228555, 0.544937, 0.136577, 0.486218, -0.334567, -0.525644, -0.0689873, -0.552627, 0.125983, 0.193758, 0.120913)
+mesh = ExtResource("4_lu4qa")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_tiutw")
 
 [node name="Corn" type="Node3D" parent="."]
 visible = false
