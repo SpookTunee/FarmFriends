@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwpeukfquy1s4"]
+[gd_scene load_steps=8 format=3 uid="uid://bwpeukfquy1s4"]
 
 [ext_resource type="Script" path="res://Tools/Scripts/bag_of_seeds.gd" id="1_7h24k"]
+[ext_resource type="ArrayMesh" uid="uid://dxcrtpbbqcjt6" path="res://Assets/Plants/mushroom_seedbag.obj" id="3_h6pmm"]
 [ext_resource type="ArrayMesh" uid="uid://dxgkkd27wfxug" path="res://Assets/Tools/seed_pouch.obj" id="3_odlhn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i2ijf"]
@@ -12,6 +13,9 @@ metallic_specular = 0.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvup7"]
 albedo_color = Color(1, 0.678431, 0.443137, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vmn6"]
+albedo_color = Color(0.254902, 0.188235, 0.0823529, 1)
+
 [node name="BagOfSeeds" type="Node3D"]
 script = ExtResource("1_7h24k")
 
@@ -21,3 +25,78 @@ mesh = ExtResource("3_odlhn")
 surface_material_override/0 = SubResource("StandardMaterial3D_i2ijf")
 surface_material_override/1 = SubResource("StandardMaterial3D_76r2c")
 surface_material_override/2 = SubResource("StandardMaterial3D_xvup7")
+
+[node name="Mushroom" type="Node3D" parent="."]
+visible = false
+
+[node name="MushroomSeedbag" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.0499997, 0, -0.00016057, 0, 0.05, 0, 0.00016057, 0, 0.0499997, -0.0449209, 0.222912, -0.0972225)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="MushroomSeedbag10" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.0499997, 0, -0.00016057, 0, 0.05, 0, 0.00016057, 0, 0.0499997, -0.143976, 0.222912, -0.0974179)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="MushroomSeedbag2" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.0499997, 0, -0.00016057, 0, 0.05, 0, 0.00016057, 0, 0.0499997, 0.0485347, 0.222912, -0.188834)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="MushroomSeedbag7" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.05, 0, -6.19592e-05, 0, 0.05, 0, 6.19592e-05, 0, 0.05, 0.184029, 0.222912, 0.0322084)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="MushroomSeedbag3" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.05, 0, -6.19592e-05, 0, 0.05, 0, 6.19592e-05, 0, 0.05, 0.0161538, 0.22158, 0.11108)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="MushroomSeedbag8" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.0499997, 0, -0.00016057, 0, 0.05, 0, 0.00016057, 0, 0.0499997, -0.11083, 0.22158, 0.136536)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="MushroomSeedbag9" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.05, 0, -6.19592e-05, 0, 0.05, 0, 6.19592e-05, 0, 0.05, 0.103283, 0.22158, 0.129984)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="MushroomSeedbag4" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.0499997, 0, -0.00016057, 0, 0.05, 0, 0.00016057, 0, 0.0499997, 0.128043, 0.222912, -0.0876319)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="MushroomSeedbag5" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.05, 0, -6.19592e-05, 0, 0.05, 0, 6.19592e-05, 0, 0.05, 0.0608868, 0.222912, 0.000836954)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="MushroomSeedbag6" type="MeshInstance3D" parent="Mushroom"]
+transform = Transform3D(0.0499997, 0, -0.00016057, 0, 0.05, 0, 0.00016057, 0, 0.0499997, -0.120427, 0.222912, 0.0147854)
+mesh = ExtResource("3_h6pmm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4vmn6")
+
+[node name="Carrot" type="Node3D" parent="."]
+visible = false
+
+[node name="Potato" type="Node3D" parent="."]
+visible = false
+
+[node name="Wheat" type="Node3D" parent="."]
+visible = false
+
+[node name="Corn" type="Node3D" parent="."]
+visible = false
