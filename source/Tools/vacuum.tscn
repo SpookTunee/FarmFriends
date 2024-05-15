@@ -12,7 +12,7 @@ top_radius = 0.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_46fl2"]
 
 [node name="vacuum" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.226884, 0.323376, 0)
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -0.226884, 0.323376, 0)
 script = ExtResource("1_8gmgr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -32,6 +32,9 @@ mesh = SubResource("BoxMesh_tb3he")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(-1.11464e-07, -2.08, 0, 2.55, -9.09197e-08, 0, 0, 0, 2.55, 3, 0, 0)
 shape = SubResource("CylinderShape3D_46fl2")
+
+[node name="Origin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
