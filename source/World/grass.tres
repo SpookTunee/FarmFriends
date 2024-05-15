@@ -1,0 +1,50 @@
+[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://bwlx8dgqmrjr2"]
+
+[sub_resource type="VisualShaderNodeDistanceFade" id="VisualShaderNodeDistanceFade_o4kr8"]
+default_input_values = [0, 0.0, 1, 100.0]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_67wjg"]
+constant = Color(0, 0.576471, 0.00784314, 1)
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_l8o5d"]
+default_input_values = [0, 1.0, 1, 0.0]
+operator = 1
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+
+
+void fragment() {
+// ColorConstant:3
+	vec4 n_out3p0 = vec4(0.000000, 0.576471, 0.007843, 1.000000);
+
+
+// DistanceFade:2
+	float n_in2p0 = 0.00000;
+	float n_in2p1 = 100.00000;
+	float n_out2p0 = clamp(smoothstep(n_in2p0, n_in2p1,-VERTEX.z),0.0,1.0);
+
+
+// FloatOp:4
+	float n_in4p0 = 1.00000;
+	float n_out4p0 = n_in4p0 - n_out2p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+	ALPHA = n_out4p0;
+
+
+}
+"
+graph_offset = Vector2(-414.09, 30.9495)
+nodes/fragment/2/node = SubResource("VisualShaderNodeDistanceFade_o4kr8")
+nodes/fragment/2/position = Vector2(-1160, 500)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_67wjg")
+nodes/fragment/3/position = Vector2(-183.792, 220.509)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatOp_l8o5d")
+nodes/fragment/4/position = Vector2(-220, 400)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 2, 0, 4, 1, 4, 0, 0, 1)
