@@ -25,12 +25,10 @@ func _on_area_3d_body_exited(body):
 # THIS NEEDS TO ACTIVATE ALWAYS NOT JUST ONCE -- CHANGE PLAYER SCRIPT
 func activate():
 	var force_dir : Vector3
-	
-	
-
+	print("active")
 	
 	for i in inRad:
-		force_dir = self.translation.direction_to(i.translation) # finds direction
+		force_dir = $Origin.translation.direction_to(i.translation) # finds direction
+		print(i.name + ":  " + force_dir)
 		
-		
-		i.apply_impulse(0, force_dir * force)
+		i.apply_central_force(force_dir * force)
