@@ -413,10 +413,10 @@ func payQuota():
 					$Stats.moneyPaid += due
 
 
-func pushPull(direction: Vector3, delta):
-	self.velocity.y += direction.y
-	knockbackX = direction.x
-	knockbackY = direction.z
+func pushPull(force, direction: Vector3, delta):
+	self.velocity.y += force * direction.y * 0.7
+	knockbackX = force * direction.x
+	knockbackY = force * direction.z
 	isPPactive = true
 	
 func resetKnock():
