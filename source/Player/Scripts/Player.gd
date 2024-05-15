@@ -241,7 +241,7 @@ func mov_hands():
 		if isunlocked["4"]:
 			switch_hand.rpc(4)
 			switch_hand(4)
-	if !canFarm: return
+	#if !canFarm: return
 	if Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
@@ -408,3 +408,7 @@ func payQuota():
 					var due = Global.quotaPrice + addedQuota - $Stats.moneyPaid
 					$Stats.money -= due
 					$Stats.moneyPaid += due
+
+
+func pushPull(direction: Vector3):
+	self.position += direction
