@@ -216,7 +216,7 @@ func _physics_process(delta):
 
 func mov_sprint(delta):
 	if Input.is_action_pressed("sprint"):
-		SPEED = 20.0
+		SPEED = 7.5
 		if is_on_floor() && velocity.length() > 5:
 			$Camera3D.rotation.x += (cos((ticks%360)*delta*15))*.00075
 	else:
