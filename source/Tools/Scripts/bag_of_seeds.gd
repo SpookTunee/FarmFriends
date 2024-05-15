@@ -38,8 +38,6 @@ func _process(delta):
 	if not plants_list[plant].visible:
 		plants_list[plant].show()
 	if not ($seedPouchMesh.get_active_material(1).albedo_color == color_list[plant]):
-		print(color_list[plant])
-		print(plant)
 		material.albedo_color = color_list[plant]
 		$seedPouchMesh.set_surface_override_material(1, material)
 	
