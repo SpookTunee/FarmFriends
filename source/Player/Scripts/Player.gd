@@ -26,8 +26,9 @@ var quotaCheck : bool = true
 var addCheck : bool = false
 var plsCheck : bool = true
 var canFarm: bool = false
-
-
+var knockbackX : float = 0.0
+var knockbackY : float = 0.0
+var isPPactive : bool = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
 
@@ -135,6 +136,7 @@ func switch_hand(id):
 		Hand.add_child(nscn)
 
 func _physics_process(delta):
+
 	if get_node("Camera3D/Hand").get_child(0).name == "BagOfSeeds":
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
@@ -204,6 +206,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
 		if not is_on_floor():
 			velocity.y -= gravity * delta
 	move_and_slide()
@@ -253,13 +256,13 @@ func mov_dirs():
 	if direction:
 		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "walk")):
 			walk_animation.rpc()
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * SPEED + knockbackX
+		velocity.z = direction.z * SPEED + knockbackY
 	else:
 		if is_on_floor() and ((not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation != "idle"))):
 			idle_animation.rpc()
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0 + knockbackX, SPEED)
+		velocity.z = move_toward(velocity.z, 0 + knockbackY, SPEED)
 
 		
 @rpc("call_local","any_peer","reliable")
@@ -410,5 +413,12 @@ func payQuota():
 					$Stats.moneyPaid += due
 
 
-func pushPull(direction: Vector3):
-	self.position += direction
+func pushPull(direction: Vector3, delta):
+	self.velocity.y += direction.y
+	knockbackX = direction.x
+	knockbackY = direction.z
+	isPPactive = true
+	
+func resetKnock():
+	knockbackX = 0
+	knockbackY = 0

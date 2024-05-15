@@ -2,6 +2,7 @@ extends Node3D
 
 @export var force : int = 30
 var inRad : Array
+var force_dir : Vector3
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -10,9 +11,12 @@ func _ready():
 func _process(delta):
 	for i in $Area3D.get_overlapping_areas():
 		if i.name == "Hitbox":
-			var force_dir = ($Origin.position.direction_to(i.position)) # finds direction
-			force_dir = Vector3(0,0,0) - force_dir
-			i.get_parent().pushPull(force_dir)
+			if i.get_parent() != self.get_parent().get_parent().get_parent():
+				
+				force_dir = Vector3(0,0,0) - Vector3($Origin.global_position.x - (i.get_parent().global_position.x), -($Origin.global_position.y - (i.get_parent().global_position.y)), $Origin.global_position.z - (i.get_parent().global_position.z)) # finds direction
+				#print(force_dir)
+				#force_dir = Vector3(0,0,0) - force_dir
+				i.get_parent().pushPull(force_dir, delta)
 			
 
 
@@ -30,12 +34,10 @@ func _process(delta):
 
 # THIS NEEDS TO ACTIVATE ALWAYS NOT JUST ONCE -- CHANGE PLAYER SCRIPT
 func activate():
-	var force_dir : Vector3
-	print("active")
-	
-	for i in inRad:
-		
-		force_dir = 1/($Origin.translation.direction_to(i.translation)) # finds direction
-		print(i.name + ":  " + force_dir)
-		
-		i.pushPull(force_dir)
+	pass
+
+
+func _on_area_3d_area_exited(area):
+	if area.name == "Hitbox":
+			if area.get_parent() != self.get_parent().get_parent().get_parent():
+				area.get_parent().resetKnock()
