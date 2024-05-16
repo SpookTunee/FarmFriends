@@ -984,4 +984,6 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00005, 0)
 shape = SubResource("CapsuleShape3D_e5t3x")
 
+[node name="itemsExtention" type="Node" parent="."]
+
 [connection signal="timeout" from="DepositTimer" to="." method="_on_deposit_timer_timeout"]
