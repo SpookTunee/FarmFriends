@@ -29,6 +29,7 @@ var canFarm: bool = false
 var knockbackX : float = 0.0
 var knockbackY : float = 0.0
 var isPPactive : bool = false
+var shaderCheck : bool = true
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
 
@@ -215,7 +216,18 @@ func _physics_process(delta):
 	if Global.day > 1:
 		quotacheck(delta)
 	payQuota()
+	
+	reset_mat.rpc()
+	
+	
 
+@rpc("call_local")
+func reset_mat():
+	if get_node("Node3D/Armature/Skeleton3D").get_child(0).get_material_override() != null:
+		if get_node("Camera3D/Hand").get_child(0).name != "invis":
+			var skel = get_node("Node3D/Armature/Skeleton3D")
+			for i in range(0, skel.get_child_count()):
+				skel.get_child(i).set_material_override(null)
 
 func mov_sprint(delta):
 	if Input.is_action_pressed("sprint"):

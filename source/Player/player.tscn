@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Player/Scripts/Stats.gd" id="2_235ld"]
 [ext_resource type="ArrayMesh" uid="uid://ch07l8d3wtasp" path="res://Assets/Player/player.obj" id="3_aa578"]
 [ext_resource type="Texture2D" uid="uid://c65wdgt6hb24n" path="res://Assets/Player/Manface.png" id="4_06gp4"]
-[ext_resource type="PackedScene" uid="uid://b4yyvd0ufsiax" path="res://Tools/vacuum.tscn" id="5_dethl"]
+[ext_resource type="PackedScene" uid="uid://23xkwsxrea3x" path="res://Tools/invis.tscn" id="5_f2hql"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrk0f"]
 
@@ -817,8 +817,8 @@ debug_shape_thickness = 1
 [node name="Hand" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.674198, -0.650779, -0.639026)
 
-[node name="vacuum" parent="Camera3D/Hand" instance=ExtResource("5_dethl")]
-transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -0.316158, 0.354056, 0.981094)
+[node name="invis" parent="Camera3D/Hand" instance=ExtResource("5_f2hql")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.674198, -0.854381, 0.981094)
 
 [node name="DepositTimer" type="Timer" parent="."]
 wait_time = 0.5
