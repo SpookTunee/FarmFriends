@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7e0b4qeycv7c"]
+[gd_scene load_steps=6 format=3 uid="uid://c7e0b4qeycv7c"]
 
 [ext_resource type="Script" path="res://Tools/Scripts/Shovel.gd" id="1_b2mph"]
 [ext_resource type="ArrayMesh" uid="uid://5lqgg38x51mh" path="res://Assets/Tools/shovel.obj" id="2_nt7wt"]
@@ -12,14 +12,27 @@ albedo_color = Color(0.905882, 0.905882, 0.905882, 1)
 metallic = 1.0
 roughness = 0.21
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_osl4s"]
+size = Vector3(0.0153956, 0.034683, 0.0345649)
+
 [node name="Shovel" type="Node3D"]
+transform = Transform3D(-0.843389, -0.0492094, -0.535046, 0.518906, 0.183754, -0.834848, 0.139399, -0.98174, -0.129441, 0, 0, 0)
 script = ExtResource("1_b2mph")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-
-[node name="Shovel" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="Shovel" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035553, 0, 0.0393083)
 mesh = ExtResource("2_nt7wt")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_uasnc")
 surface_material_override/1 = SubResource("StandardMaterial3D_51oad")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 128
+collision_mask = 129
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(4.92999, -2.38419e-06, 8.44072, -1.43051e-06, 9.77499, -2.98023e-07, -8.44072, -4.76837e-06, 4.92999, 0.0225929, 0.524253, 0.0583439)
+shape = SubResource("BoxShape3D_osl4s")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true

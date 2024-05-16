@@ -13,11 +13,14 @@ var hoe = preload("res://Tools/Hoe.tscn")
 var seeds = preload("res://Tools/bag_of_seeds.tscn")
 var scythe = preload("res://Tools/scythe.tscn")
 var watering_can = preload("res://Tools/watering_can.tscn")
+var shovel = preload("res://Tools/shovel.tscn")
 var pause_movement = false
 var seed_bag_save = 0
 var plantcount : int = 0
-var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true}
+var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true,"5":true}
 var isShop : bool = false
+var health : int = 10
+var current_item : int = 1
 
 var jumping : bool = false
 var quotaSecond : bool = false
@@ -71,10 +74,22 @@ func request_mp_spawned():
 			#sgs["plant_is_growing"] = ip.get_node("Plant/PlantBody/AnimationPlayer").is_playing()
 		#mps.append(sgs)
 	request_mp_spawned_callback.rpc_id(multiplayer.get_remote_sender_id(),mps)
-
+@rpc("any_peer")
+func recieve_damage():
+	var childss
+	health -= 1
+	for x in get_children():
+		if x.name == "HUD":
+			childss = x
+			break
+	childss.get_child(7).value -=1
+	if health <= 0:
+		health = 10
+		childss.get_child(7).value = 10
+		position = Vector3.ZERO
+		
 @rpc("call_remote","any_peer","reliable")
 func request_mp_spawned_callback(mps):
-	print(mps)
 	var j = -1
 	for i in mps["zones"]:
 		j += 1
@@ -109,7 +124,7 @@ func _input(event):
 func change_sensitivity(sense):
 	camera_sense_multiplier = sense/50.0 + .03
 
-@rpc("call_remote","any_peer","reliable")
+@rpc("call_local","any_peer","reliable")
 func switch_hand(id):
 	if id == 1:
 		Hand.get_child(0).queue_free()
@@ -132,6 +147,11 @@ func switch_hand(id):
 		Hand.get_child(0).queue_free()
 		var nscn = watering_can.instantiate()
 		nscn.name = "WateringCan"
+		Hand.add_child(nscn)
+	if id == 5:
+		Hand.get_child(0).queue_free()
+		var nscn = shovel.instantiate()
+		nscn.name = "Shovel"
 		Hand.add_child(nscn)
 
 func _physics_process(delta):
@@ -227,22 +247,29 @@ func mov_sprint(delta):
 func mov_hands():
 	if Input.is_action_just_pressed("1"):
 		if isunlocked["1"]:
+			current_item = 1
 			switch_hand.rpc(1)
-			switch_hand(1)
 	elif Input.is_action_just_pressed("2"):
 		if isunlocked["2"]:
+			current_item = 2
 			switch_hand.rpc(2)
-			switch_hand(2)
 	elif Input.is_action_just_pressed("3"):
 		if isunlocked["3"]:
+			current_item = 3
 			switch_hand.rpc(3)
-			switch_hand(3)
 	elif Input.is_action_just_pressed("4"):
 		if isunlocked["4"]:
-			switch_hand.rpc(4)
-			switch_hand(4)
-	if !canFarm: return
-	if Input.is_action_pressed("m1"):
+			current_item = 4
+			switch_hand.rpc(4)	
+	elif Input.is_action_just_pressed("5"):
+		if isunlocked["5"]:
+			current_item = 5
+			switch_hand.rpc(5)
+	if !canFarm and not (current_item == 5): return
+	if current_item == 5:
+		if Input.is_action_just_pressed("m1"):
+			Hand.get_child(0).activate()
+	elif Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcgwy6x2mj4yx"]
+[gd_scene load_steps=8 format=3 uid="uid://bcgwy6x2mj4yx"]
 
 [ext_resource type="Script" path="res://Player/Scripts/HUD.gd" id="1_5qcav"]
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="2_ad6ml"]
@@ -10,6 +10,12 @@ font_size = 64
 [sub_resource type="LabelSettings" id="LabelSettings_3vkh8"]
 font_size = 48
 font_color = Color(0.819608, 0.113725, 0.113725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqq85"]
+bg_color = Color(0.545098, 0, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7aoa"]
+bg_color = Color(0.0156863, 0.572549, 0.223529, 1)
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -305,3 +311,21 @@ offset_right = 439.0
 offset_bottom = 220.0
 text = "DUE: "
 label_settings = SubResource("LabelSettings_3vkh8")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 208.0
+offset_top = 565.0
+offset_right = -536.0
+offset_bottom = -191.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cqq85")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i7aoa")
+max_value = 10.0
+value = 10.0
+show_percentage = false

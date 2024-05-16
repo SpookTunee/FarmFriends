@@ -72,7 +72,6 @@ func _on_join_pressed():
 	enet_peer = ENetMultiplayerPeer.new()
 	enet_peer.create_client(ip.text, port)
 	multiplayer.multiplayer_peer = enet_peer
-	print(multiplayer.get_unique_id())
 	multiplayer.server_disconnected.connect(on_host_disconnect)
 
 @rpc("any_peer", "call_remote", "reliable")
