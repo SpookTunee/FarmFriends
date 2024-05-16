@@ -46,6 +46,7 @@ func _ready():
 	add_child(hud)
 	request_mp_spawned.rpc()
 	
+	
 @rpc("call_remote","authority","reliable")
 func request_mp_spawned():
 	var mps = {}
@@ -84,7 +85,7 @@ func recieve_damage():
 		if health <= 0:
 			health = 2
 			childss.value = 2
-			position = Vector3.ZERO
+			death()
 		
 @rpc("call_remote","any_peer","reliable")
 func request_mp_spawned_callback(mps):
@@ -270,8 +271,19 @@ func mov_hands():
 	elif Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
+func death():
+	ragdoll.rpc()
+	
+@rpc("call_remote", "any_peer")
 func ragdoll():
-	pass
+	$"Node3D/Armature/Skeleton3D/Physical Bone Body/CollisionShape3D".disabled = false
+	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_l/CollisionShape3D".disabled = false
+	$"Node3D/Armature/Skeleton3D/Physical Bone upperleg_l/CollisionShape3D".disabled = false
+	$"Node3D/Armature/Skeleton3D/Physical Bone lowerleg_l/CollisionShape3D".disabled = false
+	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/CollisionShape3D".disabled = false
+	$"Node3D/Armature/Skeleton3D/Physical Bone upperleg_r/CollisionShape3D".disabled = false
+	$"Node3D/Armature/Skeleton3D/Physical Bone lowerleg_r/CollisionShape3D".disabled = false
+	$Node3D/Armature/Skeleton3D.physical_bones_start_simulation()
 
 @rpc("call_remote","any_peer","reliable")
 func mov_dirs():

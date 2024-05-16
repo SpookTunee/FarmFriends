@@ -67,7 +67,6 @@ script = ExtResource("1_vctkd")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.99757, 0.0461938, 0.0521524, -0.0417288, 0.995619, -0.0836778, -0.0557893, 0.0812983, 0.995127, 1.376, 0.466, 8.344)
-current = true
 fov = 37.5
 
 [node name="Terrain" type="MeshInstance3D" parent="."]
