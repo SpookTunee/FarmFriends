@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Player/Scripts/Stats.gd" id="2_235ld"]
 [ext_resource type="ArrayMesh" uid="uid://ch07l8d3wtasp" path="res://Assets/Player/player.obj" id="3_aa578"]
 [ext_resource type="Texture2D" uid="uid://c65wdgt6hb24n" path="res://Assets/Player/Manface.png" id="4_06gp4"]
-[ext_resource type="PackedScene" uid="uid://b4yyvd0ufsiax" path="res://Tools/vacuum.tscn" id="5_3fcqe"]
+[ext_resource type="PackedScene" uid="uid://crxsapmronrre" path="res://Tools/mine_placer.tscn" id="5_usujr"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrk0f"]
 
@@ -817,7 +817,7 @@ debug_shape_thickness = 1
 [node name="Hand" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.674198, -0.650779, -0.639026)
 
-[node name="vacuum" parent="Camera3D/Hand" instance=ExtResource("5_3fcqe")]
+[node name="MinePlacer" parent="Camera3D/Hand" instance=ExtResource("5_usujr")]
 
 [node name="DepositTimer" type="Timer" parent="."]
 wait_time = 0.5
