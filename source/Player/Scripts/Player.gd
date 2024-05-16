@@ -75,17 +75,18 @@ func request_mp_spawned():
 			#sgs["plant_is_growing"] = ip.get_node("Plant/PlantBody/AnimationPlayer").is_playing()
 		#mps.append(sgs)
 	request_mp_spawned_callback.rpc_id(multiplayer.get_remote_sender_id(),mps)
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func recieve_damage():
-	if $IFrameTimer.is_stopped():
+	if $IFrameTimer.is_stopped() and $RagdollTimer.is_stopped():
 		var childss
 		health -= 1
 		childss = get_node("HUD/HealthBar")
 		childss.value -=1
-		if health <= 0:
-			health = 2
-			childss.value = 2
-			death()
+		if $RagdollTimer.is_stopped():
+			if health <= 0:
+				health = 2
+				childss.value = 2
+				death()
 		
 @rpc("call_remote","any_peer","reliable")
 func request_mp_spawned_callback(mps):
@@ -115,10 +116,12 @@ func _input(event):
 		return
 	if pause_movement: return
 	var ncams = camera_sense * camera_sense_multiplier
-	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * ncams)
-		$Camera3D.rotate_x(-event.relative.y * ncams)
-		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
+	print($RagdollTimer.is_stopped())
+	if $RagdollTimer.is_stopped():
+		if event is InputEventMouseMotion:
+			rotate_y(-event.relative.x * ncams)
+			$Camera3D.rotate_x(-event.relative.y * ncams)
+			$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 
 func change_sensitivity(sense):
 	camera_sense_multiplier = sense/50.0 + .03
@@ -158,7 +161,8 @@ func _physics_process(delta):
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	ticks += 1
-
+	if $RagdollTimer.is_stopped():
+		stopragdoll.rpc()
 	var zones = get_node("/root/World/zones").get_children()
 	for i in zones:
 		if $Hitbox.overlaps_area(i):
@@ -205,21 +209,35 @@ func _physics_process(delta):
 		get_node("HUD/ToolTip").text = " "
 		
 	if !pause_movement:
-		$Camera3D.make_current()
-		# Add the gravity.
-		# Handle jump.
-
-		if (Input.is_action_just_pressed("jump") and is_on_floor()):
-			$JumpTimer.start()
-			velocity.y = JUMP_VELOCITY
-		if (Input.is_action_just_pressed("jump") and is_on_floor()) or not $JumpTimer.is_stopped():
-			jump_animation.rpc()
-		
-		mov_sprint(delta)
-		mov_dirs()
-		mov_hands()
-		if not is_on_floor():
-			velocity.y -= gravity * delta
+		if $RagdollTimer.is_stopped():
+				$Camera3D.make_current()
+		else:
+			$"Node3D/Armature/Skeleton3D/Physical Bone Body/Camera3D".make_current()
+		if $RagdollTimer.is_stopped():
+			#$Camera3D.make_current()
+			if $RagdollTimer.is_stopped():
+				$Camera3D.make_current()
+			else:
+				$"Node3D/Armature/Skeleton3D/Physical Bone Body/Camera3D".make_current()
+			
+			# Add the gravity.
+			# Handle jump.
+			if (Input.is_action_just_pressed("jump") and is_on_floor()):
+				$JumpTimer.start()
+				$JumpTimer2.start()
+				jumping = true
+				jump_animation.rpc()
+			if $JumpTimer.is_stopped() and jumping:
+				jumping = false
+				velocity.y = JUMP_VELOCITY
+			#if (Input.is_action_just_pressed("jump") and is_on_floor()) or not $JumpTimer.is_stopped():
+				#jump_animation.rpc()
+			
+			mov_sprint(delta)
+			mov_dirs()
+			mov_hands()
+			if not is_on_floor():
+				velocity.y -= gravity * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
@@ -273,8 +291,9 @@ func mov_hands():
 
 func death():
 	ragdoll.rpc()
+	$RagdollTimer.start()
 	
-@rpc("call_remote", "any_peer")
+@rpc("call_local", "any_peer")
 func ragdoll():
 	$"Node3D/Armature/Skeleton3D/Physical Bone Body/CollisionShape3D".disabled = false
 	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_l/CollisionShape3D".disabled = false
@@ -285,17 +304,28 @@ func ragdoll():
 	$"Node3D/Armature/Skeleton3D/Physical Bone lowerleg_r/CollisionShape3D".disabled = false
 	$Node3D/Armature/Skeleton3D.physical_bones_start_simulation()
 
+@rpc("call_local", "any_peer")
+func stopragdoll():	
+	$Node3D/Armature/Skeleton3D.physical_bones_stop_simulation()
+	$"Node3D/Armature/Skeleton3D/Physical Bone Body/CollisionShape3D".disabled = true
+	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_l/CollisionShape3D".disabled = true
+	$"Node3D/Armature/Skeleton3D/Physical Bone upperleg_l/CollisionShape3D".disabled = true
+	$"Node3D/Armature/Skeleton3D/Physical Bone lowerleg_l/CollisionShape3D".disabled = true
+	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/CollisionShape3D".disabled = true
+	$"Node3D/Armature/Skeleton3D/Physical Bone upperleg_r/CollisionShape3D".disabled = true
+	$"Node3D/Armature/Skeleton3D/Physical Bone lowerleg_r/CollisionShape3D".disabled = true
+
 @rpc("call_remote","any_peer","reliable")
 func mov_dirs():
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "walk")):
+		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "walk")) and $JumpTimer2.is_stopped():
 			walk_animation.rpc()
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
-		if is_on_floor() and ((not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation != "idle"))):
+		if is_on_floor() and ((not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation != "idle"))) and $JumpTimer2.is_stopped():
 			idle_animation.rpc()
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
