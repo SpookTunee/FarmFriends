@@ -19,7 +19,7 @@ var seed_bag_save = 0
 var plantcount : int = 0
 var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true,"5":true}
 var isShop : bool = false
-var health : int = 10
+var health : int = 2
 var current_item : int = 1
 
 var jumping : bool = false
@@ -76,17 +76,15 @@ func request_mp_spawned():
 	request_mp_spawned_callback.rpc_id(multiplayer.get_remote_sender_id(),mps)
 @rpc("any_peer")
 func recieve_damage():
-	var childss
-	health -= 1
-	for x in get_children():
-		if x.name == "HUD":
-			childss = x
-			break
-	childss.get_child(7).value -=1
-	if health <= 0:
-		health = 10
-		childss.get_child(7).value = 10
-		position = Vector3.ZERO
+	if $IFrameTimer.is_stopped():
+		var childss
+		health -= 1
+		childss = get_node("HUD/HealthBar")
+		childss.value -=1
+		if health <= 0:
+			health = 2
+			childss.value = 2
+			position = Vector3.ZERO
 		
 @rpc("call_remote","any_peer","reliable")
 func request_mp_spawned_callback(mps):
@@ -265,13 +263,15 @@ func mov_hands():
 		if isunlocked["5"]:
 			current_item = 5
 			switch_hand.rpc(5)
-	if !canFarm and not (current_item == 5): return
+	if !canFarm and not (current_item == 5) and not (current_item == 4): return
 	if current_item == 5:
 		if Input.is_action_just_pressed("m1"):
 			Hand.get_child(0).activate()
 	elif Input.is_action_pressed("m1"):
 		Hand.get_child(0).activate()
 
+func ragdoll():
+	pass
 
 @rpc("call_remote","any_peer","reliable")
 func mov_dirs():
