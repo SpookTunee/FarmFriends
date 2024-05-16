@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4yyvd0ufsiax"]
 
-[ext_resource type="Script" path="res://Tools/vacuum.gd" id="1_8gmgr"]
+[ext_resource type="Script" path="res://Tools/Scripts/vacuum.gd" id="1_8gmgr"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xmf2n"]
 
