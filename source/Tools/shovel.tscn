@@ -16,7 +16,7 @@ roughness = 0.21
 size = Vector3(0.0153956, 0.034683, 0.0345649)
 
 [node name="Shovel" type="Node3D"]
-transform = Transform3D(-0.843389, -0.0492094, -0.535046, 0.518906, 0.183754, -0.834848, 0.139399, -0.98174, -0.129441, 0, 0, 0)
+transform = Transform3D(2.04199, -0.382552, 1.39963, -1.36633, 0.306244, 2.07711, -0.488316, -2.4566, 0.0409802, 0, 0, -0.577788)
 script = ExtResource("1_b2mph")
 
 [node name="Shovel" type="MeshInstance3D" parent="."]
@@ -30,7 +30,7 @@ collision_layer = 128
 collision_mask = 129
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(4.92999, -2.38419e-06, 8.44072, -1.43051e-06, 9.77499, -2.98023e-07, -8.44072, -4.76837e-06, 4.92999, 0.0225929, 0.524253, 0.0583439)
+transform = Transform3D(4.92999, -3.1329e-06, 8.44072, -1.43051e-06, 9.77499, 4.46366e-06, -8.44072, -3.48648e-06, 4.92999, 0.0225929, 0.524253, 0.0583439)
 shape = SubResource("BoxShape3D_osl4s")
 
 [node name="Timer" type="Timer" parent="."]

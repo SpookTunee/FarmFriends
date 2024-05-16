@@ -22,6 +22,6 @@ func _process(delta):
 				break
 	
 func activate():
-	if !activated:
+	if !activated and $Timer.is_stopped():
 		$Timer.start()
 		activated = true
