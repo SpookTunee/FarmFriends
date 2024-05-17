@@ -9,6 +9,7 @@ void vertex() {
 }
 
 void fragment() {
+	ROUGHNESS = 1.0;
 	vec3 falb = vec3(0.03,0.1,0.002);
 	vec3 nalb = vec3(0.1,0.1,0.2);
 	vec3 lalb = vec3(0.2,0.2,0.1);
