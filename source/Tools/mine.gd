@@ -1,6 +1,8 @@
 extends RigidBody3D
 var force_dir : Vector3
 var deltaP
+var done : bool = false
+var delete : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -9,6 +11,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	deltaP = delta
+	
+	
 
 func instance(pos):
 	global_position = pos
@@ -25,10 +29,29 @@ func _on_detect_zone_area_entered(area):
 			
 			$Explosion.play(1)
 			i.get_parent().pushPull(force_dir, deltaP)
+			done = true
+			$Backup.start()
 			
-	
+
 
 
 func _on_explosion_zone_area_exited(area):
-	if area.name == "Hitbox":
-		area.get_parent().resetKnock()
+	if done == true:
+		if area.name == "Hitbox":
+			area.get_parent().resetKnock()
+		
+				
+				
+
+	
+
+func _on_backup_timeout():
+	for i in $ExplosionZone.get_overlapping_areas():
+		if i.name == "Hitbox":
+			i.get_parent().resetKnock()
+	remove.rpc()
+
+
+@rpc("call_local") #help
+func remove():
+	queue_free()

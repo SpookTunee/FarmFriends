@@ -48,5 +48,15 @@ shape = SubResource("SphereShape3D_rkcn6")
 
 [node name="Explosion" parent="." instance=ExtResource("2_wycfb")]
 
+[node name="AutoDelete" type="Timer" parent="."]
+wait_time = 180.0
+one_shot = true
+autostart = true
+
+[node name="Backup" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="area_entered" from="DetectZone" to="." method="_on_detect_zone_area_entered"]
 [connection signal="area_exited" from="ExplosionZone" to="." method="_on_explosion_zone_area_exited"]
+[connection signal="timeout" from="Backup" to="." method="_on_backup_timeout"]
