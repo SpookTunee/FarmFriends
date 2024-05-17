@@ -130,11 +130,17 @@ func change_sensitivity(sense):
 	camera_sense_multiplier = sense/50.0 + .03
 	
 @rpc("call_remote")
-func hand_hide():
+func hand_hide(item):
 	if $Camera3D/Hand.visible:
 		$Camera3D/Hand.hide()
 	if not $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".visible:
 		$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".show()
+	if not $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children()[item-1].visible:
+		$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children()[item-1].show()
+	for x in $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children():
+		if x != $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children()[item-1]:
+			if x.visible:
+				x.hide()
 	
 
 
@@ -200,7 +206,7 @@ func _physics_process(delta):
 	#i fucking give up
 	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".position=Vector3(-0.087,0.387,-0.137)-$"Node3D/Armature/Skeleton3D".get_bone_pose_position(8)
 	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".rotation = Vector3(-0.3927,0.733,-0.0541)-$"Node3D/Armature/Skeleton3D".get_bone_pose_rotation(8).get_euler()
-	hand_hide.rpc()
+	hand_hide.rpc(current_item)
 	if get_node("Camera3D/Hand").get_child(0).name == "BagOfSeeds":
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return

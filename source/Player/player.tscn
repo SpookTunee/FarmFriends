@@ -1,10 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://beqbayfw32u85"]
+[gd_scene load_steps=34 format=3 uid="uid://beqbayfw32u85"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_os5jd"]
 [ext_resource type="Script" path="res://Player/Scripts/Stats.gd" id="2_235ld"]
 [ext_resource type="Texture2D" uid="uid://c65wdgt6hb24n" path="res://Assets/Player/Manface.png" id="4_06gp4"]
 [ext_resource type="PackedScene" uid="uid://dux8g5ei8hovm" path="res://Tools/Hoe.tscn" id="4_ovib2"]
 [ext_resource type="PackedScene" uid="uid://dbxrwjwe0opkn" path="res://Assets/Tools/shovel.blend" id="5_6ts6x"]
+[ext_resource type="PackedScene" uid="uid://bt47np56cssrp" path="res://Assets/Tools/scythe.blend" id="5_67ciu"]
+[ext_resource type="PackedScene" uid="uid://h3qhigbmpvii" path="res://Assets/Tools/hoe.blend" id="5_ixohr"]
+[ext_resource type="ArrayMesh" uid="uid://dxgkkd27wfxug" path="res://Assets/Tools/seed_pouch.obj" id="6_my3h0"]
+[ext_resource type="PackedScene" uid="uid://bpsjx8mcj3g4" path="res://Assets/Tools/watering_can.blend" id="8_v1fkb"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrk0f"]
 
@@ -996,10 +1000,10 @@ disabled = true
 transform = Transform3D(1, 8.21634e-08, 8.72645e-08, 8.21634e-08, 0.06016, -0.998189, -8.72645e-08, 0.998189, 0.06016, 0, 0, -0.360121)
 
 [node name="Physical Bone upperarm_l" type="PhysicalBone3D" parent="Node3D/Armature/Skeleton3D"]
-transform = Transform3D(0.776951, -0.415145, -0.463984, 0.252317, -0.486796, 0.80859, -0.576982, -0.769252, -0.292391, 0.288138, 1.11987, 0.0208462)
+transform = Transform3D(0.776951, -0.415511, -0.463984, 0.252317, -0.487457, 0.80859, -0.576982, -0.769731, -0.292391, 0.288138, 1.11987, 0.0208462)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00230085, -0.00549311, 0.211435)
-body_offset = Transform3D(0.989302, -0.0310497, 0.151667, 0.146124, 0.115705, -0.954972, 0.0123631, 0.993334, 0.140063, -0.0345147, 0.202214, -0.0241861)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00229991, -0.00548846, 0.211434)
+body_offset = Transform3D(0.989302, -0.0312831, 0.151667, 0.146124, 0.116021, -0.954972, 0.0123631, 0.994138, 0.140063, -0.0345147, 0.202214, -0.0241861)
 bone_name = "upperarm.l"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -1026,10 +1030,10 @@ shape = SubResource("CapsuleShape3D_ggyky")
 disabled = true
 
 [node name="Physical Bone lowerleg_l" type="PhysicalBone3D" parent="Node3D/Armature/Skeleton3D"]
-transform = Transform3D(1.0088, 0.00908783, -1.99422e-05, -0.0031464, 0.351733, 0.938988, 0.00852104, -0.951812, 0.344669, 0.0995558, 0.217605, -0.0443675)
+transform = Transform3D(1.01513, 0.00908783, 1.7357e-05, -0.00316065, 0.351733, 0.938992, 0.00855135, -0.951812, 0.344669, 0.0995558, 0.217605, -0.0443675)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00014336, 0.00339867, 0.172018)
-body_offset = Transform3D(1.00882, 0.00640434, 0.00092035, 0.00171095, -0.12112, -0.993336, -0.00625543, 1.00741, -0.117147, -3.54573e-05, 0.171283, 0.0167266)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000148786, 0.0033985, 0.172017)
+body_offset = Transform3D(1.01515, 0.00640434, 0.000957651, 0.00172172, -0.12112, -0.99334, -0.00627088, 1.00741, -0.117147, -3.54573e-05, 0.171283, 0.0167266)
 bone_name = "lowerleg.l"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -1058,6 +1062,20 @@ disabled = true
 [node name="Hand2" type="Node3D" parent="Node3D/Armature/Skeleton3D/Physical Bone upperarm_r"]
 transform = Transform3D(-0.691153, -0.421226, -0.587487, -0.436991, -0.40387, 0.803912, -0.575789, 0.812138, 0.0950706, 0.353327, -0.225078, -0.357649)
 visible = false
+
+[node name="hoe" parent="Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2" instance=ExtResource("5_ixohr")]
+transform = Transform3D(0.53843, -0.0993352, -0.836796, 0.139404, 0.989846, -0.0278049, 0.83106, -0.101682, 0.54681, -0.032459, 0.254342, -0.0168509)
+
+[node name="SeedPouch" type="MeshInstance3D" parent="Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2"]
+transform = Transform3D(0.179261, -0.013414, 0.00925282, 0.0106856, 0.173925, 0.0451224, -0.0123031, -0.0443878, 0.174007, -0.0728523, 0.175259, -0.0651048)
+mesh = ExtResource("6_my3h0")
+skeleton = NodePath("../../../../../..")
+
+[node name="scythe" parent="Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2" instance=ExtResource("5_67ciu")]
+transform = Transform3D(-0.704865, 0.0602349, -0.249073, 0.154151, 0.682006, -0.271306, 0.204703, -0.306172, -0.653342, -0.0278949, 0.0822429, -0.0220832)
+
+[node name="watering_can" parent="Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2" instance=ExtResource("8_v1fkb")]
+transform = Transform3D(-0.0090903, 0.000396241, 0.504918, 0.324091, 0.387247, 0.00553086, -0.387179, 0.324138, -0.0072249, -0.00870296, -0.149328, -0.200007)
 
 [node name="shovel" parent="Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2" instance=ExtResource("5_6ts6x")]
 transform = Transform3D(0.755844, -0.215254, 0.618402, -0.049272, 0.922471, 0.381881, -0.65314, -0.319085, 0.686642, -0.0870192, 0.386935, -0.136923)
