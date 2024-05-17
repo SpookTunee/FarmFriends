@@ -29,6 +29,10 @@ var quotaCheck : bool = true
 var addCheck : bool = false
 var plsCheck : bool = true
 var canFarm: bool = false
+var knockbackX : float = 0.0
+var knockbackY : float = 0.0
+var isPPactive : bool = false
+var shaderCheck : bool = true
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -249,6 +253,18 @@ func _physics_process(delta):
 	if Global.day > 1:
 		quotacheck(delta)
 	payQuota()
+	
+	reset_mat.rpc()
+	
+	
+
+@rpc("call_local")
+func reset_mat():
+	if get_node("Node3D/Armature/Skeleton3D").get_child(0).get_material_override() != null:
+		if get_node("Camera3D/Hand").get_child(0).name != "invis":
+			var skel = get_node("Node3D/Armature/Skeleton3D")
+			for i in range(0, skel.get_child_count()):
+				skel.get_child(i).set_material_override(null)
 
 
 func mov_sprint(delta):
@@ -322,13 +338,13 @@ func mov_dirs():
 	if direction:
 		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "walk")) and $JumpTimer2.is_stopped():
 			walk_animation.rpc()
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * SPEED + knockbackX
+		velocity.z = direction.z * SPEED + knockbackY
 	else:
 		if is_on_floor() and ((not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation != "idle"))) and $JumpTimer2.is_stopped():
 			idle_animation.rpc()
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED) + knockbackX
+		velocity.z = move_toward(velocity.z, 0, SPEED) + knockbackY
 
 		
 @rpc("call_local","any_peer","reliable")
@@ -477,3 +493,15 @@ func payQuota():
 					var due = Global.quotaPrice + addedQuota - $Stats.moneyPaid
 					$Stats.money -= due
 					$Stats.moneyPaid += due
+
+
+func pushPull(direction: Vector3, delta):
+	self.velocity.y += direction.y * 0.7
+	knockbackX = direction.x
+	knockbackY = direction.z
+	isPPactive = true
+	
+func resetKnock():
+	knockbackX = 0
+	knockbackY = 0
+
