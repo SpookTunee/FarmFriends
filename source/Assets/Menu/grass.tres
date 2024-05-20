@@ -1,4 +1,11 @@
-[gd_resource type="VisualShader" load_steps=24 format=3 uid="uid://7v11fqkf6wxa"]
+[gd_resource type="VisualShader" load_steps=26 format=3 uid="uid://7v11fqkf6wxa"]
+
+[sub_resource type="VisualShaderNodeDistanceFade" id="VisualShaderNodeDistanceFade_gkto7"]
+default_input_values = [0, 0.0, 1, 65.0]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_rbf4c"]
+default_input_values = [0, 1.0, 1, 0.0]
+operator = 1
 
 [sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_ulhdr"]
 default_input_values = [0, 0.0, 1, 1.0, 2, 0.0]
@@ -180,6 +187,17 @@ void fragment() {
 	vec3 n_out7p0 = mix(vec3(n_out8p0.xyz), vec3(n_out9p0.xyz), vec3(n_out6p0));
 
 
+// DistanceFade:10
+	float n_in10p0 = 0.00000;
+	float n_in10p1 = 65.00000;
+	float n_out10p0 = clamp(smoothstep(n_in10p0, n_in10p1,-VERTEX.z),0.0,1.0);
+
+
+// FloatOp:11
+	float n_in11p0 = 1.00000;
+	float n_out11p0 = n_in11p0 - n_out10p0;
+
+
 // FloatConstant:3
 	float n_out3p0 = 0.000000;
 
@@ -193,6 +211,7 @@ void fragment() {
 
 // Output:0
 	ALBEDO = n_out7p0;
+	ALPHA = n_out11p0;
 	ROUGHNESS = n_out3p0;
 	NORMAL = n_out2p0;
 	NORMAL_MAP = n_out2p0;
@@ -200,6 +219,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-530.873, -114.385)
 modes/cull = 2
 modes/diffuse = 3
 nodes/vertex/0/position = Vector2(1540, 80)
@@ -250,4 +270,8 @@ nodes/fragment/8/node = SubResource("VisualShaderNodeColorParameter_8cy5b")
 nodes/fragment/8/position = Vector2(-1200, -180)
 nodes/fragment/9/node = SubResource("VisualShaderNodeColorParameter_jydnl")
 nodes/fragment/9/position = Vector2(-1340, 240)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 8, 2, 0, 0, 9, 3, 0, 0, 3, 4, 0, 5, 0, 5, 1, 6, 0, 6, 0, 7, 2, 7, 0, 0, 0, 8, 0, 7, 0, 9, 0, 7, 1)
+nodes/fragment/10/node = SubResource("VisualShaderNodeDistanceFade_gkto7")
+nodes/fragment/10/position = Vector2(-580, -180)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_rbf4c")
+nodes/fragment/11/position = Vector2(-58.7211, -110.701)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 8, 2, 0, 0, 9, 3, 0, 0, 3, 4, 0, 5, 0, 5, 1, 6, 0, 6, 0, 7, 2, 7, 0, 0, 0, 8, 0, 7, 0, 9, 0, 7, 1, 10, 0, 11, 1, 11, 0, 0, 1)
