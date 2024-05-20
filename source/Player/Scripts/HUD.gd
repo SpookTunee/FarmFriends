@@ -13,4 +13,4 @@ func _process(delta):
 	$Quota.text = "DUE: " + str(Global.quotaPrice + get_parent().addedQuota - get_node("../Stats").moneyPaid)
 	
 	
-	print(Global.quotaPrice)
+	
