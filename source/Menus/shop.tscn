@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://yncwijbbpmb2"]
+[gd_scene load_steps=10 format=3 uid="uid://yncwijbbpmb2"]
 
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="1_isg4c"]
 [ext_resource type="Script" path="res://Menus/Scripts/shop.gd" id="1_ng0yv"]
@@ -14,9 +14,6 @@ bg_color = Color(0.172549, 0.172549, 0.172549, 0.827451)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfwor"]
 bg_color = Color(0.172549, 0.172549, 0.172549, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3oq2m"]
-bg_color = Color(0.172549, 0.172549, 0.172549, 0.564706)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igbb2"]
 bg_color = Color(0.172549, 0.172549, 0.172549, 0.564706)
@@ -108,11 +105,13 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 60
 alignment = 1
 
-[node name="basic_hoe" type="Panel" parent="HBoxContainer/Tools/Tools"]
+[node name="basic_hoe" type="Button" parent="HBoxContainer/Tools/Tools"]
 custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_3oq2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
 
 [node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Tools/Tools/basic_hoe"]
 layout_mode = 1
@@ -190,11 +189,13 @@ theme_override_fonts/font = ExtResource("1_isg4c")
 theme_override_font_sizes/font_size = 70
 text = "450 WEU"
 
-[node name="fast_hoe" type="Panel" parent="HBoxContainer/Tools/Tools"]
+[node name="fast_hoe" type="Button" parent="HBoxContainer/Tools/Tools"]
 custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_3oq2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
 
 [node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Tools/Tools/fast_hoe"]
 layout_mode = 1
@@ -270,11 +271,13 @@ theme_override_fonts/font = ExtResource("1_isg4c")
 theme_override_font_sizes/font_size = 70
 text = "3500 WEU"
 
-[node name="shovel" type="Panel" parent="HBoxContainer/Tools/Tools"]
+[node name="shovel" type="Button" parent="HBoxContainer/Tools/Tools"]
 custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_3oq2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
 
 [node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Tools/Tools/shovel"]
 layout_mode = 1
@@ -349,11 +352,13 @@ theme_override_fonts/font = ExtResource("1_isg4c")
 theme_override_font_sizes/font_size = 70
 text = "650 WEU"
 
-[node name="boots" type="Panel" parent="HBoxContainer/Tools/Tools"]
+[node name="boots" type="Button" parent="HBoxContainer/Tools/Tools"]
 custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_3oq2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
 
 [node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Tools/Tools/boots"]
 layout_mode = 1
