@@ -22,6 +22,7 @@ var isShop : bool = false
 var health : int = 2
 var current_item : int = 1
 
+var handhidden : bool = false
 var jumping : bool = false
 var quotaSecond : bool = false
 var addedQuota : float = 0
@@ -29,7 +30,10 @@ var quotaCheck : bool = true
 var addCheck : bool = false
 var plsCheck : bool = true
 var canFarm: bool = false
-
+var knockbackX : float = 0.0
+var knockbackY : float = 0.0
+var isPPactive : bool = false
+var shaderCheck : bool = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
@@ -116,7 +120,6 @@ func _input(event):
 		return
 	if pause_movement: return
 	var ncams = camera_sense * camera_sense_multiplier
-	print($RagdollTimer.is_stopped())
 	if $RagdollTimer.is_stopped():
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x * ncams)
@@ -125,6 +128,49 @@ func _input(event):
 
 func change_sensitivity(sense):
 	camera_sense_multiplier = sense/50.0 + .03
+	
+@rpc("call_remote")
+func hand_hide(item):
+	if $Camera3D/Hand.visible:
+		$Camera3D/Hand.hide()
+	if not $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".visible:
+		$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".show()
+	if not $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children()[item-1].visible:
+		$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children()[item-1].show()
+	for x in $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children():
+		if x != $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children()[item-1]:
+			if x.visible:
+				x.hide()
+	
+
+
+@rpc("call_remote")
+func hoe_animation_remote():
+	pass
+
+@rpc("call_remote")
+func seed_bag_animation_remote():
+	pass
+
+@rpc("call_remote")
+func scythe_animation_remote():
+	pass
+
+@rpc("call_remote")
+func watering_can_animation_remote():
+	pass
+
+@rpc("call_remote")
+func shovel_animation_remote():
+	pass
+
+@rpc("call_remote")
+func land_mine_animation():
+	pass
+	
+@rpc("call_remote")
+func vaccum_gun_animation():
+	pass
 
 @rpc("call_local","any_peer","reliable")
 func switch_hand(id):
@@ -157,6 +203,10 @@ func switch_hand(id):
 		Hand.add_child(nscn)
 
 func _physics_process(delta):
+	#i fucking give up
+	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".position=Vector3(-0.087,0.387,-0.137)-$"Node3D/Armature/Skeleton3D".get_bone_pose_position(8)
+	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".rotation = Vector3(-0.3927,0.733,-0.0541)-$"Node3D/Armature/Skeleton3D".get_bone_pose_rotation(8).get_euler()
+	hand_hide.rpc(current_item)
 	if get_node("Camera3D/Hand").get_child(0).name == "BagOfSeeds":
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
@@ -249,6 +299,18 @@ func _physics_process(delta):
 	if Global.day > 1:
 		quotacheck(delta)
 	payQuota()
+	
+	reset_mat.rpc()
+	
+	
+
+@rpc("call_local")
+func reset_mat():
+	if get_node("Node3D/Armature/Skeleton3D").get_child(0).get_material_override() != null:
+		if get_node("Camera3D/Hand").get_child(0).name != "invis":
+			var skel = get_node("Node3D/Armature/Skeleton3D")
+			for i in range(0, skel.get_child_count()):
+				skel.get_child(i).set_material_override(null)
 
 
 func mov_sprint(delta):
@@ -322,13 +384,13 @@ func mov_dirs():
 	if direction:
 		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "walk")) and $JumpTimer2.is_stopped():
 			walk_animation.rpc()
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * SPEED + knockbackX
+		velocity.z = direction.z * SPEED + knockbackY
 	else:
 		if is_on_floor() and ((not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation != "idle"))) and $JumpTimer2.is_stopped():
 			idle_animation.rpc()
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED) + knockbackX
+		velocity.z = move_toward(velocity.z, 0, SPEED) + knockbackY
 
 		
 @rpc("call_local","any_peer","reliable")
@@ -427,7 +489,8 @@ func shop():
 
 
 func quotacheck(delta):
-	if Global.get_day_name() != "Sunday":
+	
+	if Global.get_day_name() != "Monday" && (Global.dayfloat - float(Global.day)) < delta:
 		quotaCheck = true
 		
 	if Global.get_day_name() == "Monday":
@@ -461,8 +524,10 @@ func quotadue(price : float, delta):
 			addedQuota = Global.quotaPrice * 0.5
 			quotaSecond = true
 	else:
-		print("You dieded")
-		#you lose :( by explosion
+		if plsCheck:
+			print("You dieded")
+			$Explosion.play(2)
+			#you lose :( by explosion
 	
 
 
@@ -477,3 +542,15 @@ func payQuota():
 					var due = Global.quotaPrice + addedQuota - $Stats.moneyPaid
 					$Stats.money -= due
 					$Stats.moneyPaid += due
+
+
+func pushPull(direction: Vector3, delta):
+	self.velocity.y += direction.y * 0.7
+	knockbackX = direction.x
+	knockbackY = direction.z
+	isPPactive = true
+	
+func resetKnock():
+	knockbackX = 0
+	knockbackY = 0
+

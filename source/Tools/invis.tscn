@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://23xkwsxrea3x"]
+
+[ext_resource type="Script" path="res://Tools/invis.gd" id="1_emnpp"]
+
+[node name="invis" type="Node3D"]
+script = ExtResource("1_emnpp")
