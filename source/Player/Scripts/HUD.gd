@@ -11,3 +11,6 @@ func _process(delta):
 	$Inventory/Mushrooms.text = str(get_node("../Stats").crop_counts[Global.Plants.MUSHROOM]) + " Mushrooms"
 	$Inventory/Money.text = "$" + str(get_node("../Stats").money)
 	$Quota.text = "DUE: " + str(Global.quotaPrice + get_parent().addedQuota - get_node("../Stats").moneyPaid)
+	
+	
+	print(Global.quotaPrice)

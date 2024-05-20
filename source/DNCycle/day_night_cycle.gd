@@ -33,8 +33,9 @@ func _process(delta):
 		
 	
 	if Global.get_day_name() == "Monday" && check && Global.day > 3:
+		print("i")
 		check = false
-		Global.quotaPrice *= 1 + 360
+		Global.quotaPrice += 360
 		
-	if Global.get_day_name() != "Monday":
+	if Global.get_day_name() != "Monday" && Global.get_day_name() != "Sunday":
 		check = true

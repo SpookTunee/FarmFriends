@@ -489,7 +489,8 @@ func shop():
 
 
 func quotacheck(delta):
-	if Global.get_day_name() != "Sunday":
+	
+	if Global.get_day_name() != "Monday" && (Global.dayfloat - float(Global.day)) < delta:
 		quotaCheck = true
 		
 	if Global.get_day_name() == "Monday":
@@ -523,8 +524,10 @@ func quotadue(price : float, delta):
 			addedQuota = Global.quotaPrice * 0.5
 			quotaSecond = true
 	else:
-		print("You dieded")
-		#you lose :( by explosion
+		if plsCheck:
+			print("You dieded")
+			$Explosion.play(2)
+			#you lose :( by explosion
 	
 
 
