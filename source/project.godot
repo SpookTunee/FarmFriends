@@ -13,6 +13,8 @@ config_version=5
 config/name="First Draft"
 run/main_scene="res://World/world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]

@@ -101,6 +101,7 @@ func add_player(id):
 	add_child(player)
 	Global.players.append(player)
 	zone_count += 1
+	player.hand_hide.rpc(1)
 
 func upnp_settup():
 	var upnp = UPNP.new()
