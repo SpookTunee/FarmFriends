@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ddeupk73o12qq"
+path="res://.godot/imported/landmine.obj-84a93459539a66c969ecbd1346a5f734.mesh"
+
+[deps]
+
+files=["res://.godot/imported/landmine.obj-84a93459539a66c969ecbd1346a5f734.mesh"]
+
+source_file="res://Assets/Tools/landmine.obj"
+dest_files=["res://.godot/imported/landmine.obj-84a93459539a66c969ecbd1346a5f734.mesh", "res://.godot/imported/landmine.obj-84a93459539a66c969ecbd1346a5f734.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
