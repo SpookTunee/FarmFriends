@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsnpsyyyfiiv3"]
+
+[ext_resource type="PackedScene" uid="uid://cbfryq0kwdqyt" path="res://Assets/Environment/tree.blend" id="1_ej8b2"]
+[ext_resource type="Material" uid="uid://bwib7lnylncmj" path="res://Assets/Environment/treeLeaves.tres" id="2_go1fe"]
+
+[node name="tree" instance=ExtResource("1_ej8b2")]
+
+[node name="Cone" parent="." index="1"]
+material_override = ExtResource("2_go1fe")
+
+[node name="Cone_002" parent="." index="2"]
+material_override = ExtResource("2_go1fe")
+
+[node name="Cone_003" parent="." index="3"]
+material_override = ExtResource("2_go1fe")
+
+[node name="Cone_001" parent="." index="4"]
+material_override = ExtResource("2_go1fe")

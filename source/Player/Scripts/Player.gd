@@ -49,7 +49,11 @@ func _ready():
 	var hud = load("res://Player/hud.tscn").instantiate()
 	add_child(hud)
 	request_mp_spawned.rpc()
+	request_hand_hide.rpc()
 	
+@rpc("call_local","any_peer","unreliable")
+func request_hand_hide():
+	hand_hide.rpc(current_item)
 	
 @rpc("call_remote","authority","reliable")
 func request_mp_spawned():
@@ -129,7 +133,7 @@ func _input(event):
 func change_sensitivity(sense):
 	camera_sense_multiplier = sense/50.0 + .03
 	
-@rpc("call_remote")
+@rpc("call_remote","authority","unreliable")
 func hand_hide(item):
 	if $Camera3D/Hand.visible:
 		$Camera3D/Hand.hide()
@@ -201,12 +205,12 @@ func switch_hand(id):
 		var nscn = shovel.instantiate()
 		nscn.name = "Shovel"
 		Hand.add_child(nscn)
+	hand_hide.rpc(current_item)
 
 func _physics_process(delta):
 	#i fucking give up
 	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".position=Vector3(-0.087,0.387,-0.137)-$"Node3D/Armature/Skeleton3D".get_bone_pose_position(8)
 	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".rotation = Vector3(-0.3927,0.733,-0.0541)-$"Node3D/Armature/Skeleton3D".get_bone_pose_rotation(8).get_euler()
-	hand_hide.rpc(current_item)
 	if get_node("Camera3D/Hand").get_child(0).name == "BagOfSeeds":
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return

@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcgwy6x2mj4yx"]
+[gd_scene load_steps=10 format=3 uid="uid://bcgwy6x2mj4yx"]
 
 [ext_resource type="Script" path="res://Player/Scripts/HUD.gd" id="1_5qcav"]
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="2_ad6ml"]
 [ext_resource type="Texture2D" uid="uid://bifh8ml83jcuh" path="res://icon.svg" id="3_5wt4m"]
+[ext_resource type="Texture2D" uid="uid://c2agd0hnrdd6n" path="res://Assets/Icons/hoeicon.png" id="3_p6yv7"]
+[ext_resource type="Texture2D" uid="uid://uq83l2o45okh" path="res://Assets/Icons/scytheicon.png" id="4_flynk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yfxox"]
 font_size = 64
@@ -155,7 +157,37 @@ grow_vertical = 2
 [node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe/Control"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_5wt4m")
+texture = ExtResource("3_p6yv7")
+
+[node name="Control2" type="Control" parent="Hotbar/Hoe"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe/Control2"]
+modulate = Color(1, 1, 1, 0.721569)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_flynk")
+
+[node name="Control3" type="Control" parent="Hotbar/Hoe"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe/Control3"]
+modulate = Color(1, 1, 1, 0.721569)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_flynk")
 
 [node name="Hoe2" type="ColorRect" parent="Hotbar"]
 custom_minimum_size = Vector2(120, 120)
@@ -193,86 +225,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe3/Control"]
-modulate = Color(1, 1, 1, 0.721569)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_5wt4m")
-
-[node name="Hoe4" type="ColorRect" parent="Hotbar"]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-color = Color(1, 1, 1, 0.458824)
-
-[node name="Control" type="Control" parent="Hotbar/Hoe4"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe4/Control"]
-modulate = Color(1, 1, 1, 0.721569)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_5wt4m")
-
-[node name="Hoe5" type="ColorRect" parent="Hotbar"]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-color = Color(1, 1, 1, 0.458824)
-
-[node name="Control" type="Control" parent="Hotbar/Hoe5"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe5/Control"]
-modulate = Color(1, 1, 1, 0.721569)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_5wt4m")
-
-[node name="Hoe6" type="ColorRect" parent="Hotbar"]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-color = Color(1, 1, 1, 0.458824)
-
-[node name="Control" type="Control" parent="Hotbar/Hoe6"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe6/Control"]
-modulate = Color(1, 1, 1, 0.721569)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_5wt4m")
-
-[node name="Hoe7" type="ColorRect" parent="Hotbar"]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-color = Color(1, 1, 1, 0.458824)
-
-[node name="Control" type="Control" parent="Hotbar/Hoe7"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe7/Control"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_5wt4m")
@@ -317,9 +269,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 208.0
-offset_top = 565.0
-offset_right = -536.0
+offset_left = 461.0
+offset_top = 569.0
+offset_right = -463.0
 offset_bottom = -191.0
 grow_horizontal = 2
 grow_vertical = 2

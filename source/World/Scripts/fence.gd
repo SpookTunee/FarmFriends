@@ -12,7 +12,7 @@ func _ready():
 	for i in get_children():
 		var pf = i.get_node("PathFollow3D")
 		pf.progress_ratio = 1.0
-		max.append(int(pf.progress)*0.84)
+		max.append(int(pf.progress)*0.85)
 		pf.progress_ratio = 0.0
 		prev.append(null)
 		pim.append(true)
