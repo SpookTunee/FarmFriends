@@ -36,6 +36,7 @@ var knockbackX : float = 0.0
 var knockbackY : float = 0.0
 var isPPactive : bool = false
 var shaderCheck : bool = true
+var prevloc: int = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
@@ -224,6 +225,9 @@ func _physics_process(delta):
 		$"Node3D/Armature/Skeleton3D/Physical Bone Body".global_position = $Node3D.global_position
 		$"Node3D/Armature/Skeleton3D/Physical Bone Body/Camera3D".look_at(ragdoll_opos)
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
+	
+	handle_msgs()
+	
 	ticks += 1
 	if $RagdollTimer.is_stopped():
 		stopragdoll.rpc()
@@ -573,12 +577,26 @@ func payQuota():
 
 
 func pushPull(direction: Vector3, delta):
-	self.velocity.y += direction.y * 0.7
-	knockbackX = direction.x
-	knockbackY = direction.z
-	isPPactive = true
+	#self.velocity.y += direction.y * 0.7
+	#knockbackX = direction.x
+	#knockbackY = direction.z
+	#isPPactive = true
+	self.velocity += direction
 	
-func resetKnock():
-	knockbackX = 0
-	knockbackY = 0
+func zone_alert(id):
+	var msg = "Now Entering "
+	msg += ["The Marketplace","Plot One","Plot Two","Plot Three","Plot Four"][id]
+	get_node("HUD").send_unique_chat(msg)
+	
+func handle_msgs():
+	for i in $Hitbox.get_overlapping_areas():
+		if i.get_parent().name == "zones":
+			var q = int(i.name.replace("FarmZone",""))
+			if prevloc != q:
+				zone_alert(q)
+				prevloc = int(q)
+	
+#func resetKnock():
+	#knockbackX = 0
+	#knockbackY = 0
 

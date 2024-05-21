@@ -23,7 +23,7 @@ func _on_detect_zone_area_entered(area):
 		if i.name == "Hitbox":
 		
 					
-			force_dir = (Vector3(0,0,0) - Vector3(global_position.x - (i.get_parent().global_position.x), -(global_position.y - (i.get_parent().global_position.y)) - 0.3, global_position.z - (i.get_parent().global_position.z))) * 20 # finds direction
+			force_dir = (Vector3(0,0,0) - Vector3(global_position - i.get_parent().global_position)).normalized() * 10 # finds direction
 				#print(force_dir)
 				#force_dir = Vector3(0,0,0) - force_dir
 			
@@ -35,11 +35,11 @@ func _on_detect_zone_area_entered(area):
 			
 
 
-
-func _on_explosion_zone_area_exited(area):
-	if done == true:
-		if area.name == "Hitbox":
-			area.get_parent().resetKnock()
+#
+#func _on_explosion_zone_area_exited(area):
+	#if done == true:
+		#if area.name == "Hitbox":
+			#area.get_parent().resetKnock()
 		
 				
 				
@@ -47,9 +47,9 @@ func _on_explosion_zone_area_exited(area):
 	
 
 func _on_backup_timeout():
-	for i in $ExplosionZone.get_overlapping_areas():
-		if i.name == "Hitbox":
-			i.get_parent().resetKnock()
+	#for i in $ExplosionZone.get_overlapping_areas():
+		#if i.name == "Hitbox":
+			#i.get_parent().resetKnock()
 	remove.rpc()
 
 

@@ -1,8 +1,10 @@
 extends Control
 
-
+var ticks: int = 0
+var tpos: int =  0
 
 func _process(delta):
+	ticks += 1
 	$Day.text = Global.get_day_name()
 	$Inventory/Wheat.text = str(get_node("../Stats").crop_counts[Global.Plants.WHEAT]) +  "   "
 	$Inventory/Corn.text = str(get_node("../Stats").crop_counts[Global.Plants.CORN]) + "   "
@@ -11,6 +13,9 @@ func _process(delta):
 	$Inventory/Mushrooms.text = str(get_node("../Stats").crop_counts[Global.Plants.MUSHROOM]) + "   "
 	$Inventory/Money.text = str(get_node("../Stats").money) + "   "
 	$Quota.text = "DUE: " + str(Global.quotaPrice + get_parent().addedQuota - get_node("../Stats").moneyPaid)
-	#if get_parent().
+	if (tpos + 200) - ticks < 0:
+		$Messages/RichTextLabel.text = ""
 	
-	
+func send_unique_chat(msg: String):
+	tpos = ticks
+	$Messages/RichTextLabel.text += msg + "\n"
