@@ -1,15 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvce6gjdlos3m"]
+[gd_scene load_steps=7 format=3 uid="uid://dvce6gjdlos3m"]
 
-[ext_resource type="PackedScene" uid="uid://cbfryq0kwdqyt" path="res://Assets/Environment/tree.blend" id="1_jfpwc"]
+[ext_resource type="ArrayMesh" uid="uid://o7vhssxq6n84" path="res://Assets/Environment/tree.obj" id="1_lk24i"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_sk1d1"]
-height = 6.25761
-radius = 0.207323
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3luy1"]
+albedo_color = Color(0.509804, 0.313726, 0.0666667, 1)
 
-[node name="Tree" type="StaticBody3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38iqf"]
+albedo_color = Color(0.172549, 0.368627, 0.2, 1)
 
-[node name="tree" parent="." instance=ExtResource("1_jfpwc")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j54t7"]
+albedo_color = Color(0.172549, 0.368627, 0.2, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12494, 0)
-shape = SubResource("CylinderShape3D_sk1d1")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qqmm"]
+albedo_color = Color(0.172549, 0.368627, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbaqe"]
+albedo_color = Color(0.172549, 0.368627, 0.2, 1)
+
+[node name="Tree" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = ExtResource("1_lk24i")
+surface_material_override/0 = SubResource("StandardMaterial3D_3luy1")
+surface_material_override/1 = SubResource("StandardMaterial3D_38iqf")
+surface_material_override/2 = SubResource("StandardMaterial3D_j54t7")
+surface_material_override/3 = SubResource("StandardMaterial3D_0qqmm")
+surface_material_override/4 = SubResource("StandardMaterial3D_jbaqe")
