@@ -1,10 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcgwy6x2mj4yx"]
+[gd_scene load_steps=18 format=3 uid="uid://bcgwy6x2mj4yx"]
 
 [ext_resource type="Script" path="res://Player/Scripts/HUD.gd" id="1_5qcav"]
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="2_ad6ml"]
-[ext_resource type="Texture2D" uid="uid://bifh8ml83jcuh" path="res://icon.svg" id="3_5wt4m"]
+[ext_resource type="Texture2D" uid="uid://cwbtemh1yyap4" path="res://Assets/Icons/wheaticon.png" id="2_xvpng"]
 [ext_resource type="Texture2D" uid="uid://c2agd0hnrdd6n" path="res://Assets/Icons/hoeicon.png" id="3_p6yv7"]
+[ext_resource type="Texture2D" uid="uid://fl06lmrhtve8" path="res://Assets/Icons/cornicon.png" id="3_rniby"]
+[ext_resource type="Texture2D" uid="uid://b5ueupi1t0bay" path="res://Assets/Icons/potatoicon.png" id="4_a1nq4"]
 [ext_resource type="Texture2D" uid="uid://uq83l2o45okh" path="res://Assets/Icons/scytheicon.png" id="4_flynk"]
+[ext_resource type="Texture2D" uid="uid://d0w0vrr2mfgob" path="res://Assets/Icons/carroticon.png" id="5_7fkpf"]
+[ext_resource type="Texture2D" uid="uid://dgaqc5dbkmf2l" path="res://Assets/Icons/shovelicon.png" id="5_g2hdg"]
+[ext_resource type="Texture2D" uid="uid://di023ajbklmcl" path="res://Assets/Icons/seedpouchicon.png" id="6_1rsef"]
+[ext_resource type="Texture2D" uid="uid://xfnavm3iaf0n" path="res://Assets/Icons/mushroomicon.png" id="6_p26ya"]
+[ext_resource type="Texture2D" uid="uid://cv67qr5jj1vv3" path="res://Assets/Icons/weuicon.png" id="7_3n161"]
+[ext_resource type="Texture2D" uid="uid://cb2te2ndklyjx" path="res://Assets/Icons/kandmineicon.png" id="13_7i8as"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yfxox"]
 font_size = 64
@@ -40,57 +48,87 @@ text = "Sunday"
 label_settings = SubResource("LabelSettings_yfxox")
 
 [node name="Inventory" type="VBoxContainer" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -556.0
-offset_top = 25.0
-offset_right = -25.0
-offset_bottom = 774.0
+offset_left = -549.0
+offset_top = 26.0
+offset_right = -18.0
+offset_bottom = 430.27
 grow_horizontal = 0
 
 [node name="Wheat" type="Label" parent="Inventory"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Wheat"
+theme_override_font_sizes/font_size = 30
+text = "0   "
 horizontal_alignment = 2
+
+[node name="Wheaticon" type="Sprite2D" parent="Inventory/Wheat"]
+position = Vector2(532.25, 17.75)
+scale = Vector2(0.332031, 0.332031)
+texture = ExtResource("2_xvpng")
 
 [node name="Corn" type="Label" parent="Inventory"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Corn"
+theme_override_font_sizes/font_size = 30
+text = "0   "
 horizontal_alignment = 2
+
+[node name="Cornicon" type="Sprite2D" parent="Inventory/Corn"]
+position = Vector2(531, 17)
+scale = Vector2(0.367188, 0.367188)
+texture = ExtResource("3_rniby")
 
 [node name="Potatoes" type="Label" parent="Inventory"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Potatoes"
+theme_override_font_sizes/font_size = 30
+text = "0   "
 horizontal_alignment = 2
+
+[node name="Potatoicon" type="Sprite2D" parent="Inventory/Potatoes"]
+position = Vector2(532, 18)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("4_a1nq4")
 
 [node name="Carrots" type="Label" parent="Inventory"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Carrots"
+theme_override_font_sizes/font_size = 30
+text = "0   "
 horizontal_alignment = 2
+
+[node name="Carroticon" type="Sprite2D" parent="Inventory/Carrots"]
+position = Vector2(533, 19)
+scale = Vector2(0.335938, 0.335938)
+texture = ExtResource("5_7fkpf")
 
 [node name="Mushrooms" type="Label" parent="Inventory"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "0 Mushrooms"
+theme_override_font_sizes/font_size = 30
+text = "0   "
 horizontal_alignment = 2
+
+[node name="Mushroomicon" type="Sprite2D" parent="Inventory/Mushrooms"]
+position = Vector2(535, 20)
+scale = Vector2(0.316406, 0.316406)
+texture = ExtResource("6_p26ya")
 
 [node name="Spacer" type="Label" parent="Inventory"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 51
+theme_override_font_sizes/font_size = 30
 horizontal_alignment = 2
 
 [node name="Money" type="Label" parent="Inventory"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 51
-text = "$0
-"
+theme_override_font_sizes/font_size = 30
+text = "0   "
 horizontal_alignment = 2
+
+[node name="Weuicon" type="Sprite2D" parent="Inventory/Money"]
+position = Vector2(534, 22)
+scale = Vector2(0.289062, 0.289062)
+texture = ExtResource("7_3n161")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -131,12 +169,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -571.0
-offset_top = -174.0
-offset_right = 572.0
-offset_bottom = -54.0
+offset_left = -567.0
+offset_top = -154.0
+offset_right = 576.0
+offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Hoe" type="ColorRect" parent="Hotbar"]
@@ -160,6 +199,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_p6yv7")
 
 [node name="Control2" type="Control" parent="Hotbar/Hoe"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -171,10 +211,11 @@ grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe/Control2"]
 modulate = Color(1, 1, 1, 0.721569)
-scale = Vector2(0.75, 0.75)
+scale = Vector2(-0.75, 0.75)
 texture = ExtResource("4_flynk")
 
 [node name="Control3" type="Control" parent="Hotbar/Hoe"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -187,7 +228,7 @@ grow_vertical = 2
 [node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe/Control3"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("4_flynk")
+texture = ExtResource("5_g2hdg")
 
 [node name="Hoe2" type="ColorRect" parent="Hotbar"]
 custom_minimum_size = Vector2(120, 120)
@@ -207,7 +248,7 @@ grow_vertical = 2
 [node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe2/Control"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_5wt4m")
+texture = ExtResource("6_1rsef")
 
 [node name="Hoe3" type="ColorRect" parent="Hotbar"]
 custom_minimum_size = Vector2(120, 120)
@@ -227,7 +268,7 @@ grow_vertical = 2
 [node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe3/Control"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_5wt4m")
+texture = ExtResource("13_7i8as")
 
 [node name="Messages" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -257,10 +298,10 @@ shortcut_keys_enabled = false
 
 [node name="Quota" type="Label" parent="."]
 layout_mode = 1
-offset_left = 47.0
-offset_top = 121.0
-offset_right = 439.0
-offset_bottom = 220.0
+offset_left = 27.0
+offset_top = 105.0
+offset_right = 419.0
+offset_bottom = 204.0
 text = "DUE: "
 label_settings = SubResource("LabelSettings_3vkh8")
 
@@ -269,10 +310,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 461.0
-offset_top = 569.0
-offset_right = -463.0
-offset_bottom = -191.0
+offset_left = 444.0
+offset_top = 589.0
+offset_right = -434.0
+offset_bottom = -171.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
