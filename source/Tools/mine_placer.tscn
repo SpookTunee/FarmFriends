@@ -1,19 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://crxsapmronrre"]
 
 [ext_resource type="Script" path="res://Tools/mine_placer.gd" id="1_vnmy4"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_mn3mt"]
+[ext_resource type="ArrayMesh" uid="uid://bg3apkx04ajgr" path="res://Assets/Tools/landmine.obj" id="2_nch1g"]
 
 [node name="MinePlacer" type="Node3D"]
 script = ExtResource("1_vnmy4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.3905, 0, 0, 0, -0.0311654, 0, 0, 0, 0.3905, 0, 0, 0)
-mesh = SubResource("CylinderMesh_mn3mt")
+transform = Transform3D(-1.54, 0, -2.32534e-07, 0, 1.54, 0, 2.32534e-07, 0, -1.54, 0, 0.381049, 0)
+mesh = ExtResource("2_nch1g")
 
 [node name="Spawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.31772)
-
-[node name="Cd" type="Timer" parent="."]
-wait_time = 30.0
-one_shot = true

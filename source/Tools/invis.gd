@@ -17,5 +17,5 @@ func activate():
 @rpc("call_local")
 func grug():
 	var skeleton = get_parent().get_parent().get_parent().get_node("Node3D/Armature/Skeleton3D")
-	for i in range(0, skeleton.get_child_count()):
+	for i in range(0, 3):
 		skeleton.get_child(i).set_material_override(texture)

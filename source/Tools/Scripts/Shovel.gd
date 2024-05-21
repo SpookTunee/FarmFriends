@@ -16,7 +16,7 @@ func _process(delta):
 		for x in $Area3D.get_overlapping_areas():
 			if activated:
 				if x.name.substr(0, 3) == "Hit":
-					x.get_parent().recieve_damage.rpc_id(x.get_parent().get_multiplayer_authority())
+					x.get_parent().recieve_damage.rpc_id(x.get_parent().get_multiplayer_authority(),0.667)
 					activated = false
 			else:
 				break

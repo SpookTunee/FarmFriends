@@ -14,14 +14,16 @@ var seeds = preload("res://Tools/bag_of_seeds.tscn")
 var scythe = preload("res://Tools/scythe.tscn")
 var watering_can = preload("res://Tools/watering_can.tscn")
 var shovel = preload("res://Tools/shovel.tscn")
+var mine_placer = preload("res://Tools/mine_placer.tscn")
 var pause_movement = false
 var seed_bag_save = 0
 var plantcount : int = 0
-var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true,"5":true}
+var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true,"5":true, "6": true}
 var isShop : bool = false
 var health : int = 2
 var current_item : int = 1
-
+var is_ragdoll: bool = false
+var ragdoll_opos: Vector3 = Vector3(0,0,0)
 var handhidden : bool = false
 var jumping : bool = false
 var quotaSecond : bool = false
@@ -84,16 +86,16 @@ func request_mp_spawned():
 		#mps.append(sgs)
 	request_mp_spawned_callback.rpc_id(multiplayer.get_remote_sender_id(),mps)
 @rpc("any_peer", "call_local")
-func recieve_damage():
+func recieve_damage(amt):
 	if $IFrameTimer.is_stopped() and $RagdollTimer.is_stopped():
 		var childss
-		health -= 1
-		childss = get_node("HUD/HealthBar")
-		childss.value -=1
+		health -= amt
+		childss = get_node_or_null("HUD/HealthBar")
+		if childss: childss.value -= amt
 		if $RagdollTimer.is_stopped():
 			if health <= 0:
 				health = 2
-				childss.value = 2
+				if childss: childss.value = 2
 				death()
 		
 @rpc("call_remote","any_peer","reliable")
@@ -205,6 +207,11 @@ func switch_hand(id):
 		var nscn = shovel.instantiate()
 		nscn.name = "Shovel"
 		Hand.add_child(nscn)
+	if id == 6:
+		Hand.get_child(0).queue_free()
+		var nscn = mine_placer.instantiate()
+		nscn.name = "MinePlacer"
+		Hand.add_child(nscn)
 	hand_hide.rpc(current_item)
 
 func _physics_process(delta):
@@ -213,6 +220,9 @@ func _physics_process(delta):
 	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".rotation = Vector3(-0.3927,0.733,-0.0541)-$"Node3D/Armature/Skeleton3D".get_bone_pose_rotation(8).get_euler()
 	if get_node("Camera3D/Hand").get_child(0).name == "BagOfSeeds":
 		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
+	if is_ragdoll:
+		$"Node3D/Armature/Skeleton3D/Physical Bone Body".global_position = $Node3D.global_position
+		$"Node3D/Armature/Skeleton3D/Physical Bone Body/Camera3D".look_at(ragdoll_opos)
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
 	ticks += 1
 	if $RagdollTimer.is_stopped():
@@ -313,7 +323,7 @@ func reset_mat():
 	if get_node("Node3D/Armature/Skeleton3D").get_child(0).get_material_override() != null:
 		if get_node("Camera3D/Hand").get_child(0).name != "invis":
 			var skel = get_node("Node3D/Armature/Skeleton3D")
-			for i in range(0, skel.get_child_count()):
+			for i in range(0, 3):
 				skel.get_child(i).set_material_override(null)
 
 
@@ -348,7 +358,11 @@ func mov_hands():
 		if isunlocked["5"]:
 			current_item = 5
 			switch_hand.rpc(5)
-	if !canFarm and not (current_item == 5) and not (current_item == 4): return
+	elif Input.is_action_just_pressed("6"):
+		if isunlocked["6"]:
+			current_item = 6
+			switch_hand.rpc(6)
+	if !canFarm and not (current_item == 5) and not (current_item == 4) and not (current_item == 6): return
 	if current_item == 5:
 		if Input.is_action_just_pressed("m1"):
 			Hand.get_child(0).activate()
@@ -361,6 +375,11 @@ func death():
 	
 @rpc("call_local", "any_peer")
 func ragdoll():
+	is_ragdoll = true
+	ragdoll_opos = global_position
+	ragdoll_helper.call_deferred()
+
+func ragdoll_helper():
 	$"Node3D/Armature/Skeleton3D/Physical Bone Body/CollisionShape3D".disabled = false
 	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_l/CollisionShape3D".disabled = false
 	$"Node3D/Armature/Skeleton3D/Physical Bone upperleg_l/CollisionShape3D".disabled = false
@@ -371,7 +390,11 @@ func ragdoll():
 	$Node3D/Armature/Skeleton3D.physical_bones_start_simulation()
 
 @rpc("call_local", "any_peer")
-func stopragdoll():	
+func stopragdoll():
+	is_ragdoll = false
+	stopragdoll_helper.call_deferred()
+
+func stopragdoll_helper():
 	$Node3D/Armature/Skeleton3D.physical_bones_stop_simulation()
 	$"Node3D/Armature/Skeleton3D/Physical Bone Body/CollisionShape3D".disabled = true
 	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_l/CollisionShape3D".disabled = true
@@ -380,6 +403,7 @@ func stopragdoll():
 	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/CollisionShape3D".disabled = true
 	$"Node3D/Armature/Skeleton3D/Physical Bone upperleg_r/CollisionShape3D".disabled = true
 	$"Node3D/Armature/Skeleton3D/Physical Bone lowerleg_r/CollisionShape3D".disabled = true
+
 
 @rpc("call_remote","any_peer","reliable")
 func mov_dirs():
