@@ -23,12 +23,13 @@ func _on_detect_zone_area_entered(area):
 		if i.name == "Hitbox":
 		
 					
-			force_dir = (Vector3(0,0,0) - Vector3(global_position.x - (i.get_parent().global_position.x), -(global_position.y - (i.get_parent().global_position.y)) - 0.3, global_position.z - (i.get_parent().global_position.z))) * 100 # finds direction
+			force_dir = (Vector3(0,0,0) - Vector3(global_position.x - (i.get_parent().global_position.x), -(global_position.y - (i.get_parent().global_position.y)) - 0.3, global_position.z - (i.get_parent().global_position.z))) * 20 # finds direction
 				#print(force_dir)
 				#force_dir = Vector3(0,0,0) - force_dir
 			
 			$Explosion.play(1)
 			i.get_parent().pushPull(force_dir, deltaP)
+			i.get_parent().recieve_damage.rpc(2)
 			done = true
 			$Backup.start()
 			
