@@ -21,5 +21,22 @@ func send_unique_chat(msg: String):
 	$Messages/RichTextLabel.text += msg + "\n"
 
 func switch_hotbar_slot(slot : int, slot2 : int):
-	pass
+	if slot == 0:
+		for x in range($Hotbar/Hoe.get_children().size()):
+			if x == slot2:
+				$Hotbar/Hoe.get_child(x).show()
+			else:
+				$Hotbar/Hoe.get_child(x).hide()
+	if slot == 1:
+		for x in range($Hotbar/Hoe2.get_children().size()):
+			if x == slot2:
+				$Hotbar/Hoe2.get_child(x).show()
+			else:
+				$Hotbar/Hoe2.get_child(x).hide()
+	if slot == 2:
+		for x in range($Hotbar/Hoe3.get_children().size()):
+			if x == slot2:
+				$Hotbar/Hoe3.get_child(x).show()
+			else:
+				$Hotbar/Hoe3.get_child(x).hide()
 	
