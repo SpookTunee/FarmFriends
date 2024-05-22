@@ -19,3 +19,7 @@ func _process(delta):
 func send_unique_chat(msg: String):
 	tpos = ticks
 	$Messages/RichTextLabel.text += msg + "\n"
+
+func switch_hotbar_slot(slot : int, slot2 : int):
+	pass
+	
