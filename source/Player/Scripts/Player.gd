@@ -18,9 +18,8 @@ var mine_placer = preload("res://Tools/mine_placer.tscn")
 var pause_movement = false
 var seed_bag_save = 0
 var plantcount : int = 0
-var isunlocked: Dictionary = {"1":true,"2":true,"3":true,"4":true,"5":true, "6": true}
 var isShop : bool = false
-var health : int = 2
+var health : float = 2
 var current_item : int = 1
 var is_ragdoll: bool = false
 var ragdoll_opos: Vector3 = Vector3(0,0,0)
@@ -51,6 +50,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	var hud = load("res://Player/hud.tscn").instantiate()
 	add_child(hud)
+	get_node("HUD").send_unique_chat("Use WASD to move around (space for jump, shift for sprint),\nkeys 1-3 to access different item types in your hotbar,\nand scroll to access different items within that type.\nLeft click to use.",1000)
 	request_mp_spawned.rpc()
 	request_hand_hide.rpc()
 	
@@ -94,9 +94,9 @@ func recieve_damage(amt):
 		childss = get_node_or_null("HUD/HealthBar")
 		if childss: childss.value -= amt
 		if $RagdollTimer.is_stopped():
-			if health <= 0:
-				health = 2
-				if childss: childss.value = 2
+			if health <= 0.0:
+				health = 2.0
+				if childss: childss.value = 2.0
 				death()
 		
 @rpc("call_remote","any_peer","reliable")

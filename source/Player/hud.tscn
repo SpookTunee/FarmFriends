@@ -38,6 +38,34 @@ mouse_filter = 2
 mouse_force_pass_scroll_events = false
 script = ExtResource("1_5qcav")
 
+[node name="Messages" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0.698039)
+top_level = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -346.0
+offset_right = 640.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Messages"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("2_ad6ml")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+scroll_active = false
+scroll_following = true
+autowrap_mode = 1
+shortcut_keys_enabled = false
+
 [node name="Day" type="Label" parent="."]
 layout_mode = 0
 offset_left = 29.0
@@ -178,12 +206,12 @@ grow_vertical = 0
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Hoe" type="ColorRect" parent="Hotbar"]
+[node name="Tools" type="ColorRect" parent="Hotbar"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 color = Color(1, 1, 1, 0.458824)
 
-[node name="Control" type="Control" parent="Hotbar/Hoe"]
+[node name="Control" type="Control" parent="Hotbar/Tools"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -193,12 +221,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Tools/Control"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_p6yv7")
 
-[node name="Control2" type="Control" parent="Hotbar/Hoe"]
+[node name="Control2" type="Control" parent="Hotbar/Tools"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -209,12 +237,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe/Control2"]
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Tools/Control2"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(-0.75, 0.75)
 texture = ExtResource("4_flynk")
 
-[node name="Control3" type="Control" parent="Hotbar/Hoe"]
+[node name="Control3" type="Control" parent="Hotbar/Tools"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -225,17 +253,17 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe/Control3"]
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Tools/Control3"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_g2hdg")
 
-[node name="Hoe2" type="ColorRect" parent="Hotbar"]
+[node name="Seeds" type="ColorRect" parent="Hotbar"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 color = Color(1, 1, 1, 0.458824)
 
-[node name="Control" type="Control" parent="Hotbar/Hoe2"]
+[node name="Control" type="Control" parent="Hotbar/Seeds"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -245,17 +273,17 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe2/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Seeds/Control"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_1rsef")
 
-[node name="Hoe3" type="ColorRect" parent="Hotbar"]
+[node name="Misc" type="ColorRect" parent="Hotbar"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 color = Color(1, 1, 1, 0.458824)
 
-[node name="Control" type="Control" parent="Hotbar/Hoe3"]
+[node name="Control" type="Control" parent="Hotbar/Misc"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -265,36 +293,10 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Hoe3/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Misc/Control"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("13_7i8as")
-
-[node name="Messages" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -640.0
-offset_top = -346.0
-offset_right = 640.0
-offset_bottom = -74.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Messages"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource("2_ad6ml")
-theme_override_font_sizes/normal_font_size = 40
-bbcode_enabled = true
-scroll_active = false
-scroll_following = true
-autowrap_mode = 1
-shortcut_keys_enabled = false
 
 [node name="Quota" type="Label" parent="."]
 layout_mode = 1
