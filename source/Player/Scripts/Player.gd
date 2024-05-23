@@ -342,30 +342,30 @@ func mov_sprint(delta):
 
 
 func mov_hands():
-	if Input.is_action_just_pressed("1"):
-		if isunlocked["1"]:
-			current_item = 1
-			switch_hand.rpc(1)
-	elif Input.is_action_just_pressed("2"):
-		if isunlocked["2"]:
-			current_item = 2
-			switch_hand.rpc(2)
-	elif Input.is_action_just_pressed("3"):
-		if isunlocked["3"]:
-			current_item = 3
-			switch_hand.rpc(3)
-	elif Input.is_action_just_pressed("4"):
-		if isunlocked["4"]:
-			current_item = 4
-			switch_hand.rpc(4)	
-	elif Input.is_action_just_pressed("5"):
-		if isunlocked["5"]:
-			current_item = 5
-			switch_hand.rpc(5)
-	elif Input.is_action_just_pressed("6"):
-		if isunlocked["6"]:
-			current_item = 6
-			switch_hand.rpc(6)
+	#if Input.is_action_just_pressed("1"):
+		#if isunlocked["1"]:
+			#current_item = 1
+			#switch_hand.rpc(1)
+	#elif Input.is_action_just_pressed("2"):
+		#if isunlocked["2"]:
+			#current_item = 2
+			#switch_hand.rpc(2)
+	#elif Input.is_action_just_pressed("3"):
+		#if isunlocked["3"]:
+			#current_item = 3
+			#switch_hand.rpc(3)
+	#elif Input.is_action_just_pressed("4"):
+		#if isunlocked["4"]:
+			#current_item = 4
+			#switch_hand.rpc(4)	
+	#elif Input.is_action_just_pressed("5"):
+		#if isunlocked["5"]:
+			#current_item = 5
+			#switch_hand.rpc(5)
+	#elif Input.is_action_just_pressed("6"):
+		#if isunlocked["6"]:
+			#current_item = 6
+			#switch_hand.rpc(6)
 	if !canFarm and not (current_item == 5) and not (current_item == 4) and not (current_item == 6): return
 	if current_item == 5:
 		if Input.is_action_just_pressed("m1"):
