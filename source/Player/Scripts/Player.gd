@@ -36,6 +36,26 @@ var knockbackY : float = 0.0
 var isPPactive : bool = false
 var shaderCheck : bool = true
 var prevloc: int = 0
+var item_state: Dictionary = {
+	   "tools": {
+		"hoe": {"isunlocked":true},
+		"scythe": {"isunlocked":true},
+		"watering_can": {"isunlocked":true}
+	}, "seeds": {
+		"wheat": {"isunlocked":true},
+		"corn": {"isunlocked":false},
+		"potato": {"isunlocked":false},
+		"carrot": {"isunlocked":false},
+		"mushroom": {"isunlocked":false},
+	}, "misc":  {
+		"shovel": {"isunlocked":true},
+		#"vacuum": {"isunlocked":false},
+		"mine": {"isunlocked":false, "count": 0},
+	}, "current": {
+		"slot": "tools",
+		"id": "hoe"
+	}
+}
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
@@ -181,38 +201,12 @@ func vaccum_gun_animation():
 
 @rpc("call_local","any_peer","reliable")
 func switch_hand(id):
-	if id == 1:
-		Hand.get_child(0).queue_free()
-		var nscn = hoe.instantiate()
-		nscn.name = "Hoe"
-		Hand.add_child(nscn)
-	if id == 2:
-		Hand.get_child(0).queue_free()
-		var nscn = seeds.instantiate()
-		nscn.name = "BagOfSeeds"
-		Hand.add_child(nscn)
-		nscn.plant = seed_bag_save
-	if id == 3:
-		Hand.get_child(0).queue_free()
-		var nscn = scythe.instantiate()
-		nscn.name = "Scythe"
-		Hand.add_child(nscn)
-		nscn.init_pos()
-	if id == 4:
-		Hand.get_child(0).queue_free()
-		var nscn = watering_can.instantiate()
-		nscn.name = "WateringCan"
-		Hand.add_child(nscn)
-	if id == 5:
-		Hand.get_child(0).queue_free()
-		var nscn = shovel.instantiate()
-		nscn.name = "Shovel"
-		Hand.add_child(nscn)
-	if id == 6:
-		Hand.get_child(0).queue_free()
-		var nscn = mine_placer.instantiate()
-		nscn.name = "MinePlacer"
-		Hand.add_child(nscn)
+	if id["slot"] == "seeds":
+		return
+	Hand.get_child(0).queue_free()
+	var nscn = {"hoe":hoe,"scythe":scythe,"watering_can":watering_can,"shovel":shovel,"mine":mine_placer}.get(id["id"]).instantiate()
+	nscn.name = id["id"]
+	Hand.add_child(nscn)
 	hand_hide.rpc(current_item)
 
 func _physics_process(delta):
@@ -232,12 +226,16 @@ func _physics_process(delta):
 	if $RagdollTimer.is_stopped():
 		stopragdoll.rpc()
 	var zones = get_node("/root/World/zones").get_children()
+	var isin = false
 	for i in zones:
 		if $Hitbox.overlaps_area(i):
+			isin = true
 			if i.property_owner != self:
 				canFarm = false
 			else:
 				canFarm = i.farmable
+	if !isin:
+		canFarm = false
 
 	if Input.is_action_just_pressed("menu"):
 		if get_node_or_null("ShopMenu"):
@@ -339,39 +337,49 @@ func mov_sprint(delta):
 	else:
 		SPEED = 5.0
 
+func get_scroll_list(slot):
+	var tr = []
+	for i in item_state[slot].keys():
+		if item_state[slot][i]["isunlocked"]:
+			tr.append(i)
+	return tr
 
-
+func get_scroll_pos(slot,id):
+	var j = 0
+	for i in get_scroll_list(slot):
+		if id == i:
+			return j
+		j += 1
+	
 func mov_hands():
+	var sc = 0
+	if Input.is_action_just_pressed("scroll_down"):
+		sc = -1
+	elif Input.is_action_just_pressed("scroll_up"):
+		sc = 1
+	if sc != 0:
+		item_state["current"]["id"] = get_scroll_list(item_state["current"]["slot"])[(get_scroll_pos(item_state["current"]["slot"],item_state["current"]["id"]) + sc)%get_scroll_list(item_state["current"]["slot"]).size()]
 	if Input.is_action_just_pressed("1"):
-		if isunlocked["1"]:
-			current_item = 1
-			switch_hand.rpc(1)
+		item_state["current"]["slot"] = "tools"
+		item_state["current"]["id"] = "hoe"
+		switch_hand.rpc(item_state["current"])
 	elif Input.is_action_just_pressed("2"):
-		if isunlocked["2"]:
-			current_item = 2
-			switch_hand.rpc(2)
+		item_state["current"]["slot"] = "seeds"
+		item_state["current"]["id"] = "wheat"
+		switch_hand.rpc(item_state["current"])
 	elif Input.is_action_just_pressed("3"):
-		if isunlocked["3"]:
-			current_item = 3
-			switch_hand.rpc(3)
-	elif Input.is_action_just_pressed("4"):
-		if isunlocked["4"]:
-			current_item = 4
-			switch_hand.rpc(4)	
-	elif Input.is_action_just_pressed("5"):
-		if isunlocked["5"]:
-			current_item = 5
-			switch_hand.rpc(5)
-	elif Input.is_action_just_pressed("6"):
-		if isunlocked["6"]:
-			current_item = 6
-			switch_hand.rpc(6)
-	if !canFarm and not (current_item == 5) and not (current_item == 4) and not (current_item == 6): return
-	if current_item == 5:
-		if Input.is_action_just_pressed("m1"):
+		var t = null
+		for i in item_state["misc"].keys():
+			if item_state["misc"][i]["isunlocked"]:
+				t = i
+				break
+		if t:
+			item_state["current"]["slot"] = "misc"
+			item_state["current"]["id"] = t
+			switch_hand.rpc(item_state["current"])
+	if canFarm || ((item_state["current"]["slot"] == "misc") || (item_state["current"]["id"] == "scythe")):
+		if Input.is_action_pressed("m1"):
 			Hand.get_child(0).activate()
-	elif Input.is_action_pressed("m1"):
-		Hand.get_child(0).activate()
 
 func death():
 	ragdoll.rpc()
