@@ -50,7 +50,7 @@ var item_state: Dictionary = {
 	}, "misc":  {
 		"shovel": {"isunlocked":true},
 		#"vacuum": {"isunlocked":false},
-		"mine": {"isunlocked":false, "count": 0},
+		"mine": {"isunlocked":true, "count": 0},
 	}, "current": {
 		"slot": "tools",
 		"id": "hoe"
@@ -201,20 +201,23 @@ func vaccum_gun_animation():
 
 @rpc("call_local","any_peer","reliable")
 func switch_hand(id):
-	if id["slot"] == "seeds":
-		return
 	Hand.get_child(0).queue_free()
-	var nscn = {"hoe":hoe,"scythe":scythe,"watering_can":watering_can,"shovel":shovel,"mine":mine_placer}.get(id["id"]).instantiate()
+	var nscn
+	if id["slot"] == "seeds":
+		nscn = seeds.instantiate()
+		nscn.plant = {"wheat":0,"corn":1,"potato":2,"carrot":3,"mushroom":4}.get(id["id"])
+	else:
+		nscn = {"hoe":hoe,"scythe":scythe,"watering_can":watering_can,"shovel":shovel,"mine":mine_placer}.get(id["id"]).instantiate()
 	nscn.name = id["id"]
 	Hand.add_child(nscn)
+	if id["id"] == "scythe":
+		nscn.init_pos()
 	hand_hide.rpc(current_item)
 
 func _physics_process(delta):
 	#i fucking give up
 	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".position=Vector3(-0.087,0.387,-0.137)-$"Node3D/Armature/Skeleton3D".get_bone_pose_position(8)
 	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".rotation = Vector3(-0.3927,0.733,-0.0541)-$"Node3D/Armature/Skeleton3D".get_bone_pose_rotation(8).get_euler()
-	if get_node("Camera3D/Hand").get_child(0).name == "BagOfSeeds":
-		seed_bag_save = get_node("Camera3D/Hand/BagOfSeeds").plant
 	if is_ragdoll:
 		$"Node3D/Armature/Skeleton3D/Physical Bone Body".global_position = $Node3D.global_position
 		$"Node3D/Armature/Skeleton3D/Physical Bone Body/Camera3D".look_at(ragdoll_opos)
@@ -351,6 +354,11 @@ func get_scroll_pos(slot,id):
 			return j
 		j += 1
 	
+func movhelper(ist):
+	var ist2 = ist["current"]
+	get_node("HUD").switch_hotbar_slot({"tools":0,"seeds":1,"misc":2}.get(ist2["slot"]),get_scroll_pos(ist2["slot"],ist2["id"]))
+	switch_hand.rpc(ist2)
+	
 func mov_hands():
 	var sc = 0
 	if Input.is_action_just_pressed("scroll_down"):
@@ -359,14 +367,15 @@ func mov_hands():
 		sc = 1
 	if sc != 0:
 		item_state["current"]["id"] = get_scroll_list(item_state["current"]["slot"])[(get_scroll_pos(item_state["current"]["slot"],item_state["current"]["id"]) + sc)%get_scroll_list(item_state["current"]["slot"]).size()]
+		movhelper(item_state)
 	if Input.is_action_just_pressed("1"):
 		item_state["current"]["slot"] = "tools"
 		item_state["current"]["id"] = "hoe"
-		switch_hand.rpc(item_state["current"])
+		movhelper(item_state)
 	elif Input.is_action_just_pressed("2"):
 		item_state["current"]["slot"] = "seeds"
 		item_state["current"]["id"] = "wheat"
-		switch_hand.rpc(item_state["current"])
+		movhelper(item_state)
 	elif Input.is_action_just_pressed("3"):
 		var t = null
 		for i in item_state["misc"].keys():
@@ -376,7 +385,7 @@ func mov_hands():
 		if t:
 			item_state["current"]["slot"] = "misc"
 			item_state["current"]["id"] = t
-			switch_hand.rpc(item_state["current"])
+			movhelper(item_state)
 	if canFarm || ((item_state["current"]["slot"] == "misc") || (item_state["current"]["id"] == "scythe")):
 		if Input.is_action_pressed("m1"):
 			Hand.get_child(0).activate()

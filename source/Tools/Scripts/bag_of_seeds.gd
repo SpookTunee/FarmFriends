@@ -23,10 +23,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("scroll_up"):
-		plant += 1
-	elif Input.is_action_just_pressed("scroll_down"):
-		plant -= 1
 	if (plant > 4):
 		plant = 0
 	if (plant == -1):
