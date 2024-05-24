@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://yncwijbbpmb2"]
+[gd_scene load_steps=14 format=3 uid="uid://yncwijbbpmb2"]
 
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="1_isg4c"]
 [ext_resource type="Script" path="res://Menus/Scripts/shop.gd" id="1_ng0yv"]
 [ext_resource type="Texture2D" uid="uid://c2agd0hnrdd6n" path="res://Assets/Icons/hoeicon.png" id="3_lp10k"]
 [ext_resource type="Texture2D" uid="uid://dgaqc5dbkmf2l" path="res://Assets/Icons/shovelicon.png" id="4_8ywaf"]
 [ext_resource type="Texture2D" uid="uid://di023ajbklmcl" path="res://Assets/Icons/seedpouchicon.png" id="5_iye8p"]
+[ext_resource type="Texture2D" uid="uid://cwbtemh1yyap4" path="res://Assets/Icons/wheaticon.png" id="6_uhnto"]
+[ext_resource type="Texture2D" uid="uid://fl06lmrhtve8" path="res://Assets/Icons/cornicon.png" id="7_nguw5"]
+[ext_resource type="Texture2D" uid="uid://b5ueupi1t0bay" path="res://Assets/Icons/potatoicon.png" id="8_0xudq"]
+[ext_resource type="Texture2D" uid="uid://d0w0vrr2mfgob" path="res://Assets/Icons/carroticon.png" id="9_ha6ap"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkeh6"]
 bg_color = Color(0.172549, 0.172549, 0.172549, 0.564706)
@@ -38,7 +42,6 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 
 [node name="Categories" type="VBoxContainer" parent="HBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 60
@@ -96,6 +99,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
 text = ">"
 
 [node name="Tools" type="ScrollContainer" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -105,92 +109,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 60
 alignment = 1
 
-[node name="basic_hoe" type="Button" parent="HBoxContainer/Tools/Tools"]
-custom_minimum_size = Vector2(2.08165e-12, 300)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
-
-[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Tools/Tools/basic_hoe"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -0.5
-offset_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/Tools/Tools/basic_hoe/HboxContainer"]
-custom_minimum_size = Vector2(300, 2.08165e-12)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_isg4c")
-theme_override_font_sizes/font_size = 60
-text = "Basic Hoe
- 
- 
- "
-
-[node name="Control" type="Control" parent="HBoxContainer/Tools/Tools/basic_hoe/HboxContainer/Label"]
-custom_minimum_size = Vector2(300, 2.08165e-12)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -150.0
-offset_right = 300.0
-offset_bottom = 150.0
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Tools/Tools/basic_hoe/HboxContainer/Label/Control"]
-position = Vector2(120, 180)
-scale = Vector2(1.75, 1.75)
-texture = ExtResource("3_lp10k")
-
-[node name="Label2" type="Label" parent="HBoxContainer/Tools/Tools/basic_hoe/HboxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1_isg4c")
-theme_override_font_sizes/font_size = 50
-text = "This tool is a staple of any farm. It allows you to till the land, though it's not particularly fast.
-
-"
-autowrap_mode = 2
-
-[node name="Panel" type="Panel" parent="HBoxContainer/Tools/Tools/basic_hoe"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -519.0
-offset_top = -85.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
-
-[node name="Label" type="Label" parent="HBoxContainer/Tools/Tools/basic_hoe/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -142.0
-offset_top = -42.5
-offset_right = 142.0
-offset_bottom = 42.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_isg4c")
-theme_override_font_sizes/font_size = 70
-text = "450 WEU"
-
 [node name="fast_hoe" type="Button" parent="HBoxContainer/Tools/Tools"]
-visible = false
 custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -270,7 +189,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_isg4c")
 theme_override_font_sizes/font_size = 70
-text = "3500 WEU"
+text = "500 WEU"
 
 [node name="shovel" type="Button" parent="HBoxContainer/Tools/Tools"]
 custom_minimum_size = Vector2(2.08165e-12, 300)
@@ -354,7 +273,6 @@ theme_override_font_sizes/font_size = 70
 text = "650 WEU"
 
 [node name="boots" type="Button" parent="HBoxContainer/Tools/Tools"]
-visible = false
 custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -434,11 +352,360 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_isg4c")
 theme_override_font_sizes/font_size = 70
-text = "2000 WEU"
+text = "1000 WEU"
+
+[node name="Seeds" type="ScrollContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Seeds" type="VBoxContainer" parent="HBoxContainer/Seeds"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="wheat" type="Button" parent="HBoxContainer/Seeds/Seeds"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Seeds/Seeds/wheat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Seeds/Seeds/wheat/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Wheat
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Seeds/Seeds/wheat/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Seeds/Seeds/wheat/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(-1.75, 1.75)
+texture = ExtResource("6_uhnto")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Seeds/Seeds/wheat/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 50
+text = "The standard crop. Beautifully crafted, these seeds have a 5x ROI!
+
+
+"
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Seeds/Seeds/wheat"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Seeds/Seeds/wheat/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "1 WEU"
+
+[node name="corn" type="Button" parent="HBoxContainer/Seeds/Seeds"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Seeds/Seeds/corn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Seeds/Seeds/corn/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Corn
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Seeds/Seeds/corn/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Seeds/Seeds/corn/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("7_nguw5")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Seeds/Seeds/corn/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 50
+text = "Corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn corn "
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Seeds/Seeds/corn"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Seeds/Seeds/corn/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "0.75 WEU"
+
+[node name="potato" type="Button" parent="HBoxContainer/Seeds/Seeds"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Seeds/Seeds/potato"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Seeds/Seeds/potato/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Potato
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Seeds/Seeds/potato/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Seeds/Seeds/potato/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("8_0xudq")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Seeds/Seeds/potato/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Potatoes are a staple food all across specific areas on the world."
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Seeds/Seeds/potato"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Seeds/Seeds/potato/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "3 WEU"
+
+[node name="carrot" type="Button" parent="HBoxContainer/Seeds/Seeds"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Seeds/Seeds/carrot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Seeds/Seeds/carrot/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Carrots
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Seeds/Seeds/carrot/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Seeds/Seeds/carrot/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("9_ha6ap")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Seeds/Seeds/carrot/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Nature's *********, these orange ********** ***** are pricey.
+ "
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Seeds/Seeds/carrot"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Seeds/Seeds/carrot/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "4 WEU"
 
 [connection signal="pressed" from="HBoxContainer/Categories/Tools" to="." method="_on_tools_pressed"]
 [connection signal="pressed" from="HBoxContainer/Categories/Seeds" to="." method="_on_seeds_pressed"]
 [connection signal="pressed" from="HBoxContainer/Categories/Signs" to="." method="_on_signs_pressed"]
 [connection signal="pressed" from="HBoxContainer/Categories/Structures" to="." method="_on_structures_pressed"]
 [connection signal="pressed" from="HBoxContainer/CloseBar" to="." method="_on_close_bar_pressed"]
+[connection signal="pressed" from="HBoxContainer/Tools/Tools/fast_hoe" to="." method="_on_fast_hoe_pressed"]
 [connection signal="pressed" from="HBoxContainer/Tools/Tools/shovel" to="." method="_on_shovel_pressed"]
+[connection signal="pressed" from="HBoxContainer/Tools/Tools/boots" to="." method="_on_boots_pressed"]
+[connection signal="button_down" from="HBoxContainer/Seeds/Seeds/wheat" to="." method="_on_wheat_pressed"]
+[connection signal="button_up" from="HBoxContainer/Seeds/Seeds/wheat" to="." method="_on_wheat_button_up"]
+[connection signal="button_down" from="HBoxContainer/Seeds/Seeds/corn" to="." method="_on_corn_pressed"]
+[connection signal="button_up" from="HBoxContainer/Seeds/Seeds/corn" to="." method="_on_corn_button_up"]
+[connection signal="button_down" from="HBoxContainer/Seeds/Seeds/potato" to="." method="_on_potato_pressed"]
+[connection signal="button_up" from="HBoxContainer/Seeds/Seeds/potato" to="." method="_on_potato_button_up"]
+[connection signal="button_down" from="HBoxContainer/Seeds/Seeds/carrot" to="." method="_on_carrot_pressed"]
+[connection signal="button_up" from="HBoxContainer/Seeds/Seeds/carrot" to="." method="_on_carrot_button_up"]

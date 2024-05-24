@@ -40,6 +40,9 @@ func _process(delta):
 
 
 func activate():
-	var Look = get_parent().get_parent().get_child(0)
-	if Look.get_collider() && (Look.get_collider().name == "TilledLand"):
-		Look.get_collider().get_parent().grow(plant)
+	if get_node("../../..").item_state["seeds"].get(["wheat","corn","potato","carrot","mushroom"][plant])["count"] >= 1:
+		var Look = get_parent().get_parent().get_child(0)
+		if Look.get_collider() && (Look.get_collider().name == "TilledLand"):
+			if !Look.get_collider().get_parent().get_node_or_null("PLANT"):
+				get_node("../../..").item_state["seeds"].get(["wheat","corn","potato","carrot","mushroom"][plant])["count"] -= 1
+			Look.get_collider().get_parent().grow(plant)

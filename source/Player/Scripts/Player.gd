@@ -3,7 +3,8 @@ extends CharacterBody3D
 
 var sprinting = false
 var ticks = 0
-
+var SPRINT_SPEED = 8.0
+var NORMAL_SPEED = 5.0
 var SPEED = 5.0
 @export var JUMP_VELOCITY = 8.5
 var camera_sense = 0.002
@@ -36,17 +37,19 @@ var knockbackY : float = 0.0
 var isPPactive : bool = false
 var shaderCheck : bool = true
 var prevloc: int = 0
+var has_boots: bool = false
+var has_fast_hoe: bool = false
 var item_state: Dictionary = {
 	   "tools": {
 		"hoe": {"isunlocked":true},
 		"scythe": {"isunlocked":true},
 		"watering_can": {"isunlocked":true}
 	}, "seeds": {
-		"wheat": {"isunlocked":true},
-		"corn": {"isunlocked":true},
-		"potato": {"isunlocked":true},
-		"carrot": {"isunlocked":true},
-		"mushroom": {"isunlocked":false},
+		"wheat": {"isunlocked":true, "count": 20},
+		"corn": {"isunlocked":false, "count": 0},
+		"potato": {"isunlocked":false, "count": 0},
+		"carrot": {"isunlocked":false, "count": 0},
+		"mushroom": {"isunlocked":false, "count": 0},
 	}, "misc":  {
 		"shovel": {"isunlocked":false},
 		#"vacuum": {"isunlocked":false},
@@ -335,11 +338,11 @@ func reset_mat():
 
 func mov_sprint(delta):
 	if Input.is_action_pressed("sprint"):
-		SPEED = 7.5
+		SPEED = SPRINT_SPEED
 		if is_on_floor() && velocity.length() > 5:
 			$Camera3D.rotation.x += (cos((ticks%360)*delta*15))*.00075
 	else:
-		SPEED = 5.0
+		SPEED = NORMAL_SPEED
 
 func get_scroll_list(slot):
 	var tr = []
@@ -388,8 +391,12 @@ func mov_hands():
 			item_state["current"]["id"] = t
 			movhelper(item_state)
 	if canFarm || ((item_state["current"]["slot"] == "misc") || (item_state["current"]["id"] == "scythe")):
-		if Input.is_action_pressed("m1"):
-			Hand.get_child(0).activate()
+		if (item_state["current"]["id"] == "hoe") && (!has_fast_hoe):
+			if Input.is_action_just_pressed("m1"):
+				Hand.get_child(0).activate()
+		else:
+			if Input.is_action_pressed("m1"):
+				Hand.get_child(0).activate()
 
 func death():
 	ragdoll.rpc()
@@ -512,7 +519,7 @@ func calcReturn(plantcount) -> float:
 	if plantcount == 0:
 		return 1.0
 	elif plantcount == 1:
-		return 4.0
+		return 1.25
 	elif plantcount == 2:
 		return 3.75
 	elif plantcount == 3:
