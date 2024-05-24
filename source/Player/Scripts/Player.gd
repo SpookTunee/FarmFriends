@@ -43,14 +43,14 @@ var item_state: Dictionary = {
 		"watering_can": {"isunlocked":true}
 	}, "seeds": {
 		"wheat": {"isunlocked":true},
-		"corn": {"isunlocked":false},
-		"potato": {"isunlocked":false},
-		"carrot": {"isunlocked":false},
+		"corn": {"isunlocked":true},
+		"potato": {"isunlocked":true},
+		"carrot": {"isunlocked":true},
 		"mushroom": {"isunlocked":false},
 	}, "misc":  {
-		"shovel": {"isunlocked":true},
+		"shovel": {"isunlocked":false},
 		#"vacuum": {"isunlocked":false},
-		"mine": {"isunlocked":true, "count": 0},
+		"mine": {"isunlocked":false, "count": 1},
 	}, "current": {
 		"slot": "tools",
 		"id": "hoe"
@@ -222,7 +222,8 @@ func _physics_process(delta):
 		$"Node3D/Armature/Skeleton3D/Physical Bone Body".global_position = $Node3D.global_position
 		$"Node3D/Armature/Skeleton3D/Physical Bone Body/Camera3D".look_at(ragdoll_opos)
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
-	
+	if item_state["misc"]["mine"]["count"] == 0:
+		item_state["misc"]["mine"]["isunlocked"] = false
 	handle_msgs()
 	
 	ticks += 1

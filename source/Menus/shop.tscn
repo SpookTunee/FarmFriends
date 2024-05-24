@@ -38,6 +38,7 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 
 [node name="Categories" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 60
@@ -95,7 +96,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
 text = ">"
 
 [node name="Tools" type="ScrollContainer" parent="HBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -190,6 +190,7 @@ theme_override_font_sizes/font_size = 70
 text = "450 WEU"
 
 [node name="fast_hoe" type="Button" parent="HBoxContainer/Tools/Tools"]
+visible = false
 custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -353,6 +354,7 @@ theme_override_font_sizes/font_size = 70
 text = "650 WEU"
 
 [node name="boots" type="Button" parent="HBoxContainer/Tools/Tools"]
+visible = false
 custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -439,3 +441,4 @@ text = "2000 WEU"
 [connection signal="pressed" from="HBoxContainer/Categories/Signs" to="." method="_on_signs_pressed"]
 [connection signal="pressed" from="HBoxContainer/Categories/Structures" to="." method="_on_structures_pressed"]
 [connection signal="pressed" from="HBoxContainer/CloseBar" to="." method="_on_close_bar_pressed"]
+[connection signal="pressed" from="HBoxContainer/Tools/Tools/shovel" to="." method="_on_shovel_pressed"]
