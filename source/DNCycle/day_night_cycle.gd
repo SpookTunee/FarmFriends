@@ -39,3 +39,15 @@ func _process(delta):
 		
 	if Global.get_day_name() != "Monday" && Global.get_day_name() != "Sunday":
 		check = true
+		
+		
+		
+		
+		
+		
+		
+	# Control ambient sounnd
+	
+	if $Ambience.playing == false:
+		$Ambience.play()
+	pass
