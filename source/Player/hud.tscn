@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bcgwy6x2mj4yx"]
+[gd_scene load_steps=16 format=3 uid="uid://bcgwy6x2mj4yx"]
 
 [ext_resource type="Script" path="res://Player/Scripts/HUD.gd" id="1_5qcav"]
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="2_ad6ml"]
@@ -6,13 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://c2agd0hnrdd6n" path="res://Assets/Icons/hoeicon.png" id="3_p6yv7"]
 [ext_resource type="Texture2D" uid="uid://fl06lmrhtve8" path="res://Assets/Icons/cornicon.png" id="3_rniby"]
 [ext_resource type="Texture2D" uid="uid://b5ueupi1t0bay" path="res://Assets/Icons/potatoicon.png" id="4_a1nq4"]
-[ext_resource type="Texture2D" uid="uid://uq83l2o45okh" path="res://Assets/Icons/scytheicon.png" id="4_flynk"]
 [ext_resource type="Texture2D" uid="uid://d0w0vrr2mfgob" path="res://Assets/Icons/carroticon.png" id="5_7fkpf"]
 [ext_resource type="Texture2D" uid="uid://dgaqc5dbkmf2l" path="res://Assets/Icons/shovelicon.png" id="5_g2hdg"]
 [ext_resource type="Texture2D" uid="uid://di023ajbklmcl" path="res://Assets/Icons/seedpouchicon.png" id="6_1rsef"]
 [ext_resource type="Texture2D" uid="uid://xfnavm3iaf0n" path="res://Assets/Icons/mushroomicon.png" id="6_p26ya"]
 [ext_resource type="Texture2D" uid="uid://cv67qr5jj1vv3" path="res://Assets/Icons/weuicon.png" id="7_3n161"]
-[ext_resource type="Texture2D" uid="uid://cb2te2ndklyjx" path="res://Assets/Icons/kandmineicon.png" id="13_7i8as"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yfxox"]
 font_size = 64
@@ -226,38 +224,6 @@ modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_p6yv7")
 
-[node name="Control2" type="Control" parent="Hotbar/Tools"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Tools/Control2"]
-modulate = Color(1, 1, 1, 0.721569)
-scale = Vector2(-0.75, 0.75)
-texture = ExtResource("4_flynk")
-
-[node name="Control3" type="Control" parent="Hotbar/Tools"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Hotbar/Tools/Control3"]
-modulate = Color(1, 1, 1, 0.721569)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("5_g2hdg")
-
 [node name="Seeds" type="ColorRect" parent="Hotbar"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
@@ -278,6 +244,20 @@ modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_1rsef")
 
+[node name="SeedCount" type="HBoxContainer" parent="Hotbar/Seeds/Control"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 31.0
+offset_right = 40.0
+offset_bottom = 71.0
+
+[node name="Label" type="Label" parent="Hotbar/Seeds/Control/SeedCount"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ad6ml")
+theme_override_font_sizes/font_size = 20
+text = "20 seeds"
+horizontal_alignment = 1
+
 [node name="Misc" type="ColorRect" parent="Hotbar"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
@@ -296,7 +276,7 @@ grow_vertical = 2
 [node name="Sprite2D" type="Sprite2D" parent="Hotbar/Misc/Control"]
 modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("13_7i8as")
+texture = ExtResource("5_g2hdg")
 
 [node name="Quota" type="Label" parent="."]
 layout_mode = 1
