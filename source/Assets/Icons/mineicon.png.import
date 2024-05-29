@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cb2te2ndklyjx"
-path="res://.godot/imported/kandmineicon.png-495f9fc628f66dfc119a77b78f44ddca.ctex"
+path="res://.godot/imported/mineicon.png-9ec0b31435f180cf9a8c391a18930b5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/kandmineicon.png"
-dest_files=["res://.godot/imported/kandmineicon.png-495f9fc628f66dfc119a77b78f44ddca.ctex"]
+source_file="res://Assets/Icons/mineicon.png"
+dest_files=["res://.godot/imported/mineicon.png-9ec0b31435f180cf9a8c391a18930b5b.ctex"]
 
 [params]
 
