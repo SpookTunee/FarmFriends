@@ -252,7 +252,6 @@ func _physics_process(delta):
 		elif !get_node_or_null("Menu"):
 			$Node3D/AnimationPlayer.stop()
 			if not is_on_floor():
-				$Node3D/AnimationPlayer2.stop()
 				idle_animation.rpc()
 			var mnu = load("res://Menus/menu.tscn").instantiate()
 			mnu.name = "Menu"
@@ -360,7 +359,7 @@ func get_scroll_pos(slot,id):
 	
 func movhelper(ist):
 	var ist2 = ist["current"]
-	get_node("HUD").switch_hotbar_slot({"tools":0,"seeds":1,"misc":2}.get(ist2["slot"]),get_scroll_pos(ist2["slot"],ist2["id"]))
+	get_node("HUD").switch_hotbar_slot({"tools":0,"seeds":1,"misc":2}.get(ist2["slot"]),ist2["id"])
 	switch_hand.rpc(ist2)
 	
 func mov_hands():
@@ -444,7 +443,7 @@ func mov_dirs():
 		velocity.x = direction.x * SPEED + knockbackX
 		velocity.z = direction.z * SPEED + knockbackY
 	else:
-		if is_on_floor() and ((not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation != "idle"))) and $JumpTimer2.is_stopped():
+		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "idle")) and $JumpTimer2.is_stopped():
 			idle_animation.rpc()
 		velocity.x = move_toward(velocity.x, 0, SPEED) + knockbackX
 		velocity.z = move_toward(velocity.z, 0, SPEED) + knockbackY
@@ -453,23 +452,23 @@ func mov_dirs():
 @rpc("call_local","any_peer","reliable")
 func walk_animation():
 	if (not ($Node3D/AnimationPlayer.current_animation == "walk")):
-		$Node3D/AnimationPlayer2.stop()
 		$Node3D/AnimationPlayer.stop()
+	$Node3D/AnimationPlayer.speed_scale = 3
 	$Node3D/AnimationPlayer.play("walk")
 
 @rpc("call_local","any_peer","reliable")
 func idle_animation():
-	if (not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation == "idle")):
-		$Node3D/AnimationPlayer2.stop()
+	if (not ($Node3D/AnimationPlayer.current_animation == "idle")):
 		$Node3D/AnimationPlayer.stop()
+	$Node3D/AnimationPlayer.speed_scale = 2
 	$Node3D/AnimationPlayer.play("idle")
 
 @rpc("call_local","any_peer","reliable")
 func jump_animation():
-	if (not ($Node3D/AnimationPlayer2.current_animation == "jump")):
-		$Node3D/AnimationPlayer2.stop()
+	if (not ($Node3D/AnimationPlayer.current_animation == "jump")):
 		$Node3D/AnimationPlayer.stop()
-	$Node3D/AnimationPlayer2.play("jump")
+	$Node3D/AnimationPlayer.speed_scale = 1
+	$Node3D/AnimationPlayer.play("jump")
 func deposit():
 
 	if Input.is_action_just_pressed("interact"):
