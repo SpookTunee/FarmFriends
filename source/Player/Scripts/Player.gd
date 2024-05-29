@@ -324,9 +324,14 @@ func _physics_process(delta):
 	payQuota()
 	
 	reset_mat.rpc()
+	AnimationPlayer
+	if  $Node3D/AnimationPlayer.current_animation == "walk" && $Node3D/AnimationPlayer.is_playing():
+		if $SoundHandler/Walk.playing != true:
+			startWalkSound.rpc()
+	else:
+		if $SoundHandler/Walk.playing == true:
+			stopWalkSound.rpc()
 	
-	
-
 @rpc("call_local")
 func reset_mat():
 	if get_node("Node3D/Armature/Skeleton3D").get_child(0).get_material_override() != null:
@@ -341,8 +346,10 @@ func mov_sprint(delta):
 		SPEED = SPRINT_SPEED
 		if is_on_floor() && velocity.length() > 5:
 			$Camera3D.rotation.x += (cos((ticks%360)*delta*15))*.00075
+			$SoundHandler/Walk.set_pitch_scale(2.00)
 	else:
 		SPEED = NORMAL_SPEED
+		$SoundHandler/Walk.set_pitch_scale(1.67)
 
 func get_scroll_list(slot):
 	var tr = []
@@ -456,7 +463,16 @@ func walk_animation():
 		$Node3D/AnimationPlayer2.stop()
 		$Node3D/AnimationPlayer.stop()
 	$Node3D/AnimationPlayer.play("walk")
+	
 
+@rpc("call_local", "any_peer", "unreliable")
+func startWalkSound():
+		$SoundHandler/Walk.play()
+
+@rpc("call_local", "any_peer", "unreliable")
+func stopWalkSound():
+	$SoundHandler/Walk.stop() 
+	
 @rpc("call_local","any_peer","reliable")
 func idle_animation():
 	if (not ($Node3D/AnimationPlayer.current_animation == "idle")) or (not ($Node3D/AnimationPlayer2.current_animation == "idle")):
