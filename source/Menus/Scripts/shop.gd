@@ -19,9 +19,9 @@ func _on_signs_pressed():
 	pass # Replace with function body.
 
 
-func _on_structures_pressed():
-	pass # Replace with function body.
-
+func _on_misc_pressed():
+	$HBoxContainer/Categories.visible = false
+	$HBoxContainer/Misc.visible = true
 
 func _on_close_bar_pressed():
 	for i in $HBoxContainer.get_children():
@@ -70,6 +70,10 @@ func _on_boots_pressed():
 			get_node("../HUD").send_unique_chat("[color=green]Purchased 1x boots[/color]")
 		else:
 			get_node("../HUD").send_unique_chat("[color=red]Not enough fundage[/color]")
+
+
+func _on_landmine_pressed():
+	purchase("misc","mine",150,true)
 
 #1 .75 3 4
 

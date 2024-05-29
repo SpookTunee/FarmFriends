@@ -7,6 +7,8 @@ var ovrrd: int = -1
 func _process(delta):
 	ticks += 1
 	$Day.text = Global.get_day_name()
+	if get_parent().item_state["current"]["slot"] == "seeds":
+		$Hotbar/Seeds/Control/SeedCount/Label.text = str(get_parent().item_state[get_parent().item_state["current"]["slot"]][get_parent().item_state["current"]["id"]]["count"]) + " seeds"
 	$Inventory/Wheat.text = str(get_node("../Stats").crop_counts[Global.Plants.WHEAT]) +  "   "
 	$Inventory/Corn.text = str(get_node("../Stats").crop_counts[Global.Plants.CORN]) + "   "
 	$Inventory/Potatoes.text = str(get_node("../Stats").crop_counts[Global.Plants.POTATO]) + "   "
@@ -24,23 +26,11 @@ func send_unique_chat(msg: String, cooldown_override: int = -1):
 	ovrrd = cooldown_override
 	$Messages/RichTextLabel.text += msg + "\n"
 
-func switch_hotbar_slot(slot : int, slot2 : int):
+func switch_hotbar_slot(slot: int, id: String):
 	if slot == 0:
-		for x in range($Hotbar/Tools.get_children().size()):
-			if x == slot2:
-				$Hotbar/Tools.get_child(x).show()
-			else:
-				$Hotbar/Tools.get_child(x).hide()
-	if slot == 1:
-		for x in range($Hotbar/Seeds.get_children().size()):
-			if x == slot2:
-				$Hotbar/Seeds.get_child(x).show()
-			else:
-				$Hotbar/Seeds.get_child(x).hide()
-	if slot == 2:
-		for x in range($Hotbar/Misc.get_children().size()):
-			if x == slot2:
-				$Hotbar/Misc.get_child(x).show()
-			else:
-				$Hotbar/Misc.get_child(x).hide()
+		get_node("Hotbar/Tools/Control/Sprite2D").texture = load("Assets/Icons/" + id + "icon.png")
+	elif slot == 1:
+		get_node("Hotbar/Seeds/Control/Sprite2D").texture = load("Assets/Icons/" + id + "icon.png")
+	elif slot == 2:
+		get_node("Hotbar/Misc/Control/Sprite2D").texture = load("Assets/Icons/" + id + "icon.png")
 	
