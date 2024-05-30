@@ -15,6 +15,7 @@ func _physics_process(_delta):
 			for i in Look.get_overlapping_areas():
 				if i.name == "PlantBox":
 					con = i
+					#add sound effect here
 					break
 			if con:
 				#if !con.get_parent().get_node("Plant/PlantBody/AnimationPlayer").is_playing():

@@ -39,6 +39,7 @@ var shaderCheck : bool = true
 var prevloc: int = 0
 var has_boots: bool = false
 var has_fast_hoe: bool = false
+var sellPitchScale : float = 0.9
 var item_state: Dictionary = {
 	   "tools": {
 		"hoe": {"isunlocked":true},
@@ -507,6 +508,7 @@ func deposit():
 		$DepositTimer.stop()
 		$DepositTimer.wait_time = 0.5
 		plantcount = 0
+		sellPitchScale = 0.9
 		
 	if Input.is_action_just_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
@@ -535,9 +537,15 @@ func _on_deposit_timer_timeout():
 					$Stats.money += calcReturn(plantcount) * 4
 				else:
 					$Stats.crop_counts[plantcount] -= 1
+				$SoundHandler/Selling.play()
+				sellPitchScale += 0.1
+				$SoundHandler/Selling.set_pitch_scale(sellPitchScale)
+				
 			else:
 				plantcount += 1
-				
+				$SoundHandler/Selling.set_pitch_scale(0.9)
+				sellPitchScale = 0.9
+			
 	if $DepositTimer.wait_time > 0:
 		$DepositTimer.wait_time *= 0.90
 	
