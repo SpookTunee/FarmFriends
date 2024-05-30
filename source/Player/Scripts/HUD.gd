@@ -9,6 +9,10 @@ func _process(delta):
 	$Day.text = Global.get_day_name()
 	if get_parent().item_state["current"]["slot"] == "seeds":
 		$Hotbar/Seeds/Control/SeedCount/Label.text = str(get_parent().item_state[get_parent().item_state["current"]["slot"]][get_parent().item_state["current"]["id"]]["count"]) + " seeds"
+	if get_parent().item_state["current"]["id"] == "mine":
+		$Hotbar/Misc/Control/MineCount/Label.text = str(get_parent().item_state["misc"]["mine"]["count"]) + " mines"
+	else:
+		$Hotbar/Misc/Control/MineCount/Label.text = ""
 	$Inventory/Wheat.text = str(get_node("../Stats").crop_counts[Global.Plants.WHEAT]) +  "   "
 	$Inventory/Corn.text = str(get_node("../Stats").crop_counts[Global.Plants.CORN]) + "   "
 	$Inventory/Potatoes.text = str(get_node("../Stats").crop_counts[Global.Plants.POTATO]) + "   "

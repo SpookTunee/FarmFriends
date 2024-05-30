@@ -278,6 +278,18 @@ modulate = Color(1, 1, 1, 0.721569)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_g2hdg")
 
+[node name="MineCount" type="HBoxContainer" parent="Hotbar/Misc/Control"]
+offset_left = -40.0
+offset_top = 31.0
+offset_right = 40.0
+offset_bottom = 71.0
+
+[node name="Label" type="Label" parent="Hotbar/Misc/Control/MineCount"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ad6ml")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
 [node name="Quota" type="Label" parent="."]
 layout_mode = 1
 offset_left = 27.0
