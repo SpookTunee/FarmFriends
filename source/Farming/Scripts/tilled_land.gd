@@ -1,11 +1,30 @@
 extends Node3D
 
 var wheatplant = preload("res://Farming/plant_prototype.tscn")
+
+var sound1 = preload("res://Sounds/dirt1.mp3")
+var sound2 = preload("res://Sounds/dirt2.mp3")
+var sound3 = preload("res://Sounds/dirt3.mp3")
+var sound4 = preload("res://Sounds/dirt4.mp3")
+	
+@onready var audio = $AudioStreamPlayer3D
+
 @export var water_level:float = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	var num = randi_range(0, 3)
+	if num == 0:
+		audio.set_stream(sound1)
+	if num == 1:
+		audio.set_stream(sound2)
+	if num == 2:
+		audio.set_stream(sound3)
+	if num == 3:
+		audio.set_stream(sound4)
+		
+	
+	audio.play()
 
 func reduce_water(delta):
 	if water_level > delta:

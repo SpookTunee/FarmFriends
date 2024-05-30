@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://5frcq064xyc7"]
+[gd_scene load_steps=7 format=3 uid="uid://5frcq064xyc7"]
 
 [ext_resource type="Script" path="res://Farming/Scripts/plant_base.gd" id="1_jbvpf"]
+[ext_resource type="AudioStream" uid="uid://bg7u7trujciq7" path="res://Sounds/Pop_effect.mp3" id="2_amoem"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4cvy"]
 radius = 0.291641
@@ -89,3 +90,8 @@ gi_mode = 0
 libraries = {
 "": SubResource("AnimationLibrary_i0xur")
 }
+
+[node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_amoem")
+unit_size = 5.1
+pitch_scale = 0.83
