@@ -457,6 +457,13 @@ func walk_animation():
 	$Node3D/AnimationPlayer.play("walk")
 
 @rpc("call_local","any_peer","reliable")
+func minegoblin_animation():
+	if (not ($Node3D/AnimationPlayer.current_animation == "minegoblin")):
+		$Node3D/AnimationPlayer.stop()
+	$Node3D/AnimationPlayer.speed_scale = 1
+	$Node3D/AnimationPlayer.play("minegoblin")
+	
+@rpc("call_local","any_peer","reliable")
 func idle_animation():
 	if (not ($Node3D/AnimationPlayer.current_animation == "idle")):
 		$Node3D/AnimationPlayer.stop()
@@ -623,4 +630,3 @@ func handle_msgs():
 #func resetKnock():
 	#knockbackX = 0
 	#knockbackY = 0
-
