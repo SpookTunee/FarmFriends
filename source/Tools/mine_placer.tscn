@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://crxsapmronrre"]
+[gd_scene load_steps=6 format=3 uid="uid://crxsapmronrre"]
 
 [ext_resource type="Script" path="res://Tools/mine_placer.gd" id="1_vnmy4"]
 [ext_resource type="ArrayMesh" uid="uid://bg3apkx04ajgr" path="res://Assets/Tools/landmine.obj" id="2_nch1g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2kw0"]
+albedo_color = Color(0.352941, 0.384314, 0.0941176, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_166ps"]
+albedo_color = Color(0.219608, 0.376471, 0.0941176, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wnfd"]
+albedo_color = Color(0.427451, 0.498039, 0.32549, 1)
 
 [node name="MinePlacer" type="Node3D"]
 script = ExtResource("1_vnmy4")
@@ -9,6 +18,9 @@ script = ExtResource("1_vnmy4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.54, 0, -2.32534e-07, 0, 1.54, 0, 2.32534e-07, 0, -1.54, 0, 0.381049, 0)
 mesh = ExtResource("2_nch1g")
+surface_material_override/0 = SubResource("StandardMaterial3D_d2kw0")
+surface_material_override/1 = SubResource("StandardMaterial3D_166ps")
+surface_material_override/2 = SubResource("StandardMaterial3D_1wnfd")
 
 [node name="Spawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.31772)
