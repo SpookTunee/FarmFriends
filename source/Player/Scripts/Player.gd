@@ -444,9 +444,14 @@ func stopragdoll_helper():
 func mov_dirs():
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if velocity.length() < 0.1:
+		idle_animation.rpc()
 	if direction:
 		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "walk")) and $JumpTimer2.is_stopped():
-			walk_animation.rpc()
+			if velocity.length() > 0.1:
+				walk_animation.rpc()
+			else:
+				idle_animation.rpc()
 		velocity.x = direction.x * SPEED + knockbackX
 		velocity.z = direction.z * SPEED + knockbackY
 	else:
@@ -454,7 +459,6 @@ func mov_dirs():
 			idle_animation.rpc()
 		velocity.x = move_toward(velocity.x, 0, SPEED) + knockbackX
 		velocity.z = move_toward(velocity.z, 0, SPEED) + knockbackY
-
 		
 @rpc("call_local","any_peer","reliable")
 func walk_animation():
