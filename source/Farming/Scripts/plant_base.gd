@@ -25,10 +25,15 @@ var start_grow_time: float = 0.0
 var actual_grow_time: float = 0.0
 var default_growth_modifier: float = 0.0
 var external_growth_rate_modifier: float = 1.0
-
+var pitch : float
 
 
 func _ready():
+	
+	pitch = randf_range(-0.25, 0.25)
+	$SpawnSound.set_pitch_scale(1 + pitch)
+	$SpawnSound.play()
+	
 	if is_tool: return
 	$Plant/PlantBody.mesh = plant_model
 	$Plant.position = default_position
