@@ -330,6 +330,8 @@ func _physics_process(delta):
 	else:
 		if $SoundHandler/Walk.playing == true:
 			stopWalkSound.rpc()
+	if pause_movement:
+		stopWalkSound.rpc()
 	
 @rpc("call_local")
 func reset_mat():
