@@ -32,3 +32,5 @@ ring_sides = 7
 script = ExtResource("2_w4s2e")
 negative = true
 shape = SubResource("Resource_r5o2j")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
