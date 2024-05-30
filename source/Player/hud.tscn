@@ -279,6 +279,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_g2hdg")
 
 [node name="MineCount" type="HBoxContainer" parent="Hotbar/Misc/Control"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = 31.0
 offset_right = 40.0
