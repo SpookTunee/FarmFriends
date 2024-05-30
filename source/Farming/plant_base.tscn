@@ -93,5 +93,6 @@ libraries = {
 
 [node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_amoem")
+volume_db = -15.0
 unit_size = 5.1
 pitch_scale = 0.83
