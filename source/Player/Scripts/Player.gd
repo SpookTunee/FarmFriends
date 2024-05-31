@@ -331,7 +331,7 @@ func _physics_process(delta):
 	else:
 		if $SoundHandler/Walk.playing == true:
 			stopWalkSound.rpc()
-	if pause_movement:
+	if pause_movement || is_ragdoll:
 		stopWalkSound.rpc()
 	
 @rpc("call_local")
