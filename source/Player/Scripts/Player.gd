@@ -173,36 +173,6 @@ func hand_hide(item):
 			if x.visible:
 				x.hide()
 	
-
-
-@rpc("call_remote")
-func hoe_animation_remote():
-	pass
-
-@rpc("call_remote")
-func seed_bag_animation_remote():
-	pass
-
-@rpc("call_remote")
-func scythe_animation_remote():
-	pass
-
-@rpc("call_remote")
-func watering_can_animation_remote():
-	pass
-
-@rpc("call_remote")
-func shovel_animation_remote():
-	pass
-
-@rpc("call_remote")
-func land_mine_animation():
-	pass
-	
-@rpc("call_remote")
-func vaccum_gun_animation():
-	pass
-
 @rpc("call_local","any_peer","reliable")
 func switch_hand(id):
 	Hand.get_child(0).queue_free()
@@ -253,7 +223,7 @@ func _physics_process(delta):
 		elif !get_node_or_null("Menu"):
 			$Node3D/AnimationPlayer.stop()
 			if not is_on_floor():
-				idle_animation.rpc()
+				animation_handler.rpc("idle", false)
 			var mnu = load("res://Menus/menu.tscn").instantiate()
 			mnu.name = "Menu"
 			add_child(mnu)
@@ -299,7 +269,7 @@ func _physics_process(delta):
 				$JumpTimer.start()
 				$JumpTimer2.start()
 				jumping = true
-				jump_animation.rpc()
+				animation_handler.rpc("jump", false)
 			if $JumpTimer.is_stopped() and jumping:
 				jumping = false
 				velocity.y = JUMP_VELOCITY
@@ -325,7 +295,7 @@ func _physics_process(delta):
 	
 	reset_mat.rpc()
 	AnimationPlayer
-	if  $Node3D/AnimationPlayer.current_animation == "walk" && $Node3D/AnimationPlayer.is_playing():
+	if  $Node3D/AnimationPlayer.current_animation == "idle_walk" && $Node3D/AnimationPlayer.is_playing():
 		if $SoundHandler/Walk.playing != true:
 			startWalkSound.rpc()
 	else:
@@ -448,57 +418,41 @@ func mov_dirs():
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if velocity.length() < 0.1:
-		idle_animation.rpc()
+		animation_handler.rpc("idle", false)
 	if direction:
-		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "walk")) and $JumpTimer2.is_stopped():
+		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "idle_walk")) and $JumpTimer2.is_stopped():
 			if velocity.length() > 0.1:
-				walk_animation.rpc()
+				animation_handler.rpc("idle", true)
 			else:
-				idle_animation.rpc()
+				animation_handler.rpc("idle", false)
 		velocity.x = direction.x * SPEED + knockbackX
 		velocity.z = direction.z * SPEED + knockbackY
 	else:
 		if is_on_floor() and (not ($Node3D/AnimationPlayer.current_animation == "idle")) and $JumpTimer2.is_stopped():
-			idle_animation.rpc()
+			animation_handler.rpc("idle", false)
 		velocity.x = move_toward(velocity.x, 0, SPEED) + knockbackX
 		velocity.z = move_toward(velocity.z, 0, SPEED) + knockbackY
 		
-@rpc("call_local","any_peer","reliable")
-func walk_animation():
-	if (not ($Node3D/AnimationPlayer.current_animation == "walk")):
-		$Node3D/AnimationPlayer.stop()
-	$Node3D/AnimationPlayer.speed_scale = 3
-	$Node3D/AnimationPlayer.play("walk")
 	
 
 @rpc("call_local", "any_peer", "unreliable")
 func startWalkSound():
-		$SoundHandler/Walk.play()
+	$SoundHandler/Walk.play()
 
 @rpc("call_local", "any_peer", "unreliable")
 func stopWalkSound():
 	$SoundHandler/Walk.stop() 
 	
 @rpc("call_local","any_peer","reliable")
-func minegoblin_animation():
-	if (not ($Node3D/AnimationPlayer.current_animation == "minegoblin")):
+func animation_handler(animation : String, walking: bool):
+	if walking:
+		animation = animation + "_walk"
+	if (not ($Node3D/AnimationPlayer.current_animation == animation)):
 		$Node3D/AnimationPlayer.stop()
-	$Node3D/AnimationPlayer.speed_scale = 1
-	$Node3D/AnimationPlayer.play("minegoblin")
-	
-@rpc("call_local","any_peer","reliable")
-func idle_animation():
-	if (not ($Node3D/AnimationPlayer.current_animation == "idle")):
-		$Node3D/AnimationPlayer.stop()
-	$Node3D/AnimationPlayer.speed_scale = 2
-	$Node3D/AnimationPlayer.play("idle")
+	if animation == "idle_walk": $Node3D/AnimationPlayer.speed_scale = 3
+	else: $Node3D/AnimationPlayer.speed_scale = 1
+	$Node3D/AnimationPlayer.play(animation)
 
-@rpc("call_local","any_peer","reliable")
-func jump_animation():
-	if (not ($Node3D/AnimationPlayer.current_animation == "jump")):
-		$Node3D/AnimationPlayer.stop()
-	$Node3D/AnimationPlayer.speed_scale = 1
-	$Node3D/AnimationPlayer.play("jump")
 func deposit():
 
 	if Input.is_action_just_pressed("interact"):
