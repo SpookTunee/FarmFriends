@@ -6,7 +6,8 @@ var pitch : float = 1.0
 func _ready():
 	var randomize : float = randf_range(-0.10, 0.50)
 	$ExplosionSound.set_pitch_scale(1 + randomize)
-	$ExplosionSound.play()
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -15,6 +16,7 @@ func _process(delta):
 func play(sized): 
 	size = sized
 	rppeed.rpc()
+	playSound.rpc()
 	
 @rpc("call_local")
 func rppeed():
