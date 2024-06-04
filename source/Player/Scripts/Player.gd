@@ -491,14 +491,14 @@ func _on_deposit_timer_timeout():
 					$Stats.money += calcReturn(plantcount) * 4
 				else:
 					$Stats.crop_counts[plantcount] -= 1
-				$SoundHandler/Selling.play()
-				sellPitchScale += 0.1
-				$SoundHandler/Selling.set_pitch_scale(sellPitchScale)
+				#$SoundHandler/Selling.play()
+				#sellPitchScale += 0.1
+				#$SoundHandler/Selling.set_pitch_scale(sellPitchScale)
 				
 			else:
 				plantcount += 1
-				$SoundHandler/Selling.set_pitch_scale(0.9)
-				sellPitchScale = 0.9
+				#$SoundHandler/Selling.set_pitch_scale(0.9)
+				#sellPitchScale = 0.9
 			
 	if $DepositTimer.wait_time > 0:
 		$DepositTimer.wait_time *= 0.90
