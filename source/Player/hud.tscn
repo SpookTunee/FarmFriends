@@ -47,10 +47,11 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -640.0
 offset_top = -346.0
-offset_right = 640.0
-offset_bottom = -74.0
+offset_right = 1920.0
+offset_bottom = 342.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Messages"]
@@ -70,6 +71,7 @@ offset_left = 29.0
 offset_top = 10.0
 offset_right = 490.0
 offset_bottom = 148.0
+scale = Vector2(0.5, 0.5)
 text = "Sunday"
 label_settings = SubResource("LabelSettings_yfxox")
 
@@ -79,10 +81,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -556.0
-offset_top = 26.0
-offset_right = -25.0
-offset_bottom = 430.27
+offset_left = -561.0
+offset_top = 10.0
+offset_right = -33.0
+offset_bottom = 336.0
 grow_horizontal = 0
 
 [node name="Wheat" type="Label" parent="Inventory"]
@@ -163,12 +165,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -6.0
-offset_top = -6.0
-offset_right = 6.0
-offset_bottom = 6.0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 9.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 
 [node name="ToolTip" type="Label" parent="."]
@@ -190,17 +193,18 @@ theme_override_font_sizes/font_size = 50
 
 [node name="Hotbar" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.057
-anchor_top = 0.807
-anchor_right = 0.95
-anchor_bottom = 0.957
-offset_left = 0.0399952
-offset_top = 0.399967
-offset_right = -6.10352e-05
-offset_bottom = 0.399986
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -82.0
+offset_right = 300.0
+offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(0.5, 0.5)
 theme_override_constants/separation = 20
 alignment = 1
 
@@ -294,25 +298,27 @@ horizontal_alignment = 1
 [node name="Quota" type="Label" parent="."]
 layout_mode = 1
 offset_left = 27.0
-offset_top = 105.0
+offset_top = 70.0
 offset_right = 419.0
-offset_bottom = 204.0
+offset_bottom = 169.0
+scale = Vector2(0.5, 0.5)
 text = "DUE: "
 label_settings = SubResource("LabelSettings_3vkh8")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.794
-anchor_right = 0.5
-anchor_bottom = 0.794
-offset_left = -196.0
-offset_top = -66.2
-offset_right = 206.0
-offset_bottom = -0.200024
+anchor_left = 0.419141
+anchor_top = 0.89875
+anchor_right = 0.574609
+anchor_bottom = 0.9475
+offset_left = -0.5
+offset_top = -1.0
+offset_right = 0.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_cqq85")
 theme_override_styles/fill = SubResource("StyleBoxFlat_i7aoa")

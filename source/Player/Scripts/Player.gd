@@ -46,7 +46,7 @@ var item_state: Dictionary = {
 		"scythe": {"isunlocked":true},
 		"watering_can": {"isunlocked":true}
 	}, "seeds": {
-		"wheat": {"isunlocked":true, "count": 20},
+		"wheat": {"isunlocked":true, "count": 40},
 		"corn": {"isunlocked":false, "count": 0},
 		"potato": {"isunlocked":false, "count": 0},
 		"carrot": {"isunlocked":false, "count": 0},

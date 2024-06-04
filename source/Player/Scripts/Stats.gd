@@ -7,8 +7,8 @@ extends Node
 	Global.Plants.CARROT : 0,
 	Global.Plants.MUSHROOM : 0,
 	}
-	
-@export var money : float = 3000
+
+@export var money : float = 100
 
 
 @export var moneyPaid : float = 0

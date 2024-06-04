@@ -1,16 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://c53f7lqlax7k0"]
+[gd_scene load_steps=5 format=3 uid="uid://c53f7lqlax7k0"]
 
-[ext_resource type="PackedScene" uid="uid://cm6hidfytq4u8" path="res://Assets/Buildings/protoFence.blend" id="1_8jera"]
+[ext_resource type="ArrayMesh" uid="uid://ce63y1h0k1v84" path="res://Assets/Buildings/protoFence.obj" id="1_xh4bw"]
+[ext_resource type="Shader" uid="uid://cubw0g3enqybi" path="res://Farming/fence.tres" id="2_xa2n5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ev0ji"]
 size = Vector3(0.253906, 1.37033, 1.19672)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ranu"]
+render_priority = 0
+shader = ExtResource("2_xa2n5")
 
 [node name="Fence" type="Node3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
-[node name="protoFence" parent="StaticBody3D" instance=ExtResource("1_8jera")]
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.678329, -0.470551)
 shape = SubResource("BoxShape3D_ev0ji")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = ExtResource("1_xh4bw")
+surface_material_override/0 = SubResource("ShaderMaterial_0ranu")
