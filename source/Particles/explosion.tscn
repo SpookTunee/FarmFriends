@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://1rghlfdk7yrj"]
+[gd_scene load_steps=26 format=3 uid="uid://1rghlfdk7yrj"]
 
 [ext_resource type="Texture2D" uid="uid://bnrhidiydbndr" path="res://Assets/Flare00.PNG" id="1_51lei"]
 [ext_resource type="Script" path="res://Particles/explosion.gd" id="1_dy56t"]
 [ext_resource type="Material" uid="uid://bfhh16b0ig2le" path="res://Particles/explosion.tres" id="2_75tkw"]
+[ext_resource type="AudioStream" uid="uid://dyps6hbl8qrlw" path="res://Sounds/Explosion - Sound Effect.mp3" id="4_d60lq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msity"]
 transparency = 1
@@ -160,3 +161,8 @@ explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_vre5s")
 draw_pass_1 = SubResource("QuadMesh_h1vms")
+
+[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_d60lq")
+volume_db = 35.0
+unit_size = 49.69
