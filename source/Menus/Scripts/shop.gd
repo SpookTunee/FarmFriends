@@ -37,7 +37,7 @@ func purchase(slot,id,cost,ismine=false):
 			get_node("../HUD").send_unique_chat("[color=green]Purchased " + id + "[/color]")
 		else:
 			get_node("../HUD").send_unique_chat("[color=red]Not enough fundage[/color]")
-	elif ismine:
+	if ismine:
 		if get_node("../Stats").money >= cost:
 			get_node("../Stats").money -= cost
 			get_parent().item_state[slot][id]["count"] += 1
@@ -46,13 +46,13 @@ func purchase(slot,id,cost,ismine=false):
 			get_node("../HUD").send_unique_chat("[color=red]Not enough fundage[/color]")
 
 func _on_shovel_pressed():
-	purchase("misc","shovel",650)
+	purchase("misc","shovel",150)
 
 
 func _on_fast_hoe_pressed():
 	if !get_parent().has_fast_hoe:
-		if get_node("../Stats").money >= 500:
-			get_node("../Stats").money -= 500
+		if get_node("../Stats").money >= 250:
+			get_node("../Stats").money -= 250
 			get_parent().has_fast_hoe = true
 			get_node("../HUD").send_unique_chat("[color=green]Purchased 1x fast_hoe[/color]")
 		else:
@@ -61,8 +61,8 @@ func _on_fast_hoe_pressed():
 
 func _on_boots_pressed():
 	if !get_parent().has_boots:
-		if get_node("../Stats").money >= 1000:
-			get_node("../Stats").money -= 1000
+		if get_node("../Stats").money >= 500:
+			get_node("../Stats").money -= 500
 			get_parent().has_boots = true
 			get_parent().NORMAL_SPEED = 6.5
 			get_parent().SPRINT_SPEED = 9.5
@@ -73,7 +73,7 @@ func _on_boots_pressed():
 
 
 func _on_landmine_pressed():
-	purchase("misc","mine",150,true)
+	purchase("misc","mine",80,true)
 
 #1 .75 3 4
 

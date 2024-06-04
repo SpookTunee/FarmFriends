@@ -26,11 +26,9 @@ var is_ragdoll: bool = false
 var ragdoll_opos: Vector3 = Vector3(0,0,0)
 var handhidden : bool = false
 var jumping : bool = false
-var quotaSecond : bool = false
-var addedQuota : float = 0
-var quotaCheck : bool = true
 var addCheck : bool = false
 var plsCheck : bool = true
+var quotas_passed: int = 1
 var canFarm: bool = false
 var knockbackX : float = 0.0
 var knockbackY : float = 0.0
@@ -54,7 +52,7 @@ var item_state: Dictionary = {
 	}, "misc":  {
 		"shovel": {"isunlocked":false},
 		#"vacuum": {"isunlocked":false},
-		"mine": {"isunlocked":false, "count": 1},
+		"mine": {"isunlocked":false, "count": 0},
 	}, "current": {
 		"slot": "tools",
 		"id": "hoe"
@@ -77,10 +75,11 @@ func _ready():
 	get_node("HUD").send_unique_chat("Use WASD to move around (space for jump, shift for sprint),\nkeys 1-3 to access different item types in your hotbar,\nand scroll to access different items within that type.\nLeft click to use.",1000)
 	request_mp_spawned.rpc()
 	request_hand_hide.rpc()
+	get_node("/root/World/DayNightCycle").connect("dayChange",_pay_quota)
 	
 @rpc("call_local","any_peer","unreliable")
 func request_hand_hide():
-	hand_hide.rpc(current_item)
+	hand_hide.rpc(item_state["current"])
 	
 @rpc("call_remote","authority","reliable")
 func request_mp_spawned():
@@ -161,15 +160,20 @@ func change_sensitivity(sense):
 	camera_sense_multiplier = sense/50.0 + .03
 	
 @rpc("call_remote","authority","unreliable")
-func hand_hide(item):
+func hand_hide(id):
+	var item
+	if id["slot"] == "seeds":
+		item = "SeedPouch"
+	else:
+		item = id["id"]
 	if $Camera3D/Hand.visible:
 		$Camera3D/Hand.hide()
 	if not $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".visible:
 		$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".show()
-	if not $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children()[item-1].visible:
-		$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children()[item-1].show()
+	if not $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_node(item).visible:
+		$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_node(item).show()
 	for x in $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children():
-		if x != $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_children()[item-1]:
+		if x != $"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".get_node(item):
 			if x.visible:
 				x.hide()
 	
@@ -186,7 +190,6 @@ func switch_hand(id):
 	Hand.add_child(nscn)
 	if id["id"] == "scythe":
 		nscn.init_pos()
-	hand_hide.rpc(current_item)
 
 func _physics_process(delta):
 	#i fucking give up
@@ -289,9 +292,6 @@ func _physics_process(delta):
 	move_and_slide()
 	deposit()
 	shop()
-	if Global.day > 1:
-		quotacheck(delta)
-	payQuota()
 	
 	reset_mat.rpc()
 	AnimationPlayer
@@ -341,6 +341,7 @@ func movhelper(ist):
 	var ist2 = ist["current"]
 	get_node("HUD").switch_hotbar_slot({"tools":0,"seeds":1,"misc":2}.get(ist2["slot"]),ist2["id"])
 	switch_hand.rpc(ist2)
+	hand_hide.rpc(ist2)
 	
 func mov_hands():
 	var sc = 0
@@ -348,9 +349,6 @@ func mov_hands():
 		sc = -1
 	elif Input.is_action_just_pressed("scroll_up"):
 		sc = 1
-	if sc != 0:
-		item_state["current"]["id"] = get_scroll_list(item_state["current"]["slot"])[(get_scroll_pos(item_state["current"]["slot"],item_state["current"]["id"]) + sc)%get_scroll_list(item_state["current"]["slot"]).size()]
-		movhelper(item_state)
 	if Input.is_action_just_pressed("1"):
 		item_state["current"]["slot"] = "tools"
 		item_state["current"]["id"] = "hoe"
@@ -369,6 +367,9 @@ func mov_hands():
 			item_state["current"]["slot"] = "misc"
 			item_state["current"]["id"] = t
 			movhelper(item_state)
+	elif sc != 0:
+		item_state["current"]["id"] = get_scroll_list(item_state["current"]["slot"])[(get_scroll_pos(item_state["current"]["slot"],item_state["current"]["id"]) + sc)%get_scroll_list(item_state["current"]["slot"]).size()]
+		movhelper(item_state)
 	if canFarm || ((item_state["current"]["slot"] == "misc") || (item_state["current"]["id"] == "scythe")):
 		if (item_state["current"]["id"] == "hoe") && (!has_fast_hoe):
 			if Input.is_action_just_pressed("m1"):
@@ -532,70 +533,8 @@ func shop():
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				pause_movement = true
 
-			
-
-
-func quotacheck(delta):
-	
-	if Global.get_day_name() != "Monday" && (Global.dayfloat - float(Global.day)) < delta:
-		quotaCheck = true
-		
-	if Global.get_day_name() == "Monday":
-		plsCheck = true
-	
-	if Global.get_day_name() == "Monday" && (Global.dayfloat - float(Global.day)) < delta && quotaSecond == false:
-		addCheck = false
-		addedQuota = 0
-	
-	if quotacheck:
-		if Global.get_day_name() == "Sunday" && (Global.dayfloat - float(Global.day)) < delta:
-			quotadue(Global.quotaPrice + addedQuota, delta)
-			quotaCheck = false
-	
-	if Global.get_day_name() == "Monday" && (Global.dayfloat - float(Global.day)) < delta:
-		$Stats.moneyPaid = 0
-	
-
-func quotadue(price : float, delta):
-	if $Stats.moneyPaid >= price:
-		if plsCheck:
-			plsCheck = false
-			addCheck = true
-			quotaSecond = false
-			print("Quota reached mfs")
-	elif quotaSecond != true:
-		if plsCheck:
-			plsCheck = false
-			print("Quota not reached")
-			#add thing to say you have not reached quota 
-			addedQuota = Global.quotaPrice * 0.5
-			quotaSecond = true
-	else:
-		if plsCheck:
-			print("You dieded")
-			$Explosion.play(2)
-			#you lose :( by explosion
-	
-
-
-func payQuota():
-	if Input.is_action_just_pressed("interact"):
-		if $Camera3D.get_child(0).get_collider() != null:
-			if $Camera3D.get_child(0).get_collider().name == "QuotaArea":
-				if $Stats.money <= Global.quotaPrice + addedQuota - $Stats.moneyPaid:
-					$Stats.moneyPaid += $Stats.money
-					$Stats.money = 0
-				else:
-					var due = Global.quotaPrice + addedQuota - $Stats.moneyPaid
-					$Stats.money -= due
-					$Stats.moneyPaid += due
-
 
 func pushPull(direction: Vector3, delta):
-	#self.velocity.y += direction.y * 0.7
-	#knockbackX = direction.x
-	#knockbackY = direction.z
-	#isPPactive = true
 	self.velocity += direction
 	
 func zone_alert(id):
@@ -610,7 +549,6 @@ func handle_msgs():
 			if prevloc != q:
 				zone_alert(q)
 				prevloc = int(q)
-	
-#func resetKnock():
-	#knockbackX = 0
-	#knockbackY = 0
+
+func _pay_quota():
+	pass

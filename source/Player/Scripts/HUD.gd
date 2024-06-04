@@ -19,7 +19,6 @@ func _process(delta):
 	$Inventory/Carrots.text = str(get_node("../Stats").crop_counts[Global.Plants.CARROT]) + "   "
 	$Inventory/Mushrooms.text = str(get_node("../Stats").crop_counts[Global.Plants.MUSHROOM]) + "   "
 	$Inventory/Money.text = str(get_node("../Stats").money) + "   "
-	$Quota.text = "DUE: " + str(Global.quotaPrice + get_parent().addedQuota - get_node("../Stats").moneyPaid)
 	if (tpos + (200 if ovrrd == -1 else ovrrd)) - ticks < 0:
 		$Messages/RichTextLabel.text = ""
 		ovrrd = -1
