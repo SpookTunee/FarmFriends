@@ -2,7 +2,6 @@ extends Node3D
 
 @export var cycle_sec: int = 30
 var starting_rotation = 210
-var check : bool = true
 var currday : int
 signal dayChange
 # Called when the node enters the scene tree for the first time.
@@ -28,26 +27,5 @@ func _process(delta):
 	$DirectionalLight3D3.light_energy = 1+(cos(-($DirectionalLight3D.rotation.x))/2) * 1.5 + 0.8
 	if $DirectionalLight3D.rotation.x >= 2*PI:
 		$DirectionalLight3D.rotation.x = 0
-		
-	
-		
-	
-	if Global.get_day_name() == "Monday" && check && Global.day > 3:
-		print("i")
-		check = false
-		Global.quotaPrice += 360
-		
-	if Global.get_day_name() != "Monday" && Global.get_day_name() != "Sunday":
-		check = true
-		
-		
-		
-		
-		
-		
-		
-	# Control ambient sounnd
-	
 	if $Ambience.playing == false:
 		$Ambience.play()
-	pass
