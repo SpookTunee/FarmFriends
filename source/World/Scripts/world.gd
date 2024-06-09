@@ -28,6 +28,7 @@ func _ready():
 	$WaterPlane.hide()
 	$DayNightCycle.hide()
 	$"Menu/Control/VBoxContainer/Your Ip".placeholder_text = "Local IP: " + str(l_IP_scan())
+	upnp_settup()
 	#$Terrain/ProtonScatter.enabled = true
 	
 
@@ -36,7 +37,6 @@ func on_host_disconnect():
 
 func _on_host_pressed():
 	menu.hideme()
-	upnp_settup()
 	$Terrain.show()
 	$WaterPlane.show()
 	$DayNightCycle.show()
