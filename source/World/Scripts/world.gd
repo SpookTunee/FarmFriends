@@ -36,6 +36,7 @@ func on_host_disconnect():
 
 func _on_host_pressed():
 	menu.hideme()
+	upnp_settup()
 	$Terrain.show()
 	$WaterPlane.show()
 	$DayNightCycle.show()
