@@ -5,7 +5,7 @@ extends Node3D
 
 const tilLand = preload("res://Farming/tilled_land.tscn")
 const Player = preload("res://Player/player.tscn")
-var port = 6009
+var port = 6005
 var enet_peer = ENetMultiplayerPeer.new()
 var zone_count = 1
 
