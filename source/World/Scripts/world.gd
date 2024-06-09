@@ -115,6 +115,8 @@ func upnp_settup():
 	var map_result = upnp.add_port_mapping(port)
 	if map_result == UPNP.UPNP_RESULT_SUCCESS:
 		print("UPNP Port Mapping Failed! Error %s" % map_result)
+	if upnp.query_external_address() == "":
+		return
 	$Menu.get_node("Control").get_node("VBoxContainer").get_node("Your Ip2").placeholder_text = upnp.query_external_address()
 	print("Successful UPNP")
 	
