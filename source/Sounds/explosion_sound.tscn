@@ -1,17 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm70s8l0mbqg3"]
+[gd_scene load_steps=3 format=3 uid="uid://dm70s8l0mbqg3"]
 
 [ext_resource type="Script" path="res://Sounds/explosion_sound.gd" id="1_c1yft"]
+[ext_resource type="AudioStream" uid="uid://dyps6hbl8qrlw" path="res://Sounds/Explosion - Sound Effect.mp3" id="2_i8y3s"]
 
 [node name="ExplosionSound" type="Node3D"]
 script = ExtResource("1_c1yft")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_i8y3s")
 volume_db = 50.0
 unit_size = 100.0
 max_db = 5.5
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

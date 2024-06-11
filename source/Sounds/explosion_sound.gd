@@ -3,7 +3,7 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	$ExplosionSound
 	var randomize : float = randf_range(-0.10, 0.50)
 	$ExplosionSound.set_pitch_scale(1 + randomize)
 	playSound.rpc()
@@ -24,5 +24,3 @@ func relocate(pos):
 	
 	
 
-func _on_timer_timeout():
-	queue_free()
