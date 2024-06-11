@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2defqux4eywm"]
+[gd_scene load_steps=9 format=3 uid="uid://b2defqux4eywm"]
 
 [ext_resource type="Script" path="res://Tools/Scripts/Scythe.gd" id="1_gcwxj"]
 [ext_resource type="PackedScene" uid="uid://bt47np56cssrp" path="res://Assets/Tools/scythe.blend" id="2_s168g"]
+[ext_resource type="AudioStream" uid="uid://0v3jom0lyi3f" path="res://Sounds/dirt4.mp3" id="3_3xomh"]
 
 [sub_resource type="Animation" id="Animation_ig2s8"]
 length = 0.001
@@ -52,6 +53,12 @@ script = ExtResource("1_gcwxj")
 
 [node name="scythe" parent="." instance=ExtResource("2_s168g")]
 transform = Transform3D(-1.3252, -1.13037, -0.169135, 1.85334e-07, 0.258966, -1.73073, 1.14296, -1.31061, -0.196104, 0, 0, 0)
+
+[node name="CutNoise" type="AudioStreamPlayer3D" parent="scythe"]
+transform = Transform3D(-0.432717, 5.96905e-08, 0.37321, -0.369102, 0.0845604, -0.427954, -0.0552281, -0.565138, -0.064034, 0.340954, 1.11746, -0.0355634)
+stream = ExtResource("3_3xomh")
+volume_db = -10.0
+pitch_scale = 1.6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="scythe"]
 libraries = {
