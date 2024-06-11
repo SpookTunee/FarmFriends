@@ -7,11 +7,8 @@ var active : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-	
-func activate():
-	pass
 
-func _physics_process(delta):
+func activate():
 	for i in $Area3D.get_overlapping_areas():
 		if i.name == "Hitbox":
 			if i.get_parent() != self.get_parent().get_parent().get_parent():
@@ -19,9 +16,11 @@ func _physics_process(delta):
 				force_dir = (Vector3(0,0,0) - Vector3($Origin.global_position.x - (i.get_parent().global_position.x), -($Origin.global_position.y - (i.get_parent().global_position.y)), $Origin.global_position.z - (i.get_parent().global_position.z))) # finds direction
 				#print(force_dir)
 				#force_dir = Vector3(0,0,0) - force_dir
+				print("on")
+				i.get_parent().pushPull(force_dir, 0.0)
 
-				i.get_parent().pushPull(force_dir, delta)
-	
+func _physics_process(delta):
+	pass
 
 
 
@@ -41,6 +40,7 @@ func _physics_process(delta):
 
 
 func _on_area_3d_area_exited(area):
-	if area.name == "Hitbox":
-			if area.get_parent() != self.get_parent().get_parent().get_parent():
-				area.get_parent().resetKnock()
+	pass
+	#if area.name == "Hitbox":
+			#if area.get_parent() != self.get_parent().get_parent().get_parent():
+				#area.get_parent().resetKnock()
