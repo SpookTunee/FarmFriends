@@ -36,6 +36,7 @@ func on_host_disconnect():
 	cleanup()
 
 func _on_host_pressed():
+	upnp_settup()
 	menu.hideme()
 	$Terrain.show()
 	$WaterPlane.show()
