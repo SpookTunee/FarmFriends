@@ -16,6 +16,8 @@ var scythe = preload("res://Tools/scythe.tscn")
 var watering_can = preload("res://Tools/watering_can.tscn")
 var shovel = preload("res://Tools/shovel.tscn")
 var mine_placer = preload("res://Tools/mine_placer.tscn")
+var invisble = preload("res://Tools/invis.tscn")
+var vacum = preload("res://Tools/vacuum.tscn")
 var pause_movement = false
 var seed_bag_save = 0
 var plantcount : int = 0
@@ -51,7 +53,7 @@ var item_state: Dictionary = {
 		"mushroom": {"isunlocked":false, "count": 0},
 	}, "misc":  {
 		"shovel": {"isunlocked":false},
-		#"vacuum": {"isunlocked":false},
+		"invis": {"isunlocked":false},
 		"mine": {"isunlocked":false, "count": 0},
 	}, "current": {
 		"slot": "tools",
@@ -185,7 +187,7 @@ func switch_hand(id):
 		nscn = seeds.instantiate()
 		nscn.plant = {"wheat":0,"corn":1,"potato":2,"carrot":3,"mushroom":4}.get(id["id"])
 	else:
-		nscn = {"hoe":hoe,"scythe":scythe,"watering_can":watering_can,"shovel":shovel,"mine":mine_placer}.get(id["id"]).instantiate()
+		nscn = {"hoe":hoe,"scythe":scythe,"watering_can":watering_can,"shovel":shovel,"mine":mine_placer,"invis":invisble}.get(id["id"]).instantiate()
 	nscn.name = id["id"]
 	Hand.add_child(nscn)
 	if id["id"] == "scythe":
@@ -310,7 +312,8 @@ func reset_mat():
 		if get_node("Camera3D/Hand").get_child(0).name != "invis":
 			var skel = get_node("Node3D/Armature/Skeleton3D")
 			for i in range(0, 3):
-				skel.get_child(i).set_material_override(null)
+				for j in skel.get_child(i).get_surface_override_material_count():
+					skel.get_child(i).set_surface_override_material(j,null)
 
 
 func mov_sprint(delta):
