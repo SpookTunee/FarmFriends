@@ -156,7 +156,6 @@ autowrap_mode = 2
 text_overrun_behavior = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.8
@@ -222,6 +221,7 @@ theme_override_font_sizes/font_size = 81
 text = "Quit"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.925
@@ -253,6 +253,11 @@ offset_top = -1.52588e-05
 offset_right = 738.0
 offset_bottom = 138.0
 
+[node name="Button" type="Button" parent="Control/VBoxContainer3"]
+visible = false
+layout_mode = 2
+text = "Play"
+
 [node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer3"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.87451)
@@ -266,6 +271,7 @@ editable = false
 [connection signal="pressed" from="Control/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="text_changed" from="Control/VBoxContainer2/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="Control/VBoxContainer2/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Control/VBoxContainer3/Button" to="." method="_on_button_pressed"]
 
 [editable path="grass"]
