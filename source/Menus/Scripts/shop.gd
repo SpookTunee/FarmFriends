@@ -61,8 +61,8 @@ func _on_fast_hoe_pressed():
 
 func _on_boots_pressed():
 	if !get_parent().has_boots:
-		if get_node("../Stats").money >= 500:
-			get_node("../Stats").money -= 500
+		if get_node("../Stats").money >= 300:
+			get_node("../Stats").money -= 300
 			get_parent().has_boots = true
 			get_parent().NORMAL_SPEED = 6.5
 			get_parent().SPRINT_SPEED = 9.5
@@ -114,3 +114,11 @@ func _on_potato_button_up():
 
 func _on_carrot_button_up():
 	cap = false
+
+
+func _on_vacuum_pressed():
+	purchase("misc","vacuum",200)
+
+
+func _on_invis_pressed():
+	purchase("misc","invis",250)

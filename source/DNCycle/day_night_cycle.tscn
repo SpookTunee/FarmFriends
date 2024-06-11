@@ -67,5 +67,11 @@ replication_config = SubResource("SceneReplicationConfig_1ua5o")
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_y46ih")
-volume_db = 24.0
-autoplay = true
+volume_db = 18.0
+
+[node name="AmbienceTimer" type="Timer" parent="."]
+wait_time = 18.592
+one_shot = true
+
+[connection signal="finished" from="Ambience" to="." method="_on_ambience_finished"]
+[connection signal="timeout" from="AmbienceTimer" to="." method="_on_ambience_timer_timeout"]

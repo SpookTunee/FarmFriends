@@ -4,8 +4,13 @@ extends Node3D
 var starting_rotation = 210
 var currday : int
 signal dayChange
+
+@onready var startTime = randf_range(0, 10)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AmbienceTimer.wait_time = startTime
+	$AmbienceTimer.start()
 	currday = floor(Global.dayfloat)
 	$DirectionalLight3D.rotation.x = starting_rotation*PI/180
 	
@@ -27,5 +32,15 @@ func _process(delta):
 	$DirectionalLight3D3.light_energy = 1+(cos(-($DirectionalLight3D.rotation.x))/2) * 1.5 + 0.8
 	if $DirectionalLight3D.rotation.x >= 2*PI:
 		$DirectionalLight3D.rotation.x = 0
-	if $Ambience.playing == false:
-		$Ambience.play()
+	print($AmbienceTimer.wait_time)
+	
+	
+
+func _on_ambience_timer_timeout():
+	$Ambience.play()
+	
+
+
+func _on_ambience_finished():
+	$AmbienceTimer.wait_time = randf_range(0, 30)
+	$AmbienceTimer.start()

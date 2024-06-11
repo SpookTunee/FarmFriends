@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://yncwijbbpmb2"]
+[gd_scene load_steps=16 format=3 uid="uid://yncwijbbpmb2"]
 
 [ext_resource type="FontFile" uid="uid://dmgo1xsgca6oi" path="res://Assets/Font/Palamecia Titling.otf" id="1_isg4c"]
 [ext_resource type="Script" path="res://Menus/Scripts/shop.gd" id="1_ng0yv"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://fl06lmrhtve8" path="res://Assets/Icons/cornicon.png" id="7_nguw5"]
 [ext_resource type="Texture2D" uid="uid://b5ueupi1t0bay" path="res://Assets/Icons/potatoicon.png" id="8_0xudq"]
 [ext_resource type="Texture2D" uid="uid://d0w0vrr2mfgob" path="res://Assets/Icons/carroticon.png" id="9_ha6ap"]
+[ext_resource type="Texture2D" uid="uid://bifh8ml83jcuh" path="res://icon.svg" id="10_6jbwn"]
 [ext_resource type="Texture2D" uid="uid://cb2te2ndklyjx" path="res://Assets/Icons/mineicon.png" id="10_vymp7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkeh6"]
@@ -43,6 +44,7 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 
 [node name="Categories" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 60
@@ -272,7 +274,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_isg4c")
 theme_override_font_sizes/font_size = 70
-text = "1000 WEU"
+text = "300 WEU"
 
 [node name="Seeds" type="ScrollContainer" parent="HBoxContainer"]
 visible = false
@@ -614,7 +616,6 @@ theme_override_font_sizes/font_size = 70
 text = "4 WEU"
 
 [node name="Misc" type="ScrollContainer" parent="HBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -703,7 +704,172 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_isg4c")
 theme_override_font_sizes/font_size = 70
-text = "650 WEU"
+text = "150 WEU"
+
+[node name="vacuum" type="Button" parent="HBoxContainer/Misc/Misc"]
+visible = false
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Misc/Misc/vacuum"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Misc/Misc/vacuum/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Vacuum
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Misc/Misc/vacuum/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Misc/Misc/vacuum/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("10_6jbwn")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Misc/Misc/vacuum/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 50
+text = "This vacuum is not for cleaning, but, for blowing your friends.
+
+"
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Misc/Misc/vacuum"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Misc/Misc/vacuum/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "200 WEU"
+
+[node name="invis" type="Button" parent="HBoxContainer/Misc/Misc"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_wkeh6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_utdbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mfwor")
+
+[node name="HboxContainer" type="HBoxContainer" parent="HBoxContainer/Misc/Misc/invis"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Misc/Misc/invis/HboxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 60
+text = "Invisibility
+ 
+ 
+ "
+
+[node name="Control" type="Control" parent="HBoxContainer/Misc/Misc/invis/HboxContainer/Label"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/Misc/Misc/invis/HboxContainer/Label/Control"]
+position = Vector2(120, 180)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("10_6jbwn")
+
+[node name="Label2" type="Label" parent="HBoxContainer/Misc/Misc/invis/HboxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 50
+text = "The shovel is another of the big-shot tools in any farmer's repertoire, giving you needed defence"
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Misc/Misc/invis"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igbb2")
+
+[node name="Label" type="Label" parent="HBoxContainer/Misc/Misc/invis/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -42.5
+offset_right = 142.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_isg4c")
+theme_override_font_sizes/font_size = 70
+text = "250 WEU"
 
 [node name="landmine" type="Button" parent="HBoxContainer/Misc/Misc"]
 custom_minimum_size = Vector2(2.08165e-12, 300)
@@ -786,7 +952,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_isg4c")
 theme_override_font_sizes/font_size = 70
-text = "650 WEU"
+text = "80 WEU"
 
 [connection signal="pressed" from="HBoxContainer/Categories/Tools" to="." method="_on_tools_pressed"]
 [connection signal="pressed" from="HBoxContainer/Categories/Seeds" to="." method="_on_seeds_pressed"]
@@ -804,4 +970,6 @@ text = "650 WEU"
 [connection signal="button_down" from="HBoxContainer/Seeds/Seeds/carrot" to="." method="_on_carrot_pressed"]
 [connection signal="button_up" from="HBoxContainer/Seeds/Seeds/carrot" to="." method="_on_carrot_button_up"]
 [connection signal="pressed" from="HBoxContainer/Misc/Misc/shovel" to="." method="_on_shovel_pressed"]
+[connection signal="pressed" from="HBoxContainer/Misc/Misc/vacuum" to="." method="_on_vacuum_pressed"]
+[connection signal="pressed" from="HBoxContainer/Misc/Misc/invis" to="." method="_on_invis_pressed"]
 [connection signal="pressed" from="HBoxContainer/Misc/Misc/landmine" to="." method="_on_landmine_pressed"]
