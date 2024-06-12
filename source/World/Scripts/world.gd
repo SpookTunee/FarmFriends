@@ -8,6 +8,7 @@ const Player = preload("res://Player/player.tscn")
 var port = 6005
 var enet_peer = ENetMultiplayerPeer.new()
 var zone_count = 1
+var pid_owner = 0
 
 func disconnect_from_server():
 	print(multiplayer.get_unique_id())
@@ -97,12 +98,15 @@ func remove_player_callback():
 func add_player(id):
 	var player = Player.instantiate()
 	player.name = "mpSpawned_" + str(id)
+	player.player_id = pid_owner
 	if is_multiplayer_authority():
 		player.get_node("Camera3D").current = true
 	get_node("zones").get_children()[zone_count].property_owner = player
+	get_node("zones").get_children()[zone_count].id_owner = pid_owner
 	add_child(player)
 	Global.players.append(player)
 	zone_count += 1
+	pid_owner += 1
 	player.hand_hide.rpc(1)
 
 func upnp_settup():
