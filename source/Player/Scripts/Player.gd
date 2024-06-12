@@ -588,7 +588,13 @@ func player_out():
 	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
 		get_node("/root/World").disconnect_from_server()
 	else:
-		$HUD.send_unique_chat("[color=blue]Player ")
+		$HUD.send_unique_chat("[color=blue]A player is out! Find and use their plot.[/color]")
+		var zones = get_node("/root/World/zones").get_children()
+		var zid = get_node("/root/World/mpSpawned_" + str(multiplayer.get_remote_sender_id())).player_id
+		for i in zones:
+			if zones.id_owner == zid:
+				zones.id_owner = -1
+				break
 
 
 
