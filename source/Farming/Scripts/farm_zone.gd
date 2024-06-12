@@ -5,6 +5,7 @@ extends Area3D
 @export_enum("None","Plains", "Mountainous", "River", "Forest") var terrain_type : int = 0
 @export var farmable: bool = true
 @export_flags("yield_boost","farming_speed","grow_speed","move_speed") var effects: int
+var id_owner: int
 
 
 func parse():
@@ -36,14 +37,3 @@ func parse():
 		return [1,2,8]
 	elif effects == 15:
 		return [1,2,4,8]
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-#he he he ha
