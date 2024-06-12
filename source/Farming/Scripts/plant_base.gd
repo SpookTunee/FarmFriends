@@ -49,7 +49,7 @@ func _ready():
 	(1.0 if is_in_preffered_terrain == 1 else 0.75 if is_in_preffered_terrain == 0 else 0.5) \
 	/(
 		actual_grow_time
-		*240
+		*280
 		)
 	$Plant/PlantBody/AnimationPlayer.speed_scale = default_growth_modifier*get_parent().water_level
 	$Plant/PlantBody/AnimationPlayer.play("Plant_Growth_anim")

@@ -64,6 +64,7 @@ var item_state: Dictionary = {
 		"id": "hoe"
 	}
 }
+var isout = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
@@ -85,6 +86,7 @@ func _ready():
 	
 @rpc("call_local","any_peer","unreliable")
 func request_hand_hide():
+	if isout: return
 	hand_hide.rpc(item_state["current"])
 	
 @rpc("call_remote","authority","reliable")
@@ -117,6 +119,7 @@ func request_mp_spawned():
 	request_mp_spawned_callback.rpc_id(multiplayer.get_remote_sender_id(),mps)
 @rpc("any_peer", "call_local")
 func recieve_damage(amt):
+	if isout: return
 	if $IFrameTimer.is_stopped() and $RagdollTimer.is_stopped():
 		var childss
 		health -= amt
@@ -152,6 +155,7 @@ func request_mp_spawned_callback(mps):
 		#get_node("/root/World/TilledLand").add_child(till)
 	
 func _input(event):
+	if isout: return
 	if not is_multiplayer_authority(): 
 		return
 	if pause_movement: return
@@ -163,10 +167,12 @@ func _input(event):
 			$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI/2, PI/2)
 
 func change_sensitivity(sense):
+	if isout: return
 	camera_sense_multiplier = sense/50.0 + .03
 	
 @rpc("call_remote","authority","unreliable")
 func hand_hide(id):
+	if isout: return
 	var item
 	if id["slot"] == "seeds":
 		item = "SeedPouch"
@@ -185,6 +191,7 @@ func hand_hide(id):
 	
 @rpc("call_local","any_peer","reliable")
 func switch_hand(id):
+	if isout: return
 	Hand.get_child(0).queue_free()
 	var nscn
 	if id["slot"] == "seeds":
@@ -198,6 +205,7 @@ func switch_hand(id):
 		nscn.init_pos()
 
 func _physics_process(delta):
+	if isout: return
 	#i fucking give up
 	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".position=Vector3(-0.087,0.387,-0.137)-$"Node3D/Armature/Skeleton3D".get_bone_pose_position(8)
 	#$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_r/Hand2".rotation = Vector3(-0.3927,0.733,-0.0541)-$"Node3D/Armature/Skeleton3D".get_bone_pose_rotation(8).get_euler()
@@ -314,6 +322,7 @@ func _physics_process(delta):
 	
 @rpc("call_local")
 func reset_mat():
+	if isout: return
 	if get_node("Node3D/Armature/Skeleton3D").get_child(0).get_material_override() != null:
 		if get_node("Camera3D/Hand").get_child(0).name != "invis":
 			var skel = get_node("Node3D/Armature/Skeleton3D")
@@ -323,6 +332,7 @@ func reset_mat():
 
 
 func mov_sprint(delta):
+	if isout: return
 	if Input.is_action_pressed("sprint"):
 		SPEED = SPRINT_SPEED
 		if is_on_floor() && velocity.length() > 5:
@@ -333,6 +343,7 @@ func mov_sprint(delta):
 		$SoundHandler/Walk.set_pitch_scale(1.67)
 
 func get_scroll_list(slot):
+	if isout: return
 	var tr = []
 	for i in item_state[slot].keys():
 		if item_state[slot][i]["isunlocked"]:
@@ -340,6 +351,7 @@ func get_scroll_list(slot):
 	return tr
 
 func get_scroll_pos(slot,id):
+	if isout: return
 	var j = 0
 	for i in get_scroll_list(slot):
 		if id == i:
@@ -347,12 +359,14 @@ func get_scroll_pos(slot,id):
 		j += 1
 	
 func movhelper(ist):
+	if isout: return
 	var ist2 = ist["current"]
 	get_node("HUD").switch_hotbar_slot({"tools":0,"seeds":1,"misc":2}.get(ist2["slot"]),ist2["id"])
 	switch_hand.rpc(ist2)
 	hand_hide.rpc(ist2)
 	
 func mov_hands():
+	if isout: return
 	var sc = 0
 	if Input.is_action_just_pressed("scroll_down"):
 		sc = -1
@@ -388,16 +402,19 @@ func mov_hands():
 				Hand.get_child(0).activate()
 
 func death():
+	if isout: return
 	ragdoll.rpc()
 	$RagdollTimer.start()
 	
 @rpc("call_local", "any_peer")
 func ragdoll():
+	if isout: return
 	is_ragdoll = true
 	ragdoll_opos = global_position
 	ragdoll_helper.call_deferred()
 
 func ragdoll_helper():
+	if isout: return
 	$"Node3D/Armature/Skeleton3D/Physical Bone Body/CollisionShape3D".disabled = false
 	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_l/CollisionShape3D".disabled = false
 	$"Node3D/Armature/Skeleton3D/Physical Bone upperleg_l/CollisionShape3D".disabled = false
@@ -409,10 +426,12 @@ func ragdoll_helper():
 
 @rpc("call_local", "any_peer")
 func stopragdoll():
+	if isout: return
 	is_ragdoll = false
 	stopragdoll_helper.call_deferred()
 
 func stopragdoll_helper():
+	if isout: return
 	$Node3D/Armature/Skeleton3D.physical_bones_stop_simulation()
 	$"Node3D/Armature/Skeleton3D/Physical Bone Body/CollisionShape3D".disabled = true
 	$"Node3D/Armature/Skeleton3D/Physical Bone upperarm_l/CollisionShape3D".disabled = true
@@ -425,6 +444,7 @@ func stopragdoll_helper():
 
 @rpc("call_remote","any_peer","reliable")
 func mov_dirs():
+	if isout: return
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if velocity.length() < 0.1:
@@ -447,14 +467,17 @@ func mov_dirs():
 
 @rpc("call_local", "any_peer", "unreliable")
 func startWalkSound():
+	if isout: return
 	$SoundHandler/Walk.play()
 
 @rpc("call_local", "any_peer", "unreliable")
 func stopWalkSound():
+	if isout: return
 	$SoundHandler/Walk.stop() 
 	
 @rpc("call_local","any_peer","reliable")
 func animation_handler(animation : String, walking: bool):
+	if isout: return
 	if walking:
 		animation = animation + "_walk"
 	if (not ($Node3D/AnimationPlayer.current_animation == animation)):
@@ -464,7 +487,7 @@ func animation_handler(animation : String, walking: bool):
 	$Node3D/AnimationPlayer.play(animation)
 
 func deposit():
-
+	if isout: return
 	if Input.is_action_just_pressed("interact"):
 		$DepositTimer.start()
 		
@@ -484,6 +507,7 @@ func deposit():
 					$Stats.money += calcReturn(plantcount)
 
 func _on_deposit_timer_timeout():
+	if isout: return
 	if $Camera3D.get_child(0).get_collider() != null:
 		if $Camera3D.get_child(0).get_collider().name == "DepositArea":
 			if plantcount > 4:
@@ -516,6 +540,7 @@ func _on_deposit_timer_timeout():
 
 
 func calcReturn(plantcount) -> float:
+	if isout: return 0.0
 	if plantcount == 0:
 		return 1.0
 	elif plantcount == 1:
@@ -531,6 +556,7 @@ func calcReturn(plantcount) -> float:
 
 
 func shop():
+	if isout: return
 	if get_node_or_null("ShopMenu"): return
 	if Input.is_action_just_pressed("interact"):
 		if $Camera3D.get_child(0).get_collider() != null:
@@ -544,14 +570,17 @@ func shop():
 
 
 func pushPull(direction: Vector3, delta):
+	if isout: return
 	self.velocity += direction
 	
 func zone_alert(id):
+	if isout: return
 	var msg = "Now Entering "
 	msg += ["The Marketplace","Plot One","Plot Two","Plot Three","Plot Four"][id]
 	get_node("HUD").send_unique_chat(msg)
 	
 func handle_msgs():
+	if isout: return
 	for i in $Hitbox.get_overlapping_areas():
 		if i.get_parent().name == "zones":
 			var q = int(i.name.replace("FarmZone",""))
@@ -560,6 +589,7 @@ func handle_msgs():
 				prevloc = int(q)
 
 func pay_quota():
+	if isout: return
 	var tslqe = tte - quota_ts
 	if tslqe >= quota_secs:
 		activate_quota()
@@ -568,6 +598,7 @@ func pay_quota():
 
 
 func activate_quota():
+	if isout: return
 	var money = $Stats.money
 	var owed = floor(50 * (1.25**quotas_passed)) + overdue
 	if money >= owed:
@@ -585,10 +616,11 @@ func activate_quota():
 
 @rpc("call_local","any_peer","reliable")
 func player_out():
+	if isout: return
 	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
-		get_node("/root/World").disconnect_from_server()
+		isout = true
 	else:
-		$HUD.send_unique_chat("[color=blue]A player is out! Find and use their plot.[/color]")
+		#$HUD.send_unique_chat("[color=blue]A player is out! Find and use their plot.[/color]")
 		var zones = get_node("/root/World/zones").get_children()
 		var zid = get_node("/root/World/mpSpawned_" + str(multiplayer.get_remote_sender_id())).player_id
 		for i in zones:
