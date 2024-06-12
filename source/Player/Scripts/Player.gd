@@ -1,8 +1,12 @@
 extends CharacterBody3D
 
-
+var player_id: int = 0
 var sprinting = false
 var ticks = 0
+var tte = 0.0
+@onready var quota_secs = get_node("/root/World/DayNightCycle").cycle_sec
+var quota_ts = 0.0
+var overdue = 0
 var SPRINT_SPEED = 8.0
 var NORMAL_SPEED = 5.0
 var SPEED = 5.0
@@ -30,7 +34,7 @@ var handhidden : bool = false
 var jumping : bool = false
 var addCheck : bool = false
 var plsCheck : bool = true
-var quotas_passed: int = 1
+var quotas_passed: int = 0
 var canFarm: bool = false
 var knockbackX : float = 0.0
 var knockbackY : float = 0.0
@@ -74,10 +78,10 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	var hud = load("res://Player/hud.tscn").instantiate()
 	add_child(hud)
+	get_node("HUD/Quota").text = "You owe 50 WEU"
 	get_node("HUD").send_unique_chat("Use WASD to move around (space for jump, shift for sprint),\nkeys 1-3 to access different item types in your hotbar,\nand scroll to access different items within that type.\nLeft click to use.",1000)
 	request_mp_spawned.rpc()
 	request_hand_hide.rpc()
-	get_node("/root/World/DayNightCycle").connect("dayChange",_pay_quota)
 	
 @rpc("call_local","any_peer","unreliable")
 func request_hand_hide():
@@ -206,6 +210,8 @@ func _physics_process(delta):
 	handle_msgs()
 	
 	ticks += 1
+	tte += delta
+	pay_quota()
 	if $RagdollTimer.is_stopped():
 		stopragdoll.rpc()
 	var zones = get_node("/root/World/zones").get_children()
@@ -213,7 +219,7 @@ func _physics_process(delta):
 	for i in zones:
 		if $Hitbox.overlaps_area(i):
 			isin = true
-			if i.property_owner != self:
+			if (i.id_owner != player_id) && (i.id_owner != -1):
 				canFarm = false
 			else:
 				canFarm = i.farmable
@@ -553,5 +559,37 @@ func handle_msgs():
 				zone_alert(q)
 				prevloc = int(q)
 
-func _pay_quota():
-	pass
+func pay_quota():
+	var tslqe = tte - quota_ts
+	if tslqe >= quota_secs:
+		activate_quota()
+		quota_ts = tte
+		quotas_passed += 1
+
+
+func activate_quota():
+	var money = $Stats.money
+	var owed = floor(50 * (1.25**quotas_passed)) + overdue
+	if money >= owed:
+		$Stats.money -= owed
+		$HUD.send_unique_chat("[color=green]Quota passed! You payed [/color][color=red]" + str(owed) + "[/color][color=green] WEU.")
+		overdue = 0
+	else:
+		if overdue != 0:
+			player_out.rpc()
+		else:
+			$HUD.send_unique_chat("[color=red]Quota failed! You still owe " + str(owed) + " WEU.\nIf you miss another quota, you're out.")
+			overdue = owed
+	$HUD/Quota.text = str(floor(50 * (1.25**(quotas_passed+1))) + overdue)
+
+
+@rpc("call_local","any_peer","reliable")
+func player_out():
+	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
+		get_node("/root/World").disconnect_from_server()
+	else:
+		$HUD.send_unique_chat("[color=blue]Player ")
+
+
+
+
