@@ -83,6 +83,7 @@ func _ready():
 	get_node("HUD").send_unique_chat("Use WASD to move around (space for jump, shift for sprint),\nkeys 1-3 to access different item types in your hotbar,\nand scroll to access different items within that type.\nLeft click to use.",1000)
 	request_mp_spawned.rpc()
 	request_hand_hide.rpc()
+	item_state["misc"]["mine"]["isunlocked"] = false
 	
 @rpc("call_local","any_peer","unreliable")
 func request_hand_hide():
@@ -213,8 +214,10 @@ func _physics_process(delta):
 		$"Node3D/Armature/Skeleton3D/Physical Bone Body".global_position = $Node3D.global_position
 		$"Node3D/Armature/Skeleton3D/Physical Bone Body/Camera3D".look_at(ragdoll_opos)
 	if !multiplayer.multiplayer_peer || !is_multiplayer_authority(): return
-	if item_state["misc"]["mine"]["count"] == 0:
-		item_state["misc"]["mine"]["isunlocked"] = false
+	#if item_state["misc"]["mine"]["count"] == 0:
+		#item_state["misc"]["mine"]["isunlocked"] = false
+	if item_state["misc"]["mine"]["count"] !=0:
+		item_state["misc"]["mine"]["isunlocked"] = true
 	handle_msgs()
 	
 	ticks += 1
